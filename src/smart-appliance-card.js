@@ -42,6 +42,7 @@ var HcI18n = {
     door_open: 'Porte ouverte',
     door_closed: 'Porte fermée',
     door_locked: 'Porte verrouillée',
+    door_waiting: 'Terminé {t}, porte toujours fermée',
     program: 'Programme',
     no_program: 'Aucun programme',
     ends_at: 'Fin à',
@@ -144,6 +145,7 @@ var HcI18n = {
     door_open: 'Door open',
     door_closed: 'Door closed',
     door_locked: 'Door locked',
+    door_waiting: 'Finished {t}, door still closed',
     program: 'Program',
     no_program: 'No program',
     ends_at: 'Ends at',
@@ -246,6 +248,7 @@ var HcI18n = {
     door_open: 'Tür offen',
     door_closed: 'Tür geschlossen',
     door_locked: 'Tür verriegelt',
+    door_waiting: 'Fertig {t}, Tür noch zu',
     program: 'Programm',
     no_program: 'Kein Programm',
     ends_at: 'Endet um',
@@ -348,6 +351,7 @@ var HcI18n = {
     door_open: 'Puerta abierta',
     door_closed: 'Puerta cerrada',
     door_locked: 'Puerta bloqueada',
+    door_waiting: 'Terminado {t}, puerta aún cerrada',
     program: 'Programa',
     no_program: 'Sin programa',
     ends_at: 'Termina a las',
@@ -450,6 +454,7 @@ var HcI18n = {
     door_open: 'Врата отворена',
     door_closed: 'Врата затворена',
     door_locked: 'Врата закључана',
+    door_waiting: 'Завршено {t}, врата још затворена',
     program: 'Програм',
     no_program: 'Нема програма',
     ends_at: 'Завршава се у',
@@ -552,6 +557,7 @@ var HcI18n = {
     door_open: 'Vrata otvorena',
     door_closed: 'Vrata zatvorena',
     door_locked: 'Vrata zaključana',
+    door_waiting: 'Završeno {t}, vrata još zatvorena',
     program: 'Program',
     no_program: 'Nema programa',
     ends_at: 'Završava se u',
@@ -654,6 +660,7 @@ var HcI18n = {
     door_open: 'Sportello aperto',
     door_closed: 'Sportello chiuso',
     door_locked: 'Sportello bloccato',
+    door_waiting: 'Terminato {t}, sportello ancora chiuso',
     program: 'Programma',
     no_program: 'Nessun programma',
     ends_at: 'Fine alle',
@@ -756,6 +763,7 @@ var HcI18n = {
     door_open: 'Deur open',
     door_closed: 'Deur dicht',
     door_locked: 'Deur vergrendeld',
+    door_waiting: 'Klaar {t}, deur nog dicht',
     program: 'Programma',
     no_program: 'Geen programma',
     ends_at: 'Klaar om',
@@ -858,6 +866,7 @@ var HcI18n = {
     door_open: 'Porta aberta',
     door_closed: 'Porta fechada',
     door_locked: 'Porta bloqueada',
+    door_waiting: 'Concluído {t}, porta ainda fechada',
     program: 'Programa',
     no_program: 'Nenhum programa',
     ends_at: 'Fim às',
@@ -960,6 +969,7 @@ var HcI18n = {
     door_open: 'Drzwi otwarte',
     door_closed: 'Drzwi zamknięte',
     door_locked: 'Drzwi zablokowane',
+    door_waiting: 'Zakończone {t}, drzwi wciąż zamknięte',
     program: 'Program',
     no_program: 'Brak programu',
     ends_at: 'Koniec o',
@@ -1062,6 +1072,7 @@ var HcI18n = {
     door_open: 'Ușă deschisă',
     door_closed: 'Ușă închisă',
     door_locked: 'Ușă blocată',
+    door_waiting: 'Terminat {t}, ușa încă închisă',
     program: 'Program',
     no_program: 'Niciun program',
     ends_at: 'Se termină la',
@@ -1164,6 +1175,7 @@ var HcI18n = {
     door_open: 'Låge åben',
     door_closed: 'Låge lukket',
     door_locked: 'Låge låst',
+    door_waiting: 'Færdig {t}, lågen stadig lukket',
     program: 'Program',
     no_program: 'Intet program',
     ends_at: 'Færdig kl.',
@@ -1266,6 +1278,7 @@ var HcI18n = {
     door_open: 'Luckan öppen',
     door_closed: 'Luckan stängd',
     door_locked: 'Luckan låst',
+    door_waiting: 'Klar {t}, luckan fortfarande stängd',
     program: 'Program',
     no_program: 'Inget program',
     ends_at: 'Klar kl.',
@@ -1368,6 +1381,7 @@ var HcI18n = {
     door_open: 'Вратата е отворена',
     door_closed: 'Вратата е затворена',
     door_locked: 'Вратата е заключена',
+    door_waiting: 'Завършен {t}, вратата още е затворена',
     program: 'Програма',
     no_program: 'Няма програма',
     ends_at: 'Край в',
@@ -1470,6 +1484,7 @@ var HcI18n = {
     door_open: 'Дверца открыта',
     door_closed: 'Дверца закрыта',
     door_locked: 'Дверца заблокирована',
+    door_waiting: 'Завершено {t}, дверца ещё закрыта',
     program: 'Программа',
     no_program: 'Нет программы',
     ends_at: 'Окончание в',
@@ -1572,6 +1587,7 @@ var HcI18n = {
     door_open: 'Дверцята відчинені',
     door_closed: 'Дверцята зачинені',
     door_locked: 'Дверцята заблоковані',
+    door_waiting: 'Завершено {t}, дверцята ще зачинені',
     program: 'Програма',
     no_program: 'Немає програми',
     ends_at: 'Завершення о',
@@ -1674,6 +1690,7 @@ var HcI18n = {
     door_open: 'Ajtó nyitva',
     door_closed: 'Ajtó zárva',
     door_locked: 'Ajtó reteszelve',
+    door_waiting: 'Befejezve {t}, az ajtó még zárva',
     program: 'Program',
     no_program: 'Nincs program',
     ends_at: 'Befejezés:',
@@ -1776,6 +1793,7 @@ var HcI18n = {
     door_open: 'Dvierka otvorené',
     door_closed: 'Dvierka zatvorené',
     door_locked: 'Dvierka zamknuté',
+    door_waiting: 'Dokončené {t}, dvierka stále zatvorené',
     program: 'Program',
     no_program: 'Žiadny program',
     ends_at: 'Koniec o',
@@ -1878,6 +1896,7 @@ var HcI18n = {
     door_open: 'Dvířka otevřena',
     door_closed: 'Dvířka zavřena',
     door_locked: 'Dvířka zamčena',
+    door_waiting: 'Dokončeno {t}, dvířka stále zavřena',
     program: 'Program',
     no_program: 'Žádný program',
     ends_at: 'Konec v',
@@ -1980,6 +1999,7 @@ var HcI18n = {
     door_open: 'Vrata odprta',
     door_closed: 'Vrata zaprta',
     door_locked: 'Vrata zaklenjena',
+    door_waiting: 'Končano {t}, vrata še zaprta',
     program: 'Program',
     no_program: 'Ni programa',
     ends_at: 'Konec ob',
@@ -2082,6 +2102,7 @@ var HcI18n = {
     door_open: 'Durvis atvērtas',
     door_closed: 'Durvis aizvērtas',
     door_locked: 'Durvis bloķētas',
+    door_waiting: 'Pabeigts {t}, durvis joprojām aizvērtas',
     program: 'Programma',
     no_program: 'Nav programmas',
     ends_at: 'Beigas plkst.',
@@ -2184,6 +2205,7 @@ var HcI18n = {
     door_open: 'Πόρτα ανοιχτή',
     door_closed: 'Πόρτα κλειστή',
     door_locked: 'Πόρτα κλειδωμένη',
+    door_waiting: 'Ολοκληρώθηκε {t}, η πόρτα ακόμα κλειστή',
     program: 'Πρόγραμμα',
     no_program: 'Κανένα πρόγραμμα',
     ends_at: 'Λήξη στις',
@@ -2290,6 +2312,9 @@ var HC_ERROR_TIMEOUT = 10000;
 var HC_NO_POWER_OFF = /does not support turning off|standby/i;
 // Appliances that refused to be turned off, remembered for this page only.
 var hcNoPowerOff = new Set();
+
+// A door that moves this soon after the program ends is the appliance unlocking it, not someone opening it.
+var HC_DOOR_GRACE = 60000;
 
 function hcDelay(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -3029,6 +3054,12 @@ var hcPicture = (art, state, illustrated, lit) => {
 class HomeConnectBaseCard extends HTMLElement {
   static get kind() { return 'dishwasher'; }
 
+  constructor() {
+    super();
+    // Switches (power, option pills) with a command on its way: their button stays disabled until it is answered.
+    this._pending = new Set();
+  }
+
   static getConfigElement() {
     var el = document.createElement('smart-appliance-card-editor');
     // biome-ignore lint/complexity/noThisInStatic: subclasses override static kind
@@ -3183,7 +3214,7 @@ class HomeConnectBaseCard extends HTMLElement {
     var dev = r.deviceId && hass.devices ? hass.devices[r.deviceId] : null;
     var sig = JSON.stringify([this._lang(), r.deviceId, dev ? [dev.name_by_user, dev.name] : null,
       hass.locale?.time_format, this._zoomed, this._confirming, this._reloading, this._starting,
-      this._error ? [this._error.key, this._error.detail] : null, hcNoPowerOff.has(this._powerKey(r)), states]);
+      this._error ? [this._error.key, this._error.detail] : null, hcNoPowerOff.has(this._powerKey(r)), Array.from(this._pending), states]);
     if (sig === this._sig) return;
     // Don't rebuild while a dropdown is open in the card.
     var active = this.shadowRoot.activeElement;
@@ -3211,17 +3242,38 @@ class HomeConnectBaseCard extends HTMLElement {
 
   _zoomButton() { return ''; }
 
-  // "Ends at 10:32 · 48 min left", shared between the full and mini layouts. The 12 h / 24 h
-  // preference follows the Home Assistant locale; the card language only picks the words.
+  // "Ends at 10:32 · 1 hr 5 min left", shared between the full and mini layouts. The 12 h / 24 h
+  // preference follows the Home Assistant locale; the card language picks the words and the unit names.
   _timeLine(finish) {
     var mins = Math.max(0, Math.round((finish.getTime() - Date.now()) / 60000));
     var h = Math.floor(mins / 60), m = mins % 60;
-    var left = h ? `${h} h ${String(m).padStart(2, '0')}` : `${m} min`;
+    var unit = (u, n) => new Intl.NumberFormat(this._locale(), { style: 'unit', unit: u, unitDisplay: 'short' }).format(n);
+    var left = h && m ? `${unit('hour', h)} ${unit('minute', m)}` : (h ? unit('hour', h) : unit('minute', m));
     var opts = { hour: '2-digit', minute: '2-digit' };
     var tf = this._hass.locale?.time_format;
     if (tf === '12' || tf === '24') opts.hour12 = tf === '12';
     var at = finish.toLocaleTimeString(this._locale(), opts);
     return `${this._t('ends_at')} ${at} · ${this._t('remaining').replace('{t}', left)}`;
+  }
+
+  // "25 minutes ago", "3 hours ago", "yesterday", in the card's language.
+  _ago(date) {
+    var rtf = new Intl.RelativeTimeFormat(this._locale(), { numeric: 'auto' });
+    var mins = Math.max(1, Math.round((Date.now() - date.getTime()) / 60000));
+    if (mins < 60) return rtf.format(-mins, 'minute');
+    var h = Math.round(mins / 60);
+    return h < 48 ? rtf.format(-h, 'hour') : rtf.format(-Math.round(h / 24), 'day');
+  }
+
+  // When a finished program still waits behind a closed door: the time it ended, if the door hasn't moved since
+  // (or only as the appliance unlocked it). Null otherwise, or when the states carry no times.
+  _doorWaiting(ent, door) {
+    if (door !== 'closed' && door !== 'locked') return null;
+    var at = (id) => { var s = this._st(id); return s?.last_changed ? Date.parse(s.last_changed) : Number.NaN; };
+    var ended = Math.max(...[ent.operation_state, ent.phase].map(at).filter((t) => !Number.isNaN(t)));
+    var moved = at(ent.door);
+    if (!Number.isFinite(ended) || Number.isNaN(moved) || moved > ended + HC_DOOR_GRACE) return null;
+    return new Date(ended);
   }
 
   // Start / Pause / Resume, drawn as labelled bars (full card) or round icons (mini card).
@@ -3335,7 +3387,12 @@ class HomeConnectBaseCard extends HTMLElement {
     var door = this._val(ent.door);
     // Doors other integrations report as binary sensors: on is open.
     if (ent.door && ent.door.indexOf('binary_sensor.') === 0) door = door === 'on' ? 'open' : (door === 'off' ? 'closed' : undefined);
-    if (online && door && ['open', 'closed', 'locked'].indexOf(door) >= 0) {
+    // Finished but not emptied: the door chip turns into a reminder, with the time since the program ended.
+    var waiting = c.show_alerts && online && state === 'finished' ? this._doorWaiting(ent, door) : null;
+    if (waiting) {
+      chips.push(hcChip('chip warn', 'mdi:bell-ring-outline', hcEsc(this._t('door_waiting').replace('{t}', this._ago(waiting))), ent.door));
+      this._ticking = true;
+    } else if (online && door && ['open', 'closed', 'locked'].indexOf(door) >= 0) {
       var dIcon = door === 'open' ? 'mdi:door-open' : (door === 'locked' ? 'mdi:door-closed-lock' : 'mdi:door-closed');
       chips.push(hcChip(`chip${door === 'open' ? ' warn' : ''}`, dIcon, this._t(`door_${door}`), ent.door));
     }
@@ -3380,7 +3437,7 @@ class HomeConnectBaseCard extends HTMLElement {
       }).join('');
       var toggles = ent.option_switches.filter((id) => this._st(id)).map((id) => {
         var ok = this._avail(id), on = ok && this._val(id) === 'on';
-        return '<button class="toggle' + (on ? ' on' : '') + '" data-toggle="' + hcEsc(id) + '" aria-pressed="' + on + '"' + (ok ? '' : ' disabled') + '>' +
+        return '<button class="toggle' + (on ? ' on' : '') + '" data-toggle="' + hcEsc(id) + '" aria-pressed="' + on + '"' + (ok && !this._pending.has(id) ? '' : ' disabled') + '>' +
           '<ha-icon icon="' + (on ? 'mdi:checkbox-marked-circle' : 'mdi:checkbox-blank-circle-outline') + '"></ha-icon>' + hcEsc(this._entityLabel(id, deviceName)) + '</button>';
       }).join('');
       // Home Connect only loads options when the selected program changes, so after
@@ -3421,9 +3478,10 @@ class HomeConnectBaseCard extends HTMLElement {
 
     // Once an appliance refused to turn off, the button only serves to turn it on.
     var noOff = powerOn && hcNoPowerOff.has(this._powerKey(r));
+    var powerBusy = this._pending.has(ent.power);
     var powerTitle = this._t(noOff ? 'power_off_unsupported' : 'power');
     var powerBtn = c.show_power && ent.power && online
-      ? `<button class="power${powerOn ? ' on' : ''}" data-action="power" title="${hcEsc(powerTitle)}" aria-label="${this._t('power')}" aria-pressed="${!!powerOn}"${noOff ? ' disabled' : ''}><ha-icon icon="mdi:power"></ha-icon></button>`
+      ? `<button class="power${powerOn ? ' on' : ''}" data-action="power" title="${hcEsc(powerTitle)}" aria-label="${this._t('power')}" aria-pressed="${!!powerOn}"${noOff || powerBusy ? ' disabled' : ''}><ha-icon icon="mdi:power"></ha-icon></button>`
       : '';
 
     var errorHtml = this._error
@@ -3782,7 +3840,7 @@ class HomeConnectBaseCard extends HTMLElement {
       return;
     }
     if (btn.dataset.toggle) {
-      this._option('switch', 'toggle', { entity_id: btn.dataset.toggle });
+      this._optionSwitch(btn.dataset.toggle);
       return;
     }
     switch (btn.dataset.action) {
@@ -3873,6 +3931,25 @@ class HomeConnectBaseCard extends HTMLElement {
     }
   }
 
+  // Runs `fn` for a switch with nothing else on its way, its button disabled meanwhile: a second click can't
+  // send the opposite command before the first is answered.
+  async _guard(id, fn) {
+    if (!id || this._pending.has(id)) return;
+    this._pending.add(id);
+    this._update();
+    try {
+      await fn();
+    } finally {
+      this._pending.delete(id);
+      this._update();
+    }
+  }
+
+  // An option pill: turn_on or turn_off from the state shown, never a blind toggle.
+  _optionSwitch(id) {
+    return this._guard(id, () => this._option('switch', this._val(id) === 'on' ? 'turn_off' : 'turn_on', { entity_id: id }));
+  }
+
   // Selecting an option on the "active program" select starts it.
   async _start() {
     var cmd = this._cmd('start');
@@ -3890,18 +3967,19 @@ class HomeConnectBaseCard extends HTMLElement {
     }
   }
 
-  async _power() {
-    var r = this._r, key = this._powerKey(r);
-    var on = this._val(r.ent.power) === 'on';
+  _power() {
+    var r = this._r, key = this._powerKey(r), id = r.ent.power;
+    var on = this._val(id) === 'on';
     if (on && hcNoPowerOff.has(key)) return;
-    try {
-      await this._call('switch', 'toggle', { entity_id: r.ent.power });
-    } catch (err) {
-      var noOff = on && HC_NO_POWER_OFF.test(hcErrText(err));
-      if (noOff) hcNoPowerOff.add(key);
-      this._showError(noOff ? 'power_off_unsupported' : 'power_failed', err);
-      this._update();
-    }
+    return this._guard(id, async () => {
+      try {
+        await this._call('switch', on ? 'turn_off' : 'turn_on', { entity_id: id });
+      } catch (err) {
+        var noOff = on && HC_NO_POWER_OFF.test(hcErrText(err));
+        if (noOff) hcNoPowerOff.add(key);
+        this._showError(noOff ? 'power_off_unsupported' : 'power_failed', err);
+      }
+    });
   }
 
   // Switch to another program and back: that's what makes Home Connect send the options.

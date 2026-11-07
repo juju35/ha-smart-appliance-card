@@ -175,6 +175,53 @@ test("power: an appliance that can't be turned off gets a message, then a disabl
   click(c, "power");
   await flush();
   assert.equal(hass.calls.length, 2);
-  assert.deepEqual({ ...hass.calls[1] }, { domain: "switch", service: "toggle", data: hass.calls[1].data, target: undefined, notifyOnError: false });
+  assert.deepEqual({ ...hass.calls[1] }, { domain: "switch", service: "turn_on", data: hass.calls[1].data, target: undefined, notifyOnError: false });
   assert.equal(hass.calls[1].data.entity_id, "switch.wm_alimentation");
+});
+
+// A service call that stays pending until the test settles it.
+function pendingCall(hass) {
+  let settle;
+  hass.callService = (domain, service, data) => {
+    hass.calls.push({ domain, service, data });
+    return new Promise((resolve) => {
+      settle = resolve;
+    });
+  };
+  return () => settle();
+}
+
+test("power: turn_off / turn_on from the state shown, the button disabled until the appliance answers", async () => {
+  const hass = mockHass({ deviceId: "d-power-guard" });
+  const done = pendingCall(hass);
+  const c = card(hass);
+  click(c, "power");
+  assert.deepEqual(hass.calls.map((x) => [x.service, x.data.entity_id]), [["turn_off", "switch.wm_alimentation"]]);
+  assert.match(c.shadowRoot.innerHTML, /data-action="power"[^>]* disabled>/);
+  // A second click while the first is on its way sends nothing (a toggle would have undone it).
+  c._power();
+  assert.equal(hass.calls.length, 1);
+  done();
+  await flush();
+  assert.doesNotMatch(c.shadowRoot.innerHTML, /data-action="power"[^>]* disabled/);
+});
+
+test("option pills: turn_on / turn_off from the state shown, disabled while the command runs", async () => {
+  const hass = mockHass();
+  const done = pendingCall(hass);
+  const c = card(hass);
+  const id = "switch.wm_vario_perfect";
+  const pill = () => c.shadowRoot.innerHTML.match(new RegExp(`<button[^>]*data-toggle="${id}"[^>]*>`))[0];
+  c._onClick({ composedPath: () => [{ dataset: { toggle: id }, disabled: false }] });
+  assert.deepEqual(hass.calls.map((x) => [x.domain, x.service, x.data.entity_id]), [["switch", "turn_on", id]]);
+  assert.match(pill(), / disabled>/);
+  c._optionSwitch(id);
+  assert.equal(hass.calls.length, 1);
+  done();
+  await flush();
+  assert.doesNotMatch(pill(), / disabled/);
+  hass.states[id] = st("on");
+  c.hass = { ...hass, states: { ...hass.states } };
+  c._onClick({ composedPath: () => [{ dataset: { toggle: id }, disabled: false }] });
+  assert.equal(hass.calls[1].service, "turn_off");
 });

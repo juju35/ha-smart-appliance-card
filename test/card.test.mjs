@@ -472,3 +472,53 @@ test("every kind of button has a hover and a keyboard focus style", () => {
     assert.match(css, new RegExp(`\\.${cls}:focus-visible`), `.${cls} has no :focus-visible rule`);
   }
 });
+
+test("time left: hours and minutes in the card's language, not a hard-coded h / min", () => {
+  const line = (language, mins) => {
+    const card = new HomeConnectWasherCard();
+    card.setConfig({ language });
+    card._hass = mockHass();
+    return card._timeLine(new Date(Date.now() + mins * 60000));
+  };
+  assert.match(line("en", 65), /· 1 hr 5 min left$/);
+  assert.match(line("en", 120), /· 2 hr left$/);
+  assert.match(line("de", 65), /1 Std\. 5 Min\./);
+  assert.match(line("sr", 65), /1 сат 5 мин/);
+  assert.doesNotMatch(line("sr", 65), /[A-Za-z]/);
+});
+
+// A washer that finished 25 minutes ago, its door last moved at `doorAt` minutes ago.
+function finishedWasher(door, doorAt) {
+  const hass = mockHass({ washerState: "finished" });
+  const ago = (m) => new Date(Date.now() - m * 60000).toISOString();
+  hass.states["sensor.wm_operation_state"].last_changed = ago(25);
+  hass.states["sensor.wm_door"] = { state: door, attributes: { options: ["open", "closed", "locked"] }, last_changed: ago(doorAt) };
+  hass.entities["sensor.wm_door"] = { entity_id: "sensor.wm_door", device_id: "d2", translation_key: "door" };
+  return hass;
+}
+
+test("finished, door not opened since: a reminder chip with the time since the end, on the full and mini cards", () => {
+  // The door was closed before the end, or unlocked by the appliance as the program ended.
+  for (const doorAt of [90, 24.5]) {
+    const html = render(HomeConnectWasherCard, finishedWasher("closed", doorAt), { device_id: "d2" });
+    assert.match(html, /class="chip warn clickable"[^>]*data-entity="sensor\.wm_door"[^>]*><ha-icon icon="mdi:bell-ring-outline"><\/ha-icon>Finished 25 minutes ago, door still closed</);
+    assert.doesNotMatch(html, />Door closed</);
+  }
+  const Mini = customElements.get("home-connect-washer-mini-card");
+  assert.match(render(Mini, finishedWasher("locked", 90), { device_id: "d2" }), /Finished 25 minutes ago, door still closed/);
+  assert.match(render(HomeConnectWasherCard, finishedWasher("closed", 90), { device_id: "d2", language: "fr" }), /Terminé il y a 25 minutes, porte toujours fermée/);
+});
+
+test("no reminder once the door was opened, while it is open, without times, or with alerts off", () => {
+  const html = (hass, config = {}) => render(HomeConnectWasherCard, hass, { device_id: "d2", ...config });
+  assert.doesNotMatch(html(finishedWasher("closed", 10)), /door still closed/);
+  assert.match(html(finishedWasher("closed", 10)), />Door closed</);
+  assert.doesNotMatch(html(finishedWasher("open", 10)), /door still closed/);
+  const noTimes = finishedWasher("closed", 90);
+  delete noTimes.states["sensor.wm_door"].last_changed;
+  assert.doesNotMatch(html(noTimes), /door still closed/);
+  assert.doesNotMatch(html(finishedWasher("closed", 90), { show_alerts: false }), /door still closed/);
+  const running = finishedWasher("closed", 90);
+  running.states["sensor.wm_operation_state"].state = "run";
+  assert.doesNotMatch(html(running), /door still closed/);
+});

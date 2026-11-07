@@ -397,9 +397,12 @@ washerDelayed["sensor.washer_operation_state"].state = "delayedstart";
 const washerFinished = structuredClone(states);
 washerFinished["sensor.washer_operation_state"].state = "finished";
 
-// Dishwasher at the end of its cycle: the tick is drawn in and sparkles twinkle around it.
+// Dishwasher at the end of its cycle: the tick is drawn in and sparkles twinkle around it. It ended 25 minutes ago
+// and its door hasn't been opened since: the door chip turns into the reminder.
 const finished = structuredClone(states);
 finished["sensor.dishwasher_operation_state"].state = "finished";
+finished["sensor.dishwasher_operation_state"].last_changed = inMinutes(-25);
+finished["sensor.dishwasher_door"].last_changed = inMinutes(-140);
 
 // Dishwasher paused mid-cycle: the program badge pulses gently while it waits.
 const dishwasherPaused = structuredClone(states);

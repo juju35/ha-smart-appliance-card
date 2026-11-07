@@ -1,5 +1,14 @@
 # Changelog
 
+## 2.2.0 - 2026-11-07
+
+### What's new
+- A reminder chip shows when a program has finished and the door hasn't been opened since, with the time since it ended ("Finished 25 minutes ago, door still closed"), on the full and mini cards.
+
+### Fixes
+- The power button and the option pills turn the switch on or off from the state shown instead of toggling it, and stay disabled while the command runs, so a double click no longer cancels itself.
+- The time left uses the hour and minute units of the card's language instead of a hard-coded "h" and "min".
+
 ## 2.1.0 - 2026-11-07
 
 ### What's new

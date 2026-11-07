@@ -44,6 +44,7 @@ Pick the appliance: the card works out its type and its brand, and finds all its
 - Program options before starting, and the settings of appliances without programs (super modes, fan stage…)
 - Temperatures of fridges, freezers and wine cabinets, and of ovens while cooking
 - Door state, salt and rinse aid alerts, coffee machine bean container, water tank and drip tray alerts
+- A reminder chip when a program has finished and the door hasn't been opened since ("Finished 25 minutes ago, door still closed")
 - A click on a chip (door, temperature, alert…) opens the more-info dialog of its entity
 - Visual editor in the dashboard UI (no YAML needed)
 - English, French, German, Spanish, Serbian (Cyrillic and Latin), Italian, Dutch, European Portuguese, Polish, Romanian, Danish, Swedish, Bulgarian, Russian, Ukrainian, Hungarian, Slovak, Czech, Slovenian, Latvian and Greek, follows the Home Assistant language
@@ -185,7 +186,7 @@ entities:
 | `show_program` | ❌ | `true` | Show the program picker |
 | `show_options` | ❌ | `true` | Show program options (only before a program starts) |
 | `show_controls` | ❌ | `true` | Show Start / Pause / Resume / Stop buttons |
-| `show_alerts` | ❌ | `true` | Show salt, rinse aid and coffee machine alerts |
+| `show_alerts` | ❌ | `true` | Show salt, rinse aid and coffee machine alerts, and the reminder when a finished program's door hasn't been opened |
 | `show_power` | ❌ | `true` | Show the power button (turn off for appliances that can't be switched on / off remotely) |
 | `zoom` | ❌ | `true` | Mini cards only: detail button at the top right that unfolds the full card (a click elsewhere folds it back) |
 | `language` | ❌ | Auto | Force language: `fr`, `en`, `de`, `es`, `sr`, `sr-Latn`, `it`, `nl`, `pt`, `pl`, `ro`, `da`, `sv`, `bg`, `ru`, `uk`, `hu`, `sk`, `cs`, `sl`, `lv` or `el` (auto-detects from HA settings) |
@@ -351,7 +352,7 @@ Home Connect only sends program options when the selected program changes, so af
 
 With Home Connect, **Start** selects the chosen program on the *Active program* entity, which is how that integration starts a program. Appliances sometimes reject a start for a moment (`BadRequest`, `WrongOperationState`): the card then retries once after 3 seconds, and if it fails again shows a short message in the card instead of Home Assistant's raw error (the technical detail is in its tooltip). **Stop** asks for a second tap within 3 seconds.
 
-Some appliances can't be turned off remotely: after a first refusal, the card says so and keeps the power button disabled while the appliance is on (until the page is reloaded); turning it on still works.
+Some appliances can't be turned off remotely: after a first refusal, the card says so and keeps the power button disabled while the appliance is on (until the page is reloaded); turning it on still works. The power button and the option pills send an explicit turn on or turn off from the state shown, and stay disabled until the appliance answers, so a quick second click can't undo the first.
 
 ## Development
 
