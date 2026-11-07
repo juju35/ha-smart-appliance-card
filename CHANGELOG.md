@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.1.0 - 2026-11-07
+
+### What's new
+- A click on a chip (door, temperature, fan, light, alert) opens the more-info dialog of its entity, also with Enter or Space from the keyboard.
+- Mini cards take the height of their content in sections dashboards (`rows: 'auto'`).
+
 ## 2.0.4 - 2026-11-04
 
 ### Documentation

@@ -44,6 +44,7 @@ Pick the appliance: the card works out its type and its brand, and finds all its
 - Program options before starting, and the settings of appliances without programs (super modes, fan stage…)
 - Temperatures of fridges, freezers and wine cabinets, and of ovens while cooking
 - Door state, salt and rinse aid alerts, coffee machine bean container, water tank and drip tray alerts
+- A click on a chip (door, temperature, alert…) opens the more-info dialog of its entity
 - Visual editor in the dashboard UI (no YAML needed)
 - English, French, German, Spanish, Serbian (Cyrillic and Latin), Italian, Dutch, European Portuguese, Polish, Romanian, Danish, Swedish, Bulgarian, Russian, Ukrainian, Hungarian, Slovak, Czech, Slovenian, Latvian and Greek, follows the Home Assistant language
 - Light and dark theme compatible

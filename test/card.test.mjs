@@ -98,8 +98,9 @@ test("mini card: compact view, detail button toggles the full card", () => {
   assert.match(card.shadowRoot.innerHTML, /ha-card class="mini"/);
   assert.match(card.shadowRoot.innerHTML, /data-action="zoom"[^>]*><ha-icon icon="mdi:arrow-expand"/);
   assert.doesNotMatch(card.shadowRoot.innerHTML, /data-select=/);
-  assert.deepEqual({ ...card.getGridOptions() }, { columns: 6, min_columns: 6 });
+  assert.deepEqual({ ...card.getGridOptions() }, { columns: 6, min_columns: 6, rows: "auto" });
   card._setZoom(true);
+  assert.deepEqual({ ...card.getGridOptions() }, { columns: 12, min_columns: 6, rows: "auto" });
   assert.doesNotMatch(card.shadowRoot.innerHTML, /ha-card class="mini"/);
   assert.match(card.shadowRoot.innerHTML, /mdi:arrow-collapse/);
   card._setZoom(false);
@@ -132,6 +133,31 @@ test("door open: open-door illustration", () => {
   assert.match(render(HomeConnectWasherCard, hass), /url\(#hc-wro\)/);
   hass.states["sensor.wm_door"] = st("closed", { options: ["open", "closed", "locked"] });
   assert.doesNotMatch(render(HomeConnectWasherCard, hass), /hc-wro/);
+});
+
+test("chips open the more-info dialog of their entity (click, Enter or Space)", () => {
+  const hass = mockHass({ washerState: "ready" });
+  hass.states["sensor.wm_door"] = st("open", { options: ["open", "closed", "locked"] });
+  hass.entities["sensor.wm_door"] = { entity_id: "sensor.wm_door", device_id: "d2", translation_key: "door" };
+  const card = new HomeConnectWasherCard();
+  const fired = [];
+  card.dispatchEvent = (ev) => fired.push(ev);
+  card.setConfig({});
+  card.hass = hass;
+  assert.match(card.shadowRoot.innerHTML, /<span class="chip warn clickable" role="button" tabindex="0" data-entity="sensor.wm_door">/);
+  card._onClick({ composedPath: () => [{ dataset: { entity: "sensor.wm_door" } }] });
+  for (const key of ["Enter", " ", "a"]) {
+    for (const fn of card.shadowRoot.listeners.keydown) fn({ key, composedPath: () => [{ dataset: { entity: "sensor.wm_door" } }], preventDefault() {} });
+  }
+  assert.equal(fired.length, 3);
+  for (const ev of fired) {
+    assert.equal(ev.type, "hass-more-info");
+    assert.deepEqual({ ...ev.detail }, { entityId: "sensor.wm_door" });
+  }
+  // The offline chip has no entity: not clickable.
+  hass.states["sensor.wm_operation_state"] = st("unavailable");
+  card.hass = { ...hass };
+  assert.match(card.shadowRoot.innerHTML, /<span class="chip"><ha-icon icon="mdi:cloud-off-outline">/);
 });
 
 test("an unknown operation state is escaped in the status line", () => {

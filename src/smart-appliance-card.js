@@ -2720,8 +2720,14 @@ var HC_PX = {
 function hcFocusKey(el) {
   var ds = el?.dataset;
   if (!ds) return null;
-  var k = ['action', 'toggle', 'select'].find((a) => ds[a]);
+  var k = ['action', 'toggle', 'select', 'entity'].find((a) => ds[a]);
   return k ? [k, ds[k]] : null;
+}
+
+// A header chip: a click (or Enter / Space) opens the more-info dialog of `entity`, when it has one.
+function hcChip(cls, icon, text, entity, title) {
+  var more = entity ? ` role="button" tabindex="0" data-entity="${hcEsc(entity)}"` : '';
+  return `<span class="${cls}${entity ? ' clickable' : ''}"${more}${title ? ` title="${hcEsc(title)}"` : ''}><ha-icon icon="${icon}"></ha-icon>${text}</span>`;
 }
 
 function hcRows(px) { return Math.max(1, Math.round(px / 50)); }
@@ -3053,7 +3059,14 @@ class HomeConnectBaseCard extends HTMLElement {
           this._update();
         }
       };
-      this.shadowRoot.addEventListener('keydown', (ev) => { if (ev.key === 'Escape') unfreeze(); });
+      this.shadowRoot.addEventListener('keydown', (ev) => {
+        if (ev.key === 'Escape') unfreeze();
+        var id = ev.composedPath()[0]?.dataset?.entity;
+        if (id && (ev.key === 'Enter' || ev.key === ' ')) {
+          ev.preventDefault();
+          this._moreInfo(id);
+        }
+      });
       this.addEventListener('mouseleave', unfreeze);
       // Touch: a drop-down closed without a change only loses focus. Re-check once focus has moved.
       this.shadowRoot.addEventListener('focusout', () => setTimeout(() => this._update()));
@@ -3324,14 +3337,14 @@ class HomeConnectBaseCard extends HTMLElement {
     if (ent.door && ent.door.indexOf('binary_sensor.') === 0) door = door === 'on' ? 'open' : (door === 'off' ? 'closed' : undefined);
     if (online && door && ['open', 'closed', 'locked'].indexOf(door) >= 0) {
       var dIcon = door === 'open' ? 'mdi:door-open' : (door === 'locked' ? 'mdi:door-closed-lock' : 'mdi:door-closed');
-      chips.push(`<span class="chip${door === 'open' ? ' warn' : ''}"><ha-icon icon="${dIcon}"></ha-icon>${this._t(`door_${door}`)}</span>`);
+      chips.push(hcChip(`chip${door === 'open' ? ' warn' : ''}`, dIcon, this._t(`door_${door}`), ent.door));
     }
     if (online) chips = chips.concat(this._infoChips(ent, kind, state, deviceName));
     if (c.show_alerts) {
       [['salt', 'mdi:shaker-outline'], ['rinse_aid', 'mdi:water-alert-outline'], ['bean_container', 'mdi:coffee-off-outline'],
         ['water_tank', 'mdi:cup-water'], ['drip_tray', 'mdi:tray-full']].forEach((a) => {
         var v = this._val(ent[a[0]]);
-        if (v === 'present' || v === 'confirmed' || v === 'on') chips.push(`<span class="chip warn"><ha-icon icon="${a[1]}"></ha-icon>${this._t(a[0])}</span>`);
+        if (v === 'present' || v === 'confirmed' || v === 'on') chips.push(hcChip('chip warn', a[1], this._t(a[0]), ent[a[0]]));
       });
     }
     if (!online) chips.push(`<span class="chip"><ha-icon icon="mdi:cloud-off-outline"></ha-icon>${this._t('offline')}</span>`);
@@ -3467,7 +3480,7 @@ class HomeConnectBaseCard extends HTMLElement {
   // Temperatures (cold appliances always, ovens while cooking) and the hood's fan and light.
   _infoChips(ent, kind, state, deviceName) {
     var chips = [];
-    var chip = (icon, text, title) => `<span class="chip extra"${title ? ` title="${hcEsc(title)}"` : ''}><ha-icon icon="${icon}"></ha-icon>${hcEsc(text)}</span>`;
+    var chip = (icon, text, id, title) => hcChip('chip extra', icon, hcEsc(text), id, title);
     if (HC_COLD.indexOf(kind) >= 0 || (HC_HOT.indexOf(kind) >= 0 && state === 'run')) {
       ent.temps.forEach((id) => {
         var s = this._st(id);
@@ -3479,14 +3492,14 @@ class HomeConnectBaseCard extends HTMLElement {
         } else if (this._avail(id)) {
           value = this._hass.formatEntityState ? this._hass.formatEntityState(s) : `${s.state} ${s.attributes.unit_of_measurement || ''}`.trim();
         }
-        if (value) chips.push(chip(/freez|congel|gefrier|congela|vries|zamra/i.test(`${id} ${label}`) ? 'mdi:snowflake' : 'mdi:thermometer', value, label));
+        if (value) chips.push(chip(/freez|congel|gefrier|congela|vries|zamra/i.test(`${id} ${label}`) ? 'mdi:snowflake' : 'mdi:thermometer', value, id, label));
       });
     }
     if (kind === 'hood') {
       var fan = this._st(ent.fan);
-      if (fan && fan.state === 'on' && fan.attributes.percentage != null) chips.push(chip('mdi:fan', `${Math.round(fan.attributes.percentage)} %`));
-      else if (this._avail(ent.venting) && this._busy({ venting: ent.venting })) chips.push(chip('mdi:fan', this._fmt(ent.venting)));
-      if (this._val(ent.light) === 'on') chips.push(chip('mdi:lightbulb-on-outline', this._t('light_on')));
+      if (fan && fan.state === 'on' && fan.attributes.percentage != null) chips.push(chip('mdi:fan', `${Math.round(fan.attributes.percentage)} %`, ent.fan));
+      else if (this._avail(ent.venting) && this._busy({ venting: ent.venting })) chips.push(chip('mdi:fan', this._fmt(ent.venting), ent.venting));
+      if (this._val(ent.light) === 'on') chips.push(chip('mdi:lightbulb-on-outline', this._t('light_on'), ent.light));
     }
     return chips;
   }
@@ -3654,6 +3667,8 @@ class HomeConnectBaseCard extends HTMLElement {
       '.chip { display: inline-flex; align-items: center; gap: 4px; max-width: 100%; box-sizing: border-box; overflow-wrap: anywhere; font-size: 11px; font-weight: 500; padding: 1px 8px 1px 5px; border-radius: 12px;' +
         ' background: var(--secondary-background-color, rgba(128,128,128,0.12)); color: var(--secondary-text-color); }' +
       '.chip ha-icon { --mdc-icon-size: 13px; flex: none; }' +
+      '.chip.clickable { cursor: pointer; }' +
+      '.chip.clickable:focus-visible { outline: 2px solid var(--primary-color, #03a9f4); outline-offset: 1px; }' +
       '.chip.warn { background: color-mix(in srgb, var(--warning-color, #ffa600) 15%, transparent); color: var(--hc-warning-text); }' +
       '.bar { height: 4px; border-radius: 3px; background: var(--secondary-background-color, rgba(128,128,128,0.15)); overflow: hidden; }' +
       '.fill { height: 100%; border-radius: 3px; background: var(--hc-color); transition: width 0.6s ease; }' +
@@ -3760,8 +3775,12 @@ class HomeConnectBaseCard extends HTMLElement {
   }
 
   _onClick(ev) {
-    var btn = ev.composedPath().find((n) => n.dataset && (n.dataset.action || n.dataset.toggle));
+    var btn = ev.composedPath().find((n) => n.dataset && (n.dataset.action || n.dataset.toggle || n.dataset.entity));
     if (!btn || btn.disabled) return;
+    if (btn.dataset.entity) {
+      this._moreInfo(btn.dataset.entity);
+      return;
+    }
     if (btn.dataset.toggle) {
       this._option('switch', 'toggle', { entity_id: btn.dataset.toggle });
       return;
@@ -3796,6 +3815,10 @@ class HomeConnectBaseCard extends HTMLElement {
         this._update();
         break;
     }
+  }
+
+  _moreInfo(entityId) {
+    this.dispatchEvent(new CustomEvent('hass-more-info', { detail: { entityId }, bubbles: true, composed: true }));
   }
 
   _localControl(ent) { return !!ent.remote_control && this._val(ent.remote_control) === 'off'; }
@@ -3966,7 +3989,7 @@ var hcMini = (Base) => class extends Base {
     document.removeEventListener('click', this._onUnzoom, true);
   }
 
-  getGridOptions() { return this._zoomed ? super.getGridOptions() : { columns: 6, min_columns: 6 }; }
+  getGridOptions() { return this._zoomed ? { ...super.getGridOptions(), rows: 'auto' } : { columns: 6, min_columns: 6, rows: 'auto' }; }
 
   _compact() { return !this._zoomed; }
 

@@ -115,9 +115,9 @@ test("option pills never get wider than the card: a long label wraps inside the 
   assert.match(t, /overflow-wrap: anywhere/);
 });
 
-test("mini card: the minimum width stays 6 columns (it is readable there now)", () => {
+test("mini card: the minimum width stays 6 columns (it is readable there now), its height follows its content", () => {
   const Mini = customElements.get("home-connect-washer-mini-card");
-  assert.deepEqual({ ...new Mini().getGridOptions() }, { columns: 6, min_columns: 6 });
+  assert.deepEqual({ ...new Mini().getGridOptions() }, { columns: 6, min_columns: 6, rows: "auto" });
 });
 
 // Rendered in Chromium (skipped when it can't start): the card in hosts that size it from its content

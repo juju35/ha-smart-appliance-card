@@ -28,7 +28,12 @@ export function loadCard(file, names) {
       dispatchEvent() {}
       appendChild() {}
     },
-    CustomEvent: class {},
+    CustomEvent: class {
+      constructor(type, init = {}) {
+        this.type = type;
+        this.detail = init.detail;
+      }
+    },
     customElements: { get: (n) => registry.get(n), define: (n, c) => registry.set(n, c) },
     document: { documentElement: { lang: "en" }, createElement: (tag) => ({ tagName: tag, addEventListener() {} }) },
     navigator: { language: "en" },
