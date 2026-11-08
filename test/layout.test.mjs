@@ -76,7 +76,17 @@ test("mini card: the header icon keeps the full card's size (only narrow cards s
   assert.match(rule(".logo ha-icon"), /--mdc-icon-size: 24px/);
   const top = css.replace(/@container[^{]*\{(?:[^{}]*\{[^{}]*\})*\s*\}/g, "");
   assert.doesNotMatch(top, /ha-card\.mini \.logo/, "a mini-only header icon size");
-  assert.match(containers().filter((b) => b.px === 230).map((b) => b.body).join("\n"), /\.logo \{ width: 28px; height: 28px; \}/);
+  assert.match(containers().filter((b) => b.px === 230).map((b) => b.body).join("\n"), /ha-card:not\(\.mini\) \.logo \{ width: 28px; height: 28px; \}/);
+});
+
+test("mini card: the header icon stays 40 px at every width (only the full card's shrinks or steps aside)", () => {
+  for (const b of containers()) {
+    for (const m of b.body.matchAll(/([^{}]*)\{([^{}]*)\}/g)) {
+      const sels = m[1].split(",").map((x) => x.trim());
+      if (!sels.some((x) => /\.logo|\.hc-badge/.test(x))) continue;
+      for (const x of sels) assert.match(x, /^ha-card:not\(\.mini\) /, `@container ${b.px}px: "${x}" also changes the mini card's icon`);
+    }
+  }
 });
 
 test("narrow card: the pill only shows its dot, the logo steps aside, the mini card's buttons go under its text", () => {
@@ -88,7 +98,7 @@ test("narrow card: the pill only shows its dot, the logo steps aside, the mini c
   assert.ok(hidden, "the pill text never hides");
   assert.match(hidden[1], /clip-path: inset\(50%\)|clip: rect\(0/);
   assert.doesNotMatch(hidden[1], /display: none/);
-  assert.match(all, /\.logo \{[^}]*display: none/);
+  assert.match(all, /ha-card:not\(\.mini\) \.logo \{[^}]*display: none/);
   // Mini card: the state is spelt out in the text column instead (hidden from screen readers, which read the pill).
   assert.match(rule(".mstate"), /display: none/);
   assert.match(all, /ha-card\.mini \.mstate \{[^}]*display: flex/);

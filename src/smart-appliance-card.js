@@ -87,6 +87,7 @@ var HcI18n = {
     zoom_out: 'Revenir à la vue compacte',
     ed_language: 'Langue',
     ed_language_helper: 'Laisser vide pour suivre la langue de Home Assistant',
+    ed_language_auto: 'Automatique',
     ed_entities: 'Entités (avancé)',
     ed_entities_helper: 'Détectées automatiquement depuis l\'appareil ; à renseigner seulement pour forcer une entité',
     en_operation_state: 'État de fonctionnement',
@@ -190,6 +191,7 @@ var HcI18n = {
     ed_show_alerts: 'Alerts',
     ed_language: 'Language',
     ed_language_helper: 'Leave empty to follow the Home Assistant language',
+    ed_language_auto: 'Automatic',
     ed_entities: 'Entities (advanced)',
     ed_entities_helper: 'Detected from the device automatically; only set one to override it',
     en_operation_state: 'Operation state',
@@ -293,6 +295,7 @@ var HcI18n = {
     ed_show_alerts: 'Warnmeldungen',
     ed_language: 'Sprache',
     ed_language_helper: 'Leer lassen, um die in Home Assistant eingestellte Sprache zu verwenden',
+    ed_language_auto: 'Automatisch',
     ed_entities: 'Entitäten (erweitert)',
     ed_entities_helper: 'Automatisch anhand des Geräts erkannt; nur festlegen, wenn du eine Entität überschreiben möchtest',
     en_operation_state: 'Betriebsstatus',
@@ -396,6 +399,7 @@ var HcI18n = {
     ed_show_alerts: 'Alertas',
     ed_language: 'Idioma',
     ed_language_helper: 'Déjalo vacío para seguir el idioma de Home Assistant',
+    ed_language_auto: 'Automático',
     ed_entities: 'Entidades (avanzado)',
     ed_entities_helper: 'Se detectan automáticamente a partir del dispositivo; indica una solo para sustituirla',
     en_operation_state: 'Estado de funcionamiento',
@@ -499,6 +503,7 @@ var HcI18n = {
     ed_show_alerts: 'Упозорења',
     ed_language: 'Језик',
     ed_language_helper: 'Оставите празно да бисте пратили језик Home Assistant-а',
+    ed_language_auto: 'Аутоматски',
     ed_entities: 'Ентитети (напредно)',
     ed_entities_helper: 'Аутоматски препознати на основу уређаја; попуните само да бисте заменили ентитет',
     en_operation_state: 'Радно стање',
@@ -602,6 +607,7 @@ var HcI18n = {
     ed_show_alerts: 'Upozorenja',
     ed_language: 'Jezik',
     ed_language_helper: 'Ostavite prazno da biste pratili jezik Home Assistant-a',
+    ed_language_auto: 'Automatski',
     ed_entities: 'Entiteti (napredno)',
     ed_entities_helper: 'Automatski prepoznati na osnovu uređaja; popunite samo da biste zamenili entitet',
     en_operation_state: 'Radno stanje',
@@ -705,6 +711,7 @@ var HcI18n = {
     ed_show_alerts: 'Avvisi',
     ed_language: 'Lingua',
     ed_language_helper: 'Lascia vuoto per seguire la lingua di Home Assistant',
+    ed_language_auto: 'Automatica',
     ed_entities: 'Entità (avanzate)',
     ed_entities_helper: 'Rilevate automaticamente dal dispositivo; impostane una solo per sostituirla',
     en_operation_state: 'Stato di funzionamento',
@@ -808,6 +815,7 @@ var HcI18n = {
     ed_show_alerts: 'Waarschuwingen',
     ed_language: 'Taal',
     ed_language_helper: 'Leeg laten om de taal van Home Assistant te volgen',
+    ed_language_auto: 'Automatisch',
     ed_entities: 'Entiteiten (geavanceerd)',
     ed_entities_helper: 'Automatisch gedetecteerd via het apparaat; stel er alleen een in om deze te overschrijven',
     en_operation_state: 'Bedrijfsstatus',
@@ -911,6 +919,7 @@ var HcI18n = {
     ed_show_alerts: 'Alertas',
     ed_language: 'Idioma',
     ed_language_helper: 'Deixe vazio para seguir o idioma do Home Assistant',
+    ed_language_auto: 'Automático',
     ed_entities: 'Entidades (avançado)',
     ed_entities_helper: 'Detetadas automaticamente a partir do dispositivo; defina uma apenas para a substituir',
     en_operation_state: 'Estado de funcionamento',
@@ -1014,6 +1023,7 @@ var HcI18n = {
     ed_show_alerts: 'Alerty',
     ed_language: 'Język',
     ed_language_helper: 'Pozostaw puste, aby używać języka Home Assistanta',
+    ed_language_auto: 'Automatyczny',
     ed_entities: 'Encje (zaawansowane)',
     ed_entities_helper: 'Wykrywane automatycznie na podstawie urządzenia; ustaw tylko, aby zastąpić encję',
     en_operation_state: 'Stan pracy',
@@ -1117,6 +1127,7 @@ var HcI18n = {
     ed_show_alerts: 'Alerte',
     ed_language: 'Limbă',
     ed_language_helper: 'Lăsați gol pentru a urma limba Home Assistant',
+    ed_language_auto: 'Automată',
     ed_entities: 'Entități (avansat)',
     ed_entities_helper: 'Detectate automat de pe dispozitiv; completați doar pentru a forța o entitate',
     en_operation_state: 'Stare de funcționare',
@@ -1220,6 +1231,7 @@ var HcI18n = {
     ed_show_alerts: 'Advarsler',
     ed_language: 'Sprog',
     ed_language_helper: 'Lad stå tomt for at følge Home Assistants sprog',
+    ed_language_auto: 'Automatisk',
     ed_entities: 'Entiteter (avanceret)',
     ed_entities_helper: 'Registreres automatisk fra enheden; angiv kun en for at tilsidesætte den',
     en_operation_state: 'Driftstilstand',
@@ -1323,6 +1335,7 @@ var HcI18n = {
     ed_show_alerts: 'Varningar',
     ed_language: 'Språk',
     ed_language_helper: 'Lämna tomt för att följa Home Assistants språk',
+    ed_language_auto: 'Automatiskt',
     ed_entities: 'Entiteter (avancerat)',
     ed_entities_helper: 'Identifieras automatiskt från enheten; ange bara en för att åsidosätta den',
     en_operation_state: 'Driftstatus',
@@ -1426,6 +1439,7 @@ var HcI18n = {
     ed_show_alerts: 'Предупреждения',
     ed_language: 'Език',
     ed_language_helper: 'Оставете празно, за да се използва езикът на Home Assistant',
+    ed_language_auto: 'Автоматично',
     ed_entities: 'Обекти (разширени)',
     ed_entities_helper: 'Разпознават се автоматично от устройството; задайте обект само за да го замените',
     en_operation_state: 'Работно състояние',
@@ -1529,6 +1543,7 @@ var HcI18n = {
     ed_show_alerts: 'Оповещения',
     ed_language: 'Язык',
     ed_language_helper: 'Оставьте пустым, чтобы использовать язык Home Assistant',
+    ed_language_auto: 'Автоматически',
     ed_entities: 'Объекты (дополнительно)',
     ed_entities_helper: 'Определяются автоматически по устройству; задавайте объект, только чтобы его переопределить',
     en_operation_state: 'Рабочее состояние',
@@ -1632,6 +1647,7 @@ var HcI18n = {
     ed_show_alerts: 'Сповіщення',
     ed_language: 'Мова',
     ed_language_helper: 'Залиште порожнім, щоб використовувати мову Home Assistant',
+    ed_language_auto: 'Автоматично',
     ed_entities: 'Сутності (додатково)',
     ed_entities_helper: 'Визначаються автоматично за пристроєм; вказуйте сутність лише для її заміни',
     en_operation_state: 'Робочий стан',
@@ -1735,6 +1751,7 @@ var HcI18n = {
     ed_show_alerts: 'Figyelmeztetések',
     ed_language: 'Nyelv',
     ed_language_helper: 'Hagyja üresen a Home Assistant nyelvének követéséhez',
+    ed_language_auto: 'Automatikus',
     ed_entities: 'Entitások (haladó)',
     ed_entities_helper: 'Automatikusan felismerve az eszközből; csak felülíráshoz adjon meg entitást',
     en_operation_state: 'Működési állapot',
@@ -1838,6 +1855,7 @@ var HcI18n = {
     ed_show_alerts: 'Upozornenia',
     ed_language: 'Jazyk',
     ed_language_helper: 'Nechajte prázdne, ak chcete používať jazyk Home Assistanta',
+    ed_language_auto: 'Automaticky',
     ed_entities: 'Entity (pokročilé)',
     ed_entities_helper: 'Zisťujú sa automaticky zo zariadenia; zadajte entitu, len ak ju chcete nahradiť',
     en_operation_state: 'Prevádzkový stav',
@@ -1941,6 +1959,7 @@ var HcI18n = {
     ed_show_alerts: 'Upozornění',
     ed_language: 'Jazyk',
     ed_language_helper: 'Ponechte prázdné pro použití jazyka Home Assistanta',
+    ed_language_auto: 'Automaticky',
     ed_entities: 'Entity (pokročilé)',
     ed_entities_helper: 'Zjišťují se automaticky ze zařízení; zadejte entitu, jen pokud ji chcete nahradit',
     en_operation_state: 'Provozní stav',
@@ -2044,6 +2063,7 @@ var HcI18n = {
     ed_show_alerts: 'Opozorila',
     ed_language: 'Jezik',
     ed_language_helper: 'Pustite prazno, da se uporablja jezik Home Assistanta',
+    ed_language_auto: 'Samodejno',
     ed_entities: 'Entitete (napredno)',
     ed_entities_helper: 'Samodejno zaznane iz naprave; nastavite jo le, če jo želite preglasiti',
     en_operation_state: 'Stanje delovanja',
@@ -2147,6 +2167,7 @@ var HcI18n = {
     ed_show_alerts: 'Brīdinājumi',
     ed_language: 'Valoda',
     ed_language_helper: 'Atstājiet tukšu, lai izmantotu Home Assistant valodu',
+    ed_language_auto: 'Automātiski',
     ed_entities: 'Vienības (papildu)',
     ed_entities_helper: 'Tiek noteiktas automātiski no ierīces; norādiet vienību tikai, lai to aizstātu',
     en_operation_state: 'Darbības stāvoklis',
@@ -2250,6 +2271,7 @@ var HcI18n = {
     ed_show_alerts: 'Ειδοποιήσεις',
     ed_language: 'Γλώσσα',
     ed_language_helper: 'Αφήστε κενό για να ακολουθεί τη γλώσσα του Home Assistant',
+    ed_language_auto: 'Αυτόματα',
     ed_entities: 'Οντότητες (για προχωρημένους)',
     ed_entities_helper: 'Ανιχνεύονται αυτόματα από τη συσκευή· ορίστε μία μόνο για να την παρακάμψετε',
     en_operation_state: 'Κατάσταση λειτουργίας',
@@ -2315,6 +2337,21 @@ var hcNoPowerOff = new Set();
 
 // A door that moves this soon after the program ends is the appliance unlocking it, not someone opening it.
 var HC_DOOR_GRACE = 60000;
+// How far back the door reminder looks in the recorder's history (see _doorHistory).
+var HC_DOOR_HISTORY = 48 * 3600000;
+
+// The time (ms) an entity took its current value in recorder history rows (oldest first, compressed `s` / `lc` /
+// `lu` in seconds), skipping the rows that only repeat it (a Home Assistant restart writes one). Null without rows.
+function hcSince(rows, state) {
+  var at = null;
+  for (var i = (rows || []).length - 1; i >= 0; i--) {
+    var r = rows[i];
+    if ((r.s ?? r.state) !== state) break;
+    var t = r.lc ?? r.lu;
+    at = t != null ? t * 1000 : Date.parse(r.last_changed);
+  }
+  return at != null && Number.isFinite(at) ? at : null;
+}
 
 function hcDelay(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -3114,23 +3151,53 @@ class HomeConnectBaseCard extends HTMLElement {
   connectedCallback() {
     // Refresh the remaining time every 30 s while a program with a finish time runs and the card is on screen.
     clearInterval(this._timer);
-    this._timer = setInterval(() => {
-      if (!this._ticking) return;
-      this._sig = null;
-      this._update();
-    }, 30000);
+    this._timer = setInterval(() => this._tick(), 30000);
+    // The illustration's animations pause while the card is off screen or the browser tab hidden.
+    if (!this._onVisibility) this._onVisibility = () => this._setPaused();
+    document.addEventListener('visibilitychange', this._onVisibility);
+    if (typeof IntersectionObserver === 'function') {
+      this._io?.disconnect();
+      this._io = new IntersectionObserver((entries) => {
+        this._offscreen = !entries[entries.length - 1].isIntersecting;
+        this._setPaused();
+      });
+      this._io.observe(this);
+    }
     // Back on screen: redraw now (state reset on disconnect) instead of waiting for the next hass update.
     this._update();
   }
 
   disconnectedCallback() {
     clearInterval(this._timer);
+    document.removeEventListener('visibilitychange', this._onVisibility);
+    this._io?.disconnect();
+    this._io = null;
     clearTimeout(this._confirmTimer);
     clearTimeout(this._errorTimer);
     // The cancelled timers would have reset these: an armed Stop or an old error must not survive leaving the view.
     this._confirming = null;
     this._error = null;
     this._sig = null;
+  }
+
+  _setPaused() { this.toggleAttribute('paused', !!(this._offscreen || document.hidden)); }
+
+  // The 30 s tick only rewrites the time texts in place: rebuilding the card would restart its animations. A progress
+  // worked out from the clock (finish time and total duration) still needs the bar redrawn.
+  _tick() {
+    var i = this._tickInfo;
+    if (!this._ticking || !i || !this.shadowRoot) return;
+    if (i.clockProgress) {
+      this._sig = null;
+      this._update();
+      return;
+    }
+    this.shadowRoot.querySelectorAll('[data-tick]').forEach((el) => {
+      var txt = el.dataset.tick === 'waiting'
+        ? (i.waiting && this._t('door_waiting').replace('{t}', this._ago(i.waiting)))
+        : (i.finish && this._timeLine(i.finish));
+      if (txt && el.textContent !== txt) el.textContent = txt;
+    });
   }
 
   // Masonry columns are balanced on this: the height of the blocks last drawn, in 50 px rows.
@@ -3265,15 +3332,50 @@ class HomeConnectBaseCard extends HTMLElement {
     return h < 48 ? rtf.format(-h, 'hour') : rtf.format(-Math.round(h / 24), 'day');
   }
 
-  // When a finished program still waits behind a closed door: the time it ended, if the door hasn't moved since
-  // (or only as the appliance unlocked it). Null otherwise, or when the states carry no times.
+  // When a finished program still waits behind a closed door: the time it ended (the operation state's last change),
+  // if the door hasn't moved since (or only as the appliance unlocked it). Null otherwise, or when the states carry
+  // no times.
   _doorWaiting(ent, door) {
     if (door !== 'closed' && door !== 'locked') return null;
-    var at = (id) => { var s = this._st(id); return s?.last_changed ? Date.parse(s.last_changed) : Number.NaN; };
-    var ended = Math.max(...[ent.operation_state, ent.phase].map(at).filter((t) => !Number.isNaN(t)));
-    var moved = at(ent.door);
-    if (!Number.isFinite(ended) || Number.isNaN(moved) || moved > ended + HC_DOOR_GRACE) return null;
+    var opId = ent.operation_state || ent.phase;
+    var op = this._st(opId), d = this._st(ent.door);
+    var ended = op?.last_changed ? Date.parse(op.last_changed) : Number.NaN;
+    var moved = d?.last_changed ? Date.parse(d.last_changed) : Number.NaN;
+    if (Number.isNaN(ended) || Number.isNaN(moved)) return null;
+    // Both changed within a minute: the appliance unlocked its door as the program ended, or Home Assistant restarted
+    // and gave every state a new last_changed. The recorder's history tells them apart; no reminder until it answers.
+    if (Math.abs(moved - ended) <= HC_DOOR_GRACE) {
+      var h = this._doorHistory(opId, ent.door, op, d);
+      if (!h) return null;
+      ended = h.ended;
+      moved = h.moved;
+    }
+    if (moved > ended + HC_DOOR_GRACE) return null;
     return new Date(ended);
+  }
+
+  // When the operation state and the door really took their current values, from the recorder (fetched once per
+  // pair of states). Falls back to last_changed for an entity the recorder doesn't keep, or without history.
+  _doorHistory(opId, doorId, op, d) {
+    var key = JSON.stringify([opId, doorId, op.state, op.last_changed, d.state, d.last_changed]);
+    var h = this._doorHist;
+    if (h && h.key === key) return h.done ? h : null;
+    h = this._doorHist = { key: key };
+    var done = (res) => Object.assign(h, {
+      done: true,
+      ended: hcSince(res?.[opId], op.state) ?? Date.parse(op.last_changed),
+      moved: hcSince(res?.[doorId], d.state) ?? Date.parse(d.last_changed),
+    });
+    if (!this._hass.callWS) return done(null);
+    this._hass.callWS({
+      type: 'history/history_during_period', start_time: new Date(Date.now() - HC_DOOR_HISTORY).toISOString(),
+      entity_ids: [opId, doorId], minimal_response: true, no_attributes: true, significant_changes_only: false,
+    }).then(done, () => done(null)).then(() => {
+      if (this._doorHist !== h) return;
+      this._sig = null;
+      this._update();
+    });
+    return null;
   }
 
   // Start / Pause / Resume, drawn as labelled bars (full card) or round icons (mini card).
@@ -3364,9 +3466,13 @@ class HomeConnectBaseCard extends HTMLElement {
     if (finish && Number.isNaN(finish.getTime())) finish = null;
     var left = num(ent.remaining), elapsed = num(ent.elapsed), total = num(ent.total);
     if (!finish && running && left != null && left > 0) finish = new Date(Date.now() + left * 60000);
+    var clockProgress = false;
     if (progress == null && running) {
       if (left != null && elapsed != null && left + elapsed > 0) progress = (100 * elapsed) / (left + elapsed);
-      else if (finish && total) progress = 100 * (1 - (finish.getTime() - Date.now()) / 60000 / total);
+      else if (finish && total) {
+        progress = 100 * (1 - (finish.getTime() - Date.now()) / 60000 / total);
+        clockProgress = true;
+      }
     }
     if (progress != null) progress = Math.max(0, Math.min(100, progress));
     var timeLine = running && finish ? this._timeLine(finish) : '';
@@ -3389,8 +3495,9 @@ class HomeConnectBaseCard extends HTMLElement {
     if (ent.door && ent.door.indexOf('binary_sensor.') === 0) door = door === 'on' ? 'open' : (door === 'off' ? 'closed' : undefined);
     // Finished but not emptied: the door chip turns into a reminder, with the time since the program ended.
     var waiting = c.show_alerts && online && state === 'finished' ? this._doorWaiting(ent, door) : null;
+    this._tickInfo = { finish: running ? finish : null, waiting: waiting, clockProgress: clockProgress };
     if (waiting) {
-      chips.push(hcChip('chip warn', 'mdi:bell-ring-outline', hcEsc(this._t('door_waiting').replace('{t}', this._ago(waiting))), ent.door));
+      chips.push(hcChip('chip warn', 'mdi:bell-ring-outline', `<span data-tick="waiting">${hcEsc(this._t('door_waiting').replace('{t}', this._ago(waiting)))}</span>`, ent.door));
       this._ticking = true;
     } else if (online && door && ['open', 'closed', 'locked'].indexOf(door) >= 0) {
       var dIcon = door === 'open' ? 'mdi:door-open' : (door === 'locked' ? 'mdi:door-closed-lock' : 'mdi:door-closed');
@@ -3496,9 +3603,9 @@ class HomeConnectBaseCard extends HTMLElement {
       var pct = state === 'finished' ? 100 : (progress == null ? 0 : progress);
       big = '<div class="big"><span class="pct">' + Math.round(pct) + '<small> %</small></span><span class="state">' + hcEsc(statusText) + '</span></div>' +
         '<div class="bar"><div class="fill" style="width:' + pct + '%"></div></div>' +
-        (timeLine ? `<div class="time">${hcEsc(timeLine)}</div>` : '');
+        (timeLine ? `<div class="time" data-tick="time">${hcEsc(timeLine)}</div>` : '');
     } else {
-      big = `<div class="big"><span class="state-big">${hcEsc(statusText)}</span></div>${timeLine ? `<div class="time">${hcEsc(timeLine)}</div>` : ''}`;
+      big = `<div class="big"><span class="state-big">${hcEsc(statusText)}</span></div>${timeLine ? `<div class="time" data-tick="time">${hcEsc(timeLine)}</div>` : ''}`;
     }
     var art = c.icon
       ? `<div class="badge"><ha-icon icon="${hcEsc(icon)}"></ha-icon></div>`
@@ -3546,7 +3653,13 @@ class HomeConnectBaseCard extends HTMLElement {
         var label = this._entityLabel(id, deviceName);
         var value;
         if (id.indexOf('climate.') === 0) {
-          value = `${Math.round(Number(s.attributes.current_temperature) * 10) / 10} °`;
+          // Unavailable or not reported (null would read as 0 °): no chip. The number in the card's locale, the unit
+          // Home Assistant's.
+          var cur = s.attributes.current_temperature;
+          var n = cur == null || cur === '' ? Number.NaN : Number(cur);
+          if (this._avail(id) && Number.isFinite(n)) {
+            value = `${new Intl.NumberFormat(this._locale(), { maximumFractionDigits: 1 }).format(n)} ${this._hass.config?.unit_system?.temperature || '°'}`;
+          }
         } else if (this._avail(id)) {
           value = this._hass.formatEntityState ? this._hass.formatEntityState(s) : `${s.state} ${s.attributes.unit_of_measurement || ''}`.trim();
         }
@@ -3704,6 +3817,7 @@ class HomeConnectBaseCard extends HTMLElement {
       '@keyframes hc-hum { from { opacity: .9; } to { opacity: 1; } }' +
       '@keyframes hc-zap { 0%, 100% { opacity: 0; } 50% { opacity: .55; } }' +
       '@keyframes hc-sway { 0%, 100% { transform: rotate(-3deg); } 50% { transform: rotate(3deg); } }' +
+      ':host([paused]) * { animation-play-state: paused !important; }' +
       '@media (prefers-reduced-motion: reduce) { .picture.running *, .pbadge, .pbadge *, .sparkles path { animation: none !important; } .sparkles path { opacity: 1; } .picture.running .floor { opacity: 1; } }' +
       '.badge { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center;' +
         ' background: color-mix(in srgb, var(--hc-color) 15%, transparent); color: var(--hc-color); }' +
@@ -3811,11 +3925,13 @@ class HomeConnectBaseCard extends HTMLElement {
         ' ha-card.mini .stt { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }' +
         ' ha-card.mini .mstate { display: flex; }' +
       ' }' +
+      // The full card's header icon shrinks, then steps aside; the mini card's keeps its 40 px at every width (its
+      // title, pill and picture give way instead).
       '@container (max-width: 230px) {' +
         ' .header { gap: 8px; }' +
-        ' .logo { width: 28px; height: 28px; }' +
-        ' .logo ha-icon { --mdc-icon-size: 16px; }' +
-        ' .hc-badge { width: 13px; height: 13px; right: -3px; bottom: -3px; border-radius: 4px; }' +
+        ' ha-card:not(.mini) .logo { width: 28px; height: 28px; }' +
+        ' ha-card:not(.mini) .logo ha-icon { --mdc-icon-size: 16px; }' +
+        ' ha-card:not(.mini) .hc-badge { width: 13px; height: 13px; right: -3px; bottom: -3px; border-radius: 4px; }' +
         ' .hero { gap: 10px; }' +
         ' .picture { width: 56px; height: 66px; }' +
         ' .big { flex-wrap: wrap; row-gap: 0; }' +
@@ -3823,9 +3939,9 @@ class HomeConnectBaseCard extends HTMLElement {
         ' .controls { flex-wrap: wrap; }' +
         ' .btn { flex: 1 1 auto; }' +
       ' }' +
-      // Very narrow (about 200 px): no logo.
+      // Very narrow (about 200 px): no logo on the full card.
       '@container (max-width: 180px) {' +
-        ' .logo { display: none; }' +
+        ' ha-card:not(.mini) .logo { display: none; }' +
         ' ha-card.mini .picture { width: 44px; height: 52px; }' +
         ' ha-card.mini .content { column-gap: 8px; }' +
       ' }' +
@@ -4099,7 +4215,7 @@ var hcMini = (Base) => class extends Base {
     }
     if (m.progLabel && m.online && m.powerOn) lines.push(`<div class="line"><ha-icon icon="mdi:tune-variant"></ha-icon><span>${hcEsc(m.progLabel)}</span></div>`);
     if (m.running && m.finish) {
-      lines.push(`<div class="line"><ha-icon icon="mdi:clock-outline"></ha-icon><span>${hcEsc(this._timeLine(m.finish))}</span></div>`);
+      lines.push(`<div class="line"><ha-icon icon="mdi:clock-outline"></ha-icon><span data-tick="time">${hcEsc(this._timeLine(m.finish))}</span></div>`);
     }
     if (m.chips.length) lines.push(`<div class="chips">${m.chips.join('')}</div>`);
 
@@ -4191,7 +4307,7 @@ class HomeConnectCardEditor extends HTMLElement {
       },
       {
         name: 'language',
-        selector: { select: { mode: 'dropdown', options: [{ value: 'fr', label: 'Français' }, { value: 'en', label: 'English' }, { value: 'de', label: 'Deutsch' }, { value: 'es', label: 'Español' }, { value: 'sr', label: 'Српски' }, { value: 'sr-Latn', label: 'Srpski (latinica)' }, { value: 'it', label: 'Italiano' }, { value: 'nl', label: 'Nederlands' }, { value: 'pt', label: 'Português (Portugal)' }, { value: 'pl', label: 'Polski' }, { value: 'ro', label: 'Română' }, { value: 'da', label: 'Dansk' }, { value: 'sv', label: 'Svenska' }, { value: 'bg', label: 'Български' }, { value: 'ru', label: 'Русский' }, { value: 'uk', label: 'Українська' }, { value: 'hu', label: 'Magyar' }, { value: 'sk', label: 'Slovenčina' }, { value: 'cs', label: 'Čeština' }, { value: 'sl', label: 'Slovenščina' }, { value: 'lv', label: 'Latviešu' }, { value: 'el', label: 'Ελληνικά' }] } },
+        selector: { select: { mode: 'dropdown', options: [{ value: '', label: t('ed_language_auto') }, { value: 'fr', label: 'Français' }, { value: 'en', label: 'English' }, { value: 'de', label: 'Deutsch' }, { value: 'es', label: 'Español' }, { value: 'sr', label: 'Српски' }, { value: 'sr-Latn', label: 'Srpski (latinica)' }, { value: 'it', label: 'Italiano' }, { value: 'nl', label: 'Nederlands' }, { value: 'pt', label: 'Português (Portugal)' }, { value: 'pl', label: 'Polski' }, { value: 'ro', label: 'Română' }, { value: 'da', label: 'Dansk' }, { value: 'sv', label: 'Svenska' }, { value: 'bg', label: 'Български' }, { value: 'ru', label: 'Русский' }, { value: 'uk', label: 'Українська' }, { value: 'hu', label: 'Magyar' }, { value: 'sk', label: 'Slovenčina' }, { value: 'cs', label: 'Čeština' }, { value: 'sl', label: 'Slovenščina' }, { value: 'lv', label: 'Latviešu' }, { value: 'el', label: 'Ελληνικά' }] } },
       },
       {
         type: 'expandable', name: 'entities', title: t('ed_entities'), flatten: false,
@@ -4219,7 +4335,8 @@ class HomeConnectCardEditor extends HTMLElement {
       var txt = hcT(lang, key);
       return txt === key ? undefined : txt;
     };
-    this._form.data = Object.assign({}, HC_EDITOR_DEFAULTS, this._config);
+    // No language set shows as Automatic (picking it removes the option again, see _valueChanged).
+    this._form.data = Object.assign({}, HC_EDITOR_DEFAULTS, { language: '' }, this._config);
   }
 
   _valueChanged(ev) {

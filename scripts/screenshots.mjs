@@ -84,7 +84,7 @@ async function openCard(browser, s, { icons = {}, hass = {}, extra = "" }) {
       const el = document.createElement(type);
       el.setConfig({ type: `custom:${type}`, ...config });
       el.hass = { states: {}, entities: {}, devices: {}, language: "en", locale: { language: "en" },
-                  themes: { darkMode: dark }, callService: async () => {}, callWS: async () => ({}), ...hass };
+                  config: { unit_system: { temperature: "°C" } }, themes: { darkMode: dark }, callService: async () => {}, callWS: async () => ({}), ...hass };
       document.getElementById("root").appendChild(el);
     },
     { type: s.type, config: { ...(s.device ? { device_id: s.device } : {}), ...(s.config || {}) }, hass: { ...hass, ...(s.hass || {}) }, dark: s.theme === "dark" }

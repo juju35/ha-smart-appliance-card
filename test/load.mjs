@@ -25,6 +25,9 @@ export function loadCard(file, names) {
         return this.shadowRoot;
       }
       addEventListener() {}
+      toggleAttribute(name, force) {
+        (this.attributes ||= {})[name] = !!force;
+      }
       dispatchEvent() {}
       appendChild() {}
     },
@@ -35,7 +38,13 @@ export function loadCard(file, names) {
       }
     },
     customElements: { get: (n) => registry.get(n), define: (n, c) => registry.set(n, c) },
-    document: { documentElement: { lang: "en" }, createElement: (tag) => ({ tagName: tag, addEventListener() {} }) },
+    document: {
+      documentElement: { lang: "en" },
+      hidden: false,
+      createElement: (tag) => ({ tagName: tag, addEventListener() {} }),
+      addEventListener() {},
+      removeEventListener() {},
+    },
     navigator: { language: "en" },
     localStorage: { getItem: () => null, setItem() {} },
     setInterval: () => 0,

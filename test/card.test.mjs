@@ -288,6 +288,7 @@ test("language resolution: full code if translated, else the base language, else
 test("editor offers every language, from Français to Ελληνικά, and follows them", () => {
   const options = editor("washer", {})._schema().find((s) => s.name === "language").selector.select.options;
   assert.deepEqual(JSON.parse(JSON.stringify(options)), [
+    { value: "", label: "Automatic" },
     { value: "fr", label: "Français" },
     { value: "en", label: "English" },
     { value: "de", label: "Deutsch" },
@@ -501,7 +502,7 @@ test("finished, door not opened since: a reminder chip with the time since the e
   // The door was closed before the end, or unlocked by the appliance as the program ended.
   for (const doorAt of [90, 24.5]) {
     const html = render(HomeConnectWasherCard, finishedWasher("closed", doorAt), { device_id: "d2" });
-    assert.match(html, /class="chip warn clickable"[^>]*data-entity="sensor\.wm_door"[^>]*><ha-icon icon="mdi:bell-ring-outline"><\/ha-icon>Finished 25 minutes ago, door still closed</);
+    assert.match(html, /class="chip warn clickable"[^>]*data-entity="sensor\.wm_door"[^>]*><ha-icon icon="mdi:bell-ring-outline"><\/ha-icon><span data-tick="waiting">Finished 25 minutes ago, door still closed</);
     assert.doesNotMatch(html, />Door closed</);
   }
   const Mini = customElements.get("home-connect-washer-mini-card");
@@ -521,4 +522,120 @@ test("no reminder once the door was opened, while it is open, without times, or 
   const running = finishedWasher("closed", 90);
   running.states["sensor.wm_operation_state"].state = "run";
   assert.doesNotMatch(html(running), /door still closed/);
+});
+
+test("editor: the language dropdown starts with Automatic, shown while no language is set and removed when picked", () => {
+  const ed = editor("washer", {});
+  const options = ed._schema().find((s) => s.name === "language").selector.select.options;
+  assert.deepEqual({ ...options[0] }, { value: "", label: "Automatic" });
+  assert.equal(editor("washer", { language: "fr" })._schema().find((s) => s.name === "language").selector.select.options[0].label, "Automatique");
+  let fired;
+  ed.dispatchEvent = (ev) => {
+    fired = ev.detail.config;
+  };
+  ed._valueChanged({ stopPropagation() {}, detail: { value: { type: "custom:smart-appliance-card", language: "" } } });
+  assert.equal("language" in fired, false);
+});
+
+// A fridge whose climate entity reports its temperature (or not).
+function fridge(state, current, unit) {
+  const hass = mockHass();
+  hass.states["climate.fr_fridge"] = st(state, current === undefined ? {} : { current_temperature: current });
+  hass.entities["climate.fr_fridge"] = { entity_id: "climate.fr_fridge", device_id: "d3" };
+  hass.devices.d3 = { name: "Fridge" };
+  if (unit) hass.config = { unit_system: { temperature: unit } };
+  return hass;
+}
+
+test("climate chip: no chip without a finite temperature, else the number in the card's locale and HA's unit", () => {
+  const chip = (hass, config = {}) => {
+    const m = render(HomeConnectWasherCard, hass, { device_id: "d3", kind: "fridge", ...config }).match(/data-entity="climate\.fr_fridge"[^>]*><ha-icon[^>]*><\/ha-icon>([^<]*)</);
+    return m ? m[1] : null;
+  };
+  const card = new HomeConnectWasherCard();
+  card.setConfig({ device_id: "d3", kind: "fridge" });
+  card.hass = fridge("cool", 4.25, "°C");
+  assert.ok(card._r.ent.temps.includes("climate.fr_fridge"), "the climate entity is not a temperature of the fridge");
+  assert.equal(chip(fridge("cool", 4.25, "°C")), "4.3 °C");
+  assert.equal(chip(fridge("cool", 4.25, "°C"), { language: "fr" }), "4,3 °C");
+  assert.equal(chip(fridge("cool", -18, "°F")), "-18 °F");
+  assert.equal(chip(fridge("cool", 5)), "5 °");
+  for (const hass of [fridge("cool", null, "°C"), fridge("cool", undefined, "°C"), fridge("unavailable", 4, "°C"), fridge("cool", "abc", "°C")]) {
+    assert.equal(chip(hass), null);
+  }
+});
+
+test("door reminder after a Home Assistant restart: the recorder's history decides, fetched once", async () => {
+  // Restart: every state got the same new last_changed. The history says the program ended 25 minutes ago and the
+  // door was last closed 2 hours ago (a restart row repeats each value).
+  const hass = finishedWasher("closed", 3);
+  const now = Date.now() / 1000;
+  hass.states["sensor.wm_operation_state"].last_changed = hass.states["sensor.wm_door"].last_changed;
+  const calls = [];
+  let rows = {
+    "sensor.wm_operation_state": [{ s: "run", lu: now - 7200 }, { s: "finished", lu: now - 1500 }, { s: "finished", lu: now - 180 }],
+    "sensor.wm_door": [{ s: "open", lu: now - 8000 }, { s: "closed", lu: now - 7200 }, { s: "closed", lu: now - 180 }],
+  };
+  hass.callWS = (msg) => {
+    calls.push(msg);
+    return Promise.resolve(rows);
+  };
+  const card = new HomeConnectWasherCard();
+  card.setConfig({ device_id: "d2" });
+  card.hass = hass;
+  // No reminder until the history answers.
+  assert.doesNotMatch(card.shadowRoot.innerHTML, /door still closed/);
+  await new Promise((r) => setTimeout(r));
+  assert.match(card.shadowRoot.innerHTML, /Finished 25 minutes ago, door still closed/);
+  assert.equal(calls.length, 1);
+  assert.equal(calls[0].type, "history/history_during_period");
+  assert.deepEqual([...calls[0].entity_ids], ["sensor.wm_operation_state", "sensor.wm_door"]);
+  card.hass = { ...hass };
+  assert.equal(calls.length, 1, "history fetched again for the same states");
+
+  // The door was opened and closed again after the end, before the restart: no reminder.
+  const again = finishedWasher("closed", 3);
+  again.states["sensor.wm_operation_state"].last_changed = again.states["sensor.wm_door"].last_changed;
+  rows = { ...rows, "sensor.wm_door": [{ s: "closed", lu: now - 7200 }, { s: "open", lu: now - 1200 }, { s: "closed", lu: now - 1100 }, { s: "closed", lu: now - 180 }] };
+  again.callWS = () => Promise.resolve(rows);
+  const c2 = new HomeConnectWasherCard();
+  c2.setConfig({ device_id: "d2" });
+  c2.hass = again;
+  await new Promise((r) => setTimeout(r));
+  assert.doesNotMatch(c2.shadowRoot.innerHTML, /door still closed/);
+  assert.match(c2.shadowRoot.innerHTML, />Door closed</);
+});
+
+test("door reminder: ended is the operation state's last change only, not the phase's", () => {
+  const hass = finishedWasher("closed", 10);
+  hass.states["sensor.wm_operation_state"].last_changed = new Date(Date.now() - 25 * 60000).toISOString();
+  hass.states["sensor.wm_phase"] = { state: "finished", attributes: {}, last_changed: new Date(Date.now() - 2 * 60000).toISOString() };
+  hass.entities["sensor.wm_phase"] = { entity_id: "sensor.wm_phase", device_id: "d2", translation_key: "phase" };
+  assert.doesNotMatch(render(HomeConnectWasherCard, hass, { device_id: "d2", entities: { phase: "sensor.wm_phase" } }), /door still closed/);
+});
+
+test("30 s tick rewrites the time texts in place instead of rebuilding the card (animations keep running)", () => {
+  const hass = finishedWasher("closed", 90);
+  const card = new HomeConnectWasherCard();
+  card.setConfig({ device_id: "d2" });
+  card.hass = hass;
+  const before = card.shadowRoot.innerHTML;
+  const el = { dataset: { tick: "waiting" }, textContent: "Finished 25 minutes ago, door still closed" };
+  card.shadowRoot.querySelectorAll = () => [el];
+  card._tickInfo.waiting = new Date(Date.now() - 40 * 60000);
+  card._tick();
+  assert.equal(el.textContent, "Finished 40 minutes ago, door still closed");
+  assert.equal(card.shadowRoot.innerHTML, before, "the card was rebuilt");
+});
+
+test("animations pause while the card is off screen or the tab hidden", () => {
+  const css = new HomeConnectWasherCard()._styles();
+  assert.match(css, /:host\(\[paused\]\) \* \{ animation-play-state: paused !important; \}/);
+  const card = new HomeConnectWasherCard();
+  card._offscreen = true;
+  card._setPaused();
+  assert.equal(card.attributes.paused, true);
+  card._offscreen = false;
+  card._setPaused();
+  assert.equal(card.attributes.paused, false);
 });
