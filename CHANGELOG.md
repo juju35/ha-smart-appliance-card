@@ -5,6 +5,7 @@
 ### Fixes
 - A fridge, freezer or wine cabinet temperature chip no longer shows "0 °" or "NaN °" when the climate entity is unavailable or reports no temperature; it shows the number in the card's language with Home Assistant's unit (°C or °F).
 - The "door still closed" reminder no longer appears after a Home Assistant restart for a program that ended long ago with the door opened since: it uses the operation state's last change and, when that and the door changed together, checks the recorder history.
+- After a restart, a program that ended before the 48 hours of history the card reads shows no reminder instead of one dated from the start of that history.
 - The illustration's animations pause while the card is off screen or the browser tab is hidden, and the 30 s refresh only updates the time texts instead of redrawing the card, so the animations no longer restart every 30 seconds.
 - The mini card's header icon keeps its 40 px at every width; only the full card's icon shrinks on narrow cards.
 - The visual editor's language list starts with an "Automatic" entry, which follows the Home Assistant language.

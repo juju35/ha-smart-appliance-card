@@ -2341,12 +2341,14 @@ var HC_DOOR_GRACE = 60000;
 var HC_DOOR_HISTORY = 48 * 3600000;
 
 // The time (ms) an entity took its current value in recorder history rows (oldest first, compressed `s` / `lc` /
-// `lu` in seconds), skipping the rows that only repeat it (a Home Assistant restart writes one). Null without rows.
+// `lu` in seconds), skipping the rows that only repeat it (a Home Assistant restart writes one). -Infinity when the
+// value already held at the start of the window (its first row is that start, not a change). Null without rows.
 function hcSince(rows, state) {
   var at = null;
   for (var i = (rows || []).length - 1; i >= 0; i--) {
     var r = rows[i];
     if ((r.s ?? r.state) !== state) break;
+    if (i === 0) return -Infinity;
     var t = r.lc ?? r.lu;
     at = t != null ? t * 1000 : Date.parse(r.last_changed);
   }
@@ -3349,6 +3351,8 @@ class HomeConnectBaseCard extends HTMLElement {
       if (!h) return null;
       ended = h.ended;
       moved = h.moved;
+      // Ended before the history window (the door unchanged as long, or not): too old to tell, no reminder.
+      if (!Number.isFinite(ended)) return null;
     }
     if (moved > ended + HC_DOOR_GRACE) return null;
     return new Date(ended);

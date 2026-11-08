@@ -606,6 +606,29 @@ test("door reminder after a Home Assistant restart: the recorder's history decid
   assert.match(c2.shadowRoot.innerHTML, />Door closed</);
 });
 
+test("door reminder after a restart: no reminder when the program ended before the history window", async () => {
+  const now = Date.now() / 1000;
+  const start = now - 48 * 3600;
+  // Both values held since before the window: the first row is the window start, not a change.
+  const both = { "sensor.wm_operation_state": [{ s: "finished", lu: start }, { s: "finished", lu: now - 180 }], "sensor.wm_door": [{ s: "closed", lu: start }, { s: "closed", lu: now - 180 }] };
+  // The door closed before the window, the program ended inside it: the reminder shows.
+  const doorOld = { "sensor.wm_operation_state": [{ s: "run", lu: start }, { s: "finished", lu: now - 1500 }, { s: "finished", lu: now - 180 }], "sensor.wm_door": both["sensor.wm_door"] };
+  const html = async (rows) => {
+    const hass = finishedWasher("closed", 3);
+    hass.states["sensor.wm_operation_state"].last_changed = hass.states["sensor.wm_door"].last_changed;
+    hass.callWS = () => Promise.resolve(rows);
+    const card = new HomeConnectWasherCard();
+    card.setConfig({ device_id: "d2" });
+    card.hass = hass;
+    await new Promise((r) => setTimeout(r));
+    return card.shadowRoot.innerHTML;
+  };
+  const old = await html(both);
+  assert.doesNotMatch(old, /door still closed/);
+  assert.match(old, />Door closed</);
+  assert.match(await html(doorOld), /Finished 25 minutes ago, door still closed/);
+});
+
 test("door reminder: ended is the operation state's last change only, not the phase's", () => {
   const hass = finishedWasher("closed", 10);
   hass.states["sensor.wm_operation_state"].last_changed = new Date(Date.now() - 25 * 60000).toISOString();
