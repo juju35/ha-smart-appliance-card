@@ -79,6 +79,55 @@ test("Miele: paused resumes with Start, not connected is offline", async () => {
   assert.match(off, /Unavailable/);
 });
 
+const OP_OPTIONS = ["inactive", "ready", "delayedstart", "run", "pause", "actionrequired", "finished", "error", "aborting"];
+const hcLocal = (op = "run", door = "off") =>
+  device("homeconnect_ws", { manufacturer: "Bosch", model: "Dishwasher" }, [
+    ["sensor.bosch_dishwasher_operation_state", op, { options: OP_OPTIONS }, { translation_key: "sensor_operation_state" }],
+    ["binary_sensor.bosch_dishwasher_door", door, { device_class: "door" }, { translation_key: "binary_sensor_door_state" }],
+    ["sensor.bosch_dishwasher_program_progress", "40", { unit_of_measurement: "%" }, { translation_key: "sensor_program_progress" }],
+    ["sensor.bosch_dishwasher_remaining_program_time", "1.5", { unit_of_measurement: "h", device_class: "duration" },
+      { translation_key: "sensor_remaining_program_time" }],
+    ["select.bosch_dishwasher_program", "dishcare_dishwasher_program_eco50",
+      { options: ["dishcare_dishwasher_program_auto2", "dishcare_dishwasher_program_eco50"] }, { translation_key: "select_program" }],
+    ["sensor.bosch_dishwasher_active_program", op === "run" ? "dishcare_dishwasher_program_eco50" : "unknown", {},
+      { translation_key: "sensor_active_program" }],
+    ["button.bosch_dishwasher_start_program", "unknown", {}, { translation_key: "button_start_program" }],
+    ["button.bosch_dishwasher_abort_program", "unknown", {}, { translation_key: "button_abort_program" }],
+    ["switch.bosch_dishwasher_power_state", "on", {}, { translation_key: "switch_power_state" }],
+    ["switch.bosch_dishwasher_child_lock", "off", {}, { translation_key: "switch_child_lock" }],
+    ["switch.bosch_dishwasher_half_load", "off", {}, { translation_key: "switch_half_load" }],
+    ["select.bosch_dishwasher_water_hardness", "h2", { options: ["h1", "h2"] }, { translation_key: "select_water_hardness", entity_category: "config" }],
+    ["sensor.bosch_dishwasher_salt", "nearly_empty", { options: ["empty", "nearly_empty", "full"] }, { translation_key: "sensor_salt" }],
+    ["sensor.bosch_dishwasher_rinse_aid", "full", { options: ["empty", "nearly_empty", "full"] }, { translation_key: "sensor_rinse_aid" }],
+  ]);
+
+test("Home Connect Local: type from the model, door binary sensor, time left in hours, salt alert, Stop pressed", async () => {
+  const hass = hcLocal();
+  assert.equal(hcKindOf(hass, "a1"), "dishwasher");
+  const { card, html } = render(hass);
+  assert.match(html, /40<small> %<\/small>/);
+  assert.match(html, /Door closed/);
+  assert.match(html, /1 hr 30 min/, "1.5 h left");
+  assert.match(html, /Salt/i);
+  assert.doesNotMatch(html, /Rinse aid/i, "rinse aid full is no alert");
+  assert.match(html, /title="Bosch"/);
+  card._send("stop");
+  await new Promise((r) => setTimeout(r));
+  assert.deepEqual(plain(hass.calls[0]), ["button", "press", { entity_id: "button.bosch_dishwasher_abort_program" }]);
+});
+
+test("Home Connect Local: ready shows the program picker and options, Start presses its button", async () => {
+  const hass = hcLocal("ready", "on");
+  const { card, html } = render(hass);
+  assert.match(html, /data-select="select.bosch_dishwasher_program"/);
+  assert.match(html, /data-toggle="switch.bosch_dishwasher_half_load"/);
+  assert.doesNotMatch(html, /child_lock|water_hardness/, "appliance settings are not program options");
+  assert.match(html, /Door open/);
+  card._start();
+  await new Promise((r) => setTimeout(r));
+  assert.deepEqual(plain(hass.calls[0]), ["button", "press", { entity_id: "button.bosch_dishwasher_start_program" }]);
+});
+
 test("LG ThinQ: type in the model, step as status, Start through the operation select", async () => {
   const hass = device("lg_thinq", { manufacturer: "LGE", model: "DLEX4000 (DEVICE_DRYER)" }, [
     ["sensor.dryer_current_status", "initial", { options: ["power_off", "initial", "drying", "end"] }, { translation_key: "current_state" }],

@@ -1,5 +1,14 @@
 # Changelog
 
+## 2.3.0 - 2026-11-09
+
+### What's new
+- Support for [Home Connect Local](https://github.com/chris-mc1/homeconnect_local_hass) (`homeconnect_ws`), which talks to Bosch, Siemens, Neff, Gaggenau and Constructa appliances on the local network: the card finds its operation state, door (binary sensor), progress, time left, program picker and options, Start / Pause / Resume / Stop buttons, power switch, salt and rinse aid levels and coffee machine tanks, and reads the appliance type from the device model (#48).
+- The visual editor accepts a binary sensor for the door, salt and rinse aid, and a sensor for the active program.
+
+### Fixes
+- The time left and elapsed time follow the unit of their sensor (seconds, minutes, hours or days) instead of always reading minutes.
+
 ## 2.2.1 - 2026-11-08
 
 ### Fixes

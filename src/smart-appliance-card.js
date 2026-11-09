@@ -2503,8 +2503,45 @@ var HC_PLATFORM_ROLES = {
     power: { domain: 'switch', keys: ['power'] },
     door: { domain: 'binary_sensor', keys: ['alarm_door'] },
   },
+  // Home Connect Local (chris-mc1/homeconnect_local_hass): the same appliances and states as Home Connect, reached on
+  // the local network, with its own keys. Its program select has the Home Connect program names; the running program
+  // is a sensor; durations come in the unit the user picked (hours by default).
+  homeconnect_ws: {
+    operation_state: { domain: 'sensor', keys: ['sensor_operation_state'] },
+    door: { domain: 'binary_sensor', keys: ['binary_sensor_door_state'], test: hcIsDoor },
+    progress: { domain: 'sensor', keys: ['sensor_program_progress'] },
+    remaining: { domain: 'sensor', keys: ['sensor_remaining_program_time'] },
+    elapsed: { domain: 'sensor', keys: ['sensor_elapsed_program_time'] },
+    selected_program: { domain: 'select', keys: ['select_program'] },
+    active_program: { domain: 'sensor', keys: ['sensor_active_program'] },
+    start: { domain: 'button', keys: ['button_start_program'] },
+    stop: { domain: 'button', keys: ['button_abort_program'] },
+    pause: { domain: 'button', keys: ['button_pause_program'] },
+    resume: { domain: 'button', keys: ['button_resume_program'] },
+    power: { domain: 'switch', keys: ['switch_power_state'] },
+    remote_start: { domain: 'binary_sensor', keys: ['binary_remote_start_allowed'] },
+    salt: { domain: 'sensor', keys: ['sensor_salt'] },
+    rinse_aid: { domain: 'sensor', keys: ['sensor_rinse_aid'] },
+    bean_container: { domain: 'binary_sensor', keys: ['binary_sensor_bean_container_empty'] },
+    water_tank: { domain: 'sensor', keys: ['sensor_water_tank'] },
+    drip_tray: { domain: 'sensor', keys: ['sensor_drip_tray'] },
+    boost: { domain: 'switch', keys: ['switch_super_refrigerator', 'switch_super_freezer'] },
+    light: { domain: 'light', keys: ['light_cooking_lighting', 'light_internal'], test: () => true },
+  },
 };
 var HC_PLATFORMS = Object.keys(HC_PLATFORM_ROLES);
+// Switches of Home Connect Local that are appliance settings, not program options.
+var HC_NOT_OPTIONS = ['switch_child_lock'];
+// Values of an alert entity (salt, rinse aid, coffee machine tanks) that call for a chip; `full` only on the drip tray.
+var HC_ALERT_ON = ['present', 'confirmed', 'on', 'empty', 'nearly_empty', 'not_inserted'];
+
+// A duration sensor's value in minutes, whatever unit it is shown in (Home Connect Local defaults to hours).
+var HC_MINUTES = { s: 1 / 60, min: 1, h: 60, d: 1440 };
+function hcMinutes(s) {
+  var v = Number(s?.state);
+  if (!s || s.state === '' || Number.isNaN(v)) return null;
+  return v * (HC_MINUTES[s.attributes.unit_of_measurement] ?? 1);
+}
 
 // Commands sent as an option of the appliance's operation select, where an integration has no buttons.
 var HC_OPERATION_OPTIONS = {
@@ -2602,8 +2639,10 @@ function hcDeviceRoles(hass, deviceId) {
   var table = Object.assign({}, HC_COMMON_ROLES, HC_PLATFORM_ROLES[platform]);
   var roles = {};
   Object.keys(table).forEach((role) => { roles[role] = hcFindRole(hass, list, table[role]); });
-  // Home Connect lists every switch and select as a program option; elsewhere diagnostics are left out.
-  var opts = platform === 'home_connect' ? list : list.filter((e) => e.entity_category !== 'diagnostic');
+  // Home Connect lists every switch and select as a program option; elsewhere diagnostics are left out (and, for
+  // Home Connect Local, the appliance settings too).
+  var opts = platform === 'home_connect' ? list : list.filter((e) => e.entity_category !== 'diagnostic' &&
+    (platform !== 'homeconnect_ws' || (e.entity_category !== 'config' && HC_NOT_OPTIONS.indexOf(e.translation_key) < 0)));
   var ids = opts.map((e) => e.entity_id);
   cached = {
     count: list.length,
@@ -2647,6 +2686,11 @@ var HC_LG_TYPES = {
   WASHCOMBO_MAIN: 'washer_dryer', WASHCOMBO_MINI: 'washer', DISH_WASHER: 'dishwasher', OVEN: 'oven', MICROWAVE_OVEN: 'microwave',
   COOKTOP: 'hob', HOOD: 'hood', REFRIGERATOR: 'fridge', KIMCHI_REFRIGERATOR: 'fridge', WINE_CELLAR: 'wine_cooler', STYLER: 'styler',
 };
+var HC_WS_TYPES = {
+  Dishwasher: 'dishwasher', Washer: 'washer', Dryer: 'dryer', WasherDryer: 'washer_dryer', Oven: 'oven', Microwave: 'microwave',
+  CoffeeMaker: 'coffee_maker', Hood: 'hood', Hob: 'hob', Cooktop: 'hob', Refrigerator: 'fridge', FridgeFreezer: 'fridge',
+  Freezer: 'freezer', WineCooler: 'wine_cooler',
+};
 // [kind, translation keys any one of which gives it away], in order.
 var HC_KEY_KINDS = [
   ['washer_dryer', (k) => k.washer_machine_state && k.dryer_machine_state],
@@ -2689,6 +2733,8 @@ function hcDetectKind(hass, deviceId, list) {
     var t = String(dev.model || '').match(/\((?:DEVICE_)?([A-Z_]+)\)\s*$/);
     if (t && HC_LG_TYPES[t[1]]) return HC_LG_TYPES[t[1]];
   }
+  // Home Connect Local names the device model after the appliance type (Dishwasher, WasherDryer…).
+  if (platform === 'homeconnect_ws' && HC_WS_TYPES[dev.model]) return HC_WS_TYPES[dev.model];
   // Home Connect programs.
   var progs = list.filter((e) => e.entity_id.indexOf('select.') === 0)
     .map((e) => ((hass.states[e.entity_id]?.attributes.options) || []).join(' ')).join(' ');
@@ -3468,7 +3514,9 @@ class HomeConnectBaseCard extends HTMLElement {
     var progress = num(ent.progress);
     var finish = this._avail(ent.finish_time) ? new Date(this._val(ent.finish_time)) : null;
     if (finish && Number.isNaN(finish.getTime())) finish = null;
-    var left = num(ent.remaining), elapsed = num(ent.elapsed), total = num(ent.total);
+    // Times left and elapsed in minutes, converted from the unit the sensor is shown in.
+    var mins = (id) => (this._avail(id) ? hcMinutes(this._st(id)) : null);
+    var left = mins(ent.remaining), elapsed = mins(ent.elapsed), total = num(ent.total);
     if (!finish && running && left != null && left > 0) finish = new Date(Date.now() + left * 60000);
     var clockProgress = false;
     if (progress == null && running) {
@@ -3512,7 +3560,7 @@ class HomeConnectBaseCard extends HTMLElement {
       [['salt', 'mdi:shaker-outline'], ['rinse_aid', 'mdi:water-alert-outline'], ['bean_container', 'mdi:coffee-off-outline'],
         ['water_tank', 'mdi:cup-water'], ['drip_tray', 'mdi:tray-full']].forEach((a) => {
         var v = this._val(ent[a[0]]);
-        if (v === 'present' || v === 'confirmed' || v === 'on') chips.push(hcChip('chip warn', a[1], this._t(a[0]), ent[a[0]]));
+        if (v === 'full' ? a[0] === 'drip_tray' : HC_ALERT_ON.indexOf(v) >= 0) chips.push(hcChip('chip warn', a[1], this._t(a[0]), ent[a[0]]));
       });
     }
     if (!online) chips.push(`<span class="chip"><ha-icon icon="mdi:cloud-off-outline"></ha-icon>${this._t('offline')}</span>`);
@@ -4277,10 +4325,11 @@ class HomeConnectCardEditor extends HTMLElement {
     var t = (k) => hcT(this._lang(), k);
     // The former per-appliance card types fix the kind; the single card follows the appliance picked.
     var kind = this.kind || this._config.kind || HC_KINDS.find((k) => new RegExp(`-${k.replace(/_/g, '-')}-(mini-)?card$`).test(this._config.type || '')) || null;
-    var domains = { operation_state: 'sensor', door: 'sensor', progress: 'sensor', finish_time: 'sensor',
-      selected_program: 'select', active_program: 'select', power: 'switch', stop: 'button',
+    // Doors and alerts may be binary sensors (Home Connect Local, Miele…), the running program a sensor.
+    var domains = { operation_state: 'sensor', door: ['sensor', 'binary_sensor'], progress: 'sensor', finish_time: 'sensor',
+      selected_program: 'select', active_program: ['select', 'sensor'], power: 'switch', stop: 'button',
       pause: 'button', resume: 'button', remote_start: 'binary_sensor', remote_control: 'binary_sensor', connectivity: 'binary_sensor',
-      salt: 'sensor', rinse_aid: 'sensor' };
+      salt: ['sensor', 'binary_sensor'], rinse_aid: ['sensor', 'binary_sensor'] };
     // Pause / resume only exist on washers, salt / rinse aid only on dishwashers.
     var only = { pause: 'washer', resume: 'washer', salt: 'dishwasher', rinse_aid: 'dishwasher' };
     var roles = HC_OVERRIDABLE.filter((r) => !only[r] || !kind || only[r] === kind);
