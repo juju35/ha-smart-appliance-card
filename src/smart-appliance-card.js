@@ -43,6 +43,8 @@ var HcI18n = {
     door_closed: 'Porte fermée',
     door_locked: 'Porte verrouillée',
     door_waiting: 'Terminé {t}, porte toujours fermée',
+    cycle_energy: 'Ce cycle : {e}',
+    last_cycle_energy: 'Dernier cycle : {e}',
     program: 'Programme',
     no_program: 'Aucun programme',
     ends_at: 'Fin à',
@@ -81,6 +83,7 @@ var HcI18n = {
     ed_show_options: 'Options du programme',
     ed_show_alerts: 'Alertes',
     ed_show_power: 'Bouton marche / arrêt',
+    ed_show_energy: 'Énergie du cycle',
     ed_zoom: 'Bouton détail',
     ed_zoom_helper: 'Bouton en haut à droite qui passe la mini-carte en carte complète et inversement',
     zoom_in: 'Afficher la carte complète',
@@ -97,6 +100,7 @@ var HcI18n = {
     en_selected_program: 'Programme sélectionné',
     en_active_program: 'Programme actif',
     en_power: 'Alimentation',
+    en_energy: 'Énergie',
     en_stop: 'Arrêter le programme',
     en_pause: 'Mettre en pause',
     en_resume: 'Reprendre le programme',
@@ -147,6 +151,8 @@ var HcI18n = {
     door_closed: 'Door closed',
     door_locked: 'Door locked',
     door_waiting: 'Finished {t}, door still closed',
+    cycle_energy: 'This cycle: {e}',
+    last_cycle_energy: 'Last cycle: {e}',
     program: 'Program',
     no_program: 'No program',
     ends_at: 'Ends at',
@@ -184,6 +190,7 @@ var HcI18n = {
     ed_show_controls: 'Control buttons',
     ed_show_options: 'Program options',
     ed_show_power: 'Power button',
+    ed_show_energy: 'Cycle energy',
     ed_zoom: 'Detail button',
     ed_zoom_helper: 'Button at the top right that switches the mini card to the full card and back',
     zoom_in: 'Show the full card',
@@ -201,6 +208,7 @@ var HcI18n = {
     en_selected_program: 'Selected program',
     en_active_program: 'Active program',
     en_power: 'Power',
+    en_energy: 'Energy',
     en_stop: 'Stop program',
     en_pause: 'Pause program',
     en_resume: 'Resume program',
@@ -251,6 +259,8 @@ var HcI18n = {
     door_closed: 'Tür geschlossen',
     door_locked: 'Tür verriegelt',
     door_waiting: 'Fertig {t}, Tür noch zu',
+    cycle_energy: 'Dieser Zyklus: {e}',
+    last_cycle_energy: 'Letzter Zyklus: {e}',
     program: 'Programm',
     no_program: 'Kein Programm',
     ends_at: 'Endet um',
@@ -288,6 +298,7 @@ var HcI18n = {
     ed_show_controls: 'Steuerungsschaltflächen',
     ed_show_options: 'Programmoptionen',
     ed_show_power: 'Ein-/Aus-Schaltfläche',
+    ed_show_energy: 'Energie pro Zyklus',
     ed_zoom: 'Detailansicht-Schaltfläche',
     ed_zoom_helper: 'Schaltfläche oben rechts zum Wechseln zwischen kompakter und vollständiger Kartenansicht',
     zoom_in: 'Vollständige Karte anzeigen',
@@ -305,6 +316,7 @@ var HcI18n = {
     en_selected_program: 'Ausgewähltes Programm',
     en_active_program: 'Aktives Programm',
     en_power: 'Ein/Aus',
+    en_energy: 'Energie',
     en_stop: 'Programm stoppen',
     en_pause: 'Programm pausieren',
     en_resume: 'Programm fortsetzen',
@@ -355,6 +367,8 @@ var HcI18n = {
     door_closed: 'Puerta cerrada',
     door_locked: 'Puerta bloqueada',
     door_waiting: 'Terminado {t}, puerta aún cerrada',
+    cycle_energy: 'Este ciclo: {e}',
+    last_cycle_energy: 'Último ciclo: {e}',
     program: 'Programa',
     no_program: 'Sin programa',
     ends_at: 'Termina a las',
@@ -392,6 +406,7 @@ var HcI18n = {
     ed_show_controls: 'Botones de control',
     ed_show_options: 'Opciones del programa',
     ed_show_power: 'Botón de encendido',
+    ed_show_energy: 'Energía del ciclo',
     ed_zoom: 'Botón de detalle',
     ed_zoom_helper: 'Botón arriba a la derecha que cambia la mini tarjeta a la tarjeta completa y viceversa',
     zoom_in: 'Mostrar la tarjeta completa',
@@ -409,6 +424,7 @@ var HcI18n = {
     en_selected_program: 'Programa seleccionado',
     en_active_program: 'Programa activo',
     en_power: 'Encendido/apagado',
+    en_energy: 'Energía',
     en_stop: 'Detener programa',
     en_pause: 'Pausar programa',
     en_resume: 'Reanudar programa',
@@ -459,6 +475,8 @@ var HcI18n = {
     door_closed: 'Врата затворена',
     door_locked: 'Врата закључана',
     door_waiting: 'Завршено {t}, врата још затворена',
+    cycle_energy: 'Овај циклус: {e}',
+    last_cycle_energy: 'Последњи циклус: {e}',
     program: 'Програм',
     no_program: 'Нема програма',
     ends_at: 'Завршава се у',
@@ -496,6 +514,7 @@ var HcI18n = {
     ed_show_controls: 'Дугмад за контролу',
     ed_show_options: 'Опције програма',
     ed_show_power: 'Дугме за укључивање / искључивање',
+    ed_show_energy: 'Енергија циклуса',
     ed_zoom: 'Дугме за детаље',
     ed_zoom_helper: 'Дугме у горњем десном углу које пребацује мини картицу на пун приказ и назад',
     zoom_in: 'Прикажи целу картицу',
@@ -513,6 +532,7 @@ var HcI18n = {
     en_selected_program: 'Изабрани програм',
     en_active_program: 'Активни програм',
     en_power: 'Напајање',
+    en_energy: 'Енергија',
     en_stop: 'Заустави програм',
     en_pause: 'Паузирај програм',
     en_resume: 'Настави програм',
@@ -563,6 +583,8 @@ var HcI18n = {
     door_closed: 'Vrata zatvorena',
     door_locked: 'Vrata zaključana',
     door_waiting: 'Završeno {t}, vrata još zatvorena',
+    cycle_energy: 'Ovaj ciklus: {e}',
+    last_cycle_energy: 'Poslednji ciklus: {e}',
     program: 'Program',
     no_program: 'Nema programa',
     ends_at: 'Završava se u',
@@ -600,6 +622,7 @@ var HcI18n = {
     ed_show_controls: 'Dugmad za kontrolu',
     ed_show_options: 'Opcije programa',
     ed_show_power: 'Dugme za uključivanje / isključivanje',
+    ed_show_energy: 'Energija ciklusa',
     ed_zoom: 'Dugme za detalje',
     ed_zoom_helper: 'Dugme u gornjem desnom uglu koje prebacuje mini karticu na pun prikaz i nazad',
     zoom_in: 'Prikaži celu karticu',
@@ -617,6 +640,7 @@ var HcI18n = {
     en_selected_program: 'Izabrani program',
     en_active_program: 'Aktivni program',
     en_power: 'Napajanje',
+    en_energy: 'Energija',
     en_stop: 'Zaustavi program',
     en_pause: 'Pauziraj program',
     en_resume: 'Nastavi program',
@@ -667,6 +691,8 @@ var HcI18n = {
     door_closed: 'Sportello chiuso',
     door_locked: 'Sportello bloccato',
     door_waiting: 'Terminato {t}, sportello ancora chiuso',
+    cycle_energy: 'Questo ciclo: {e}',
+    last_cycle_energy: 'Ultimo ciclo: {e}',
     program: 'Programma',
     no_program: 'Nessun programma',
     ends_at: 'Fine alle',
@@ -704,6 +730,7 @@ var HcI18n = {
     ed_show_controls: 'Pulsanti di comando',
     ed_show_options: 'Opzioni del programma',
     ed_show_power: 'Pulsante di accensione',
+    ed_show_energy: 'Energia del ciclo',
     ed_zoom: 'Pulsante dettaglio',
     ed_zoom_helper: 'Pulsante in alto a destra che passa dalla mini scheda alla scheda completa e viceversa',
     zoom_in: 'Mostra la scheda completa',
@@ -721,6 +748,7 @@ var HcI18n = {
     en_selected_program: 'Programma selezionato',
     en_active_program: 'Programma attivo',
     en_power: 'Alimentazione',
+    en_energy: 'Energia',
     en_stop: 'Arresta programma',
     en_pause: 'Metti in pausa il programma',
     en_resume: 'Riprendi programma',
@@ -771,6 +799,8 @@ var HcI18n = {
     door_closed: 'Deur dicht',
     door_locked: 'Deur vergrendeld',
     door_waiting: 'Klaar {t}, deur nog dicht',
+    cycle_energy: 'Deze cyclus: {e}',
+    last_cycle_energy: 'Vorige cyclus: {e}',
     program: 'Programma',
     no_program: 'Geen programma',
     ends_at: 'Klaar om',
@@ -808,6 +838,7 @@ var HcI18n = {
     ed_show_controls: 'Bedieningsknoppen',
     ed_show_options: 'Programma-opties',
     ed_show_power: 'Aan/uit-knop',
+    ed_show_energy: 'Energie per cyclus',
     ed_zoom: 'Detailknop',
     ed_zoom_helper: 'Knop rechtsboven die de minikaart omschakelt naar de volledige kaart en terug',
     zoom_in: 'Volledige kaart tonen',
@@ -825,6 +856,7 @@ var HcI18n = {
     en_selected_program: 'Geselecteerd programma',
     en_active_program: 'Actief programma',
     en_power: 'Aan/uit',
+    en_energy: 'Energie',
     en_stop: 'Programma stoppen',
     en_pause: 'Programma pauzeren',
     en_resume: 'Programma hervatten',
@@ -875,6 +907,8 @@ var HcI18n = {
     door_closed: 'Porta fechada',
     door_locked: 'Porta bloqueada',
     door_waiting: 'Concluído {t}, porta ainda fechada',
+    cycle_energy: 'Este ciclo: {e}',
+    last_cycle_energy: 'Último ciclo: {e}',
     program: 'Programa',
     no_program: 'Nenhum programa',
     ends_at: 'Fim às',
@@ -912,6 +946,7 @@ var HcI18n = {
     ed_show_controls: 'Botões de comando',
     ed_show_options: 'Opções do programa',
     ed_show_power: 'Botão ligar / desligar',
+    ed_show_energy: 'Energia do ciclo',
     ed_zoom: 'Botão de detalhe',
     ed_zoom_helper: 'Botão no canto superior direito que alterna entre o mini cartão e o cartão completo',
     zoom_in: 'Mostrar o cartão completo',
@@ -929,6 +964,7 @@ var HcI18n = {
     en_selected_program: 'Programa selecionado',
     en_active_program: 'Programa ativo',
     en_power: 'Alimentação',
+    en_energy: 'Energia',
     en_stop: 'Parar programa',
     en_pause: 'Pausar programa',
     en_resume: 'Retomar programa',
@@ -979,6 +1015,8 @@ var HcI18n = {
     door_closed: 'Drzwi zamknięte',
     door_locked: 'Drzwi zablokowane',
     door_waiting: 'Zakończone {t}, drzwi wciąż zamknięte',
+    cycle_energy: 'Ten cykl: {e}',
+    last_cycle_energy: 'Ostatni cykl: {e}',
     program: 'Program',
     no_program: 'Brak programu',
     ends_at: 'Koniec o',
@@ -1016,6 +1054,7 @@ var HcI18n = {
     ed_show_controls: 'Przyciski sterowania',
     ed_show_options: 'Opcje programu',
     ed_show_power: 'Przycisk włączania / wyłączania',
+    ed_show_energy: 'Energia cyklu',
     ed_zoom: 'Przycisk szczegółów',
     ed_zoom_helper: 'Przycisk w prawym górnym rogu przełączający minikartę na pełną kartę i z powrotem',
     zoom_in: 'Pokaż pełną kartę',
@@ -1033,6 +1072,7 @@ var HcI18n = {
     en_selected_program: 'Wybrany program',
     en_active_program: 'Aktywny program',
     en_power: 'Zasilanie',
+    en_energy: 'Energia',
     en_stop: 'Zatrzymaj program',
     en_pause: 'Wstrzymaj program',
     en_resume: 'Wznów program',
@@ -1083,6 +1123,8 @@ var HcI18n = {
     door_closed: 'Ușă închisă',
     door_locked: 'Ușă blocată',
     door_waiting: 'Terminat {t}, ușa încă închisă',
+    cycle_energy: 'Ciclul acesta: {e}',
+    last_cycle_energy: 'Ultimul ciclu: {e}',
     program: 'Program',
     no_program: 'Niciun program',
     ends_at: 'Se termină la',
@@ -1120,6 +1162,7 @@ var HcI18n = {
     ed_show_controls: 'Butoane de comandă',
     ed_show_options: 'Opțiunile programului',
     ed_show_power: 'Buton de pornire / oprire',
+    ed_show_energy: 'Energia ciclului',
     ed_zoom: 'Buton de detalii',
     ed_zoom_helper: 'Buton din dreapta sus care comută mini-cardul în cardul complet și înapoi',
     zoom_in: 'Afișează cardul complet',
@@ -1137,6 +1180,7 @@ var HcI18n = {
     en_selected_program: 'Program selectat',
     en_active_program: 'Program activ',
     en_power: 'Alimentare',
+    en_energy: 'Energie',
     en_stop: 'Oprește programul',
     en_pause: 'Pune programul în pauză',
     en_resume: 'Reia programul',
@@ -1187,6 +1231,8 @@ var HcI18n = {
     door_closed: 'Låge lukket',
     door_locked: 'Låge låst',
     door_waiting: 'Færdig {t}, lågen stadig lukket',
+    cycle_energy: 'Denne cyklus: {e}',
+    last_cycle_energy: 'Sidste cyklus: {e}',
     program: 'Program',
     no_program: 'Intet program',
     ends_at: 'Færdig kl.',
@@ -1224,6 +1270,7 @@ var HcI18n = {
     ed_show_controls: 'Betjeningsknapper',
     ed_show_options: 'Programindstillinger',
     ed_show_power: 'Tænd/sluk-knap',
+    ed_show_energy: 'Energi pr. cyklus',
     ed_zoom: 'Detaljeknap',
     ed_zoom_helper: 'Knap øverst til højre, der skifter minikortet til det fulde kort og tilbage',
     zoom_in: 'Vis det fulde kort',
@@ -1241,6 +1288,7 @@ var HcI18n = {
     en_selected_program: 'Valgt program',
     en_active_program: 'Aktivt program',
     en_power: 'Strøm',
+    en_energy: 'Energi',
     en_stop: 'Stop program',
     en_pause: 'Sæt program på pause',
     en_resume: 'Genoptag program',
@@ -1291,6 +1339,8 @@ var HcI18n = {
     door_closed: 'Luckan stängd',
     door_locked: 'Luckan låst',
     door_waiting: 'Klar {t}, luckan fortfarande stängd',
+    cycle_energy: 'Den här cykeln: {e}',
+    last_cycle_energy: 'Senaste cykeln: {e}',
     program: 'Program',
     no_program: 'Inget program',
     ends_at: 'Klar kl.',
@@ -1328,6 +1378,7 @@ var HcI18n = {
     ed_show_controls: 'Kontrollknappar',
     ed_show_options: 'Programalternativ',
     ed_show_power: 'På/av-knapp',
+    ed_show_energy: 'Energi per cykel',
     ed_zoom: 'Detaljknapp',
     ed_zoom_helper: 'Knapp uppe till höger som växlar minikortet till hela kortet och tillbaka',
     zoom_in: 'Visa hela kortet',
@@ -1345,6 +1396,7 @@ var HcI18n = {
     en_selected_program: 'Valt program',
     en_active_program: 'Aktivt program',
     en_power: 'Ström',
+    en_energy: 'Energi',
     en_stop: 'Stoppa program',
     en_pause: 'Pausa program',
     en_resume: 'Återuppta program',
@@ -1395,6 +1447,8 @@ var HcI18n = {
     door_closed: 'Вратата е затворена',
     door_locked: 'Вратата е заключена',
     door_waiting: 'Завършен {t}, вратата още е затворена',
+    cycle_energy: 'Този цикъл: {e}',
+    last_cycle_energy: 'Последен цикъл: {e}',
     program: 'Програма',
     no_program: 'Няма програма',
     ends_at: 'Край в',
@@ -1432,6 +1486,7 @@ var HcI18n = {
     ed_show_controls: 'Бутони за управление',
     ed_show_options: 'Опции на програмата',
     ed_show_power: 'Бутон за включване / изключване',
+    ed_show_energy: 'Енергия на цикъла',
     ed_zoom: 'Бутон за подробности',
     ed_zoom_helper: 'Бутон горе вдясно, който превключва мини картата към пълната карта и обратно',
     zoom_in: 'Покажи пълната карта',
@@ -1449,6 +1504,7 @@ var HcI18n = {
     en_selected_program: 'Избрана програма',
     en_active_program: 'Активна програма',
     en_power: 'Захранване',
+    en_energy: 'Енергия',
     en_stop: 'Спиране на програмата',
     en_pause: 'Пауза на програмата',
     en_resume: 'Продължаване на програмата',
@@ -1499,6 +1555,8 @@ var HcI18n = {
     door_closed: 'Дверца закрыта',
     door_locked: 'Дверца заблокирована',
     door_waiting: 'Завершено {t}, дверца ещё закрыта',
+    cycle_energy: 'Этот цикл: {e}',
+    last_cycle_energy: 'Последний цикл: {e}',
     program: 'Программа',
     no_program: 'Нет программы',
     ends_at: 'Окончание в',
@@ -1536,6 +1594,7 @@ var HcI18n = {
     ed_show_controls: 'Кнопки управления',
     ed_show_options: 'Параметры программы',
     ed_show_power: 'Кнопка включения / выключения',
+    ed_show_energy: 'Энергия цикла',
     ed_zoom: 'Кнопка подробностей',
     ed_zoom_helper: 'Кнопка в правом верхнем углу, переключающая мини-карточку на полную карточку и обратно',
     zoom_in: 'Показать полную карточку',
@@ -1553,6 +1612,7 @@ var HcI18n = {
     en_selected_program: 'Выбранная программа',
     en_active_program: 'Активная программа',
     en_power: 'Питание',
+    en_energy: 'Энергия',
     en_stop: 'Остановить программу',
     en_pause: 'Приостановить программу',
     en_resume: 'Продолжить программу',
@@ -1603,6 +1663,8 @@ var HcI18n = {
     door_closed: 'Дверцята зачинені',
     door_locked: 'Дверцята заблоковані',
     door_waiting: 'Завершено {t}, дверцята ще зачинені',
+    cycle_energy: 'Цей цикл: {e}',
+    last_cycle_energy: 'Останній цикл: {e}',
     program: 'Програма',
     no_program: 'Немає програми',
     ends_at: 'Завершення о',
@@ -1640,6 +1702,7 @@ var HcI18n = {
     ed_show_controls: 'Кнопки керування',
     ed_show_options: 'Параметри програми',
     ed_show_power: 'Кнопка увімкнення / вимкнення',
+    ed_show_energy: 'Енергія циклу',
     ed_zoom: 'Кнопка деталей',
     ed_zoom_helper: 'Кнопка в правому верхньому куті, що перемикає мінікартку на повну картку й назад',
     zoom_in: 'Показати повну картку',
@@ -1657,6 +1720,7 @@ var HcI18n = {
     en_selected_program: 'Вибрана програма',
     en_active_program: 'Активна програма',
     en_power: 'Живлення',
+    en_energy: 'Енергія',
     en_stop: 'Зупинити програму',
     en_pause: 'Призупинити програму',
     en_resume: 'Продовжити програму',
@@ -1707,6 +1771,8 @@ var HcI18n = {
     door_closed: 'Ajtó zárva',
     door_locked: 'Ajtó reteszelve',
     door_waiting: 'Befejezve {t}, az ajtó még zárva',
+    cycle_energy: 'Ez a ciklus: {e}',
+    last_cycle_energy: 'Előző ciklus: {e}',
     program: 'Program',
     no_program: 'Nincs program',
     ends_at: 'Befejezés:',
@@ -1744,6 +1810,7 @@ var HcI18n = {
     ed_show_controls: 'Vezérlőgombok',
     ed_show_options: 'Programbeállítások',
     ed_show_power: 'Be-/kikapcsoló gomb',
+    ed_show_energy: 'Ciklus energiája',
     ed_zoom: 'Részletek gomb',
     ed_zoom_helper: 'Jobb felső sarokban lévő gomb, amely a minikártyát teljes kártyára váltja és vissza',
     zoom_in: 'Teljes kártya megjelenítése',
@@ -1761,6 +1828,7 @@ var HcI18n = {
     en_selected_program: 'Kiválasztott program',
     en_active_program: 'Aktív program',
     en_power: 'Tápellátás',
+    en_energy: 'Energia',
     en_stop: 'Program leállítása',
     en_pause: 'Program szüneteltetése',
     en_resume: 'Program folytatása',
@@ -1811,6 +1879,8 @@ var HcI18n = {
     door_closed: 'Dvierka zatvorené',
     door_locked: 'Dvierka zamknuté',
     door_waiting: 'Dokončené {t}, dvierka stále zatvorené',
+    cycle_energy: 'Tento cyklus: {e}',
+    last_cycle_energy: 'Posledný cyklus: {e}',
     program: 'Program',
     no_program: 'Žiadny program',
     ends_at: 'Koniec o',
@@ -1848,6 +1918,7 @@ var HcI18n = {
     ed_show_controls: 'Ovládacie tlačidlá',
     ed_show_options: 'Možnosti programu',
     ed_show_power: 'Tlačidlo zapnutia / vypnutia',
+    ed_show_energy: 'Energia cyklu',
     ed_zoom: 'Tlačidlo podrobností',
     ed_zoom_helper: 'Tlačidlo vpravo hore, ktoré prepína minikartu na celú kartu a späť',
     zoom_in: 'Zobraziť celú kartu',
@@ -1865,6 +1936,7 @@ var HcI18n = {
     en_selected_program: 'Vybraný program',
     en_active_program: 'Aktívny program',
     en_power: 'Napájanie',
+    en_energy: 'Energia',
     en_stop: 'Zastaviť program',
     en_pause: 'Pozastaviť program',
     en_resume: 'Pokračovať v programe',
@@ -1915,6 +1987,8 @@ var HcI18n = {
     door_closed: 'Dvířka zavřena',
     door_locked: 'Dvířka zamčena',
     door_waiting: 'Dokončeno {t}, dvířka stále zavřena',
+    cycle_energy: 'Tento cyklus: {e}',
+    last_cycle_energy: 'Poslední cyklus: {e}',
     program: 'Program',
     no_program: 'Žádný program',
     ends_at: 'Konec v',
@@ -1952,6 +2026,7 @@ var HcI18n = {
     ed_show_controls: 'Ovládací tlačítka',
     ed_show_options: 'Možnosti programu',
     ed_show_power: 'Tlačítko zapnutí / vypnutí',
+    ed_show_energy: 'Energie cyklu',
     ed_zoom: 'Tlačítko podrobností',
     ed_zoom_helper: 'Tlačítko vpravo nahoře, které přepíná minikartu na celou kartu a zpět',
     zoom_in: 'Zobrazit celou kartu',
@@ -1969,6 +2044,7 @@ var HcI18n = {
     en_selected_program: 'Vybraný program',
     en_active_program: 'Aktivní program',
     en_power: 'Napájení',
+    en_energy: 'Energie',
     en_stop: 'Zastavit program',
     en_pause: 'Pozastavit program',
     en_resume: 'Pokračovat v programu',
@@ -2019,6 +2095,8 @@ var HcI18n = {
     door_closed: 'Vrata zaprta',
     door_locked: 'Vrata zaklenjena',
     door_waiting: 'Končano {t}, vrata še zaprta',
+    cycle_energy: 'Ta cikel: {e}',
+    last_cycle_energy: 'Zadnji cikel: {e}',
     program: 'Program',
     no_program: 'Ni programa',
     ends_at: 'Konec ob',
@@ -2056,6 +2134,7 @@ var HcI18n = {
     ed_show_controls: 'Upravljalni gumbi',
     ed_show_options: 'Možnosti programa',
     ed_show_power: 'Gumb za vklop / izklop',
+    ed_show_energy: 'Energija cikla',
     ed_zoom: 'Gumb za podrobnosti',
     ed_zoom_helper: 'Gumb zgoraj desno, ki preklopi mini kartico v celotno kartico in nazaj',
     zoom_in: 'Prikaži celotno kartico',
@@ -2073,6 +2152,7 @@ var HcI18n = {
     en_selected_program: 'Izbrani program',
     en_active_program: 'Aktivni program',
     en_power: 'Napajanje',
+    en_energy: 'Energija',
     en_stop: 'Ustavi program',
     en_pause: 'Začasno ustavi program',
     en_resume: 'Nadaljuj program',
@@ -2123,6 +2203,8 @@ var HcI18n = {
     door_closed: 'Durvis aizvērtas',
     door_locked: 'Durvis bloķētas',
     door_waiting: 'Pabeigts {t}, durvis joprojām aizvērtas',
+    cycle_energy: 'Šis cikls: {e}',
+    last_cycle_energy: 'Pēdējais cikls: {e}',
     program: 'Programma',
     no_program: 'Nav programmas',
     ends_at: 'Beigas plkst.',
@@ -2160,6 +2242,7 @@ var HcI18n = {
     ed_show_controls: 'Vadības pogas',
     ed_show_options: 'Programmas opcijas',
     ed_show_power: 'Ieslēgšanas / izslēgšanas poga',
+    ed_show_energy: 'Cikla enerģija',
     ed_zoom: 'Detaļu poga',
     ed_zoom_helper: 'Poga augšējā labajā stūrī, kas pārslēdz minikarti uz pilno karti un atpakaļ',
     zoom_in: 'Rādīt pilno karti',
@@ -2177,6 +2260,7 @@ var HcI18n = {
     en_selected_program: 'Izvēlētā programma',
     en_active_program: 'Aktīvā programma',
     en_power: 'Barošana',
+    en_energy: 'Enerģija',
     en_stop: 'Apturēt programmu',
     en_pause: 'Pauzēt programmu',
     en_resume: 'Turpināt programmu',
@@ -2227,6 +2311,8 @@ var HcI18n = {
     door_closed: 'Πόρτα κλειστή',
     door_locked: 'Πόρτα κλειδωμένη',
     door_waiting: 'Ολοκληρώθηκε {t}, η πόρτα ακόμα κλειστή',
+    cycle_energy: 'Αυτός ο κύκλος: {e}',
+    last_cycle_energy: 'Τελευταίος κύκλος: {e}',
     program: 'Πρόγραμμα',
     no_program: 'Κανένα πρόγραμμα',
     ends_at: 'Λήξη στις',
@@ -2264,6 +2350,7 @@ var HcI18n = {
     ed_show_controls: 'Κουμπιά ελέγχου',
     ed_show_options: 'Επιλογές προγράμματος',
     ed_show_power: 'Κουμπί ενεργοποίησης / απενεργοποίησης',
+    ed_show_energy: 'Ενέργεια κύκλου',
     ed_zoom: 'Κουμπί λεπτομερειών',
     ed_zoom_helper: 'Κουμπί πάνω δεξιά που αλλάζει τη μίνι κάρτα σε πλήρη κάρτα και αντίστροφα',
     zoom_in: 'Εμφάνιση πλήρους κάρτας',
@@ -2281,6 +2368,7 @@ var HcI18n = {
     en_selected_program: 'Επιλεγμένο πρόγραμμα',
     en_active_program: 'Ενεργό πρόγραμμα',
     en_power: 'Τροφοδοσία',
+    en_energy: 'Ενέργεια',
     en_stop: 'Διακοπή προγράμματος',
     en_pause: 'Παύση προγράμματος',
     en_resume: 'Συνέχιση προγράμματος',
@@ -2353,6 +2441,39 @@ function hcSince(rows, state) {
     at = t != null ? t * 1000 : Date.parse(r.last_changed);
   }
   return at != null && Number.isFinite(at) ? at : null;
+}
+
+// How far back the energy of a cycle is looked for (see _cycleEnergy), and how often it is read again while one runs.
+var HC_CYCLE_HISTORY = 24 * 3600000;
+var HC_CYCLE_REFRESH = 5 * 60000;
+var HC_CYCLE_ACTIVE = ['run', 'pause', 'actionrequired'];
+
+// The energy the last cycle used, from recorder history rows (oldest first, compressed `s` / `lu` in seconds): the
+// meter's increase from when the operation state last became active (run, pause, action required) to when it stopped
+// being, or to `current` while it still is. A drop counts as a reset (total_increasing: Miele's per-program meter
+// starts again from 0), its new value used since. { used, active, end } or null: no cycle in the rows, or no meter
+// reading.
+function hcCycleEnergy(opRows, meterRows, platform, current, now) {
+  var at = (r) => ((r.lu ?? r.lc) != null ? (r.lu ?? r.lc) * 1000 : Date.parse(r.last_updated || r.last_changed));
+  var start = null, end = null;
+  (opRows || []).forEach((r) => {
+    var active = HC_CYCLE_ACTIVE.indexOf(hcNormState(platform, r.s ?? r.state)) >= 0;
+    if (active && (start == null || end != null)) { start = at(r); end = null; }
+    else if (!active && start != null && end == null) end = at(r);
+  });
+  if (start == null) return null;
+  var readings = (meterRows || []).map((r) => ({ t: at(r), v: Number(r.s ?? r.state) })).filter((p) => Number.isFinite(p.t) && Number.isFinite(p.v));
+  if (end == null && Number.isFinite(current)) readings.push({ t: now, v: current });
+  var prev = null, used = 0;
+  readings.forEach((p) => {
+    if (p.t <= start) prev = p.v;
+    else if (end == null || p.t <= end) {
+      if (prev != null) used += p.v >= prev ? p.v - prev : p.v;
+      prev = p.v;
+    }
+  });
+  if (prev == null) return null;
+  return { used: used, active: end == null, end: end ?? now };
 }
 
 function hcDelay(ms) {
@@ -2437,6 +2558,8 @@ var HC_COMMON_ROLES = {
   fan: { domain: 'fan', keys: ['fan', 'hood', 'fan_speed'], test: () => true },
   venting: { domain: 'select', keys: ['venting_level'] },
   light: { domain: 'light', keys: ['cooking_lighting', 'light', 'oven_light'], test: () => true },
+  // The appliance's energy meter (kWh / Wh, total_increasing): what a cycle used.
+  energy: { domain: 'sensor', keys: ['energy', 'energy_consumption', 'total_energy'], test: (s) => s.attributes.device_class === 'energy' },
 };
 
 // The other integrations, role by role. They name things differently and some have no translation key at
@@ -2597,10 +2720,10 @@ function hcPlatform(list) {
 }
 
 var HC_OVERRIDABLE = ['operation_state', 'door', 'progress', 'finish_time', 'selected_program',
-  'active_program', 'power', 'stop', 'pause', 'resume', 'remote_start', 'remote_control', 'connectivity', 'salt', 'rinse_aid'];
+  'active_program', 'power', 'stop', 'pause', 'resume', 'remote_start', 'remote_control', 'connectivity', 'salt', 'rinse_aid', 'energy'];
 // Every role, overridable or not.
 var HC_ALL_ROLES = HC_OVERRIDABLE.concat(['bean_container', 'water_tank', 'drip_tray', 'program', 'phase', 'remaining', 'elapsed',
-  'total', 'operation', 'start'], Object.keys(HC_COMMON_ROLES));
+  'total', 'operation', 'start'], Object.keys(HC_COMMON_ROLES).filter((r) => HC_OVERRIDABLE.indexOf(r) < 0));
 
 // Registry entries grouped by device, built once per `hass.entities` object (it only changes with the registry).
 var hcRegistryIndex = new WeakMap();
@@ -3161,7 +3284,7 @@ class HomeConnectBaseCard extends HTMLElement {
   setConfig(config) {
     if (!config) throw new Error('Invalid configuration');
     this._config = Object.assign({
-      show_program: true, show_controls: true, show_options: true, show_alerts: true, show_power: true,
+      show_program: true, show_controls: true, show_options: true, show_alerts: true, show_power: true, show_energy: true,
     }, config);
     if (!this.shadowRoot) {
       this.attachShadow({ mode: 'open' });
@@ -3428,6 +3551,42 @@ class HomeConnectBaseCard extends HTMLElement {
     return null;
   }
 
+  // Energy of the running or last cycle, from the recorder (history of the operation state and the meter), read again
+  // when the operation state changes and every few minutes while a cycle runs. Null until it answers.
+  _cycleEnergy(ent, platform) {
+    var opId = ent.operation_state, meterId = ent.energy;
+    var op = this._st(opId), meter = this._st(meterId);
+    if (!op || !meter || !this._hass.callWS) return null;
+    var now = Date.now();
+    var key = JSON.stringify([opId, meterId, op.state, op.last_changed]);
+    var h = this._cycleHist;
+    var running = HC_CYCLE_ACTIVE.indexOf(hcNormState(platform, op.state)) >= 0;
+    if (!h || h.key !== key || (running && h.done && now - h.at > HC_CYCLE_REFRESH)) {
+      h = this._cycleHist = { key: key, at: now, rows: h?.key === key ? h.rows : null };
+      this._hass.callWS({
+        type: 'history/history_during_period', start_time: new Date(now - HC_CYCLE_HISTORY).toISOString(),
+        entity_ids: [opId, meterId], minimal_response: true, no_attributes: true, significant_changes_only: false,
+      }).then((res) => res, () => null).then((res) => {
+        if (this._cycleHist !== h) return;
+        h.done = true;
+        h.rows = res;
+        this._sig = null;
+        this._update();
+      });
+    }
+    if (!h.rows) return null;
+    return hcCycleEnergy(h.rows[opId], h.rows[meterId], platform, Number(meter.state), now);
+  }
+
+  _energyChip(ent, platform) {
+    if (!this._config.show_energy || !ent.energy) return '';
+    var cycle = this._cycleEnergy(ent, platform);
+    if (!cycle) return '';
+    var unit = this._st(ent.energy).attributes.unit_of_measurement || 'kWh';
+    var value = `${new Intl.NumberFormat(this._locale(), { maximumFractionDigits: unit === 'Wh' ? 0 : 2 }).format(cycle.used)} ${unit}`;
+    return hcChip('chip extra', 'mdi:lightning-bolt', hcEsc(this._t(cycle.active ? 'cycle_energy' : 'last_cycle_energy').replace('{e}', value)), ent.energy);
+  }
+
   // Start / Pause / Resume, drawn as labelled bars (full card) or round icons (mini card).
   _actionButtons(ent, state, running, round) {
     var btn = (action, icon, labelKey, primary, disabled, title) => {
@@ -3556,6 +3715,10 @@ class HomeConnectBaseCard extends HTMLElement {
       chips.push(hcChip(`chip${door === 'open' ? ' warn' : ''}`, dIcon, this._t(`door_${door}`), ent.door));
     }
     if (online) chips = chips.concat(this._infoChips(ent, kind, state, deviceName));
+    if (online && !profile.simple) {
+      var energyChip = this._energyChip(ent, r.platform);
+      if (energyChip) chips.push(energyChip);
+    }
     if (c.show_alerts) {
       [['salt', 'mdi:shaker-outline'], ['rinse_aid', 'mdi:water-alert-outline'], ['bean_container', 'mdi:coffee-off-outline'],
         ['water_tank', 'mdi:cup-water'], ['drip_tray', 'mdi:tray-full']].forEach((a) => {
@@ -4299,7 +4462,7 @@ class HomeConnectWasherMiniCard extends hcMini(HomeConnectWasherCard) {}
 class SmartApplianceMiniCard extends hcMini(SmartApplianceCard) {}
 
 // ── smart-appliance-card-editor (visual editor, built on HA's ha-form) ──────────
-var HC_EDITOR_DEFAULTS = { show_program: true, show_controls: true, show_options: true, show_alerts: true, show_power: true, zoom: true };
+var HC_EDITOR_DEFAULTS = { show_program: true, show_controls: true, show_options: true, show_alerts: true, show_power: true, show_energy: true, zoom: true };
 
 class HomeConnectCardEditor extends HTMLElement {
   setConfig(config) {
@@ -4329,7 +4492,7 @@ class HomeConnectCardEditor extends HTMLElement {
     var domains = { operation_state: 'sensor', door: ['sensor', 'binary_sensor'], progress: 'sensor', finish_time: 'sensor',
       selected_program: 'select', active_program: ['select', 'sensor'], power: 'switch', stop: 'button',
       pause: 'button', resume: 'button', remote_start: 'binary_sensor', remote_control: 'binary_sensor', connectivity: 'binary_sensor',
-      salt: ['sensor', 'binary_sensor'], rinse_aid: ['sensor', 'binary_sensor'] };
+      salt: ['sensor', 'binary_sensor'], rinse_aid: ['sensor', 'binary_sensor'], energy: 'sensor' };
     // Pause / resume only exist on washers, salt / rinse aid only on dishwashers.
     var only = { pause: 'washer', resume: 'washer', salt: 'dishwasher', rinse_aid: 'dishwasher' };
     var roles = HC_OVERRIDABLE.filter((r) => !only[r] || !kind || only[r] === kind);
@@ -4356,6 +4519,7 @@ class HomeConnectCardEditor extends HTMLElement {
           { name: 'show_options', selector: { boolean: {} } },
           { name: 'show_alerts', selector: { boolean: {} } },
           { name: 'show_power', selector: { boolean: {} } },
+          { name: 'show_energy', selector: { boolean: {} } },
         ].concat(this.mini || /-mini-card$/.test(this._config.type || '') ? [{ name: 'zoom', selector: { boolean: {} } }] : []),
       },
       {

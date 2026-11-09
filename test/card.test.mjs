@@ -662,3 +662,54 @@ test("animations pause while the card is off screen or the tab hidden", () => {
   card._setPaused();
   assert.equal(card.attributes.paused, false);
 });
+
+test("cycle energy: the running cycle's kWh from the meter, then the last cycle's once it ended", async () => {
+  const now = Date.now() / 1000;
+  const withMeter = (opState, meter) => {
+    const hass = mockHass({ opState });
+    hass.states["sensor.wm_energy"] = st(String(meter), { device_class: "energy", unit_of_measurement: "kWh" });
+    hass.entities["sensor.wm_energy"] = { entity_id: "sensor.wm_energy", device_id: "d2" };
+    return hass;
+  };
+  const show = async (hass, rows, config = {}) => {
+    const calls = [];
+    hass.callWS = (msg) => {
+      calls.push(msg);
+      return Promise.resolve(rows);
+    };
+    const card = new HomeConnectWasherCard();
+    card.setConfig({ device_id: "d2", ...config });
+    card.hass = hass;
+    await new Promise((r) => setTimeout(r));
+    const m = card.shadowRoot.innerHTML.match(/mdi:lightning-bolt"><\/ha-icon>([^<]*)/);
+    return { text: m ? m[1].trim() : null, calls };
+  };
+  const running = await show(withMeter("run", 10.5), {
+    "sensor.wm_operation_state": [{ s: "ready", lu: now - 9000 }, { s: "run", lu: now - 3600 }],
+    "sensor.wm_energy": [{ s: "10.0", lu: now - 7200 }, { s: "10.3", lu: now - 1800 }],
+  });
+  assert.equal(running.text, "This cycle: 0.5 kWh");
+  assert.equal(running.calls.length, 1);
+  assert.deepEqual([...running.calls[0].entity_ids], ["sensor.wm_operation_state", "sensor.wm_energy"]);
+
+  const finished = await show(withMeter("finished", 6), {
+    "sensor.wm_operation_state": [{ s: "run", lu: now - 7200 }, { s: "pause", lu: now - 5000 }, { s: "run", lu: now - 4800 }, { s: "finished", lu: now - 1200 }],
+    "sensor.wm_energy": [{ s: "5.0", lu: now - 9000 }, { s: "5.4", lu: now - 3600 }, { s: "5.9", lu: now - 1300 }, { s: "6.0", lu: now - 600 }],
+  });
+  assert.equal(finished.text, "Last cycle: 0.9 kWh");
+
+  // A per-program meter (Miele) starts again from 0: the drop is a reset, not a negative use.
+  const reset = await show(withMeter("run", 0.6), {
+    "sensor.wm_operation_state": [{ s: "ready", lu: now - 9000 }, { s: "run", lu: now - 3600 }],
+    "sensor.wm_energy": [{ s: "1.2", lu: now - 9000 }, { s: "0.1", lu: now - 3000 }],
+  });
+  assert.equal(reset.text, "This cycle: 0.6 kWh");
+
+  // No cycle in the history, no meter, or turned off: no chip.
+  assert.equal((await show(withMeter("ready", 3), { "sensor.wm_operation_state": [{ s: "ready", lu: now - 9000 }], "sensor.wm_energy": [] })).text, null);
+  const off = await show(withMeter("run", 10.5), {}, { show_energy: false });
+  assert.equal(off.text, null);
+  assert.equal(off.calls.length, 0);
+  const none = await show(mockHass(), {});
+  assert.equal(none.calls.length, 0);
+});

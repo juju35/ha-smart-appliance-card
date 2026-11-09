@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.5.0 - 2026-11-09
+
+### Features
+- **Energy per cycle**: with an energy meter among the appliance's entities (`device_class: energy`, Miele, SmartThings, LG ThinQ…) or one set as `entities.energy` (a smart plug), a chip shows *This cycle: 0.6 kWh* while a program runs and *Last cycle: 0.9 kWh* once it ended (within 24 h). Worked out from the recorder's history of the operation state and the meter, read again when the state changes and every 5 minutes while a cycle runs; a meter that drops (Miele's per-program one) counts as a reset. `show_energy` (default `true`) in the editor; 22 languages.
+
 ## 2.4.1 - 2026-11-09
 
 ### Fixes
