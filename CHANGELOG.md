@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.5.2 - 2026-11-10
+
+### Improvements
+- Energy per cycle: with `energy_price` (per kWh) or `energy_price_entity` (a price sensor: current tariff, Tempo…), the chip adds the cycle's cost in Home Assistant's currency (*This cycle: 0.58 kWh · ≈ €0.12*). Both in the editor (full card), 22 languages.
+
 ## 2.5.1 - 2026-11-09
 
 ### Maintenance

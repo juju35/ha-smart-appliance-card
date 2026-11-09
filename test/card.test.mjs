@@ -234,14 +234,14 @@ test("I18N parity: every language has exactly the English keys, array lengths an
 
 test("Serbian: sr is all Cyrillic and sr-Latn all Latin, brand names and placeholders aside", () => {
   const { HcI18n } = loadCard("smart-appliance-card.js", ["HcI18n"]);
-  const strip = (s) => String(s).replace(/Home Connect|Home Assistant|Miele|SmartThings|LG ThinQ|Whirlpool|Matter|Maytag|KitchenAid|Styler|\{\w+\}/g, "");
+  const strip = (s) => String(s).replace(/Home Connect|Home Assistant|Miele|SmartThings|LG ThinQ|Whirlpool|Matter|Maytag|KitchenAid|Styler|kWh|Tempo|\{\w+\}/g, "");
   for (const [k, v] of Object.entries(HcI18n.sr)) assert.doesNotMatch(strip(v), /[A-Za-z]/, `sr.${k}`);
   for (const [k, v] of Object.entries(HcI18n["sr-Latn"])) assert.doesNotMatch(strip(v), /[\u0400-\u04FF]/, `sr-Latn.${k}`);
 });
 
 test("Bulgarian, Russian and Ukrainian are all Cyrillic, Greek all Greek, brand names and placeholders aside", () => {
   const { HcI18n } = loadCard("smart-appliance-card.js", ["HcI18n"]);
-  const strip = (s) => String(s).replace(/Home Connect|Home Assistant|Miele|SmartThings|LG ThinQ|Whirlpool|Matter|Maytag|KitchenAid|Styler|\{\w+\}/g, "");
+  const strip = (s) => String(s).replace(/Home Connect|Home Assistant|Miele|SmartThings|LG ThinQ|Whirlpool|Matter|Maytag|KitchenAid|Styler|kWh|Tempo|\{\w+\}/g, "");
   for (const lang of ["bg", "ru", "uk", "el"]) {
     for (const [k, v] of Object.entries(HcI18n[lang])) assert.doesNotMatch(strip(v), /[A-Za-z]/, `${lang}.${k}`);
   }
@@ -689,6 +689,16 @@ test("cycle energy: the running cycle's kWh from the meter, then the last cycle'
     "sensor.wm_energy": [{ s: "10.0", lu: now - 7200 }, { s: "10.3", lu: now - 1800 }],
   });
   assert.equal(running.text, "This cycle: 0.5 kWh");
+  // With a price (fixed, or a price sensor that wins over it), the cost in Home Assistant's currency.
+  const priced = withMeter("run", 10.5);
+  priced.config = { currency: "EUR" };
+  priced.states["sensor.tariff"] = st("0.25", { unit_of_measurement: "EUR/kWh" });
+  const rows = {
+    "sensor.wm_operation_state": [{ s: "ready", lu: now - 9000 }, { s: "run", lu: now - 3600 }],
+    "sensor.wm_energy": [{ s: "10.0", lu: now - 7200 }, { s: "10.3", lu: now - 1800 }],
+  };
+  assert.equal((await show(priced, rows, { energy_price: 0.2 })).text, "This cycle: 0.5 kWh · ≈ €0.10");
+  assert.equal((await show(priced, rows, { energy_price: 0.2, energy_price_entity: "sensor.tariff" })).text, "This cycle: 0.5 kWh · ≈ €0.13");
   assert.equal(running.calls.length, 1);
   assert.deepEqual([...running.calls[0].entity_ids], ["sensor.wm_operation_state", "sensor.wm_energy"]);
 
