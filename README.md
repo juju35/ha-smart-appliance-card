@@ -109,8 +109,8 @@ The Marketplace registers the dashboard resource for you.
 
 ### Manual
 
-1. Download `smart-appliance-card.js` from the [latest release](https://github.com/juju35/ha-smart-appliance-card/releases/latest)
-2. Copy it to `/config/www/smart-appliance-card.js`
+1. Download `smart-appliance-card.js` and the `smart-appliance-card.i18n.*.js` translation files from the [latest release](https://github.com/juju35/ha-smart-appliance-card/releases/latest)
+2. Copy them all to `/config/www/` (without the translation files, the cards show in English)
 3. Go to **Settings → Dashboards → Resources** → Add resource:
    - URL: `/local/smart-appliance-card.js`
    - Type: **JavaScript Module**

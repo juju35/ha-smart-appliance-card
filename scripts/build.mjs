@@ -3,6 +3,7 @@
 // Usage: node scripts/build.mjs  (dist/ is not committed: CI and the release workflow build it)
 import { mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
+import { splitDist } from "./i18n-split.mjs";
 
 const FILE = "smart-appliance-card.js";
 const LEGACY = "home-connect-card.js";
@@ -33,3 +34,7 @@ writeFileSync(target, out);
 // Same file under the 1.x name, attached to the releases for manual installs moving from ha-home-connect-card.
 writeFileSync(`${root}dist/${LEGACY}`, out);
 console.log(`Built dist/${FILE} (${(out.length / 1024).toFixed(1)} KB)`);
+
+// Translations: English stays in the bundle, each other language goes to dist/smart-appliance-card.i18n.<lang>.js,
+// fetched when a card needs it (scripts/i18n-split.mjs).
+if (process.argv[1] === fileURLToPath(import.meta.url)) splitDist(`${root}dist`, "smart-appliance-card.js", { version: pkg.version, aliases: ["home-connect-card.js"] });
