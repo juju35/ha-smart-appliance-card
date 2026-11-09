@@ -84,7 +84,7 @@ async function openCard(browser, s, { icons = {}, hass = {}, extra = "" }) {
       const el = document.createElement(type);
       el.setConfig({ type: `custom:${type}`, ...config });
       el.hass = { states: {}, entities: {}, devices: {}, language: "en", locale: { language: "en" },
-                  config: { unit_system: { temperature: "°C" } }, themes: { darkMode: dark }, callService: async () => {}, callWS: async () => ({}), ...hass };
+                  config: { unit_system: { temperature: "°C" } }, themes: { darkMode: dark }, callService: async () => {}, callWS: async () => ({}), ...hass, ...(window.__ws ? { callWS: window.__ws } : {}) };
       document.getElementById("root").appendChild(el);
     },
     { type: s.type, config: { ...(s.device ? { device_id: s.device } : {}), ...(s.config || {}) }, hass: { ...hass, ...(s.hass || {}) }, dark: s.theme === "dark" }
@@ -161,6 +161,7 @@ const icons = {
   "checkbox-blank-circle-outline": "M12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z",
   "checkbox-marked-circle": "M10,17L5,12L6.41,10.58L10,14.17L17.59,6.58L19,8M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z",
   "cloud-off-outline": "M19.8 22.6L17.15 20H6.5Q4.2 20 2.6 18.4T1 14.5Q1 12.58 2.19 11.08 3.38 9.57 5.25 9.15 5.33 8.95 5.4 8.76 5.5 8.57 5.55 8.35L1.4 4.2L2.8 2.8L21.2 21.2M6.5 18H15.15L7.1 9.95Q7.05 10.23 7.03 10.5 7 10.73 7 11H6.5Q5.05 11 4.03 12.03 3 13.05 3 14.5 3 15.95 4.03 17 5.05 18 6.5 18M11.13 14M21.6 18.75L20.15 17.35Q20.58 17 20.79 16.54 21 16.08 21 15.5 21 14.45 20.27 13.73 19.55 13 18.5 13H17V11Q17 8.93 15.54 7.46 14.08 6 12 6 11.33 6 10.7 6.16 10.07 6.33 9.5 6.68L8.05 5.23Q8.93 4.63 9.91 4.31 10.9 4 12 4 14.93 4 16.96 6.04 19 8.07 19 11 20.73 11.2 21.86 12.5 23 13.78 23 15.5 23 16.5 22.63 17.31 22.25 18.15 21.6 18.75M14.83 12.03Z",
+  "lightning-bolt": "M11,15H6L13,1V9H18L11,23V15Z",
   "dishwasher": "M18,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V4A2,2 0 0,0 18,2M10,4A1,1 0 0,1 11,5A1,1 0 0,1 10,6A1,1 0 0,1 9,5A1,1 0 0,1 10,4M7,4A1,1 0 0,1 8,5A1,1 0 0,1 7,6A1,1 0 0,1 6,5A1,1 0 0,1 7,4M18,20H6V8H18V20M14.67,15.33C14.69,16.03 14.41,16.71 13.91,17.21C12.86,18.26 11.15,18.27 10.09,17.21C9.59,16.71 9.31,16.03 9.33,15.33C9.4,14.62 9.63,13.94 10,13.33C10.37,12.5 10.81,11.73 11.33,11L12,10C13.79,12.59 14.67,14.36 14.67,15.33",
   "bell-ring-outline": "M10,21H14A2,2 0 0,1 12,23A2,2 0 0,1 10,21M21,19V20H3V19L5,17V11C5,7.9 7.03,5.17 10,4.29C10,4.19 10,4.1 10,4A2,2 0 0,1 12,2A2,2 0 0,1 14,4C14,4.1 14,4.19 14,4.29C16.97,5.17 19,7.9 19,11V17L21,19M17,11A5,5 0 0,0 12,6A5,5 0 0,0 7,11V18H17V11M19.75,3.19L18.33,4.61C20.04,6.3 21,8.6 21,11H23C23,8.07 21.84,5.25 19.75,3.19M1,11H3C3,8.6 3.96,6.3 5.67,4.61L4.25,3.19C2.16,5.25 1,8.07 1,11Z",
   "door-closed": "M16,11H18V13H16V11M12,3H19C20.11,3 21,3.89 21,5V19H22V21H2V19H10V5C10,3.89 10.89,3 12,3M12,5V19H19V5H12Z",
@@ -217,6 +218,8 @@ add("dw", "select.dishwasher_selected_program", "selected_program", "dishcare_di
 add("dw", "switch.dishwasher_power", "power", "on");
 add("dw", "binary_sensor.dishwasher_connectivity", "connectivity", "on", { device_class: "connectivity" });
 add("dw", "sensor.dishwasher_rinse_aid_nearly_empty", "rinse_aid_nearly_empty", "present");
+// Its energy meter: the cycle's kWh, from the recorder mock below.
+add("dw", "sensor.dishwasher_energy", "energy", "112.98", { device_class: "energy", unit_of_measurement: "kWh", state_class: "total_increasing" });
 add("dw", "button.dishwasher_stop_program", "stop_program", "unknown");
 add("dw", "switch.dishwasher_intensiv_zone", "intensiv_zone", "on", { friendly_name: "Dishwasher Intensive zone" });
 add("dw", "switch.dishwasher_hygiene_plus", "hygiene_plus", "off", { friendly_name: "Dishwasher Hygiene plus" });
@@ -373,6 +376,17 @@ const MINIS = [["bosch", "fr"], ["siemens", "cm"], ["neff", "oven"], ["gaggenau"
   ["lg", "styler"], ["whirlpool", "kaov", { brand: "kitchenaid" }]];
 const hass = { states, entities, devices };
 
+// Recorder mock for the energy per cycle: the operation state turned to "run" 50 minutes ago, the meter read
+// 112.40 kWh before. The card adds the meter's rise since then (now 112.98: "This cycle: 0.58 kWh").
+const ws = `window.__ws = async (msg) => {
+  if (msg.type !== "history/history_during_period") return {};
+  const now = Date.now() / 1000, [op, meter] = msg.entity_ids;
+  return {
+    [op]: [{ s: "ready", lu: now - 3 * 3600 }, { s: "run", lu: now - 50 * 60 }],
+    [meter]: [{ s: "112.40", lu: now - 4 * 3600 }, { s: "112.71", lu: now - 20 * 60 }],
+  };
+};`;
+
 // Same dishwasher, switched on and waiting for a program: the options are shown.
 const ready = structuredClone(states);
 ready["sensor.dishwasher_operation_state"].state = "ready";
@@ -458,7 +472,7 @@ await render(
       file: `mini-${brand}${theme === "light" ? "" : "-dark"}`, type: "smart-appliance-mini-card", device, theme, width: 380, config,
     }))),
   ],
-  { icons, hass }
+  { icons, hass, extra: ws }
 );
 
 // One looping GIF per distinct animated state and per appliance — the two illustrations differ,
