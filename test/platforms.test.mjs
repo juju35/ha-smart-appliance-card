@@ -233,6 +233,30 @@ test("Home Connect programs give oven, coffee machine, hood, dryer and washer-dr
   assert.equal(kind("laundry_care_washer_dryer_program_cotton"), "washer_dryer");
 });
 
+test("Home Connect hob: no program, told apart by its event sensors; a zone on shows it cooking", () => {
+  const states = ["inactive", "ready", "delayedstart", "run", "pause", "actionrequired", "finished", "error", "aborting"];
+  const event = ["off", "present", "confirmed"];
+  const rows = (op, extra = []) => [
+    ["sensor.hob_operation_state", op, { device_class: "enum", options: states }, { translation_key: "operation_state" }],
+    ["sensor.hob_alarm_clock_elapsed", "off", { device_class: "enum", options: event }, { translation_key: "alarm_clock_elapsed" }],
+    ["sensor.hob_preheat_finished", "off", { device_class: "enum", options: event }, { translation_key: "preheat_finished" }],
+    ["sensor.hob_favorite_short_press", "off", { device_class: "enum", options: event }, { translation_key: "favorite_short_press" }],
+    ["sensor.hob_favorite_long_press", "off", { device_class: "enum", options: event }, { translation_key: "favorite_long_press" }],
+    ...extra,
+  ];
+  const hob = device("home_connect", { manufacturer: "SIEMENS", model: "EX877LYV5E" }, rows("ready"));
+  assert.equal(hcKindOf(hob, "a1"), "hob");
+  assert.match(render(hob).html, /mdi:induction/);
+  const cooking = render(device("home_connect", { manufacturer: "SIEMENS" }, rows("run"))).html;
+  assert.match(cooking, /class="picture st-run running"/);
+  assert.match(cooking, /Cooking/);
+  // A hood shares the favorite keys and an oven the preheat and alarm clock events: neither is a hob.
+  const fav = rows("ready").filter(([id]) => id.includes("favorite"));
+  const cookEvents = rows("ready").filter(([id]) => id.includes("preheat") || id.includes("alarm"));
+  assert.notEqual(hcKindOf(device("home_connect", {}, fav), "a1"), "hob");
+  assert.notEqual(hcKindOf(device("home_connect", {}, cookEvents), "a1"), "hob");
+});
+
 test("brands: Home Connect manufacturers, LGE and an unknown maker", () => {
   assert.equal(hcBrand({ manufacturer: "SIEMENS" }).name, "Siemens");
   assert.equal(hcBrand({ manufacturer: "LGE" }).name, "LG");

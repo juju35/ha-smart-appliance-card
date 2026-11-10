@@ -2912,6 +2912,9 @@ var HC_KEY_KINDS = [
   ['oven', ['oven_machine_state', 'oven_machine_state_cavity_01', 'oven_state', 'oven_state_upper', 'oven_current_cavity_temperature']],
   ['coffee_maker', ['bean_container_empty', 'coffee_counter']],
   ['hood', ['venting_level', 'hood', 'hood_fan_speed', 'hood_filter_usage']],
+  // A Home Connect hob has no program: it is the only appliance with both the favorite keys (also on hoods) and the
+  // preheat / alarm clock events (also on ovens), sensors the integration creates from the appliance type.
+  ['hob', (k) => (k.favorite_short_press || k.favorite_long_press) && (k.preheat_finished || k.alarm_clock_elapsed)],
   ['wine_cooler', ['wine_compartment_setpoint_temperature']],
   ['fridge', ['refrigerator_setpoint_temperature', 'refrigerator_super_mode', 'cooler_temperature', 'power_cool',
     'refrigerator_temperature_level', 'refrigerator_door']],
