@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.6.0 - 2026-11-10
+
+### Features
+- **Home Connect hob**: a hob on the built-in Home Connect integration is now detected. It has no program and its device model is the VIB, so it is told apart by its event sensors: it is the only appliance with both the favorite keys (also on hoods) and the preheat / alarm clock events (also on ovens). Thanks @FredM67 (#79, #80).
+
 ## 2.5.2 - 2026-11-10
 
 ### Improvements
