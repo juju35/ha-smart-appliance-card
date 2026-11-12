@@ -183,6 +183,8 @@ entities:
 | `device_id` | ❌* | Auto | Appliance device (*or `entity`; the first supported appliance is used if both are missing) |
 | `entity` | ❌ | — | Any entity of the appliance, used to find the device |
 | `name` | ❌ | Device name | Card title |
+| `show_title` | ❌ | `true` | Show the title in the header (e.g. `false` under a section heading of your own) |
+| `show_subtitle` | ❌ | `true` | Show the subtitle under the title |
 | `kind` | ❌ | Auto | Appliance type when it can't be detected: `dishwasher`, `washer`, `dryer`, `washer_dryer`, `oven`, `microwave`, `hob`, `coffee_maker`, `hood`, `fridge`, `freezer`, `wine_cooler`, `styler` |
 | `brand` | ❌ | Auto | Brand for the badge and button colour when the integration doesn't give it: `bosch`, `siemens`, `neff`, `gaggenau`, `constructa`, `miele`, `samsung`, `lg`, `whirlpool`, `maytag`, `kitchenaid`, `consul` |
 | `icon` | ❌ | Illustration | Replaces the appliance illustration with an icon |

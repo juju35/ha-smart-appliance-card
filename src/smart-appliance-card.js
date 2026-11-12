@@ -79,6 +79,8 @@ var HcI18n = {
     ed_name_helper: 'Laisser vide pour le nom de l\'appareil',
     ed_icon: 'Icône',
     ed_show_program: 'Choix du programme',
+    ed_show_title: 'Titre',
+    ed_show_subtitle: 'Sous-titre',
     ed_show_controls: 'Boutons de commande',
     ed_show_options: 'Options du programme',
     ed_show_alerts: 'Alertes',
@@ -191,6 +193,8 @@ var HcI18n = {
     ed_name_helper: 'Leave empty to use the device name',
     ed_icon: 'Icon',
     ed_show_program: 'Program picker',
+    ed_show_title: 'Title',
+    ed_show_subtitle: 'Subtitle',
     ed_show_controls: 'Control buttons',
     ed_show_options: 'Program options',
     ed_show_power: 'Power button',
@@ -303,6 +307,8 @@ var HcI18n = {
     ed_name_helper: 'Leer lassen, um den Gerätenamen zu verwenden',
     ed_icon: 'Symbol',
     ed_show_program: 'Programmauswahl',
+    ed_show_title: 'Titel',
+    ed_show_subtitle: 'Untertitel',
     ed_show_controls: 'Steuerungsschaltflächen',
     ed_show_options: 'Programmoptionen',
     ed_show_power: 'Ein-/Aus-Schaltfläche',
@@ -415,6 +421,8 @@ var HcI18n = {
     ed_name_helper: 'Déjalo vacío para usar el nombre del dispositivo',
     ed_icon: 'Icono',
     ed_show_program: 'Selector de programa',
+    ed_show_title: 'Título',
+    ed_show_subtitle: 'Subtítulo',
     ed_show_controls: 'Botones de control',
     ed_show_options: 'Opciones del programa',
     ed_show_power: 'Botón de encendido',
@@ -527,6 +535,8 @@ var HcI18n = {
     ed_name_helper: 'Оставите празно за назив уређаја',
     ed_icon: 'Икона',
     ed_show_program: 'Избор програма',
+    ed_show_title: 'Наслов',
+    ed_show_subtitle: 'Поднаслов',
     ed_show_controls: 'Дугмад за контролу',
     ed_show_options: 'Опције програма',
     ed_show_power: 'Дугме за укључивање / искључивање',
@@ -639,6 +649,8 @@ var HcI18n = {
     ed_name_helper: 'Ostavite prazno za naziv uređaja',
     ed_icon: 'Ikona',
     ed_show_program: 'Izbor programa',
+    ed_show_title: 'Naslov',
+    ed_show_subtitle: 'Podnaslov',
     ed_show_controls: 'Dugmad za kontrolu',
     ed_show_options: 'Opcije programa',
     ed_show_power: 'Dugme za uključivanje / isključivanje',
@@ -751,6 +763,8 @@ var HcI18n = {
     ed_name_helper: 'Lascia vuoto per usare il nome del dispositivo',
     ed_icon: 'Icona',
     ed_show_program: 'Selettore del programma',
+    ed_show_title: 'Titolo',
+    ed_show_subtitle: 'Sottotitolo',
     ed_show_controls: 'Pulsanti di comando',
     ed_show_options: 'Opzioni del programma',
     ed_show_power: 'Pulsante di accensione',
@@ -863,6 +877,8 @@ var HcI18n = {
     ed_name_helper: 'Leeg laten om de apparaatnaam te gebruiken',
     ed_icon: 'Pictogram',
     ed_show_program: 'Programmakeuze',
+    ed_show_title: 'Titel',
+    ed_show_subtitle: 'Ondertitel',
     ed_show_controls: 'Bedieningsknoppen',
     ed_show_options: 'Programma-opties',
     ed_show_power: 'Aan/uit-knop',
@@ -975,6 +991,8 @@ var HcI18n = {
     ed_name_helper: 'Deixe vazio para usar o nome do dispositivo',
     ed_icon: 'Ícone',
     ed_show_program: 'Seletor de programa',
+    ed_show_title: 'Título',
+    ed_show_subtitle: 'Subtítulo',
     ed_show_controls: 'Botões de comando',
     ed_show_options: 'Opções do programa',
     ed_show_power: 'Botão ligar / desligar',
@@ -1087,6 +1105,8 @@ var HcI18n = {
     ed_name_helper: 'Pozostaw puste, aby użyć nazwy urządzenia',
     ed_icon: 'Ikona',
     ed_show_program: 'Wybór programu',
+    ed_show_title: 'Tytuł',
+    ed_show_subtitle: 'Podtytuł',
     ed_show_controls: 'Przyciski sterowania',
     ed_show_options: 'Opcje programu',
     ed_show_power: 'Przycisk włączania / wyłączania',
@@ -1199,6 +1219,8 @@ var HcI18n = {
     ed_name_helper: 'Lăsați gol pentru a folosi numele dispozitivului',
     ed_icon: 'Pictogramă',
     ed_show_program: 'Selector de program',
+    ed_show_title: 'Titlu',
+    ed_show_subtitle: 'Subtitlu',
     ed_show_controls: 'Butoane de comandă',
     ed_show_options: 'Opțiunile programului',
     ed_show_power: 'Buton de pornire / oprire',
@@ -1311,6 +1333,8 @@ var HcI18n = {
     ed_name_helper: 'Lad stå tomt for at bruge enhedens navn',
     ed_icon: 'Ikon',
     ed_show_program: 'Programvælger',
+    ed_show_title: 'Titel',
+    ed_show_subtitle: 'Undertitel',
     ed_show_controls: 'Betjeningsknapper',
     ed_show_options: 'Programindstillinger',
     ed_show_power: 'Tænd/sluk-knap',
@@ -1423,6 +1447,8 @@ var HcI18n = {
     ed_name_helper: 'Lämna tomt för att använda enhetens namn',
     ed_icon: 'Ikon',
     ed_show_program: 'Programväljare',
+    ed_show_title: 'Rubrik',
+    ed_show_subtitle: 'Underrubrik',
     ed_show_controls: 'Kontrollknappar',
     ed_show_options: 'Programalternativ',
     ed_show_power: 'På/av-knapp',
@@ -1535,6 +1561,8 @@ var HcI18n = {
     ed_name_helper: 'Оставете празно, за да се използва името на устройството',
     ed_icon: 'Икона',
     ed_show_program: 'Избор на програма',
+    ed_show_title: 'Заглавие',
+    ed_show_subtitle: 'Подзаглавие',
     ed_show_controls: 'Бутони за управление',
     ed_show_options: 'Опции на програмата',
     ed_show_power: 'Бутон за включване / изключване',
@@ -1647,6 +1675,8 @@ var HcI18n = {
     ed_name_helper: 'Оставьте пустым, чтобы использовать название устройства',
     ed_icon: 'Значок',
     ed_show_program: 'Выбор программы',
+    ed_show_title: 'Заголовок',
+    ed_show_subtitle: 'Подзаголовок',
     ed_show_controls: 'Кнопки управления',
     ed_show_options: 'Параметры программы',
     ed_show_power: 'Кнопка включения / выключения',
@@ -1759,6 +1789,8 @@ var HcI18n = {
     ed_name_helper: 'Залиште порожнім, щоб використати назву пристрою',
     ed_icon: 'Значок',
     ed_show_program: 'Вибір програми',
+    ed_show_title: 'Заголовок',
+    ed_show_subtitle: 'Підзаголовок',
     ed_show_controls: 'Кнопки керування',
     ed_show_options: 'Параметри програми',
     ed_show_power: 'Кнопка увімкнення / вимкнення',
@@ -1871,6 +1903,8 @@ var HcI18n = {
     ed_name_helper: 'Hagyja üresen az eszköz nevének használatához',
     ed_icon: 'Ikon',
     ed_show_program: 'Programválasztó',
+    ed_show_title: 'Cím',
+    ed_show_subtitle: 'Alcím',
     ed_show_controls: 'Vezérlőgombok',
     ed_show_options: 'Programbeállítások',
     ed_show_power: 'Be-/kikapcsoló gomb',
@@ -1983,6 +2017,8 @@ var HcI18n = {
     ed_name_helper: 'Nechajte prázdne, ak chcete použiť názov zariadenia',
     ed_icon: 'Ikona',
     ed_show_program: 'Výber programu',
+    ed_show_title: 'Názov',
+    ed_show_subtitle: 'Podnázov',
     ed_show_controls: 'Ovládacie tlačidlá',
     ed_show_options: 'Možnosti programu',
     ed_show_power: 'Tlačidlo zapnutia / vypnutia',
@@ -2095,6 +2131,8 @@ var HcI18n = {
     ed_name_helper: 'Ponechte prázdné pro použití názvu zařízení',
     ed_icon: 'Ikona',
     ed_show_program: 'Výběr programu',
+    ed_show_title: 'Název',
+    ed_show_subtitle: 'Podnázev',
     ed_show_controls: 'Ovládací tlačítka',
     ed_show_options: 'Možnosti programu',
     ed_show_power: 'Tlačítko zapnutí / vypnutí',
@@ -2207,6 +2245,8 @@ var HcI18n = {
     ed_name_helper: 'Pustite prazno, da se uporabi ime naprave',
     ed_icon: 'Ikona',
     ed_show_program: 'Izbira programa',
+    ed_show_title: 'Naslov',
+    ed_show_subtitle: 'Podnaslov',
     ed_show_controls: 'Upravljalni gumbi',
     ed_show_options: 'Možnosti programa',
     ed_show_power: 'Gumb za vklop / izklop',
@@ -2319,6 +2359,8 @@ var HcI18n = {
     ed_name_helper: 'Atstājiet tukšu, lai izmantotu ierīces nosaukumu',
     ed_icon: 'Ikona',
     ed_show_program: 'Programmas izvēle',
+    ed_show_title: 'Virsraksts',
+    ed_show_subtitle: 'Apakšvirsraksts',
     ed_show_controls: 'Vadības pogas',
     ed_show_options: 'Programmas opcijas',
     ed_show_power: 'Ieslēgšanas / izslēgšanas poga',
@@ -2431,6 +2473,8 @@ var HcI18n = {
     ed_name_helper: 'Αφήστε κενό για χρήση του ονόματος της συσκευής',
     ed_icon: 'Εικονίδιο',
     ed_show_program: 'Επιλογέας προγράμματος',
+    ed_show_title: 'Τίτλος',
+    ed_show_subtitle: 'Υπότιτλος',
     ed_show_controls: 'Κουμπιά ελέγχου',
     ed_show_options: 'Επιλογές προγράμματος',
     ed_show_power: 'Κουμπί ενεργοποίησης / απενεργοποίησης',
@@ -3377,6 +3421,9 @@ class HomeConnectBaseCard extends HTMLElement {
     this._config = Object.assign({
       show_program: true, show_controls: true, show_options: true, show_alerts: true, show_power: true, show_energy: true,
     }, config);
+    // show_title / show_subtitle: the header's title / subtitle, hidden by the stylesheet
+    this.toggleAttribute?.("hide-title", config.show_title === false);
+    this.toggleAttribute?.("hide-subtitle", config.show_subtitle === false);
     if (!this.shadowRoot) {
       this.attachShadow({ mode: 'open' });
       this.shadowRoot.addEventListener('click', (ev) => this._onClick(ev));
@@ -4052,6 +4099,7 @@ class HomeConnectBaseCard extends HTMLElement {
       // The title takes the room the pill and the buttons leave (basis 0, so it doesn't squeeze the pill at
       // ordinary widths); it shrinks with an ellipsis but keeps about four characters.
       '.titles { flex: 1 1 0; min-width: 5ch; font-size: 16px; }' +
+      ':host([hide-title]) .titles > .name, :host([hide-subtitle]) .titles > .sub { display: none; }' +
       '.name { font-size: 16px; font-weight: 500; line-height: 1.25; color: var(--primary-text-color); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }' +
       '.sub { font-size: 12px; color: var(--secondary-text-color); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }' +
       '.hero { display: flex; align-items: center; gap: 14px; }' +
@@ -4569,7 +4617,7 @@ class HomeConnectWasherMiniCard extends hcMini(HomeConnectWasherCard) {}
 class SmartApplianceMiniCard extends hcMini(SmartApplianceCard) {}
 
 // ── smart-appliance-card-editor (visual editor, built on HA's ha-form) ──────────
-var HC_EDITOR_DEFAULTS = { show_program: true, show_controls: true, show_options: true, show_alerts: true, show_power: true, show_energy: true, zoom: true };
+var HC_EDITOR_DEFAULTS = { show_title: true, show_subtitle: true, show_program: true, show_controls: true, show_options: true, show_alerts: true, show_power: true, show_energy: true, zoom: true };
 
 class HomeConnectCardEditor extends HTMLElement {
   setConfig(config) {
@@ -4621,6 +4669,8 @@ class HomeConnectCardEditor extends HTMLElement {
       },
       {
         type: 'grid', name: '', schema: [
+          { name: 'show_title', selector: { boolean: {} } },
+          { name: 'show_subtitle', selector: { boolean: {} } },
           { name: 'show_program', selector: { boolean: {} } },
           { name: 'show_controls', selector: { boolean: {} } },
           { name: 'show_options', selector: { boolean: {} } },
