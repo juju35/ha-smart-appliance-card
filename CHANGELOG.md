@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.7.1 - 2026-11-14
+
+### Fixes
+- The mini card's visual editor offers `energy_price` and `energy_price_entity` again: the energy chip of the compact view shows the cycle's cost too, and so does the full card it unfolds into.
+- README: `entity`, the alternative to `device_id`, is marked YAML only.
+
 ## 2.7.0 - 2026-11-12
 
 ### Features

@@ -4679,8 +4679,8 @@ class HomeConnectCardEditor extends HTMLElement {
           { name: 'show_energy', selector: { boolean: {} } },
         ].concat(this.mini || /-mini-card$/.test(this._config.type || '') ? [{ name: 'zoom', selector: { boolean: {} } }] : []),
       },
-    ].concat(this.mini || /-mini-card$/.test(this._config.type || '') ? [] : [
-      // The cost of a cycle next to its energy (full card).
+    ].concat([
+      // The cost of a cycle next to its energy (the energy chip, on the mini card too).
       {
         type: 'grid', name: '', schema: [
           { name: 'energy_price', selector: { number: { min: 0, step: 0.0001, mode: 'box' } } },
