@@ -200,6 +200,21 @@ test("editor labels the device field instead of leaking the raw key", () => {
   assert.equal(editor("washer", {})._form.computeHelper({ name: "device_id" }), "Appliance from Home Connect, Miele, SmartThings, LG ThinQ, Whirlpool or Matter");
 });
 
+test("mini card editor: every full card option (energy price included), plus zoom; entity stays YAML only", () => {
+  const names = (ed) => ed._schema().flatMap((s) => (s.type === "grid" ? s.schema : [s])).map((s) => s.name);
+  const full = names(editor("washer", {}));
+  const mini = editor("washer", {});
+  mini.mini = true;
+  const miniNames = names(mini);
+  for (const n of full) assert.ok(miniNames.includes(n), n);
+  for (const n of ["energy_price", "energy_price_entity", "zoom"]) assert.ok(miniNames.includes(n), n);
+  assert.ok(!full.includes("zoom"));
+  assert.ok(!miniNames.includes("entity"));
+  assert.ok(names(editor(undefined, { type: "custom:smart-appliance-mini-card" })).includes("energy_price"));
+  for (const language of ["en", "fr", "de"])
+    for (const n of ["energy_price", "energy_price_entity"]) assert.notEqual(editor("washer", { language })._form.computeLabel({ name: n }), `ed_${n}`);
+});
+
 test("editor lists the connectivity, salt and rinse aid overrides where they apply", () => {
   const roles = (kind) => editor(kind, {})._schema().find((s) => s.name === "entities").schema.map((s) => s.name);
   assert.ok(roles("dishwasher").includes("connectivity"));

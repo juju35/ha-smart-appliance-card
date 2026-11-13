@@ -153,9 +153,9 @@ type: custom:smart-appliance-mini-card
 device_id: bad11e7fd00845a2fb485b38c97cf675
 ```
 
-The mini card shows the appliance, its state, the program, the progress and finish time, the alerts, and round Start / Pause / Resume and power buttons. The detail button (top right) unfolds the full card with every option; a click anywhere else on the page folds it back. It takes the same options as the full card, which apply once unfolded, plus `zoom`. At its default size in a Sections view (6 columns), the round buttons sit under the text and the status pill shows only its coloured dot, the state being written above the program.
+The mini card shows the appliance, its state, the program, the progress and finish time, the alerts, and round Start / Pause / Resume and power buttons. The detail button (top right) unfolds the full card with every option; a click anywhere else on the page folds it back. It takes the same options as the full card, which apply once unfolded, plus `zoom`; they are all in its visual editor too, `energy_price` and `energy_price_entity` included (the compact view's energy chip shows the cost as well). At its default size in a Sections view (6 columns), the round buttons sit under the text and the status pill shows only its coloured dot, the state being written above the program.
 
-Use either `device_id` (what the visual editor writes) or `entity` (any entity of the appliance). With neither, the card uses the first supported appliance it finds (of the `kind` given, if any).
+Use either `device_id` (what the visual editor writes) or `entity` (any entity of the appliance, YAML only). With neither, the card uses the first supported appliance it finds (of the `kind` given, if any).
 
 ### Full options
 
@@ -183,7 +183,7 @@ entities:
 | Option | Required | Default | Description |
 |---|---|---|---|
 | `device_id` | ❌* | Auto | Appliance device (*or `entity`; the first supported appliance is used if both are missing) |
-| `entity` | ❌ | — | Any entity of the appliance, used to find the device |
+| `entity` | ❌ | — | Any entity of the appliance, used to find the device (YAML only: the visual editor sets `device_id`) |
 | `name` | ❌ | Device name | Card title |
 | `show_title` | ❌ | `true` | Show the title in the header (e.g. `false` under a section heading of your own) |
 | `show_subtitle` | ❌ | `true` | Show the subtitle under the title |
