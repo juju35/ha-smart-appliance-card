@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.8.1 - 2026-11-17
+
+### Fixes
+- Illustrated header in Safari (WebKit): the appliance no longer lands on the title and the status pill — its box gets an explicit width instead of the SVG's default 300 px, so it stays at the banner's right.
+
 ## 2.8.0 - 2026-11-17
 
 ### Features

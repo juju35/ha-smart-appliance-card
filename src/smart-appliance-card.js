@@ -3723,7 +3723,9 @@ var HC_BANNER_STYLE = '<style>' +
   '.banner .bart { position: absolute; right: 6px; bottom: calc(10px - var(--hc-drop, 0px)); height: 72px; }' +
   // The detail button keeps the top right corner: the appliance steps aside so that nothing covers it.
   '.banner.has-zoom .bart { right: 36px; }' +
-  '.banner .bart .picture { width: auto; height: 72px; aspect-ratio: 80 / 94; }' +
+  // Explicit widths (72 × 80 / 94): WebKit sizes an absolute box from its SVG's default 300 px width otherwise, and
+  // the appliance then lands on the title at the left of a 300 px wide box.
+  '.banner .bart { width: 61.3px; } .banner .bart .picture { width: 100%; height: 72px; }' +
   '.banner .bart .picture svg:first-child { filter: drop-shadow(0 2px 3px rgba(0,0,0,.2)); }' +
   // The expand / collapse button: 24 px, round, frosted, in the banner's top right corner.
   '.banner .zoom { position: absolute; z-index: 2; top: 5px; right: 5px; margin: 0; color: #33506b; background: rgba(255,255,255,.55);' +
@@ -3736,7 +3738,7 @@ var HC_BANNER_STYLE = '<style>' +
   '.banner.has-zoom .htext { right: 102px; }' +
   '@container (max-width: 360px) { .banner .scene { display: none; } }' +
   // A narrow card: a smaller appliance leaves the title and the whole pill their room.
-  '@container hc-card (max-width: 260px) { .banner .bart, .banner .bart .picture { height: 56px; } .banner .bart { right: 4px; }' +
+  '@container hc-card (max-width: 260px) { .banner .bart, .banner .bart .picture { height: 56px; } .banner .bart { right: 4px; width: 47.7px; }' +
     ' .banner.has-zoom .bart { right: 34px; } .banner .htext { right: 58px; } .banner.has-zoom .htext { right: 86px; } }' +
   '@media (prefers-reduced-motion: reduce) { .hc-swing { animation: none; } }' +
 '</style>';
