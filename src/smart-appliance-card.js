@@ -3970,7 +3970,8 @@ class HomeConnectBaseCard extends HTMLElement {
 
   // The status pill goes on the title row, right after the title, only when the whole title and the pill's whole
   // label fit there; otherwise it takes its own line under the subtitle (the subtitle then on one line). In the
-  // banner, when title, subtitle and pill still do not fit above the ground strip, the pill keeps its dot only.
+  // banner, when title, subtitle and pill still do not fit above the ground strip (or the pill's label runs past the
+  // text, over the picture), the pill keeps its dot only.
   // Measured after each render and on every new width (or once the web font is loaded), never by a fixed width.
   _fitPill() {
     for (const t of this.shadowRoot?.querySelectorAll?.(".titles") || []) {
@@ -3987,9 +3988,10 @@ class HomeConnectBaseCard extends HTMLElement {
       if (!banner) continue;
       const box = banner.getBoundingClientRect();
       const ground = box.bottom - PILL_GROUND_PX;
+      const right = t.getBoundingClientRect().right;
       const out = [name, ...t.querySelectorAll(".sub"), ...chips].some((n) => {
         const r = n.getBoundingClientRect();
-        return r.height > 0 && (r.top < box.top - 0.5 || r.bottom > ground + 0.5);
+        return r.height > 0 && (r.top < box.top - 0.5 || r.bottom > ground + 0.5 || r.right > right + 0.5);
       });
       if (out) t.classList.add("pill-dot");
     }
