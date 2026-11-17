@@ -109,6 +109,10 @@ test("illustrated header: the room, the appliance on the floor strip, night mode
   assert.match(render(HomeConnectWasherCard, mockHass(), { illustration_theme: "night" }), /class="banner sc-laundry night"/);
   const sunDown = mockHass();
   sunDown.states["sun.sun"] = st("below_horizon");
+  // A light theme keeps the day picture after sunset.
+  assert.match(render(HomeConnectWasherCard, sunDown), /class="banner sc-laundry"/);
+  assert.match(render(HomeConnectWasherCard, sunDown, { illustration_theme: "night" }), /class="banner sc-laundry night"/);
+  sunDown.themes = { darkMode: true };
   assert.match(render(HomeConnectWasherCard, sunDown), /class="banner sc-laundry night"/);
   assert.match(render(HomeConnectWasherCard, sunDown, { illustration_theme: "day" }), /class="banner sc-laundry"/);
   const dark = mockHass();

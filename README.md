@@ -191,7 +191,7 @@ entities:
 | `brand` | ❌ | Auto | Brand for the badge and button colour when the integration doesn't give it: `bosch`, `siemens`, `neff`, `gaggenau`, `constructa`, `miele`, `samsung`, `lg`, `whirlpool`, `maytag`, `kitchenaid`, `consul` |
 | `icon` | ❌ | Appliance icon | The header's round icon; with `illustration: false`, it also replaces the appliance illustration |
 | `illustration` | ❌ | `true` | Illustrated header (both cards): the appliance in its room (laundry room or kitchen) on a tiled floor, its icon tinted by the state and the brand's logo on it. `false` keeps the classic header |
-| `illustration_theme` | ❌ | `auto` | Illustrated header, both cards: `auto` (night after sunset, from `sun.sun`, or with Home Assistant's dark theme even while the sun is up), `day` or `night` |
+| `illustration_theme` | ❌ | `auto` | Illustrated header, both cards: `auto` (follows the Home Assistant theme: night with a dark theme, day with a light theme), `day` or `night` |
 | `show_program` | ❌ | `true` | Show the program picker |
 | `show_options` | ❌ | `true` | Show program options (only before a program starts) |
 | `show_controls` | ❌ | `true` | Show Start / Pause / Resume / Stop buttons |
