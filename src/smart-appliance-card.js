@@ -3860,9 +3860,10 @@ class HomeConnectBaseCard extends HTMLElement {
         if (el.lastChild && el.lastChild.nodeValue !== left) el.lastChild.nodeValue = left;
         return;
       }
+      var fmt = { left: this._leftText, ends: this._endsAt, time: this._timeLine }[el.dataset.tick] || this._timeLine;
       var txt = el.dataset.tick === 'waiting'
         ? (i.waiting && this._t('door_waiting').replace('{t}', this._ago(i.waiting)))
-        : (i.finish && this._timeLine(i.finish));
+        : (i.finish && fmt.call(this, i.finish));
       if (txt && el.textContent !== txt) el.textContent = txt;
     });
   }
@@ -3981,11 +3982,15 @@ class HomeConnectBaseCard extends HTMLElement {
   // "Ends at 10:32 · 1 hr 5 min left", shared between the full and mini layouts. The 12 h / 24 h
   // preference follows the Home Assistant locale; the card language picks the words and the unit names.
   _timeLine(finish) {
+    return `${this._endsAt(finish)} · ${this._leftText(finish)}`;
+  }
+
+  // "Ends at 10:32": the full card's line under the bar, the time left being beside the percentage.
+  _endsAt(finish) {
     var opts = { hour: '2-digit', minute: '2-digit' };
     var tf = this._hass.locale?.time_format;
     if (tf === '12' || tf === '24') opts.hour12 = tf === '12';
-    var at = finish.toLocaleTimeString(this._locale(), opts);
-    return `${this._t('ends_at')} ${at} · ${this._leftText(finish)}`;
+    return `${this._t('ends_at')} ${finish.toLocaleTimeString(this._locale(), opts)}`;
   }
 
   // "25 minutes ago", "3 hours ago", "yesterday", in the card's language.
@@ -4332,11 +4337,17 @@ class HomeConnectBaseCard extends HTMLElement {
     var noPct = this._noPct = running && progress == null && r.platform !== 'home_connect';
     if ((running && !noPct) || state === 'finished') {
       var pct = state === 'finished' ? 100 : (progress == null ? 0 : progress);
-      big = '<div class="big"><span class="pct">' + Math.round(pct) + '<small> %</small></span><span class="state">' + hcEsc(statusText) + '</span></div>' +
+      // The state is in the header pill: beside the percentage, the time left instead (the finish time under the bar).
+      // Without a finish time, the state stays there only for a card so narrow that the pill keeps just its dot.
+      var label = running && finish
+        ? `<span class="state" data-tick="left">${hcEsc(this._leftText(finish))}</span>`
+        : `<span class="state pill-echo">${hcEsc(statusText)}</span>`;
+      big = '<div class="big"><span class="pct">' + Math.round(pct) + '<small> %</small></span>' + label + '</div>' +
         '<div class="bar"><div class="fill" style="width:' + pct + '%"></div></div>' +
-        (timeLine ? `<div class="time" data-tick="time">${hcEsc(timeLine)}</div>` : '');
+        (running && finish ? `<div class="time" data-tick="ends">${hcEsc(this._endsAt(finish))}</div>` : '');
     } else {
-      big = `<div class="big"><span class="state-big">${hcEsc(statusText)}</span></div>${timeLine ? `<div class="time" data-tick="time">${hcEsc(timeLine)}</div>` : ''}`;
+      // Idle, ready, delayed: the state is the pill's; written big again only when the pill keeps just its dot.
+      big = `<div class="big pill-echo"><span class="state-big">${hcEsc(statusText)}</span></div>${timeLine ? `<div class="time" data-tick="time">${hcEsc(timeLine)}</div>` : ''}`;
     }
     var art = c.icon
       ? `<div class="badge"><ha-icon icon="${hcEsc(icon)}"></ha-icon></div>`
@@ -4696,6 +4707,10 @@ class HomeConnectBaseCard extends HTMLElement {
       '.big .state { min-width: 0; font-size: 13px; font-weight: 500; color: var(--hc-text); overflow-wrap: break-word; }' +
       '.state-big { min-width: 0; font-size: 22px; font-weight: 400; line-height: 1.2; color: var(--hc-text); overflow-wrap: break-word; }' +
       '.time { font-size: 12px; color: var(--secondary-text-color); }' +
+      // What the header pill already says is not repeated under it, unless the banner's pill keeps only its dot.
+      '.pill-echo { display: none !important; }' +
+      '@container hc-card (max-width: 200px) { .banner ~ .hero .big.pill-echo { display: flex !important; }' +
+        ' .banner ~ .hero .state.pill-echo { display: inline !important; } ha-card.mini .banner ~ .content .mstate { display: flex; } }' +
       'button { font: inherit; cursor: pointer; border: none; }' +
       'button:disabled { cursor: default; opacity: 0.5; }' +
       '.power { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex: none;' +
@@ -4809,7 +4824,7 @@ class HomeConnectBaseCard extends HTMLElement {
       '@container (max-width: 230px) {' +
         ' ha-card.mini .header .st { padding: 4px; }' +
         ' ha-card.mini .header .stt { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }' +
-        ' ha-card.mini .mstate { display: flex; }' +
+        ' ha-card.mini .header ~ .content .mstate { display: flex; }' +
       ' }' +
       // The full card's header icon shrinks, then steps aside; the mini card's keeps its 40 px at every width (its
       // title, pill and picture give way instead).
@@ -5093,8 +5108,7 @@ var hcMini = (Base) => class extends Base {
   _miniHtml(m) {
     // The state also as the first line: on a narrow card it stands in for the pill, which then only shows its dot.
     var c = m.c, ent = m.ent, lines = [];
-    // The banner's subtitle already spells the state out.
-    var mstate = m.banner ? '' : `<div class="line mstate" aria-hidden="true"><span>${hcEsc(m.statusText)}</span></div>`;
+    var mstate = `<div class="line mstate" aria-hidden="true"><span>${hcEsc(m.statusText)}</span></div>`;
     var bar = '';
     if ((m.running && !this._noPct) || m.state === 'finished') {
       var pct = m.state === 'finished' ? 100 : (m.progress == null ? 0 : m.progress);

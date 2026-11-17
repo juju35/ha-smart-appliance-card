@@ -204,7 +204,8 @@ test("the mini card's status pill keeps its text in a title (and for screen read
   const banner = card(mockHass(), Mini).shadowRoot.innerHTML;
   assert.match(banner, /<div class="name">[^<]*<\/div><span class="st" title="Running"><span class="dot"><\/span><span class="stt">Running<\/span><\/span><div class="sub">/);
   assert.doesNotMatch(banner, /<div class="sub">Running<\/div>/);
-  assert.doesNotMatch(banner, /class="line mstate"/);
+  // The state line is there too, shown only on a card so narrow that the banner's pill keeps just its dot.
+  assert.match(banner, /<div class="info"><div class="line mstate" aria-hidden="true"><span>Running<\/span><\/div>/);
   // The full card too.
   const Full = customElements.get("home-connect-washer-card");
   assert.match(card(mockHass(), Full).shadowRoot.innerHTML, /<\/div><span class="st" title="Running">/);

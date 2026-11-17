@@ -101,10 +101,20 @@ test("narrow card: the pill only shows its dot, the logo steps aside, the mini c
   assert.match(all, /ha-card:not\(\.mini\) \.logo \{[^}]*display: none/);
   // Mini card: the state is spelt out in the text column instead (hidden from screen readers, which read the pill).
   assert.match(rule(".mstate"), /display: none/);
-  assert.match(all, /ha-card\.mini \.mstate \{[^}]*display: flex/);
+  assert.match(all, /ha-card\.mini \.header ~ \.content \.mstate \{[^}]*display: flex/);
   // Mini card: the round buttons take their own row, so the info column gets the card's width back.
   assert.match(all, /ha-card\.mini \.content \{[^}]*flex-wrap: wrap/);
   assert.match(all, /ha-card\.mini \.mcontrols \{[^}]*flex: 1 1 100%/);
+});
+
+test("the body does not repeat the header pill, unless the banner's pill keeps only its dot", () => {
+  // The state is the pill's: the full card's big state and the state beside the percentage are hidden, and come back
+  // (with the mini card's state line) at the width where the illustrated header's pill keeps only its dot.
+  assert.match(rule(".pill-echo"), /display: none !important/);
+  const narrow = css.match(/@container hc-card \(max-width: 200px\) \{ \.banner ~ \.hero \.big\.pill-echo \{ display: flex !important; \}([^@]*)\}/);
+  assert.ok(narrow, "the state never comes back on a narrow banner card");
+  assert.match(narrow[1], /\.banner ~ \.hero \.state\.pill-echo \{ display: inline !important; \}/);
+  assert.match(narrow[1], /ha-card\.mini \.banner ~ \.content \.mstate \{ display: flex; \}/);
 });
 
 test("values wrap instead of being cut: state, finish time, program (6 columns on a phone, and 280-364 px)", () => {

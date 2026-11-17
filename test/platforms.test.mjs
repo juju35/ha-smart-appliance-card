@@ -108,6 +108,9 @@ test("Home Connect Local: type from the model, door binary sensor, time left in 
   assert.match(html, /40<small> %<\/small>/);
   assert.match(html, /Door closed/);
   assert.match(html, /1 hr 30 min/, "1.5 h left");
+  // The pill says "Running": beside the percentage, the time left; the finish time alone under the bar.
+  assert.match(html, /40<small> %<\/small><\/span><span class="state" data-tick="left">1 hr 30 min left<\/span>/);
+  assert.match(html, /<div class="time" data-tick="ends">Ends at [^<·]*<\/div>/);
   assert.match(html, /Salt/i);
   assert.doesNotMatch(html, /Rinse aid/i, "rinse aid full is no alert");
   assert.match(html, /title="Bosch"/);
