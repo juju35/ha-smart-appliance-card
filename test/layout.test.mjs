@@ -269,7 +269,8 @@ test("the status pill sits beside a whole title, else under the subtitle, its la
     await page.addScriptTag({ content: src });
     const results = await page.evaluate(
       async ({ states, entities }) => {
-        const frame = () => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
+        // Three frames: the card fits its pill in the frame after its ResizeObserver fired.
+        const frame = () => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(() => requestAnimationFrame(r))));
         const out = [];
         const variants = [];
         for (const illustration of [true, false])
