@@ -218,3 +218,81 @@ test("in an inline-block, an auto grid column or a 1fr 1fr grid, direct or in a 
   }
   assert.deepEqual(failures, []);
 });
+
+// Rendered in Chromium (skipped when it can't start): the illustrated header's status pill, full and mini card,
+// compact and expanded, at 245-500 px. It shows its whole label, takes at most about half the title row when it
+// sits beside the title, the title keeps at least four characters, and nothing leaves the banner.
+test("illustrated header: the status pill shows its whole label beside or under a readable title (245-500 px)", { timeout: 120000 }, async (t) => {
+  let browser;
+  try {
+    const { chromium } = await import("playwright");
+    browser = await chromium.launch(process.env.CHROMIUM_PATH ? { executablePath: process.env.CHROMIUM_PATH } : {});
+  } catch (e) {
+    return t.skip(`Chromium unavailable: ${e.message.split("\n")[0]}`);
+  }
+  const { readFileSync } = await import("node:fs");
+  const src = readFileSync(new URL("../src/smart-appliance-card.js", import.meta.url), "utf8");
+  const entities = {};
+  const states = {};
+  const add = (id, key, state, attributes = {}) => {
+    entities[id] = { entity_id: id, device_id: "dev", translation_key: key };
+    states[id] = { entity_id: id, state, attributes: { friendly_name: id, ...attributes } };
+  };
+  add("sensor.d_operation_state", "operation_state", "run", { options: ["ready", "run", "pause", "finished"] });
+  add("select.d_active_program", "active_program", "dishcare_dishwasher_program_eco_50", { options: ["dishcare_dishwasher_program_eco_50"] });
+  add("switch.d_power", "power", "on");
+  add("sensor.d_program_progress", "program_progress", "45", { unit_of_measurement: "%" });
+  const failures = [];
+  try {
+    const page = await browser.newPage({ viewport: { width: 1200, height: 900 } });
+    await page.setContent("<!doctype html><body style='margin:0;font-family:Arial,sans-serif'></body>");
+    await page.addScriptTag({
+      content:
+        'customElements.define("ha-card", class extends HTMLElement { constructor() { super(); this.attachShadow({ mode: "open" }).innerHTML = "<style>:host{display:block;border-radius:12px}</style><slot></slot>"; } });' +
+        'customElements.define("ha-icon", class extends HTMLElement { connectedCallback() { this.style.display = "inline-flex"; this.innerHTML = "<svg viewBox=\'0 0 24 24\' style=\'width:24px;height:24px\'></svg>"; } });',
+    });
+    await page.addScriptTag({ content: src });
+    const results = await page.evaluate(
+      ({ states, entities }) => {
+        const out = [];
+        for (const [type, zoom] of [["smart-appliance-card", false], ["smart-appliance-mini-card", false], ["smart-appliance-mini-card", true]])
+          for (const w of [245, 280, 300, 360, 400, 500]) {
+            const box = document.createElement("div");
+            box.style.width = `${w}px`;
+            document.body.appendChild(box);
+            const el = document.createElement(type);
+            el.setConfig({ type: `custom:${type}`, device_id: "dev", name: "Dishwasher" });
+            if (zoom) el._zoomed = true;
+            el.hass = { states, entities, devices: { dev: { name: "Dishwasher" } }, language: "en", callService: async () => {} };
+            box.appendChild(el);
+            const root = el.shadowRoot;
+            const r = (sel) => root.querySelector(sel).getBoundingClientRect();
+            const stt = root.querySelector(".banner .stt");
+            const name = root.querySelector(".banner .name");
+            const pill = r(".banner .st"), titles = r(".banner .titles"), banner = r(".banner"), nameBox = r(".banner .name");
+            const ch = name.textContent.length * (nameBox.width / Math.max(name.scrollWidth, 1));
+            out.push({
+              label: `${type}${zoom ? " expanded" : ""} ${w}px`,
+              whole: stt.scrollWidth <= stt.clientWidth + 0.5,
+              beside: Math.abs(pill.top - nameBox.top) < nameBox.height,
+              share: pill.width / titles.width,
+              ch,
+              inside: pill.right <= banner.right + 0.5 && pill.bottom <= banner.bottom - 10 + 0.5,
+            });
+            box.remove();
+          }
+        return out;
+      },
+      { states, entities },
+    );
+    for (const x of results) {
+      if (!x.whole) failures.push(`${x.label}: the pill's label is cut`);
+      if (x.beside && x.share > 0.51) failures.push(`${x.label}: the pill takes ${(x.share * 100).toFixed(0)} % of the title row`);
+      if (x.ch < 4) failures.push(`${x.label}: the title keeps ${x.ch.toFixed(1)} characters`);
+      if (!x.inside) failures.push(`${x.label}: the pill leaves the banner's sky`);
+    }
+  } finally {
+    await browser.close();
+  }
+  assert.deepEqual(failures, []);
+});

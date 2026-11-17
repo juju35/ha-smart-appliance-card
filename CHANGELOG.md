@@ -6,6 +6,8 @@
 - **Illustrated header** on the full and the mini card (90 px): the appliance's own animated illustration stands in its room (a laundry room for washers, dryers and the Styler, a kitchen for the others) on a 10 px tiled floor strip, with the title and the subtitle on the left. The round icon is tinted by the state (at work, warning, fault, done; neutral grey when idle or off) and carries the brand's logo (or its initial) as a badge.
 - Night picture after sunset (`sun.sun`, else Home Assistant's dark mode), forced with `illustration_theme: day | night`; `illustration: false` keeps the classic header. Both options are in the visual editor, the mini card's included.
 - The classic header's icon follows the state colours too.
+- Status pill on every header (full and mini card, illustrated or classic): a dot and the state, in the icon's colour, right after the title; short of room it takes its own line under the subtitle, and on a very narrow card only its dot shows. The mini card's subtitle names the program instead of repeating the state.
+- The mini card's expand / collapse button sits in the banner's top right corner (24 px, frosted), like the other cards.
 
 ## 2.7.1 - 2026-11-14
 

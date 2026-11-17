@@ -3575,9 +3575,22 @@ var HC_BANNER_STYLE = '<style>' +
   '.banner .ground { position: absolute; left: 0; right: 0; bottom: 0; height: 10px; box-shadow: inset 0 2px 0 #b8c0c6;' +
     ' background: repeating-linear-gradient(90deg, #d9dfe3 0 18px, #c6cdd2 18px 19px); }' +
   '.banner.night .ground { background: repeating-linear-gradient(90deg, #3a4250 0 18px, #2e3542 18px 19px); box-shadow: inset 0 2px 0 #4a5466; }' +
-  '.banner .htext { position: absolute; z-index: 1; left: 0; top: 0; bottom: 10px; right: min(250px, 62%); box-sizing: border-box;' +
+  // The text runs up to the appliance: the room behind it is faded out on its left.
+  '.banner .htext { position: absolute; z-index: 1; left: 0; top: 0; bottom: 10px; right: 74px; box-sizing: border-box;' +
     ' display: flex; align-items: center; gap: 10px; padding: 8px 8px 8px 14px; min-width: 0; }' +
-  '.banner .htext .titles { flex: 1 1 auto; min-width: 0; }' +
+  // Title row: the title, then the status pill 8 px after it, both shrinking (the title keeps a few characters, the
+  // pill at most about half the row); the subtitle under them. Short of room the pill takes its own line under the
+  // subtitle, and on a very narrow card only its dot shows (its text stays in its title and for screen readers).
+  '.banner .htext .titles { flex: 1 1 auto; min-width: 0; container: hc-titles / inline-size; display: grid;' +
+    ' grid-template-columns: minmax(min(4.5ch, 100%), max-content) minmax(0, max-content); justify-content: start; align-items: center; column-gap: 8px; }' +
+  '.banner .htext .titles > .sub { grid-column: 1 / -1; }' +
+  '.banner .st { --c: var(--hc-icon); max-width: 100%; justify-self: start; padding: 1px 8px; line-height: 16px;' +
+    ' background: color-mix(in srgb, var(--c) 18%, rgba(255,255,255,.78)); color: color-mix(in srgb, var(--c) 45%, #0d2a45); }' +
+  '.banner.night .st { background: color-mix(in srgb, var(--c) 30%, rgba(8,18,38,.55)); color: color-mix(in srgb, var(--c) 35%, #ffffff); }' +
+  '.banner .st .dot { width: 7px; height: 7px; background: var(--c); }' +
+  '@container hc-titles (max-width: 180px) { .banner .htext .titles > .st { grid-column: 1 / -1; grid-row: 3; margin-top: 3px; } }' +
+  '@container hc-card (max-width: 200px) { .banner .st { padding: 4px; }' +
+    ' .banner .stt { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); } }' +
   '.banner .htext .name { color: var(--sky-text); }' +
   '.banner .htext .sub { font-size: 13px; color: var(--sky-muted); }' +
   // The round icon on the wall, in the state's colour; the brand on a white tile at its bottom right.
@@ -3594,11 +3607,19 @@ var HC_BANNER_STYLE = '<style>' +
   '.banner.has-zoom .bart { right: 36px; }' +
   '.banner .bart .picture { width: auto; height: 72px; aspect-ratio: 80 / 94; }' +
   '.banner .bart .picture svg:first-child { filter: drop-shadow(0 2px 3px rgba(0,0,0,.2)); }' +
-  '.banner .zoom { position: absolute; z-index: 2; top: 6px; right: 6px; margin: 0; color: #10283f; background: rgba(255,255,255,.55); }' +
-  '.banner.night .zoom { color: #fff; background: rgba(10,20,40,.45); }' +
+  // The expand / collapse button: 24 px, round, frosted, in the banner's top right corner.
+  '.banner .zoom { position: absolute; z-index: 2; top: 5px; right: 5px; margin: 0; color: #33506b; background: rgba(255,255,255,.55);' +
+    ' box-shadow: inset 0 0 0 1px rgba(255,255,255,.7); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); }' +
+  '.banner .zoom:hover { color: #33506b; background: rgba(255,255,255,.75); }' +
+  '.banner.night .zoom { color: #fff; background: rgba(255,255,255,.12); box-shadow: inset 0 0 0 1px rgba(255,255,255,.2); }' +
+  '.banner.night .zoom:hover { color: #fff; background: rgba(255,255,255,.22); }' +
   '.hc-swing { transform-box: view-box; animation: hc-flag 2s ease-in-out infinite; } .hc-swing.r { animation-direction: reverse; }' +
   '@keyframes hc-flag { 0%, 100% { transform: rotate(-14deg); } 50% { transform: rotate(14deg); } }' +
-  '@container (max-width: 360px) { .banner .scene { display: none; } .banner .htext { right: 72px; } .banner.has-zoom .htext { right: 102px; } }' +
+  '.banner.has-zoom .htext { right: 102px; }' +
+  '@container (max-width: 360px) { .banner .scene { display: none; } }' +
+  // A narrow card: a smaller appliance leaves the title and the whole pill their room.
+  '@container hc-card (max-width: 260px) { .banner .bart, .banner .bart .picture { height: 56px; } .banner .bart { right: 4px; }' +
+    ' .banner.has-zoom .bart { right: 34px; } .banner .htext { right: 58px; } .banner.has-zoom .htext { right: 86px; } }' +
   '@media (prefers-reduced-motion: reduce) { .hc-swing { animation: none; } }' +
 '</style>';
 
@@ -4199,13 +4220,14 @@ class HomeConnectBaseCard extends HTMLElement {
     var sub = progLabel || this._t(kind);
     // The banner always shows the appliance (a custom `icon` only replaces the classic layout's illustration).
     var illus = (door === 'open' && HC_ART_OPEN[kind]) || HC_ART[kind] || HC_ART.dishwasher;
-    var banner = (bannerSub) => this._banner({ name, sub: bannerSub, icon: profile.icon, art: illus, state, kind });
+    // The state is in the pill next to the title: the subtitle names the program (else the appliance).
+    var banner = () => this._banner({ name, sub, status: statusText, icon: profile.icon, art: illus, state, kind });
 
     if (this._compact()) {
       this._rows = hcRows(HC_PX.miniBase + (this._error ? HC_PX.error : 0));
       this.shadowRoot.innerHTML = this._miniHtml({ c, ent, name, color, state, statusText, running, online, powerOn, progress,
         finish, progLabel, chips: chips.filter((x) => x.indexOf('chip warn') >= 0 || x.indexOf('chip extra') >= 0 || !online), art, logo, powerBtn,
-        banner: this._illustrated ? banner(statusText) : '' });
+        banner: this._illustrated ? banner() : '' });
       return;
     }
 
@@ -4214,9 +4236,9 @@ class HomeConnectBaseCard extends HTMLElement {
     this._rows = hcRows(base + (programHtml ? HC_PX.program : 0) + optPx + (errorHtml ? HC_PX.error : 0) +
       (controls ? HC_PX.controls : 0) + (controls.indexOf('class="hint"') >= 0 ? HC_PX.hint : 0));
     this.shadowRoot.innerHTML = this._styles(color) + '<ha-card>' +
-      (this._illustrated ? banner(sub) : '<div class="header">' + logo +
+      (this._illustrated ? banner() : '<div class="header">' + logo +
         '<div class="titles"><div class="name">' + hcEsc(name) + '</div><div class="sub">' + this._brandLogo() + hcEsc(sub) + '</div></div>' +
-        powerBtn + this._zoomButton() +
+        this._pill(statusText) + powerBtn + this._zoomButton() +
       '</div>') +
       heroHtml + programHtml + optionsHtml + errorHtml + controls +
     '</ha-card>';
@@ -4285,9 +4307,14 @@ class HomeConnectBaseCard extends HTMLElement {
       `<svg class="scene" viewBox="0 0 200 80" preserveAspectRatio="xMaxYMax meet" aria-hidden="true">${HC_SCENES[scene](night)}</svg>` +
       '<div class="ground"></div>' +
       `<div class="htext"><div class="logo" aria-hidden="true"><ha-icon icon="${hcEsc(c.icon || o.icon)}"></ha-icon>${this._bannerBadge()}</div>` +
-      `<div class="titles"><div class="name">${hcEsc(o.name)}</div><div class="sub">${hcEsc(o.sub)}</div></div></div>` +
+      `<div class="titles"><div class="name">${hcEsc(o.name)}</div>${this._pill(o.status)}<div class="sub">${hcEsc(o.sub)}</div></div></div>` +
       `<div class="bart"${drop}>${hcPicture(art, o.state, true, this._lit)}</div>` + zoom +
     '</div>';
+  }
+
+  // The status pill: a dot and the state, in the header icon's colour; its text stays in its title when only the dot shows.
+  _pill(text) {
+    return `<span class="st" title="${hcEsc(text)}"><span class="dot"></span><span class="stt">${hcEsc(text)}</span></span>`;
   }
 
   // Badge on the banner's icon: the brand's logo on a white tile, else its initial on the brand's colour.
@@ -4318,7 +4345,7 @@ class HomeConnectBaseCard extends HTMLElement {
         // The header icon's colour: the state's (at work, waiting, warning, fault, done), neutral grey when idle or off.
         ' --hc-icon: ' + (this._iconColor || 'var(--state-inactive-color, var(--disabled-text-color, #9e9e9e))') + '; }' +
       // A size container: narrow layouts (6 columns of a Sections view, the mini card) follow the card's own width.
-      'ha-card { height: 100%; box-sizing: border-box; padding: 12px; display: flex; flex-direction: column; gap: 10px;' +
+      'ha-card { container-name: hc-card; height: 100%; box-sizing: border-box; padding: 12px; display: flex; flex-direction: column; gap: 10px;' +
         ' container-type: inline-size; }' +
       // Containment drops the content's own width: hosts that size the card from it (layout-card, button-card, an
       // `auto` grid column, an inline-block) would shrink it to its 24 px of padding. This empty, zero-height grid
@@ -4537,8 +4564,8 @@ class HomeConnectBaseCard extends HTMLElement {
       // At 6 columns the mini card's pill is a dot (its text stays in its title and for screen readers) and the
       // state is spelt out above the program instead, where it has room to wrap.
       '@container (max-width: 230px) {' +
-        ' ha-card.mini .st { padding: 4px; }' +
-        ' ha-card.mini .stt { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }' +
+        ' ha-card.mini .header .st { padding: 4px; }' +
+        ' ha-card.mini .header .stt { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }' +
         ' ha-card.mini .mstate { display: flex; }' +
       ' }' +
       // The full card's header icon shrinks, then steps aside; the mini card's keeps its 40 px at every width (its
@@ -4830,7 +4857,7 @@ var hcMini = (Base) => class extends Base {
       var pct = m.state === 'finished' ? 100 : (m.progress == null ? 0 : m.progress);
       bar = `<div class="mbar"><div class="bar"><div class="fill" style="width:${pct}%"></div></div><span class="v">${Math.round(pct)} %</span></div>`;
     }
-    if (m.progLabel && m.online && m.powerOn) lines.push(`<div class="line"><ha-icon icon="mdi:tune-variant"></ha-icon><span>${hcEsc(m.progLabel)}</span></div>`);
+    if (m.progLabel && m.online && m.powerOn && !m.banner) lines.push(`<div class="line"><ha-icon icon="mdi:tune-variant"></ha-icon><span>${hcEsc(m.progLabel)}</span></div>`);
     if (m.running && m.finish) {
       lines.push(`<div class="line"><ha-icon icon="mdi:clock-outline"></ha-icon><span data-tick="time">${hcEsc(this._timeLine(m.finish))}</span></div>`);
     }
@@ -4848,7 +4875,7 @@ var hcMini = (Base) => class extends Base {
     return this._styles(m.color) + '<ha-card class="mini">' + (m.banner ||
       '<div class="header">' + m.logo +
         '<div class="titles"><div class="name">' + hcEsc(m.name) + '</div>' + (this._brandLogo() ? `<div class="sub">${this._brandLogo()}</div>` : '') + '</div>' +
-        `<span class="st" title="${hcEsc(m.statusText)}"><span class="dot"></span><span class="stt">${hcEsc(m.statusText)}</span></span>` + this._zoomButton() +
+        this._pill(m.statusText) + this._zoomButton() +
       '</div>') +
       '<div class="content">' + (m.banner ? '' : hcPicture(m.art, m.state, !c.icon, this._lit)) +
         '<div class="info">' + mstate + bar + lines.join('') + '</div>' +
