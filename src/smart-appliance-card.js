@@ -3701,19 +3701,14 @@ var HC_BANNER_STYLE = '<style>' +
   // The text runs up to the appliance: the room behind it is faded out on its left.
   '.banner .htext { position: absolute; z-index: 1; left: 0; top: 0; bottom: 10px; right: 74px; box-sizing: border-box;' +
     ' display: flex; align-items: center; gap: 10px; padding: 8px 8px 8px 14px; min-width: 0; }' +
-  // Title row: the title, then the status pill 8 px after it, both shrinking (the title keeps a few characters, the
-  // pill at most about half the row); the subtitle under them. Short of room the pill takes its own line under the
-  // subtitle, and on a very narrow card only its dot shows (its text stays in its title and for screen readers).
-  '.banner .htext .titles { flex: 1 1 auto; min-width: 0; container: hc-titles / inline-size; display: grid;' +
-    ' grid-template-columns: minmax(min(4.5ch, 100%), max-content) minmax(0, max-content); justify-content: start; align-items: center; column-gap: 8px; }' +
-  '.banner .htext .titles > .sub { grid-column: 1 / -1; }' +
-  '.banner .st { --c: var(--hc-icon); max-width: 100%; justify-self: start; padding: 1px 8px; line-height: 16px;' +
+  // Title row: the title, then the status pill 8 px after it (see .trow and _fitPill); the subtitle under them.
+  '.banner .htext .titles { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; justify-content: center; }' +
+  '.banner .st { --c: var(--hc-icon); padding: 1px 8px; line-height: 16px;' +
     ' background: color-mix(in srgb, var(--c) 18%, rgba(255,255,255,.78)); color: color-mix(in srgb, var(--c) 45%, #0d2a45); }' +
   '.banner.night .st { background: color-mix(in srgb, var(--c) 30%, rgba(8,18,38,.55)); color: color-mix(in srgb, var(--c) 35%, #ffffff); }' +
   '.banner .st .dot { width: 7px; height: 7px; background: var(--c); }' +
-  '@container hc-titles (max-width: 180px) { .banner .htext .titles > .st { grid-column: 1 / -1; grid-row: 3; margin-top: 3px; } }' +
-  '@container hc-card (max-width: 200px) { .banner .st { padding: 4px; }' +
-    ' .banner .stt { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); } }' +
+  '.banner .titles.pill-dot .st { padding: 4px; }' +
+  '@container hc-card (max-width: 200px) { .banner .st { padding: 4px; } }' +
   '.banner .htext .name { color: var(--sky-text); }' +
   '.banner .htext .sub { font-size: 13px; color: var(--sky-muted); }' +
   // The round icon on the wall, in the state's colour; the brand on a white tile at its bottom right.
@@ -3745,6 +3740,11 @@ var HC_BANNER_STYLE = '<style>' +
     ' .banner.has-zoom .bart { right: 34px; } .banner .htext { right: 58px; } .banner.has-zoom .htext { right: 86px; } }' +
   '@media (prefers-reduced-motion: reduce) { .hc-swing { animation: none; } }' +
 '</style>';
+
+// The banner's ground strip (the floor), that the title block keeps clear of, and the gap between the title and the
+// status pill on its row (.trow).
+const PILL_GROUND_PX = 10;
+const PILL_GAP_PX = 8;
 
 // ── Base card ────────────────────────────────────────────────────────────────
 class HomeConnectBaseCard extends HTMLElement {
@@ -3825,6 +3825,7 @@ class HomeConnectBaseCard extends HTMLElement {
       });
       this._io.observe(this);
     }
+    this._watchPill();
     // Back on screen: redraw now (state reset on disconnect) instead of waiting for the next hass update.
     this._update();
   }
@@ -3834,6 +3835,7 @@ class HomeConnectBaseCard extends HTMLElement {
     document.removeEventListener('visibilitychange', this._onVisibility);
     this._io?.disconnect();
     this._io = null;
+    this._unwatchPill();
     clearTimeout(this._confirmTimer);
     clearTimeout(this._errorTimer);
     // The cancelled timers would have reset these: an armed Stop or an old error must not survive leaving the view.
@@ -3962,7 +3964,53 @@ class HomeConnectBaseCard extends HTMLElement {
     // must stay focused for a second Enter to confirm it).
     var focus = hcFocusKey(active);
     this._render(r);
+    this._fitPill();
     if (focus) this._refocus(focus);
+  }
+
+  // The status pill goes on the title row, right after the title, only when the whole title and the pill's whole
+  // label fit there; otherwise it takes its own line under the subtitle (the subtitle then on one line). In the
+  // banner, when title, subtitle and pill still do not fit above the ground strip, the pill keeps its dot only.
+  // Measured after each render and on every new width (or once the web font is loaded), never by a fixed width.
+  _fitPill() {
+    for (const t of this.shadowRoot?.querySelectorAll?.(".titles") || []) {
+      const row = t.querySelector?.(".trow");
+      const name = row?.querySelector(".name");
+      const chips = row ? [...row.children].filter((n) => n.classList.contains("st")) : [];
+      if (!name?.getBoundingClientRect || !chips.length) continue;
+      t.classList.remove("pill-below", "pill-dot");
+      // The title's whole width (scrollWidth is rounded: 1 px more, so that a title that fits is never cut).
+      const need = chips.reduce((w, c) => w + PILL_GAP_PX + c.getBoundingClientRect().width, name.scrollWidth + 1);
+      if (need <= row.getBoundingClientRect().width + 0.5) continue;
+      t.classList.add("pill-below");
+      const banner = t.closest(".banner");
+      if (!banner) continue;
+      const box = banner.getBoundingClientRect();
+      const ground = box.bottom - PILL_GROUND_PX;
+      const out = [name, ...t.querySelectorAll(".sub"), ...chips].some((n) => {
+        const r = n.getBoundingClientRect();
+        return r.height > 0 && (r.top < box.top - 0.5 || r.bottom > ground + 0.5);
+      });
+      if (out) t.classList.add("pill-dot");
+    }
+  }
+
+  _watchPill() {
+    if (typeof ResizeObserver !== "function") return;
+    this._pillResize ??= new ResizeObserver((entries) => {
+      const w = Math.round(entries.at(-1).contentRect.width);
+      if (w === this._pillWidth) return;
+      this._pillWidth = w;
+      cancelAnimationFrame(this._pillFrame);
+      this._pillFrame = requestAnimationFrame(() => this._fitPill());
+    });
+    this._pillResize.observe(this);
+    document.fonts?.ready?.then(() => this._fitPill());
+  }
+
+  _unwatchPill() {
+    this._pillResize?.disconnect();
+    this._pillWidth = null;
   }
 
   _refocus(focus) {
@@ -4378,8 +4426,9 @@ class HomeConnectBaseCard extends HTMLElement {
       (controls ? HC_PX.controls : 0) + (controls.indexOf('class="hint"') >= 0 ? HC_PX.hint : 0));
     this.shadowRoot.innerHTML = this._styles(color) + '<ha-card>' +
       (this._illustrated ? banner() : '<div class="header">' + logo +
-        '<div class="titles"><div class="name">' + hcEsc(name) + '</div><div class="sub">' + this._brandLogo() + hcEsc(sub) + '</div></div>' +
-        this._pill(statusText) + powerBtn + this._zoomButton() +
+        '<div class="titles"><div class="trow"><div class="name">' + hcEsc(name) + '</div>' + this._pill(statusText) + '</div>' +
+          '<div class="sub" title="' + hcEsc(sub) + '">' + this._brandLogo() + hcEsc(sub) + '</div></div>' +
+        powerBtn + this._zoomButton() +
       '</div>') +
       heroHtml + zonesHtml + programHtml + optionsHtml + errorHtml + controls +
     '</ha-card>';
@@ -4540,7 +4589,7 @@ class HomeConnectBaseCard extends HTMLElement {
       `<svg class="scene" viewBox="0 0 200 80" preserveAspectRatio="xMaxYMax meet" aria-hidden="true">${HC_SCENES[scene](night)}</svg>` +
       '<div class="ground"></div>' +
       `<div class="htext"><div class="logo" aria-hidden="true"><ha-icon icon="${hcEsc(c.icon || o.icon)}"></ha-icon>${this._bannerBadge()}</div>` +
-      `<div class="titles"><div class="name">${hcEsc(o.name)}</div>${this._pill(o.status)}<div class="sub">${hcEsc(o.sub)}</div></div></div>` +
+      `<div class="titles"><div class="trow"><div class="name">${hcEsc(o.name)}</div>${this._pill(o.status)}</div><div class="sub" title="${hcEsc(o.sub)}">${hcEsc(o.sub)}</div></div></div>` +
       `<div class="bart"${drop}>${hcPicture(art, o.state, true, this._lit)}</div>` + zoom +
     '</div>';
   }
@@ -4604,8 +4653,21 @@ class HomeConnectBaseCard extends HTMLElement {
       '.hc-badge.brand { padding: 0; color: #fff; font: 700 9px/1 var(--ha-font-family-body, system-ui, sans-serif); letter-spacing: -0.02em; }' +
       // The title takes the room the pill and the buttons leave (basis 0, so it doesn't squeeze the pill at
       // ordinary widths); it shrinks with an ellipsis but keeps about four characters.
-      '.titles { flex: 1 1 0; min-width: 5ch; font-size: 16px; }' +
-      ':host([hide-title]) .titles > .name, :host([hide-subtitle]) .titles > .sub { display: none; }' +
+      '.titles { flex: 1 1 0; min-width: 5ch; font-size: 16px; display: flex; flex-direction: column; }' +
+      ':host([hide-title]) .titles .name, :host([hide-subtitle]) .titles > .sub { display: none; }' +
+      // The status pill on the title row, 8 px after the title, only when the whole title and the pill's whole label
+      // fit there; otherwise on its own line under the subtitle (then kept to one line); its dot alone at 200 px or
+      // less, or when the banner has no room left for its label. Measured after each render (_fitPill), in every
+      // language, never by a fixed width.
+      '.trow { display: flex; align-items: center; gap: 8px; min-width: 0; }' +
+      '.trow .name { flex: 0 1 auto; min-width: 0; }' +
+      '.trow .st { flex: none; }' +
+      '.titles.pill-below .trow { display: contents; }' +
+      '.titles.pill-below .sub { order: 1; }' +
+      '.titles.pill-below .st { order: 2; align-self: flex-start; margin-top: 3px; }' +
+      '.titles.pill-dot .stt { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }' +
+      '@container hc-card (max-width: 200px) { .st { padding: 4px; }' +
+        ' .stt { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); } }' +
       '.name { font-size: 16px; font-weight: 500; line-height: 1.25; color: var(--primary-text-color); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }' +
       '.sub { font-size: 12px; color: var(--secondary-text-color); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }' +
       '.hero { display: flex; align-items: center; gap: 14px; }' +
@@ -4708,6 +4770,8 @@ class HomeConnectBaseCard extends HTMLElement {
       '.time { font-size: 12px; color: var(--secondary-text-color); }' +
       // What the header pill already says is not repeated under it, unless the banner's pill keeps only its dot.
       '.pill-echo { display: none !important; }' +
+      'ha-card:has(.banner .titles.pill-dot) .hero .big.pill-echo { display: flex !important; }' +
+      'ha-card:has(.banner .titles.pill-dot) .hero .state.pill-echo { display: inline !important; }' +
       '@container hc-card (max-width: 200px) { .banner ~ .hero .big.pill-echo { display: flex !important; }' +
         ' .banner ~ .hero .state.pill-echo { display: inline !important; } ha-card.mini .banner ~ .content .mstate { display: flex; } }' +
       'button { font: inherit; cursor: pointer; border: none; }' +
@@ -4791,11 +4855,11 @@ class HomeConnectBaseCard extends HTMLElement {
       '.zoom ha-icon { --mdc-icon-size: 16px; }' +
       '.zoom:hover { background: color-mix(in srgb, var(--secondary-text-color) 16%, transparent); color: var(--primary-text-color); }' +
       '.zoom:focus-visible { outline: 2px solid var(--primary-color, #03a9f4); outline-offset: 1px; }' +
-      // The status pill takes at most half the header and truncates; on a narrow card only its dot shows.
-      '.st { display: inline-flex; align-items: center; gap: 4px; flex: 0 1 auto; min-width: 0; max-width: 50%; overflow: hidden; box-sizing: border-box;' +
+      // The status pill keeps its whole label (see .trow); on a narrow card only its dot shows.
+      '.st { display: inline-flex; align-items: center; gap: 4px; flex: none; box-sizing: border-box;' +
         ' padding: 1px 8px; border-radius: 12px; font-size: 11px; font-weight: 500;' +
         ' background: color-mix(in srgb, var(--hc-color) 15%, transparent); color: var(--hc-text); }' +
-      '.stt { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }' +
+      '.stt { white-space: nowrap; }' +
       '.dot { width: 6px; height: 6px; flex: none; border-radius: 50%; background: var(--hc-color); }' +
       '.content { display: flex; align-items: center; gap: 12px; }' +
       'ha-card.mini .picture { width: 56px; height: 66px; }' +
@@ -4818,13 +4882,10 @@ class HomeConnectBaseCard extends HTMLElement {
         ' ha-card.mini .content { flex-wrap: wrap; row-gap: 8px; }' +
         ' ha-card.mini .mcontrols { flex: 1 1 100%; justify-content: flex-end; }' +
       ' }' +
-      // At 6 columns the mini card's pill is a dot (its text stays in its title and for screen readers) and the
-      // state is spelt out above the program instead, where it has room to wrap.
-      '@container (max-width: 230px) {' +
-        ' ha-card.mini .header .st { padding: 4px; }' +
-        ' ha-card.mini .header .stt { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }' +
-        ' ha-card.mini .header ~ .content .mstate { display: flex; }' +
-      ' }' +
+      // When the mini card's pill is a dot (its text stays in its title and for screen readers), the state is spelt
+      // out above the program instead, where it has room to wrap.
+      '@container (max-width: 200px) { ha-card.mini .header ~ .content .mstate { display: flex; } }' +
+      'ha-card.mini:has(.titles.pill-dot) .content .mstate { display: flex; }' +
       // The full card's header icon shrinks, then steps aside; the mini card's keeps its 40 px at every width (its
       // title, pill and picture give way instead).
       '@container (max-width: 230px) {' +
@@ -5130,8 +5191,9 @@ var hcMini = (Base) => class extends Base {
     if (m.banner) this._rows = hcRows(HC_PX.bannerMini + (this._error ? HC_PX.error : 0));
     return this._styles(m.color) + '<ha-card class="mini">' + (m.banner ||
       '<div class="header">' + m.logo +
-        '<div class="titles"><div class="name">' + hcEsc(m.name) + '</div>' + (this._brandLogo() ? `<div class="sub">${this._brandLogo()}</div>` : '') + '</div>' +
-        this._pill(m.statusText) + this._zoomButton() +
+        '<div class="titles"><div class="trow"><div class="name">' + hcEsc(m.name) + '</div>' + this._pill(m.statusText) + '</div>' +
+          (this._brandLogo() ? `<div class="sub">${this._brandLogo()}</div>` : '') + '</div>' +
+        this._zoomButton() +
       '</div>') +
       '<div class="content">' + (m.banner ? '' : hcPicture(m.art, m.state, !c.icon, this._lit)) +
         '<div class="info">' + mstate + bar + lines.join('') + '</div>' +

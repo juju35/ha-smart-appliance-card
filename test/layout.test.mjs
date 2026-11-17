@@ -55,16 +55,20 @@ test("header: the title block shrinks with an ellipsis but always keeps a few ch
   for (const d of [/overflow: hidden/, /text-overflow: ellipsis/, /white-space: nowrap/]) assert.match(n, d);
 });
 
-test("header: the status pill shrinks (at most half the header) and truncates its text", () => {
-  const s = rule(".st");
-  assert.match(s, /flex: 0 1 auto/);
-  assert.match(s, /min-width: 0/);
-  assert.match(s, /max-width: 50%/);
-  assert.match(s, /overflow: hidden/);
-  assert.doesNotMatch(s, /flex-shrink: 0/);
-  const stt = rule(".stt");
-  for (const d of [/overflow: hidden/, /text-overflow: ellipsis/, /white-space: nowrap/]) assert.match(stt, d);
+test("header: the status pill keeps its whole label; its place on the title row or under the subtitle is measured", () => {
+  assert.match(rule(".st"), /flex: none/);
+  assert.doesNotMatch(rule(".st"), /max-width|overflow: hidden/);
+  assert.match(css, /\.stt \{ white-space: nowrap; \}/);
+  assert.match(rule(".trow .st"), /flex: none/);
+  assert.match(rule(".trow .name"), /min-width: 0/);
+  assert.match(rule(".titles.pill-below .trow"), /display: contents/);
+  assert.match(rule(".titles.pill-below .st"), /order: 2/);
+  assert.match(rule(".titles.pill-dot .stt"), /clip-path: inset\(50%\)/);
   assert.match(rule(".dot"), /flex: none/);
+  // No fixed width moves the pill: the only width rule on it is its dot alone at 200 px or less.
+  for (const m of css.matchAll(/@container[^{]*\(max-width: (\d+)px\) \{((?:[^{}]*\{[^{}]*\})*)\s*\}/g)) {
+    if (/\.st\b|\.stt|\.trow|hc-titles/.test(m[2])) assert.ok(Number(m[1]) <= 200, `pill rule at ${m[1]} px`);
+  }
 });
 
 test("header and mini card: icon buttons never shrink", () => {
@@ -94,7 +98,7 @@ test("narrow card: the pill only shows its dot, the logo steps aside, the mini c
   assert.ok(blocks.length >= 2, "no @container breakpoints");
   const all = blocks.map((b) => b.body).join("\n");
   // The pill's text is hidden visually only: it stays in the accessibility tree (and in the pill's title).
-  const hidden = all.match(/\.stt \{([^}]*)\}/);
+  const hidden = css.match(/@container hc-card \(max-width: 200px\) \{[^@]*?\.stt \{([^}]*)\}/);
   assert.ok(hidden, "the pill text never hides");
   assert.match(hidden[1], /clip-path: inset\(50%\)|clip: rect\(0/);
   assert.doesNotMatch(hidden[1], /display: none/);
@@ -229,10 +233,11 @@ test("in an inline-block, an auto grid column or a 1fr 1fr grid, direct or in a 
   assert.deepEqual(failures, []);
 });
 
-// Rendered in Chromium (skipped when it can't start): the illustrated header's status pill, full and mini card,
-// compact and expanded, at 245-500 px. It shows its whole label, takes at most about half the title row when it
-// sits beside the title, the title keeps at least four characters, and nothing leaves the banner.
-test("illustrated header: the status pill shows its whole label beside or under a readable title (245-500 px)", { timeout: 120000 }, async (t) => {
+// Rendered in Chromium (skipped when it can't start): the status pill's place, decided by measurement, full and mini
+// card (compact and expanded), illustrated and classic, in six languages from 190 to 500 px. Beside the title only
+// when the title stays whole; otherwise under the subtitle; its label whole or its dot alone (always at 200 px or
+// less); nothing under the banner's ground strip or out of the banner.
+test("the status pill sits beside a whole title, else under the subtitle, its label whole or its dot alone (190-500 px, 6 languages)", { timeout: 300000 }, async (t) => {
   let browser;
   try {
     const { chromium } = await import("playwright");
@@ -248,7 +253,7 @@ test("illustrated header: the status pill shows its whole label beside or under 
     entities[id] = { entity_id: id, device_id: "dev", translation_key: key };
     states[id] = { entity_id: id, state, attributes: { friendly_name: id, ...attributes } };
   };
-  add("sensor.d_operation_state", "operation_state", "run", { options: ["ready", "run", "pause", "finished"] });
+  add("sensor.d_operation_state", "operation_state", "run", { options: ["ready", "run", "pause", "finished", "actionrequired"] });
   add("select.d_active_program", "active_program", "dishcare_dishwasher_program_eco_50", { options: ["dishcare_dishwasher_program_eco_50"] });
   add("switch.d_power", "power", "on");
   add("sensor.d_program_progress", "program_progress", "45", { unit_of_measurement: "%" });
@@ -263,44 +268,53 @@ test("illustrated header: the status pill shows its whole label beside or under 
     });
     await page.addScriptTag({ content: src });
     const results = await page.evaluate(
-      ({ states, entities }) => {
+      async ({ states, entities }) => {
+        const frame = () => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
         const out = [];
-        for (const [type, zoom] of [["smart-appliance-card", false], ["smart-appliance-mini-card", false], ["smart-appliance-mini-card", true]])
-          for (const w of [245, 280, 300, 360, 400, 500]) {
+        const variants = [];
+        for (const illustration of [true, false])
+          for (const [type, zoom] of [["smart-appliance-card", false], ["smart-appliance-mini-card", false], ["smart-appliance-mini-card", true]])
+            for (const name of ["Dishwasher", "Kitchen dishwasher by the window"]) variants.push({ type, zoom, illustration, name });
+        for (const v of variants)
+          for (const lang of ["en", "fr", "de", "hu", "el", "ru"]) {
             const box = document.createElement("div");
-            box.style.width = `${w}px`;
             document.body.appendChild(box);
-            const el = document.createElement(type);
-            el.setConfig({ type: `custom:${type}`, device_id: "dev", name: "Dishwasher" });
-            if (zoom) el._zoomed = true;
-            el.hass = { states, entities, devices: { dev: { name: "Dishwasher" } }, language: "en", callService: async () => {} };
+            const el = document.createElement(v.type);
+            el.setConfig({ type: `custom:${v.type}`, device_id: "dev", name: v.name, illustration: v.illustration });
+            if (v.zoom) el._zoomed = true;
+            el.hass = { states, entities, devices: { dev: { name: v.name } }, language: lang, callService: async () => {} };
             box.appendChild(el);
-            const root = el.shadowRoot;
-            const r = (sel) => root.querySelector(sel).getBoundingClientRect();
-            const stt = root.querySelector(".banner .stt");
-            const name = root.querySelector(".banner .name");
-            const pill = r(".banner .st"), titles = r(".banner .titles"), banner = r(".banner"), nameBox = r(".banner .name");
-            const ch = name.textContent.length * (nameBox.width / Math.max(name.scrollWidth, 1));
-            out.push({
-              label: `${type}${zoom ? " expanded" : ""} ${w}px`,
-              whole: stt.scrollWidth <= stt.clientWidth + 0.5,
-              beside: Math.abs(pill.top - nameBox.top) < nameBox.height,
-              share: pill.width / titles.width,
-              ch,
-              inside: pill.right <= banner.right + 0.5 && pill.bottom <= banner.bottom - 10 + 0.5,
-            });
+            for (const w of [190, 245, 300, 400, 460, 500]) {
+              box.style.width = `${w}px`;
+              await frame();
+              const root = el.shadowRoot;
+              const titles = root.querySelector(".titles");
+              const name = titles.querySelector(".name");
+              const pill = titles.querySelector(".st");
+              const stt = pill.querySelector(".stt");
+              const p = pill.getBoundingClientRect();
+              const n = name.getBoundingClientRect();
+              const label = `${v.type}${v.zoom ? " expanded" : ""}${v.illustration ? "" : " classic"} "${v.name}" ${lang} ${w}px`;
+              const dot = stt.getBoundingClientRect().width <= 1;
+              const beside = Math.abs((p.top + p.bottom) / 2 - (n.top + n.bottom) / 2) < 6;
+              if (beside && name.scrollWidth > name.clientWidth + 0.5) out.push(`${label}: the title is cut beside the pill`);
+              if (!dot && stt.scrollWidth > stt.clientWidth + 0.5) out.push(`${label}: the pill's label is cut`);
+              if (w <= 200 && !dot) out.push(`${label}: the pill shows its label at 200 px or less`);
+              const banner = titles.closest(".banner")?.getBoundingClientRect();
+              if (banner)
+                for (const part of [name, pill, ...titles.querySelectorAll(".sub")]) {
+                  const r = part.getBoundingClientRect();
+                  if (r.height && (r.top < banner.top - 0.5 || r.bottom > banner.bottom - 10 + 0.5 || r.right > banner.right + 0.5))
+                    out.push(`${label}: .${part.className} leaves the banner's sky`);
+                }
+            }
             box.remove();
           }
         return out;
       },
       { states, entities },
     );
-    for (const x of results) {
-      if (!x.whole) failures.push(`${x.label}: the pill's label is cut`);
-      if (x.beside && x.share > 0.51) failures.push(`${x.label}: the pill takes ${(x.share * 100).toFixed(0)} % of the title row`);
-      if (x.ch < 4) failures.push(`${x.label}: the title keeps ${x.ch.toFixed(1)} characters`);
-      if (!x.inside) failures.push(`${x.label}: the pill leaves the banner's sky`);
-    }
+    failures.push(...results);
   } finally {
     await browser.close();
   }
