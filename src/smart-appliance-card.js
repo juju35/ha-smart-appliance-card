@@ -21,6 +21,10 @@ var HcI18n = {
     st_run_fridge: 'Super froid',
     st_run_freezer: 'Super congélation',
     light_on: 'Éclairage allumé',
+    zones: 'Zones de cuisson',
+    zones_on: '{n} sur {t} allumées',
+    child_lock: 'Sécurité enfants',
+    remote_on: 'Commande à distance',
     bean_container: 'Bac à grains vide',
     water_tank: 'Réservoir d\'eau vide',
     drip_tray: 'Bac d\'égouttage plein',
@@ -140,6 +144,10 @@ var HcI18n = {
     st_run_fridge: 'Super cooling',
     st_run_freezer: 'Super freezing',
     light_on: 'Light on',
+    zones: 'Cooking zones',
+    zones_on: '{n} of {t} on',
+    child_lock: 'Child lock',
+    remote_on: 'Remote control',
     bean_container: 'Bean container empty',
     water_tank: 'Water tank empty',
     drip_tray: 'Drip tray full',
@@ -259,6 +267,10 @@ var HcI18n = {
     st_run_fridge: 'Superkühlen',
     st_run_freezer: 'Supergefrieren',
     light_on: 'Licht an',
+    zones: 'Kochzonen',
+    zones_on: '{n} von {t} an',
+    child_lock: 'Kindersicherung',
+    remote_on: 'Fernsteuerung',
     bean_container: 'Bohnenbehälter leer',
     water_tank: 'Wassertank leer',
     drip_tray: 'Tropfschale voll',
@@ -378,6 +390,10 @@ var HcI18n = {
     st_run_fridge: 'Superrefrigeración',
     st_run_freezer: 'Supercongelación',
     light_on: 'Luz encendida',
+    zones: 'Zonas de cocción',
+    zones_on: '{n} de {t} encendidas',
+    child_lock: 'Bloqueo infantil',
+    remote_on: 'Control remoto',
     bean_container: 'Depósito de café en grano vacío',
     water_tank: 'Depósito de agua vacío',
     drip_tray: 'Bandeja de goteo llena',
@@ -497,6 +513,10 @@ var HcI18n = {
     st_run_fridge: 'Супер хлађење',
     st_run_freezer: 'Супер замрзавање',
     light_on: 'Светло укључено',
+    zones: 'Зоне кувања',
+    zones_on: '{n} од {t} укључено',
+    child_lock: 'Закључавање за децу',
+    remote_on: 'Даљинско управљање',
     bean_container: 'Посуда за зрна празна',
     water_tank: 'Резервоар за воду празан',
     drip_tray: 'Посуда за капање пуна',
@@ -616,6 +636,10 @@ var HcI18n = {
     st_run_fridge: 'Super hlađenje',
     st_run_freezer: 'Super zamrzavanje',
     light_on: 'Svetlo uključeno',
+    zones: 'Zone kuvanja',
+    zones_on: '{n} od {t} uključeno',
+    child_lock: 'Zaključavanje za decu',
+    remote_on: 'Daljinsko upravljanje',
     bean_container: 'Posuda za zrna prazna',
     water_tank: 'Rezervoar za vodu prazan',
     drip_tray: 'Posuda za kapanje puna',
@@ -735,6 +759,10 @@ var HcI18n = {
     st_run_fridge: 'Super raffreddamento',
     st_run_freezer: 'Super congelamento',
     light_on: 'Luce accesa',
+    zones: 'Zone di cottura',
+    zones_on: '{n} di {t} accese',
+    child_lock: 'Blocco bambini',
+    remote_on: 'Controllo remoto',
     bean_container: 'Contenitore caffè in grani vuoto',
     water_tank: 'Serbatoio dell\'acqua vuoto',
     drip_tray: 'Vaschetta raccogligocce piena',
@@ -854,6 +882,10 @@ var HcI18n = {
     st_run_fridge: 'Supercool',
     st_run_freezer: 'Supervries',
     light_on: 'Licht aan',
+    zones: 'Kookzones',
+    zones_on: '{n} van {t} aan',
+    child_lock: 'Kinderslot',
+    remote_on: 'Bediening op afstand',
     bean_container: 'Bonenreservoir leeg',
     water_tank: 'Waterreservoir leeg',
     drip_tray: 'Lekbak vol',
@@ -973,6 +1005,10 @@ var HcI18n = {
     st_run_fridge: 'Super refrigeração',
     st_run_freezer: 'Super congelação',
     light_on: 'Luz acesa',
+    zones: 'Zonas de cozedura',
+    zones_on: '{n} de {t} ligadas',
+    child_lock: 'Bloqueio para crianças',
+    remote_on: 'Controlo remoto',
     bean_container: 'Depósito de grãos vazio',
     water_tank: 'Depósito de água vazio',
     drip_tray: 'Tabuleiro de pingos cheio',
@@ -1092,6 +1128,10 @@ var HcI18n = {
     st_run_fridge: 'Super chłodzenie',
     st_run_freezer: 'Super zamrażanie',
     light_on: 'Światło włączone',
+    zones: 'Pola grzewcze',
+    zones_on: '{n} z {t} włączone',
+    child_lock: 'Blokada rodzicielska',
+    remote_on: 'Zdalne sterowanie',
     bean_container: 'Pojemnik na ziarna pusty',
     water_tank: 'Zbiornik na wodę pusty',
     drip_tray: 'Tacka ociekowa pełna',
@@ -1211,6 +1251,10 @@ var HcI18n = {
     st_run_fridge: 'Super răcire',
     st_run_freezer: 'Super congelare',
     light_on: 'Lumină aprinsă',
+    zones: 'Zone de gătit',
+    zones_on: '{n} din {t} pornite',
+    child_lock: 'Blocare pentru copii',
+    remote_on: 'Control de la distanță',
     bean_container: 'Recipient de boabe gol',
     water_tank: 'Rezervor de apă gol',
     drip_tray: 'Tavă de scurgere plină',
@@ -1330,6 +1374,10 @@ var HcI18n = {
     st_run_fridge: 'Superkøl',
     st_run_freezer: 'Superfrys',
     light_on: 'Lys tændt',
+    zones: 'Kogezoner',
+    zones_on: '{n} af {t} tændt',
+    child_lock: 'Børnesikring',
+    remote_on: 'Fjernbetjening',
     bean_container: 'Bønnebeholder tom',
     water_tank: 'Vandtank tom',
     drip_tray: 'Drypbakke fuld',
@@ -1449,6 +1497,10 @@ var HcI18n = {
     st_run_fridge: 'Superkyl',
     st_run_freezer: 'Superfrys',
     light_on: 'Belysning på',
+    zones: 'Kokzoner',
+    zones_on: '{n} av {t} på',
+    child_lock: 'Barnlås',
+    remote_on: 'Fjärrstyrning',
     bean_container: 'Bönbehållaren är tom',
     water_tank: 'Vattentanken är tom',
     drip_tray: 'Droppbrickan är full',
@@ -1568,6 +1620,10 @@ var HcI18n = {
     st_run_fridge: 'Супер охлаждане',
     st_run_freezer: 'Супер замразяване',
     light_on: 'Лампата свети',
+    zones: 'Зони за готвене',
+    zones_on: '{n} от {t} включени',
+    child_lock: 'Детска защита',
+    remote_on: 'Дистанционно управление',
     bean_container: 'Контейнерът за зърна е празен',
     water_tank: 'Резервоарът за вода е празен',
     drip_tray: 'Тавата за отцеждане е пълна',
@@ -1687,6 +1743,10 @@ var HcI18n = {
     st_run_fridge: 'Суперохлаждение',
     st_run_freezer: 'Суперзаморозка',
     light_on: 'Подсветка включена',
+    zones: 'Конфорки',
+    zones_on: '{n} из {t} включено',
+    child_lock: 'Защита от детей',
+    remote_on: 'Дистанционное управление',
     bean_container: 'Контейнер для зёрен пуст',
     water_tank: 'Резервуар для воды пуст',
     drip_tray: 'Поддон для капель полон',
@@ -1806,6 +1866,10 @@ var HcI18n = {
     st_run_fridge: 'Суперохолодження',
     st_run_freezer: 'Суперзаморожування',
     light_on: 'Світло увімкнено',
+    zones: 'Конфорки',
+    zones_on: '{n} з {t} увімкнено',
+    child_lock: 'Захист від дітей',
+    remote_on: 'Дистанційне керування',
     bean_container: 'Контейнер для зерен порожній',
     water_tank: 'Резервуар для води порожній',
     drip_tray: 'Піддон для крапель повний',
@@ -1925,6 +1989,10 @@ var HcI18n = {
     st_run_fridge: 'Szuperhűtés',
     st_run_freezer: 'Szuperfagyasztás',
     light_on: 'Világítás bekapcsolva',
+    zones: 'Főzőzónák',
+    zones_on: '{t}-ből {n} bekapcsolva',
+    child_lock: 'Gyerekzár',
+    remote_on: 'Távvezérlés',
     bean_container: 'A babtartály üres',
     water_tank: 'A víztartály üres',
     drip_tray: 'A csepptálca megtelt',
@@ -2044,6 +2112,10 @@ var HcI18n = {
     st_run_fridge: 'Superchladenie',
     st_run_freezer: 'Supermrazenie',
     light_on: 'Osvetlenie zapnuté',
+    zones: 'Varné zóny',
+    zones_on: '{n} z {t} zapnuté',
+    child_lock: 'Detská poistka',
+    remote_on: 'Diaľkové ovládanie',
     bean_container: 'Zásobník na zrná je prázdny',
     water_tank: 'Nádržka na vodu je prázdna',
     drip_tray: 'Odkvapkávacia miska je plná',
@@ -2163,6 +2235,10 @@ var HcI18n = {
     st_run_fridge: 'Superchlazení',
     st_run_freezer: 'Supermrazení',
     light_on: 'Osvětlení zapnuto',
+    zones: 'Varné zóny',
+    zones_on: '{n} z {t} zapnuto',
+    child_lock: 'Dětská pojistka',
+    remote_on: 'Dálkové ovládání',
     bean_container: 'Zásobník na zrnka je prázdný',
     water_tank: 'Nádržka na vodu je prázdná',
     drip_tray: 'Odkapávací miska je plná',
@@ -2282,6 +2358,10 @@ var HcI18n = {
     st_run_fridge: 'Superhlajenje',
     st_run_freezer: 'Superzamrzovanje',
     light_on: 'Luč prižgana',
+    zones: 'Kuhalne cone',
+    zones_on: '{n} od {t} vklopljenih',
+    child_lock: 'Otroška zaščita',
+    remote_on: 'Daljinsko upravljanje',
     bean_container: 'Posoda za zrna je prazna',
     water_tank: 'Rezervoar za vodo je prazen',
     drip_tray: 'Pladenj za kapljanje je poln',
@@ -2401,6 +2481,10 @@ var HcI18n = {
     st_run_fridge: 'Superdzesēšana',
     st_run_freezer: 'Supersaldēšana',
     light_on: 'Gaisma ieslēgta',
+    zones: 'Gatavošanas zonas',
+    zones_on: '{n} no {t} ieslēgtas',
+    child_lock: 'Bērnu slēdzene',
+    remote_on: 'Tālvadība',
     bean_container: 'Pupiņu tvertne ir tukša',
     water_tank: 'Ūdens tvertne ir tukša',
     drip_tray: 'Pilienu paplāte ir pilna',
@@ -2520,6 +2604,10 @@ var HcI18n = {
     st_run_fridge: 'Γρήγορη ψύξη',
     st_run_freezer: 'Γρήγορη κατάψυξη',
     light_on: 'Φωτισμός αναμμένος',
+    zones: 'Ζώνες μαγειρέματος',
+    zones_on: '{n} από {t} αναμμένες',
+    child_lock: 'Κλείδωμα για παιδιά',
+    remote_on: 'Απομακρυσμένος έλεγχος',
     bean_container: 'Το δοχείο κόκκων είναι άδειο',
     water_tank: 'Το δοχείο νερού είναι άδειο',
     drip_tray: 'Ο δίσκος σταγόνων είναι γεμάτος',
@@ -2802,6 +2890,9 @@ var HC_COMMON_ROLES = {
   light: { domain: 'light', keys: ['cooking_lighting', 'light', 'oven_light'], test: () => true },
   // The appliance's energy meter (kWh / Wh, total_increasing): what a cycle used.
   energy: { domain: 'sensor', keys: ['energy', 'energy_consumption', 'total_energy'], test: (s) => s.attributes.device_class === 'energy' },
+  // What the appliance draws now (W / kW), and its child lock (a setting: it stays among the option switches too).
+  watts: { domain: 'sensor', keys: ['power', 'power_consumption', 'current_power'], test: (s) => s.attributes.device_class === 'power' },
+  child_lock: { domain: 'switch', keys: ['child_lock', 'switch_child_lock'] },
 };
 
 // The other integrations, role by role. They name things differently and some have no translation key at
@@ -3016,6 +3107,7 @@ function hcDeviceRoles(hass, deviceId) {
     switches: ids.filter((id) => id.indexOf('switch.') === 0),
     selects: ids.filter((id) => id.indexOf('select.') === 0),
     temps: hcTempIds(hass, list),
+    zones: hcZoneIds(hass, list),
   };
   byDevice.set(deviceId, cached);
   return cached;
@@ -3037,6 +3129,36 @@ function hcTempIds(hass, list) {
   return pick('climate', (s) => s.attributes.current_temperature != null)
     .concat(pick('sensor', (s) => s.attributes.device_class === 'temperature' || unit(s)))
     .concat(pick('number', unit)).slice(0, 3);
+}
+
+// A hob's cooking zones: one per power level (LG ThinQ's per-location power level, Miele's plates), else one per
+// per-location state; each zone's state and timer joined to it by the longest shared entity_id start (the location's
+// slug: `number.hob_left_front_power_level` with `sensor.hob_left_front_remaining_time`). At most 8 zones.
+var HC_ZONE_LEVEL = /^(power_level|plate)(_for_location)?$/;
+function hcZoneIds(hass, list) {
+  var key = (e) => e.translation_key || '';
+  var isTimer = (s) => ['timestamp', 'duration'].indexOf(s.attributes.device_class) >= 0 || HC_MINUTES[s.attributes.unit_of_measurement] != null;
+  var levels = list.filter((e) => /^(sensor|number)\./.test(e.entity_id) && (HC_ZONE_LEVEL.test(key(e)) ||
+    (!e.translation_key && /_(power_level|plate_\d+)$/.test(e.entity_id))));
+  var loc = list.filter((e) => e.entity_id.indexOf('sensor.') === 0 && /_for_location$/.test(key(e)) && !HC_ZONE_LEVEL.test(key(e)));
+  var states = loc.filter((e) => !isTimer(hass.states[e.entity_id]));
+  var timers = loc.filter((e) => isTimer(hass.states[e.entity_id]));
+  var zones = (levels.length ? levels : states).slice(0, 8).map((e) => ({ level: levels.length ? e.entity_id : undefined,
+    state: levels.length ? undefined : e.entity_id, timer: undefined, ids: [e.entity_id] }));
+  var shared = (a, b) => { var n = 0; while (n < a.length && a[n] === b[n]) n++; return n; };
+  var obj = (id) => id.split('.')[1];
+  // Joined only to the zone it shares strictly the most with: a tie (no location in the id) joins nothing.
+  var join = (e, role) => {
+    var best = -1, at = -1, tie = false;
+    zones.forEach((z, i) => {
+      var n = shared(obj(e.entity_id), obj(z.ids[0]));
+      if (n > best) { best = n; at = i; tie = false; } else if (n === best) tie = true;
+    });
+    if (at >= 0 && !tie && !zones[at][role]) { zones[at][role] = e.entity_id; zones[at].ids.push(e.entity_id); }
+  };
+  if (levels.length) for (var e of states) join(e, 'state');
+  for (var t of timers) join(t, 'timer');
+  return zones;
 }
 
 // Appliance type, from the device itself where the integration says it (Miele's model, LG's device type), else
@@ -3190,6 +3312,7 @@ var HC_PX = {
   section: 26,
   selectRow: 56,
   toggleRow: 28,
+  zoneRow: 62, // a row of hob zone tiles
   reload: 30,
   error: 26,
   controls: 44,
@@ -3732,6 +3855,11 @@ class HomeConnectBaseCard extends HTMLElement {
       return;
     }
     this.shadowRoot.querySelectorAll('[data-tick]').forEach((el) => {
+      if (el.dataset.tick === 'zone') {
+        var left = this._leftText(new Date(el.dataset.finish));
+        if (el.lastChild && el.lastChild.nodeValue !== left) el.lastChild.nodeValue = left;
+        return;
+      }
       var txt = el.dataset.tick === 'waiting'
         ? (i.waiting && this._t('door_waiting').replace('{t}', this._ago(i.waiting)))
         : (i.finish && this._timeLine(i.finish));
@@ -3768,11 +3896,12 @@ class HomeConnectBaseCard extends HTMLElement {
       ent[role] = over[role] || found.roles[role];
     });
     // Super modes and the hood's fan level stay settings the card offers.
-    var used = HC_ALL_ROLES.filter((role) => role !== 'boost' && role !== 'venting').map((role) => ent[role]);
+    var used = HC_ALL_ROLES.filter((role) => role !== 'boost' && role !== 'venting' && role !== 'child_lock').map((role) => ent[role]);
     // Everything else the integration exposes as a switch or select is a program option.
     ent.option_switches = found.switches.filter((id) => used.indexOf(id) < 0);
     ent.option_selects = found.selects.filter((id) => used.indexOf(id) < 0);
     ent.temps = found.temps || [];
+    ent.zones = found.zones || [];
     return { deviceId: deviceId, ent: ent, platform: found.platform };
   }
 
@@ -3804,7 +3933,8 @@ class HomeConnectBaseCard extends HTMLElement {
   _update() {
     if (!this._config || !this._hass || !this.shadowRoot) return;
     var r = this._resolve();
-    var ids = HC_ALL_ROLES.map((role) => r.ent[role]).concat(r.ent.option_switches, r.ent.option_selects, r.ent.temps);
+    var ids = HC_ALL_ROLES.map((role) => r.ent[role]).concat(r.ent.option_switches, r.ent.option_selects, r.ent.temps,
+      ...r.ent.zones.map((z) => z.ids));
     var hass = this._hass;
     var states = JSON.stringify(ids.map((id) => {
       var s = id && hass.states[id];
@@ -3851,15 +3981,11 @@ class HomeConnectBaseCard extends HTMLElement {
   // "Ends at 10:32 · 1 hr 5 min left", shared between the full and mini layouts. The 12 h / 24 h
   // preference follows the Home Assistant locale; the card language picks the words and the unit names.
   _timeLine(finish) {
-    var mins = Math.max(0, Math.round((finish.getTime() - Date.now()) / 60000));
-    var h = Math.floor(mins / 60), m = mins % 60;
-    var unit = (u, n) => new Intl.NumberFormat(this._locale(), { style: 'unit', unit: u, unitDisplay: 'short' }).format(n);
-    var left = h && m ? `${unit('hour', h)} ${unit('minute', m)}` : (h ? unit('hour', h) : unit('minute', m));
     var opts = { hour: '2-digit', minute: '2-digit' };
     var tf = this._hass.locale?.time_format;
     if (tf === '12' || tf === '24') opts.hour12 = tf === '12';
     var at = finish.toLocaleTimeString(this._locale(), opts);
-    return `${this._t('ends_at')} ${at} · ${this._t('remaining').replace('{t}', left)}`;
+    return `${this._t('ends_at')} ${at} · ${this._leftText(finish)}`;
   }
 
   // "25 minutes ago", "3 hours ago", "yesterday", in the card's language.
@@ -4041,6 +4167,8 @@ class HomeConnectBaseCard extends HTMLElement {
       : (!powerOn && (!opState || opState === 'inactive' || opState === 'off') ? 'off' : (opState || (profile.simple ? 'ready' : 'off')));
     // Appliances without a program are at work while a super mode, the hood's fan or a hob zone is on.
     if (profile.simple && online && state === 'ready' && this._busy(ent)) state = 'run';
+    // A hob whose state sensor is one of its zones (LG ThinQ reports a state per location) cooks while any zone is on.
+    if (profile.simple && online && state === 'off' && ent.zones.some((z) => this._zoneOn(z))) state = 'run';
     var running = !profile.simple && (state === 'run' || state === 'pause' || state === 'delayedstart' || state === 'actionrequired');
     var color = HC_STATE_COLORS[state] || 'var(--disabled-text-color, #9e9e9e)';
     this._iconColor = HC_ICON_COLORS[state] || '';
@@ -4074,6 +4202,8 @@ class HomeConnectBaseCard extends HTMLElement {
     if (progress != null) progress = Math.max(0, Math.min(100, progress));
     var timeLine = running && finish ? this._timeLine(finish) : '';
     this._ticking = !!(running && finish);
+    // A hob's zones (after the line above: a zone timer keeps the tick running too).
+    var zonesHtml = this._compact() ? '' : this._zonesHtml(ent, deviceName, online);
 
     // While a program runs, integrations that report its step say more than "Running" (spinning, drying…).
     var statusText = this._t(`st_${state}`);
@@ -4233,23 +4363,107 @@ class HomeConnectBaseCard extends HTMLElement {
 
     // With the illustrated header the state row holds no picture: its own lines set its height.
     var base = this._illustrated ? HC_PX.bannerBase + (timeLine ? HC_PX.bannerTime : 0) + (chips.length ? HC_PX.bannerChips : 0) : HC_PX.base;
-    this._rows = hcRows(base + (programHtml ? HC_PX.program : 0) + optPx + (errorHtml ? HC_PX.error : 0) +
+    var nZones = zonesHtml ? ent.zones.length : 0;
+    this._rows = hcRows(base + (nZones ? HC_PX.section + Math.ceil(nZones / 2) * HC_PX.zoneRow : 0) + (programHtml ? HC_PX.program : 0) + optPx + (errorHtml ? HC_PX.error : 0) +
       (controls ? HC_PX.controls : 0) + (controls.indexOf('class="hint"') >= 0 ? HC_PX.hint : 0));
     this.shadowRoot.innerHTML = this._styles(color) + '<ha-card>' +
       (this._illustrated ? banner() : '<div class="header">' + logo +
         '<div class="titles"><div class="name">' + hcEsc(name) + '</div><div class="sub">' + this._brandLogo() + hcEsc(sub) + '</div></div>' +
         this._pill(statusText) + powerBtn + this._zoomButton() +
       '</div>') +
-      heroHtml + programHtml + optionsHtml + errorHtml + controls +
+      heroHtml + zonesHtml + programHtml + optionsHtml + errorHtml + controls +
     '</ha-card>';
   }
 
-  // A program-less appliance at work: a super mode on, the hood's fan turning or venting, its light aside.
+  // A program-less appliance at work: a super mode on, the hood's fan turning or venting, a hob zone on, its light aside.
   _busy(ent) {
     if (this._val(ent.boost) === 'on') return true;
+    if ((ent.zones || []).some((z) => this._zoneOn(z))) return true;
     if (this._val(ent.fan) === 'on') return true;
     var v = this._val(ent.venting);
     return !!(v && this._avail(ent.venting) && !/fan_off$|_off$/.test(v));
+  }
+
+  // A zone's power level: a number (LG ThinQ, `max` from the number entity), Miele's `plate_step_<n>` (`plate_step_1_5`
+  // is level 1.5), or a named step (warming, boost); null when the zone only reports a state.
+  _zoneLevel(z) {
+    if (!this._avail(z.level)) return null;
+    var v = String(this._val(z.level));
+    var m = /^(?:plate_step_)?(\d+)(?:[_.](\d+))?$/.exec(v);
+    if (m) return { n: Number(m[2] ? `${m[1]}.${m[2]}` : m[1]), max: Number(this._st(z.level).attributes.max) || null };
+    return { n: null, text: v.indexOf('plate_step_') === 0 ? hcHumanize(v.slice(11)) : this._fmt(z.level) };
+  }
+
+  _zoneOn(z) {
+    var lv = this._zoneLevel(z);
+    if (lv) return lv.n == null ? true : lv.n > 0;
+    var st = this._val(z.state);
+    return !!(st && this._avail(z.state) && ['power_off', 'off', 'initial', 'standby', 'sleep'].indexOf(st) < 0);
+  }
+
+  // A zone's timer as a finish time: a timestamp, or a duration left counted from its last change.
+  _zoneFinish(z) {
+    var s = this._st(z.timer);
+    if (!s || !this._avail(z.timer)) return null;
+    if (s.attributes.device_class === 'timestamp') {
+      var d = new Date(s.state);
+      return Number.isNaN(d.getTime()) || d.getTime() <= Date.now() ? null : d;
+    }
+    var m = hcMinutes(s);
+    if (!m || m <= 0) return null;
+    var from = Date.parse(s.last_changed || '');
+    return new Date((Number.isNaN(from) ? Date.now() : from) + m * 60000);
+  }
+
+  // "12 min left", "1 hr 5 min left".
+  _leftText(finish) {
+    var mins = Math.max(0, Math.round((finish.getTime() - Date.now()) / 60000));
+    var h = Math.floor(mins / 60), m = mins % 60;
+    var unit = (u, n) => new Intl.NumberFormat(this._locale(), { style: 'unit', unit: u, unitDisplay: 'short' }).format(n);
+    return this._t('remaining').replace('{t}', h && m ? `${unit('hour', h)} ${unit('minute', m)}` : (h ? unit('hour', h) : unit('minute', m)));
+  }
+
+  // A zone's label: what its entities' names share once the device name is cut ("Left front" from "Left front power
+  // level" and "Left front remaining time"), as leading or trailing words; a lone entity keeps its whole name.
+  _zoneLabel(z, deviceName) {
+    var names = z.ids.map((id) => this._entityLabel(id, deviceName).split(/\s+/));
+    if (names.length < 2) return names[0].join(' ');
+    var lead = 0, tail = 0, a = names[0];
+    while (lead < a.length && names.every((w) => w[lead] && w[lead].toLowerCase() === a[lead].toLowerCase())) lead++;
+    while (tail < a.length && names.every((w) => w.length > tail && w[w.length - 1 - tail].toLowerCase() === a[a.length - 1 - tail].toLowerCase())) tail++;
+    var words = lead >= tail ? a.slice(0, lead) : a.slice(a.length - tail);
+    if (!words.length) return a.join(' ');
+    var t = words.join(' ');
+    return t.charAt(0).toUpperCase() + t.slice(1);
+  }
+
+  // The hob's cooking zones, two or three to a row: each in its tile, its level (or state) and the time its timer has left.
+  _zonesHtml(ent, deviceName, online) {
+    var zones = ent.zones || [];
+    if (!online || !zones.length) return '';
+    var on = zones.filter((z) => this._zoneOn(z)).length;
+    var tiles = zones.map((z) => {
+      var active = this._zoneOn(z), lv = this._zoneLevel(z);
+      var value;
+      if (lv && lv.n != null && active) {
+        var n = new Intl.NumberFormat(this._locale(), { maximumFractionDigits: 1 }).format(lv.n);
+        value = hcEsc(n) + (lv.max ? `<small> / ${hcEsc(String(lv.max))}</small>` : '');
+      } else if (lv && lv.text) value = hcEsc(lv.text);
+      else if (!active) value = hcEsc(this._t('st_off'));
+      else value = hcEsc(this._fmt(z.state));
+      var finish = active ? this._zoneFinish(z) : null;
+      if (finish) this._ticking = true;
+      var sub = finish
+        ? `<span class="zt" data-tick="zone" data-finish="${finish.toISOString()}"><ha-icon icon="mdi:timer-outline"></ha-icon>${hcEsc(this._leftText(finish))}</span>`
+        : (lv && z.state && this._avail(z.state) && active ? `<span class="zt">${hcEsc(this._fmt(z.state))}</span>` : '');
+      var id = z.level || z.state;
+      return `<div class="zone${active ? ' on' : ''}" role="button" tabindex="0" data-entity="${hcEsc(id)}">` +
+        `<span class="zic"><ha-icon icon="${active ? 'mdi:circle-slice-8' : 'mdi:circle-outline'}"></ha-icon></span>` +
+        `<span class="ztx"><span class="zn">${hcEsc(this._zoneLabel(z, deviceName))}</span><span class="zv">${value}</span>${sub}</span></div>`;
+    }).join('');
+    return '<div class="section"><div class="section-title"><ha-icon icon="mdi:grid-large"></ha-icon><span>' + hcEsc(this._t('zones')) + '</span>' +
+      `<span class="aside">${hcEsc(this._t('zones_on').replace('{n}', on).replace('{t}', zones.length))}</span></div>` +
+      `<div class="zones">${tiles}</div></div>`;
   }
 
   // Temperatures (cold appliances always, ovens while cooking) and the hood's fan and light.
@@ -4280,8 +4494,17 @@ class HomeConnectBaseCard extends HTMLElement {
       var fan = this._st(ent.fan);
       if (fan && fan.state === 'on' && fan.attributes.percentage != null) chips.push(chip('mdi:fan', `${Math.round(fan.attributes.percentage)} %`, ent.fan));
       else if (this._avail(ent.venting) && this._busy({ venting: ent.venting })) chips.push(chip('mdi:fan', this._fmt(ent.venting), ent.venting));
-      if (this._val(ent.light) === 'on') chips.push(chip('mdi:lightbulb-on-outline', this._t('light_on'), ent.light));
     }
+    // The light of a hood or a wine cabinet.
+    if ((kind === 'hood' || kind === 'wine_cooler') && this._val(ent.light) === 'on') chips.push(chip('mdi:lightbulb-on-outline', this._t('light_on'), ent.light));
+    // What the appliance draws now, while it draws something.
+    var w = this._st(ent.watts);
+    if (w && this._avail(ent.watts) && Number(w.state) > 0) {
+      chips.push(chip('mdi:flash', this._hass.formatEntityState ? this._hass.formatEntityState(w) : `${w.state} ${w.attributes.unit_of_measurement || ''}`.trim(), ent.watts));
+    }
+    if (this._val(ent.child_lock) === 'on') chips.push(chip('mdi:lock', this._t('child_lock'), ent.child_lock));
+    // A program-less hob says whether it can be driven from Home Assistant (LG ThinQ's remote control).
+    if (kind === 'hob' && this._val(ent.remote_start) === 'on') chips.push(chip('mdi:remote', this._t('remote_on'), ent.remote_start));
     return chips;
   }
 
@@ -4502,6 +4725,26 @@ class HomeConnectBaseCard extends HTMLElement {
       '.section-title ha-icon { --mdc-icon-size: 16px; }' +
       '.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 6px; }' +
       '.toggles { display: flex; flex-wrap: wrap; gap: 6px; }' +
+      '.section-title .aside { margin-left: auto; text-transform: none; letter-spacing: 0; font-weight: 400; font-size: 11px; }' +
+      // A hob's zones: tiles two (or more) to a row, a 40 px round icon tinted by the state while the zone heats.
+      '.zones { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; }' +
+      '.zone { display: flex; align-items: center; gap: 10px; min-width: 0; padding: 8px 10px; border-radius: 12px; cursor: pointer;' +
+        ' background: var(--secondary-background-color, rgba(128,128,128,0.1)); }' +
+      '.zone:focus-visible { outline: 2px solid var(--primary-color, #03a9f4); outline-offset: 1px; }' +
+      '.zic { width: 40px; height: 40px; border-radius: 50%; flex: none; display: grid; place-items: center;' +
+        ' background: color-mix(in srgb, var(--secondary-text-color) 12%, transparent); color: var(--secondary-text-color); }' +
+      '.zic ha-icon { --mdc-icon-size: 22px; }' +
+      '.zone.on .zic { background: color-mix(in srgb, var(--hc-color) 16%, transparent); color: var(--hc-color); }' +
+      '.ztx { display: flex; flex-direction: column; min-width: 0; }' +
+      '.zn { font-size: 12px; color: var(--secondary-text-color); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }' +
+      '.zv { font-size: 16px; font-weight: 500; color: var(--primary-text-color); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }' +
+      '.zv small { font-size: 11px; font-weight: 400; color: var(--secondary-text-color); }' +
+      '.zone:not(.on) .zv { font-size: 13px; font-weight: 400; color: var(--secondary-text-color); }' +
+      '.zt { display: inline-flex; align-items: center; gap: 3px; font-size: 11px; color: var(--secondary-text-color); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }' +
+      '.zt ha-icon { --mdc-icon-size: 13px; flex: none; }' +
+      // A narrow card: smaller icons and gaps, then (6 columns of the Sections view) the zones one under the other.
+      '@container hc-card (max-width: 300px) { .zone { gap: 8px; padding: 8px; } .zic { width: 32px; height: 32px; } .zic ha-icon { --mdc-icon-size: 18px; } .zt ha-icon { display: none; } }' +
+      '@container hc-card (max-width: 240px) { .zones { grid-template-columns: minmax(0, 1fr); } }' +
       '.toggle { display: inline-flex; align-items: center; gap: 4px; max-width: 100%; box-sizing: border-box; overflow-wrap: anywhere; text-align: start;' +
         ' font-size: 11px; font-weight: 500; padding: 3px 8px 3px 5px; border-radius: 12px;' +
         ' background: var(--secondary-background-color, rgba(128,128,128,0.12)); color: var(--secondary-text-color); }' +

@@ -10,6 +10,9 @@
 - The mini card's expand / collapse button sits in the banner's top right corner (24 px, frosted), like the other cards.
 - Night picture with the dark theme even while the sun is up (a day picture would glare on a dark dashboard); `illustration_theme: day | night` still forces one.
 
+### Fixes
+- Hob: the body no longer shows only its state — a **Cooking zones** section lists each zone in its tile (LG ThinQ per-location power level out of its maximum, state and timer left; Miele plates), with how many are on; the chips add remote control (LG ThinQ), child lock, the power drawn when the integration reports it, and a wine cabinet's light.
+
 ## 2.7.1 - 2026-11-14
 
 ### Fixes

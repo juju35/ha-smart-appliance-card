@@ -192,6 +192,13 @@ const icons = {
   "lightbulb-on-outline": "M20,11H23V13H20V11M1,11H4V13H1V11M13,1V4H11V1H13M4.92,3.5L7.05,5.64L5.63,7.05L3.5,4.93L4.92,3.5M16.95,5.63L19.07,3.5L20.5,4.93L18.37,7.05L16.95,5.63M12,6A6,6 0 0,1 18,12C18,14.22 16.79,16.16 15,17.2V19A1,1 0 0,1 14,20H10A1,1 0 0,1 9,19V17.2C7.21,16.16 6,14.22 6,12A6,6 0 0,1 12,6M14,21V22A1,1 0 0,1 13,23H11A1,1 0 0,1 10,22V21H14M11,18H13V15.87C14.73,15.43 16,13.86 16,12A4,4 0 0,0 12,8A4,4 0 0,0 8,12C8,13.86 9.27,15.43 11,15.87V18Z",
   "coffee-off-outline": "M2 3.27L4 5.27V13C4 15.21 5.79 17 8 17H14C14.5 17 15 16.89 15.44 16.71L17.73 19H2V21H19.73L20.72 22L22 20.72L3.27 2L2 3.27M8 15C6.9 15 6 14.1 6 13V7.27L13.73 15H8M20 3H6.81L8.81 5H16V12.19L17.85 14.04C17.94 13.7 18 13.36 18 13V10H20C21.1 10 22 9.1 22 8V5C22 3.9 21.1 3 20 3M20 8H18V5H20V8Z",
   "cup-water": "M18.32,8H5.67L5.23,4H18.77M12,19A3,3 0 0,1 9,16C9,14 12,10.6 12,10.6C12,10.6 15,14 15,16A3,3 0 0,1 12,19M3,2L5,20.23C5.13,21.23 5.97,22 7,22H17C18,22 18.87,21.23 19,20.23L21,2H3Z",
+  "remote": "M12,0C8.96,0 6.21,1.23 4.22,3.22L5.63,4.63C7.26,3 9.5,2 12,2C14.5,2 16.74,3 18.36,4.64L19.77,3.23C17.79,1.23 15.04,0 12,0M7.05,6.05L8.46,7.46C9.37,6.56 10.62,6 12,6C13.38,6 14.63,6.56 15.54,7.46L16.95,6.05C15.68,4.78 13.93,4 12,4C10.07,4 8.32,4.78 7.05,6.05M12,15A2,2 0 0,1 10,13A2,2 0 0,1 12,11A2,2 0 0,1 14,13A2,2 0 0,1 12,15M15,9H9A1,1 0 0,0 8,10V22A1,1 0 0,0 9,23H15A1,1 0 0,0 16,22V10A1,1 0 0,0 15,9Z",
+  "grid-large": "M4,2H20A2,2 0 0,1 22,4V20A2,2 0 0,1 20,22H4C2.92,22 2,21.1 2,20V4A2,2 0 0,1 4,2M4,4V11H11V4H4M4,20H11V13H4V20M20,20V13H13V20H20M20,4H13V11H20V4Z",
+  "circle-slice-8": "M12 5C15.87 5 19 8.13 19 12C19 15.87 15.87 19 12 19C8.13 19 5 15.87 5 12C5 8.13 8.13 5 12 5M12 2C17.5 2 22 6.5 22 12C22 17.5 17.5 22 12 22C6.5 22 2 17.5 2 12C2 6.5 6.5 2 12 2M12 4C7.58 4 4 7.58 4 12C4 16.42 7.58 20 12 20C16.42 20 20 16.42 20 12C20 7.58 16.42 4 12 4Z",
+  "circle-outline": "M12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z",
+  "timer-outline": "M12,20A7,7 0 0,1 5,13A7,7 0 0,1 12,6A7,7 0 0,1 19,13A7,7 0 0,1 12,20M19.03,7.39L20.45,5.97C20,5.46 19.55,5 19.04,4.56L17.62,6C16.07,4.74 14.12,4 12,4A9,9 0 0,0 3,13A9,9 0 0,0 12,22C17,22 21,17.97 21,13C21,10.88 20.26,8.93 19.03,7.39M11,14H13V8H11M15,1H9V3H15V1Z",
+  "lock": "M12,17A2,2 0 0,0 14,15C14,13.89 13.1,13 12,13A2,2 0 0,0 10,15A2,2 0 0,0 12,17M18,8A2,2 0 0,1 20,10V20A2,2 0 0,1 18,22H6A2,2 0 0,1 4,20V10C4,8.89 4.9,8 6,8H7V6A5,5 0 0,1 12,1A5,5 0 0,1 17,6V8H18M12,3A3,3 0 0,0 9,6V8H15V6A3,3 0 0,0 12,3Z",
+  "flash": "M7,2V13H10V22L17,10H13L17,2H7Z",
   "tray-full": "M18 5H6V7H18M6 9H18V11H6M2 12H4V17H20V12H22V17A2 2 0 0 1 20 19H4A2 2 0 0 1 2 17M18 13H6V15H18Z"
 };
 
@@ -283,9 +290,18 @@ add("oven", "binary_sensor.oven_connectivity", "connectivity", "on", { device_cl
 add("mw", "sensor.microwave_current_status", "current_state", "cooking_in_progress", { options: ["power_off", "initial", "cooking_in_progress", "end"] });
 add("mw", "sensor.microwave_remaining_time", "remain", inMinutes(3), { device_class: "timestamp" });
 add("mw", "sensor.microwave_total_time", "total", "5", { unit_of_measurement: "min" });
-// Hob (LG ThinQ): two zones on.
+// Hob (LG ThinQ): two of its four zones on, each with its power level, state and timer; remote control on.
 add("hob", "sensor.hob_current_status", "current_state", "cook", { options: ["power_off", "initial", "cook"] });
-add("hob", "binary_sensor.hob_remote_start", "remote_control_enabled", "off");
+add("hob", "binary_sensor.hob_remote_start", "remote_control_enabled", "on");
+[["left_front", "Left front", 7, 12], ["right_front", "Right front", 0], ["left_rear", "Left rear", 0], ["right_rear", "Right rear", 4, 35]]
+  .forEach(([slug, label, level, timer]) => {
+    add("hob", `number.hob_${slug}_power_level`, "power_level_for_location", String(level),
+      { friendly_name: `Hob ${label} power level`, min: 0, max: 9, step: 1 });
+    add("hob", `sensor.hob_${slug}_current_status`, "current_state_for_location", level ? "cook" : "power_off",
+      { friendly_name: `Hob ${label} current status`, options: ["power_off", "initial", "cook"] });
+    add("hob", `sensor.hob_${slug}_remaining_time`, "remain_for_location", timer ? inMinutes(timer) : "unknown",
+      { friendly_name: `Hob ${label} remaining time`, device_class: "timestamp" });
+  });
 // Coffee machine (Siemens, Home Connect): a cappuccino on its way.
 add("cm", "sensor.coffee_machine_operation_state", "operation_state", "run", hot);
 add("cm", "sensor.coffee_machine_program_progress", "program_progress", "60", { unit_of_measurement: "%" });
