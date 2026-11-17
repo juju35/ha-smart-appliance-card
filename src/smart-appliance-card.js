@@ -91,6 +91,11 @@ var HcI18n = {
     ed_energy_price_entity: 'Capteur de prix de l\'énergie',
     ed_energy_price_entity_helper: 'À la place d\'un prix fixe : un capteur en devise/kWh (tarif du moment, Tempo…)',
     ed_zoom: 'Bouton détail',
+    ed_illustration: 'Illustration',
+    ed_illustration_theme: 'Thème de l\'illustration',
+    theme_auto: 'Automatique (soleil)',
+    theme_day: 'Jour',
+    theme_night: 'Nuit',
     ed_zoom_helper: 'Bouton en haut à droite qui passe la mini-carte en carte complète et inversement',
     zoom_in: 'Afficher la carte complète',
     zoom_out: 'Revenir à la vue compacte',
@@ -204,6 +209,11 @@ var HcI18n = {
     ed_energy_price_entity: 'Energy price sensor',
     ed_energy_price_entity_helper: 'Instead of a fixed price: a sensor in currency/kWh (current tariff, Tempo…)',
     ed_zoom: 'Detail button',
+    ed_illustration: 'Illustration',
+    ed_illustration_theme: 'Illustration theme',
+    theme_auto: 'Automatic (sun)',
+    theme_day: 'Day',
+    theme_night: 'Night',
     ed_zoom_helper: 'Button at the top right that switches the mini card to the full card and back',
     zoom_in: 'Show the full card',
     zoom_out: 'Back to the compact view',
@@ -318,6 +328,11 @@ var HcI18n = {
     ed_energy_price_entity: 'Energiepreis-Sensor',
     ed_energy_price_entity_helper: 'Statt eines festen Preises: ein Sensor in Währung/kWh (aktueller Tarif, Tempo…)',
     ed_zoom: 'Detailansicht-Schaltfläche',
+    ed_illustration: 'Illustration',
+    ed_illustration_theme: 'Illustrationsthema',
+    theme_auto: 'Automatisch (Sonne)',
+    theme_day: 'Tag',
+    theme_night: 'Nacht',
     ed_zoom_helper: 'Schaltfläche oben rechts zum Wechseln zwischen kompakter und vollständiger Kartenansicht',
     zoom_in: 'Vollständige Karte anzeigen',
     zoom_out: 'Zur kompakten Ansicht zurückkehren',
@@ -432,6 +447,11 @@ var HcI18n = {
     ed_energy_price_entity: 'Sensor de precio de la energía',
     ed_energy_price_entity_helper: 'En lugar de un precio fijo: un sensor en moneda/kWh (tarifa actual, Tempo…)',
     ed_zoom: 'Botón de detalle',
+    ed_illustration: 'Ilustración',
+    ed_illustration_theme: 'Tema de la ilustración',
+    theme_auto: 'Automático (sol)',
+    theme_day: 'Día',
+    theme_night: 'Noche',
     ed_zoom_helper: 'Botón arriba a la derecha que cambia la mini tarjeta a la tarjeta completa y viceversa',
     zoom_in: 'Mostrar la tarjeta completa',
     zoom_out: 'Volver a la vista compacta',
@@ -546,6 +566,11 @@ var HcI18n = {
     ed_energy_price_entity: 'Сензор цене енергије',
     ed_energy_price_entity_helper: 'Уместо фиксне цене: сензор у валути/kWh (тренутна тарифа, Tempo…)',
     ed_zoom: 'Дугме за детаље',
+    ed_illustration: 'Илустрација',
+    ed_illustration_theme: 'Тема илустрације',
+    theme_auto: 'Аутоматски (сунце)',
+    theme_day: 'Дан',
+    theme_night: 'Ноћ',
     ed_zoom_helper: 'Дугме у горњем десном углу које пребацује мини картицу на пун приказ и назад',
     zoom_in: 'Прикажи целу картицу',
     zoom_out: 'Назад на компактни приказ',
@@ -660,6 +685,11 @@ var HcI18n = {
     ed_energy_price_entity: 'Senzor cene energije',
     ed_energy_price_entity_helper: 'Umesto fiksne cene: senzor u valuti/kWh (trenutna tarifa, Tempo…)',
     ed_zoom: 'Dugme za detalje',
+    ed_illustration: 'Ilustracija',
+    ed_illustration_theme: 'Tema ilustracije',
+    theme_auto: 'Automatski (sunce)',
+    theme_day: 'Dan',
+    theme_night: 'Noć',
     ed_zoom_helper: 'Dugme u gornjem desnom uglu koje prebacuje mini karticu na pun prikaz i nazad',
     zoom_in: 'Prikaži celu karticu',
     zoom_out: 'Nazad na kompaktni prikaz',
@@ -774,6 +804,11 @@ var HcI18n = {
     ed_energy_price_entity: 'Sensore del prezzo dell\'energia',
     ed_energy_price_entity_helper: 'Invece di un prezzo fisso: un sensore in valuta/kWh (tariffa attuale, Tempo…)',
     ed_zoom: 'Pulsante dettaglio',
+    ed_illustration: 'Illustrazione',
+    ed_illustration_theme: 'Tema dell\'illustrazione',
+    theme_auto: 'Automatico (sole)',
+    theme_day: 'Giorno',
+    theme_night: 'Notte',
     ed_zoom_helper: 'Pulsante in alto a destra che passa dalla mini scheda alla scheda completa e viceversa',
     zoom_in: 'Mostra la scheda completa',
     zoom_out: 'Torna alla vista compatta',
@@ -888,6 +923,11 @@ var HcI18n = {
     ed_energy_price_entity: 'Energieprijssensor',
     ed_energy_price_entity_helper: 'In plaats van een vaste prijs: een sensor in valuta/kWh (huidig tarief, Tempo…)',
     ed_zoom: 'Detailknop',
+    ed_illustration: 'Illustratie',
+    ed_illustration_theme: 'Thema van de illustratie',
+    theme_auto: 'Automatisch (zon)',
+    theme_day: 'Dag',
+    theme_night: 'Nacht',
     ed_zoom_helper: 'Knop rechtsboven die de minikaart omschakelt naar de volledige kaart en terug',
     zoom_in: 'Volledige kaart tonen',
     zoom_out: 'Terug naar de compacte weergave',
@@ -1002,6 +1042,11 @@ var HcI18n = {
     ed_energy_price_entity: 'Sensor de preço da energia',
     ed_energy_price_entity_helper: 'Em vez de um preço fixo: um sensor em moeda/kWh (tarifa atual, Tempo…)',
     ed_zoom: 'Botão de detalhe',
+    ed_illustration: 'Ilustração',
+    ed_illustration_theme: 'Tema da ilustração',
+    theme_auto: 'Automático (sol)',
+    theme_day: 'Dia',
+    theme_night: 'Noite',
     ed_zoom_helper: 'Botão no canto superior direito que alterna entre o mini cartão e o cartão completo',
     zoom_in: 'Mostrar o cartão completo',
     zoom_out: 'Voltar à vista compacta',
@@ -1116,6 +1161,11 @@ var HcI18n = {
     ed_energy_price_entity: 'Czujnik ceny energii',
     ed_energy_price_entity_helper: 'Zamiast stałej ceny: czujnik w walucie/kWh (bieżąca taryfa, Tempo…)',
     ed_zoom: 'Przycisk szczegółów',
+    ed_illustration: 'Ilustracja',
+    ed_illustration_theme: 'Motyw ilustracji',
+    theme_auto: 'Automatyczny (słońce)',
+    theme_day: 'Dzień',
+    theme_night: 'Noc',
     ed_zoom_helper: 'Przycisk w prawym górnym rogu przełączający minikartę na pełną kartę i z powrotem',
     zoom_in: 'Pokaż pełną kartę',
     zoom_out: 'Wróć do widoku kompaktowego',
@@ -1230,6 +1280,11 @@ var HcI18n = {
     ed_energy_price_entity: 'Senzor de preț al energiei',
     ed_energy_price_entity_helper: 'În locul unui preț fix: un senzor în monedă/kWh (tariful curent, Tempo…)',
     ed_zoom: 'Buton de detalii',
+    ed_illustration: 'Ilustrație',
+    ed_illustration_theme: 'Tema ilustrației',
+    theme_auto: 'Automat (soare)',
+    theme_day: 'Zi',
+    theme_night: 'Noapte',
     ed_zoom_helper: 'Buton din dreapta sus care comută mini-cardul în cardul complet și înapoi',
     zoom_in: 'Afișează cardul complet',
     zoom_out: 'Înapoi la vizualizarea compactă',
@@ -1344,6 +1399,11 @@ var HcI18n = {
     ed_energy_price_entity: 'Energiprissensor',
     ed_energy_price_entity_helper: 'I stedet for en fast pris: en sensor i valuta/kWh (aktuel tarif, Tempo…)',
     ed_zoom: 'Detaljeknap',
+    ed_illustration: 'Illustration',
+    ed_illustration_theme: 'Illustrationstema',
+    theme_auto: 'Automatisk (sol)',
+    theme_day: 'Dag',
+    theme_night: 'Nat',
     ed_zoom_helper: 'Knap øverst til højre, der skifter minikortet til det fulde kort og tilbage',
     zoom_in: 'Vis det fulde kort',
     zoom_out: 'Tilbage til kompakt visning',
@@ -1458,6 +1518,11 @@ var HcI18n = {
     ed_energy_price_entity: 'Energiprissensor',
     ed_energy_price_entity_helper: 'I stället för ett fast pris: en sensor i valuta/kWh (aktuell taxa, Tempo…)',
     ed_zoom: 'Detaljknapp',
+    ed_illustration: 'Illustration',
+    ed_illustration_theme: 'Illustrationstema',
+    theme_auto: 'Automatiskt (sol)',
+    theme_day: 'Dag',
+    theme_night: 'Natt',
     ed_zoom_helper: 'Knapp uppe till höger som växlar minikortet till hela kortet och tillbaka',
     zoom_in: 'Visa hela kortet',
     zoom_out: 'Tillbaka till kompakt vy',
@@ -1572,6 +1637,11 @@ var HcI18n = {
     ed_energy_price_entity: 'Сензор за цена на енергията',
     ed_energy_price_entity_helper: 'Вместо фиксирана цена: сензор във валута/kWh (текуща тарифа, Tempo…)',
     ed_zoom: 'Бутон за подробности',
+    ed_illustration: 'Илюстрация',
+    ed_illustration_theme: 'Тема на илюстрацията',
+    theme_auto: 'Автоматично (слънце)',
+    theme_day: 'Ден',
+    theme_night: 'Нощ',
     ed_zoom_helper: 'Бутон горе вдясно, който превключва мини картата към пълната карта и обратно',
     zoom_in: 'Покажи пълната карта',
     zoom_out: 'Обратно към компактния изглед',
@@ -1686,6 +1756,11 @@ var HcI18n = {
     ed_energy_price_entity: 'Датчик цены энергии',
     ed_energy_price_entity_helper: 'Вместо фиксированной цены: датчик в валюте/кВт·ч (текущий тариф, Tempo…)',
     ed_zoom: 'Кнопка подробностей',
+    ed_illustration: 'Иллюстрация',
+    ed_illustration_theme: 'Тема иллюстрации',
+    theme_auto: 'Автоматически (солнце)',
+    theme_day: 'День',
+    theme_night: 'Ночь',
     ed_zoom_helper: 'Кнопка в правом верхнем углу, переключающая мини-карточку на полную карточку и обратно',
     zoom_in: 'Показать полную карточку',
     zoom_out: 'Вернуться к компактному виду',
@@ -1800,6 +1875,11 @@ var HcI18n = {
     ed_energy_price_entity: 'Датчик ціни енергії',
     ed_energy_price_entity_helper: 'Замість фіксованої ціни: датчик у валюті/кВт·год (поточний тариф, Tempo…)',
     ed_zoom: 'Кнопка деталей',
+    ed_illustration: 'Ілюстрація',
+    ed_illustration_theme: 'Тема ілюстрації',
+    theme_auto: 'Автоматично (сонце)',
+    theme_day: 'День',
+    theme_night: 'Ніч',
     ed_zoom_helper: 'Кнопка в правому верхньому куті, що перемикає мінікартку на повну картку й назад',
     zoom_in: 'Показати повну картку',
     zoom_out: 'Повернутися до компактного вигляду',
@@ -1914,6 +1994,11 @@ var HcI18n = {
     ed_energy_price_entity: 'Energiaár-érzékelő',
     ed_energy_price_entity_helper: 'Rögzített ár helyett: pénznem/kWh érzékelő (aktuális tarifa, Tempo…)',
     ed_zoom: 'Részletek gomb',
+    ed_illustration: 'Illusztráció',
+    ed_illustration_theme: 'Illusztráció témája',
+    theme_auto: 'Automatikus (nap)',
+    theme_day: 'Nappal',
+    theme_night: 'Éjszaka',
     ed_zoom_helper: 'Jobb felső sarokban lévő gomb, amely a minikártyát teljes kártyára váltja és vissza',
     zoom_in: 'Teljes kártya megjelenítése',
     zoom_out: 'Vissza a kompakt nézethez',
@@ -2028,6 +2113,11 @@ var HcI18n = {
     ed_energy_price_entity: 'Senzor ceny energie',
     ed_energy_price_entity_helper: 'Namiesto pevnej ceny: senzor v mene/kWh (aktuálna sadzba, Tempo…)',
     ed_zoom: 'Tlačidlo podrobností',
+    ed_illustration: 'Ilustrácia',
+    ed_illustration_theme: 'Téma ilustrácie',
+    theme_auto: 'Automaticky (slnko)',
+    theme_day: 'Deň',
+    theme_night: 'Noc',
     ed_zoom_helper: 'Tlačidlo vpravo hore, ktoré prepína minikartu na celú kartu a späť',
     zoom_in: 'Zobraziť celú kartu',
     zoom_out: 'Späť na kompaktné zobrazenie',
@@ -2142,6 +2232,11 @@ var HcI18n = {
     ed_energy_price_entity: 'Senzor ceny energie',
     ed_energy_price_entity_helper: 'Místo pevné ceny: senzor v měně/kWh (aktuální sazba, Tempo…)',
     ed_zoom: 'Tlačítko podrobností',
+    ed_illustration: 'Ilustrace',
+    ed_illustration_theme: 'Motiv ilustrace',
+    theme_auto: 'Automaticky (slunce)',
+    theme_day: 'Den',
+    theme_night: 'Noc',
     ed_zoom_helper: 'Tlačítko vpravo nahoře, které přepíná minikartu na celou kartu a zpět',
     zoom_in: 'Zobrazit celou kartu',
     zoom_out: 'Zpět na kompaktní zobrazení',
@@ -2256,6 +2351,11 @@ var HcI18n = {
     ed_energy_price_entity: 'Senzor cene energije',
     ed_energy_price_entity_helper: 'Namesto fiksne cene: senzor v valuti/kWh (trenutna tarifa, Tempo…)',
     ed_zoom: 'Gumb za podrobnosti',
+    ed_illustration: 'Ilustracija',
+    ed_illustration_theme: 'Tema ilustracije',
+    theme_auto: 'Samodejno (sonce)',
+    theme_day: 'Dan',
+    theme_night: 'Noč',
     ed_zoom_helper: 'Gumb zgoraj desno, ki preklopi mini kartico v celotno kartico in nazaj',
     zoom_in: 'Prikaži celotno kartico',
     zoom_out: 'Nazaj na strnjen pogled',
@@ -2370,6 +2470,11 @@ var HcI18n = {
     ed_energy_price_entity: 'Enerģijas cenas sensors',
     ed_energy_price_entity_helper: 'Fiksētas cenas vietā: sensors valūtā/kWh (pašreizējais tarifs, Tempo…)',
     ed_zoom: 'Detaļu poga',
+    ed_illustration: 'Ilustrācija',
+    ed_illustration_theme: 'Ilustrācijas tēma',
+    theme_auto: 'Automātiski (saule)',
+    theme_day: 'Diena',
+    theme_night: 'Nakts',
     ed_zoom_helper: 'Poga augšējā labajā stūrī, kas pārslēdz minikarti uz pilno karti un atpakaļ',
     zoom_in: 'Rādīt pilno karti',
     zoom_out: 'Atpakaļ uz kompakto skatu',
@@ -2484,6 +2589,11 @@ var HcI18n = {
     ed_energy_price_entity: 'Αισθητήρας τιμής ενέργειας',
     ed_energy_price_entity_helper: 'Αντί για σταθερή τιμή: αισθητήρας σε νόμισμα/kWh (τρέχον τιμολόγιο, Tempo…)',
     ed_zoom: 'Κουμπί λεπτομερειών',
+    ed_illustration: 'Εικονογράφηση',
+    ed_illustration_theme: 'Θέμα εικονογράφησης',
+    theme_auto: 'Αυτόματο (ήλιος)',
+    theme_day: 'Ημέρα',
+    theme_night: 'Νύχτα',
     ed_zoom_helper: 'Κουμπί πάνω δεξιά που αλλάζει τη μίνι κάρτα σε πλήρη κάρτα και αντίστροφα',
     zoom_in: 'Εμφάνιση πλήρους κάρτας',
     zoom_out: 'Επιστροφή στη συμπαγή προβολή',
@@ -3065,8 +3175,6 @@ function hcHumanize(value) {
   return v.charAt(0).toUpperCase() + v.slice(1);
 }
 
-// Header icon: the tinted round icon of the project page on the showcase site, the appliance's own icon in it.
-var HC_ACCENT = '#039be5';
 
 // Appliance illustrations (front view). The state color lights the display; when running the
 // washer drum turns and the dishwasher projects its floor light, like the real appliances.
@@ -3074,6 +3182,10 @@ var HC_ACCENT = '#039be5';
 var HC_PX = {
   base: 158, // padding, header and illustration
   miniBase: 142, // padding, header and the illustration row of a mini card
+  bannerBase: 150, // illustrated header, the state row under it (one line and the power button) and the padding
+  bannerMini: 154, // illustrated header, the mini card's state row and the padding
+  bannerTime: 20, // the finish time under the state, with the illustrated header
+  bannerChips: 24, // the chips under the state, with the illustrated header
   program: 58,
   section: 26,
   selectRow: 56,
@@ -3393,6 +3505,103 @@ var hcPicture = (art, state, illustrated, lit) => {
   return `<div class="picture st-${hcEsc(state)}${state === 'run' || lit ? ' running' : ''}">${art}${badge}</div>`;
 };
 
+// ── Illustrated header ("banner") ────────────────────────────────────────────
+// The appliance in its room: a laundry room for washers, dryers and the Styler, a kitchen for the others. The room is
+// a 200 × 80 picture drawn at the banner's right, over a 10 px tiled floor strip edge to edge; the appliance's own
+// illustration (HC_ART, with its animations) stands on the strip at the right.
+var hcWin = (x, y, w, h, n) => `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="1.5" fill="${n ? '#1b2f52' : '#bfe0f7'}" stroke="${n ? '#4a5568' : '#fff'}" stroke-width="1.6"/>` +
+  (n ? `<circle cx="${x + w * 0.7}" cy="${y + h * 0.3}" r="2.4" fill="#f3eed2"/>` : `<circle cx="${x + w * 0.7}" cy="${y + h * 0.35}" r="3" fill="#ffd65a"/>`) +
+  `<line x1="${x + w / 2}" y1="${y}" x2="${x + w / 2}" y2="${y + h}" stroke="${n ? '#4a5568' : '#fff'}" stroke-width="1.2"/>`;
+var hcLines = (n, f) => Array.from({ length: n }, (_, i) => f(i)).join('');
+var HC_SCENES = {
+  kitchen: (n) => `<rect width="200" height="80" fill="${n ? '#283040' : '#eef3f4'}"/><g stroke="${n ? '#343d4f' : '#dfe7ea'}" stroke-width=".6">` +
+    hcLines(20, (i) => `<line x1="${i * 10}" y1="30" x2="${i * 10}" y2="80"/>`) +
+    [40, 50, 60, 70].map((y) => `<line x1="0" y1="${y}" x2="200" y2="${y}"/>`).join('') +
+    `</g><rect x="0" y="0" width="200" height="28" fill="${n ? '#323b4e' : '#ffffff'}"/><g fill="${n ? '#3d475c' : '#e8eef1'}" stroke="${n ? '#4a5568' : '#cfd9de'}" stroke-width=".6">` +
+    [4, 48, 92].map((x) => `<rect x="${x}" y="2" width="40" height="24" rx="1.5"/>`).join('') + `</g>${hcWin(150, 6, 34, 22, n)}`,
+  laundry: (n) => `<rect width="200" height="80" fill="${n ? '#25313a' : '#e9f3f7'}"/><g stroke="${n ? '#2f3d48' : '#d4e6ee'}" stroke-width=".6">` +
+    hcLines(20, (i) => `<line x1="${i * 10}" y1="0" x2="${i * 10}" y2="80"/>`) + hcLines(8, (i) => `<line x1="0" y1="${i * 10}" x2="200" y2="${i * 10}"/>`) +
+    `</g><rect x="90" y="20" width="60" height="2.4" fill="${n ? '#4a5568' : '#b9c4cc'}"/><rect x="96" y="8" width="8" height="12" rx="2" fill="#2f80ed"/>` +
+    '<rect x="108" y="10" width="7" height="10" rx="2" fill="#d4537e"/><rect x="119" y="9" width="8" height="11" rx="2" fill="#1d9e75"/>' +
+    `<g transform="translate(100 76)"><path d="M-12 0 L-14 -16 H14 L12 0Z" fill="${n ? '#6b5a40' : '#d9b778'}"/><g stroke="${n ? '#5a4a34' : '#c09a5a'}" stroke-width=".8">` +
+    [-10, -5, 0, 5, 10].map((x) => `<line x1="${x}" y1="-15" x2="${x * 0.9}" y2="-1"/>`).join('') +
+    '</g><path d="M-10 -16 q4 -6 10 -2 q6 -5 10 2" fill="#86b9de"/></g>' +
+    `<path d="M30 6 V0 M30 6 h40" stroke="${n ? '#4a5568' : '#9aa3ae'}" stroke-width=".8"/>` +
+    '<g class="hc-swing" style="transform-origin:44px 6px"><path d="M40 6 l-4 12 h10 l-2 -12" fill="#f5b400"/></g>' +
+    '<g class="hc-swing r" style="transform-origin:60px 6px"><path d="M56 6 l-3 10 h8 l-1 -10" fill="#e5484d"/></g>',
+};
+var HC_LAUNDRY = ['washer', 'dryer', 'washer_dryer', 'styler'];
+// Appliances that stand on a counter or hang on the wall rather than on the floor: lowered (in px of the 72 px
+// picture) so that they rest on the strip.
+var HC_BANNER_DROP = { microwave: 15 };
+
+// The header icon's colour follows the state: at work in the state's colour, waiting or warning in amber, a fault in
+// red, done in green, idle or off in neutral grey.
+var HC_ICON_COLORS = {
+  run: HC_STATE_COLORS.run,
+  delayedstart: HC_STATE_COLORS.delayedstart,
+  finished: HC_STATE_COLORS.finished,
+  pause: HC_STATE_COLORS.pause,
+  actionrequired: HC_STATE_COLORS.actionrequired,
+  error: HC_STATE_COLORS.error,
+  aborting: HC_STATE_COLORS.aborting,
+};
+// Shadow DOM already keeps ids apart between cards; each card still numbers its own, so a picture copied out of it
+// (or two banners in one root) never share one.
+var hcUid = 0;
+
+// Night picture: forced by illustration_theme, else the sun below the horizon, else Home Assistant's dark mode.
+function hcIsNight(hass, config) {
+  var theme = config?.illustration_theme;
+  if (theme === 'night') return true;
+  if (theme === 'day') return false;
+  var sun = hass?.states?.['sun.sun'];
+  if (sun && sun.state !== 'unavailable' && sun.state !== 'unknown') return sun.state === 'below_horizon';
+  return !!hass?.themes?.darkMode;
+}
+
+// The banner, 90 px high on the full and the mini card, edge to edge at the top of the card (over its 12 px padding).
+// The room fills the right (at most 250 px, faded in on its left), the text sits on the wall colour at the left, and
+// the appliance (72 px high) stands on the floor strip. Narrow cards keep the appliance and drop the room.
+var HC_BANNER_STYLE = '<style>' +
+  '.banner { position: relative; flex: none; height: 90px; margin: -12px -12px 0; overflow: hidden;' +
+    ' border-radius: var(--ha-card-border-radius, 12px) var(--ha-card-border-radius, 12px) 0 0;' +
+    ' --sky-text: #0d2a45; --sky-muted: #3b5b78; color: var(--sky-text); background: #eef3f4; }' +
+  '.banner.sc-laundry { background: #e9f3f7; } .banner.night { --sky-text: #fff; --sky-muted: rgba(255,255,255,.78); background: #283040; }' +
+  '.banner.night.sc-laundry { background: #25313a; }' +
+  '.banner .scene { position: absolute; right: 0; bottom: 10px; height: 80px; width: min(250px, 62%);' +
+    ' -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 14%); mask-image: linear-gradient(90deg, transparent 0, #000 14%); }' +
+  // The floor: a 10 px strip of tiles, edge to edge.
+  '.banner .ground { position: absolute; left: 0; right: 0; bottom: 0; height: 10px; box-shadow: inset 0 2px 0 #b8c0c6;' +
+    ' background: repeating-linear-gradient(90deg, #d9dfe3 0 18px, #c6cdd2 18px 19px); }' +
+  '.banner.night .ground { background: repeating-linear-gradient(90deg, #3a4250 0 18px, #2e3542 18px 19px); box-shadow: inset 0 2px 0 #4a5466; }' +
+  '.banner .htext { position: absolute; z-index: 1; left: 0; top: 0; bottom: 10px; right: min(250px, 62%); box-sizing: border-box;' +
+    ' display: flex; align-items: center; gap: 10px; padding: 8px 8px 8px 14px; min-width: 0; }' +
+  '.banner .htext .titles { flex: 1 1 auto; min-width: 0; }' +
+  '.banner .htext .name { color: var(--sky-text); }' +
+  '.banner .htext .sub { font-size: 13px; color: var(--sky-muted); }' +
+  // The round icon on the wall, in the state's colour; the brand on a white tile at its bottom right.
+  '.banner .htext .logo { display: grid; width: 40px; height: 40px; color: var(--hc-icon); background: rgba(255,255,255,.62);' +
+    ' box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--hc-icon) 22%, transparent); }' +
+  '.banner.night .htext .logo { color: color-mix(in srgb, var(--hc-icon) 72%, #fff); background: rgba(255,255,255,.12);' +
+    ' box-shadow: inset 0 0 0 1px rgba(255,255,255,.14); }' +
+  '.banner .htext .logo ha-icon { --mdc-icon-size: 24px; }' +
+  '.banner .htext .hc-badge { width: 18px; height: 18px; right: -4px; bottom: -4px; border-radius: 5px;' +
+    ' box-shadow: 0 0 0 1px rgba(13,42,69,.16), 0 1px 3px rgba(13,42,69,.18); }' +
+  '.banner .htext .hc-badge.logo-b { padding: 2px; background: #fff; }' +
+  '.banner .bart { position: absolute; right: 6px; bottom: calc(10px - var(--hc-drop, 0px)); height: 72px; }' +
+  // The detail button keeps the top right corner: the appliance steps aside so that nothing covers it.
+  '.banner.has-zoom .bart { right: 36px; }' +
+  '.banner .bart .picture { width: auto; height: 72px; aspect-ratio: 80 / 94; }' +
+  '.banner .bart .picture svg:first-child { filter: drop-shadow(0 2px 3px rgba(0,0,0,.2)); }' +
+  '.banner .zoom { position: absolute; z-index: 2; top: 6px; right: 6px; margin: 0; color: #10283f; background: rgba(255,255,255,.55); }' +
+  '.banner.night .zoom { color: #fff; background: rgba(10,20,40,.45); }' +
+  '.hc-swing { transform-box: view-box; animation: hc-flag 2s ease-in-out infinite; } .hc-swing.r { animation-direction: reverse; }' +
+  '@keyframes hc-flag { 0%, 100% { transform: rotate(-14deg); } 50% { transform: rotate(14deg); } }' +
+  '@container (max-width: 360px) { .banner .scene { display: none; } .banner .htext { right: 72px; } .banner.has-zoom .htext { right: 102px; } }' +
+  '@media (prefers-reduced-motion: reduce) { .hc-swing { animation: none; } }' +
+'</style>';
+
 // ── Base card ────────────────────────────────────────────────────────────────
 class HomeConnectBaseCard extends HTMLElement {
   static get kind() { return 'dishwasher'; }
@@ -3590,7 +3799,7 @@ class HomeConnectBaseCard extends HTMLElement {
     var dev = r.deviceId && hass.devices ? hass.devices[r.deviceId] : null;
     var sig = JSON.stringify([this._lang(), r.deviceId, dev ? [dev.name_by_user, dev.name] : null,
       hass.locale?.time_format, this._zoomed, this._confirming, this._reloading, this._starting,
-      this._error ? [this._error.key, this._error.detail] : null, hcNoPowerOff.has(this._powerKey(r)), Array.from(this._pending), states]);
+      this._error ? [this._error.key, this._error.detail] : null, this._config.illustration !== false && hcIsNight(hass, this._config), hcNoPowerOff.has(this._powerKey(r)), Array.from(this._pending), states]);
     if (sig === this._sig) return;
     // Don't rebuild while a dropdown is open in the card.
     var active = this.shadowRoot.activeElement;
@@ -3813,6 +4022,8 @@ class HomeConnectBaseCard extends HTMLElement {
     if (profile.simple && online && state === 'ready' && this._busy(ent)) state = 'run';
     var running = !profile.simple && (state === 'run' || state === 'pause' || state === 'delayedstart' || state === 'actionrequired');
     var color = HC_STATE_COLORS[state] || 'var(--disabled-text-color, #9e9e9e)';
+    this._iconColor = HC_ICON_COLORS[state] || '';
+    this._illustrated = c.illustration !== false;
     // A wine cabinet's inside light glows in the illustration while it is on.
     this._lit = kind === 'wine_cooler' && online && this._val(ent.light) === 'on';
 
@@ -3979,26 +4190,34 @@ class HomeConnectBaseCard extends HTMLElement {
     var art = c.icon
       ? `<div class="badge"><ha-icon icon="${hcEsc(icon)}"></ha-icon></div>`
       : ((door === 'open' && HC_ART_OPEN[kind]) || HC_ART[kind] || HC_ART.dishwasher);
-    var heroHtml = '<div class="hero">' + hcPicture(art, state, !c.icon, this._lit) +
-      '<div class="info">' + big + (chips.length ? `<div class="chips">${chips.join('')}</div>` : '') + '</div></div>';
+    var infoHtml = '<div class="info">' + big + (chips.length ? `<div class="chips">${chips.join('')}</div>` : '') + '</div>';
+    // Illustrated header: the appliance stands in the banner, the state and its chips fill the row under it.
+    var heroHtml = this._illustrated ? `<div class="hero">${infoHtml}${powerBtn}</div>`
+      : `<div class="hero">${hcPicture(art, state, !c.icon, this._lit)}${infoHtml}</div>`;
 
     var logo = `<div class="logo" aria-hidden="true"><ha-icon icon="${hcEsc(profile.icon)}"></ha-icon>${this._badge()}</div>`;
     var sub = progLabel || this._t(kind);
+    // The banner always shows the appliance (a custom `icon` only replaces the classic layout's illustration).
+    var illus = (door === 'open' && HC_ART_OPEN[kind]) || HC_ART[kind] || HC_ART.dishwasher;
+    var banner = (bannerSub) => this._banner({ name, sub: bannerSub, icon: profile.icon, art: illus, state, kind });
 
     if (this._compact()) {
       this._rows = hcRows(HC_PX.miniBase + (this._error ? HC_PX.error : 0));
       this.shadowRoot.innerHTML = this._miniHtml({ c, ent, name, color, state, statusText, running, online, powerOn, progress,
-        finish, progLabel, chips: chips.filter((x) => x.indexOf('chip warn') >= 0 || x.indexOf('chip extra') >= 0 || !online), art, logo, powerBtn });
+        finish, progLabel, chips: chips.filter((x) => x.indexOf('chip warn') >= 0 || x.indexOf('chip extra') >= 0 || !online), art, logo, powerBtn,
+        banner: this._illustrated ? banner(statusText) : '' });
       return;
     }
 
-    this._rows = hcRows(HC_PX.base + (programHtml ? HC_PX.program : 0) + optPx + (errorHtml ? HC_PX.error : 0) +
+    // With the illustrated header the state row holds no picture: its own lines set its height.
+    var base = this._illustrated ? HC_PX.bannerBase + (timeLine ? HC_PX.bannerTime : 0) + (chips.length ? HC_PX.bannerChips : 0) : HC_PX.base;
+    this._rows = hcRows(base + (programHtml ? HC_PX.program : 0) + optPx + (errorHtml ? HC_PX.error : 0) +
       (controls ? HC_PX.controls : 0) + (controls.indexOf('class="hint"') >= 0 ? HC_PX.hint : 0));
     this.shadowRoot.innerHTML = this._styles(color) + '<ha-card>' +
-      '<div class="header">' + logo +
+      (this._illustrated ? banner(sub) : '<div class="header">' + logo +
         '<div class="titles"><div class="name">' + hcEsc(name) + '</div><div class="sub">' + this._brandLogo() + hcEsc(sub) + '</div></div>' +
         powerBtn + this._zoomButton() +
-      '</div>' +
+      '</div>') +
       heroHtml + programHtml + optionsHtml + errorHtml + controls +
     '</ha-card>';
   }
@@ -4053,6 +4272,31 @@ class HomeConnectBaseCard extends HTMLElement {
     return `<span class="hc-badge brand" style="background:${b.color}" title="${hcEsc(b.name)}">${hcEsc(initials)}</span>`;
   }
 
+  // The illustrated header: the room and the appliance's own illustration on the right, the round icon (tinted by the
+  // state, the brand's logo or initial in a badge on it), the title and the subtitle on the left.
+  _banner(o) {
+    var c = this._config, night = hcIsNight(this._hass, c);
+    if (!this._uid) this._uid = ++hcUid;
+    var scene = HC_LAUNDRY.indexOf(o.kind) >= 0 ? 'laundry' : 'kitchen';
+    var art = String(o.art).replace(/(id="|url\(#)hc-/g, `$1hc${this._uid}-`);
+    var drop = HC_BANNER_DROP[o.kind] ? ` style="--hc-drop: ${HC_BANNER_DROP[o.kind]}px"` : '';
+    var zoom = this._zoomButton();
+    return `<div class="banner sc-${scene}${night ? ' night' : ''}${zoom ? ' has-zoom' : ''}">` +
+      `<svg class="scene" viewBox="0 0 200 80" preserveAspectRatio="xMaxYMax meet" aria-hidden="true">${HC_SCENES[scene](night)}</svg>` +
+      '<div class="ground"></div>' +
+      `<div class="htext"><div class="logo" aria-hidden="true"><ha-icon icon="${hcEsc(c.icon || o.icon)}"></ha-icon>${this._bannerBadge()}</div>` +
+      `<div class="titles"><div class="name">${hcEsc(o.name)}</div><div class="sub">${hcEsc(o.sub)}</div></div></div>` +
+      `<div class="bart"${drop}>${hcPicture(art, o.state, true, this._lit)}</div>` + zoom +
+    '</div>';
+  }
+
+  // Badge on the banner's icon: the brand's logo on a white tile, else its initial on the brand's colour.
+  _bannerBadge() {
+    var b = this._brand, svg = b && HC_BRAND_LOGOS[b.key];
+    if (!svg) return this._badge();
+    return `<span class="hc-badge logo-b" role="img" aria-label="${hcEsc(b.name)}" title="${hcEsc(b.name)}">${svg}</span>`;
+  }
+
   _brandLogo() {
     var b = this._brand, svg = b && HC_BRAND_LOGOS[b.key];
     return svg ? `<span class="brand-logo" role="img" aria-label="${hcEsc(b.name)}" title="${hcEsc(b.name)}">${svg}</span>` : '';
@@ -4070,7 +4314,9 @@ class HomeConnectBaseCard extends HTMLElement {
         ' --hc-text: color-mix(in srgb, var(--hc-color) 45%, var(--primary-text-color));' +
         ' --hc-warning-text: color-mix(in srgb, var(--warning-color, #ffa600) 45%, var(--primary-text-color));' +
         ' --hc-error-text: color-mix(in srgb, var(--error-color, #db4437) 45%, var(--primary-text-color));' +
-        ' --hc-primary-text: color-mix(in srgb, var(--primary-color, #03a9f4) 45%, var(--primary-text-color)); }' +
+        ' --hc-primary-text: color-mix(in srgb, var(--primary-color, #03a9f4) 45%, var(--primary-text-color));' +
+        // The header icon's colour: the state's (at work, waiting, warning, fault, done), neutral grey when idle or off.
+        ' --hc-icon: ' + (this._iconColor || 'var(--state-inactive-color, var(--disabled-text-color, #9e9e9e))') + '; }' +
       // A size container: narrow layouts (6 columns of a Sections view, the mini card) follow the card's own width.
       'ha-card { height: 100%; box-sizing: border-box; padding: 12px; display: flex; flex-direction: column; gap: 10px;' +
         ' container-type: inline-size; }' +
@@ -4084,7 +4330,7 @@ class HomeConnectBaseCard extends HTMLElement {
       // The body starts 8px under the header (the card gap is 10px between body blocks).
       '.header { display: flex; align-items: center; gap: 10px; margin-bottom: -2px; }' +
       '.logo { position: relative; width: 40px; height: 40px; flex: none; border-radius: 50%; display: grid; place-items: center;' +
-        ' color: ' + HC_ACCENT + '; background: color-mix(in srgb, ' + HC_ACCENT + ' 16%, transparent); }' +
+        ' color: var(--hc-icon); background: color-mix(in srgb, var(--hc-icon) 16%, transparent); }' +
       '.logo ha-icon { --mdc-icon-size: 24px; }' +
       '.hc-badge { position: absolute; right: -4px; bottom: -4px; width: 18px; height: 18px; border-radius: 5px; padding: 1px; box-sizing: border-box;' +
         ' display: grid; place-items: center; background: #fff;' +
@@ -4315,7 +4561,7 @@ class HomeConnectBaseCard extends HTMLElement {
         ' ha-card.mini .picture { width: 44px; height: 52px; }' +
         ' ha-card.mini .content { column-gap: 8px; }' +
       ' }' +
-    '</style>';
+    '</style>' + (this._illustrated ? HC_BANNER_STYLE : '');
   }
 
   _onClick(ev) {
@@ -4577,7 +4823,8 @@ var hcMini = (Base) => class extends Base {
   _miniHtml(m) {
     // The state also as the first line: on a narrow card it stands in for the pill, which then only shows its dot.
     var c = m.c, ent = m.ent, lines = [];
-    var mstate = `<div class="line mstate" aria-hidden="true"><span>${hcEsc(m.statusText)}</span></div>`;
+    // The banner's subtitle already spells the state out.
+    var mstate = m.banner ? '' : `<div class="line mstate" aria-hidden="true"><span>${hcEsc(m.statusText)}</span></div>`;
     var bar = '';
     if ((m.running && !this._noPct) || m.state === 'finished') {
       var pct = m.state === 'finished' ? 100 : (m.progress == null ? 0 : m.progress);
@@ -4597,12 +4844,13 @@ var hcMini = (Base) => class extends Base {
       ? `<div class="error" role="alert" title="${hcEsc(this._error.detail)}"><ha-icon icon="mdi:alert-circle-outline"></ha-icon><span>${hcEsc(this._t(this._error.key))}</span></div>`
       : '';
 
-    return this._styles(m.color) + '<ha-card class="mini">' +
+    if (m.banner) this._rows = hcRows(HC_PX.bannerMini + (this._error ? HC_PX.error : 0));
+    return this._styles(m.color) + '<ha-card class="mini">' + (m.banner ||
       '<div class="header">' + m.logo +
         '<div class="titles"><div class="name">' + hcEsc(m.name) + '</div>' + (this._brandLogo() ? `<div class="sub">${this._brandLogo()}</div>` : '') + '</div>' +
         `<span class="st" title="${hcEsc(m.statusText)}"><span class="dot"></span><span class="stt">${hcEsc(m.statusText)}</span></span>` + this._zoomButton() +
-      '</div>' +
-      '<div class="content">' + hcPicture(m.art, m.state, !c.icon, this._lit) +
+      '</div>') +
+      '<div class="content">' + (m.banner ? '' : hcPicture(m.art, m.state, !c.icon, this._lit)) +
         '<div class="info">' + mstate + bar + lines.join('') + '</div>' +
         (btns.length ? `<div class="mcontrols">${btns.join('')}</div>` : '') +
       '</div>' + errorHtml +
@@ -4617,7 +4865,7 @@ class HomeConnectWasherMiniCard extends hcMini(HomeConnectWasherCard) {}
 class SmartApplianceMiniCard extends hcMini(SmartApplianceCard) {}
 
 // ── smart-appliance-card-editor (visual editor, built on HA's ha-form) ──────────
-var HC_EDITOR_DEFAULTS = { show_title: true, show_subtitle: true, show_program: true, show_controls: true, show_options: true, show_alerts: true, show_power: true, show_energy: true, zoom: true };
+var HC_EDITOR_DEFAULTS = { illustration: true, illustration_theme: 'auto', show_title: true, show_subtitle: true, show_program: true, show_controls: true, show_options: true, show_alerts: true, show_power: true, show_energy: true, zoom: true };
 
 class HomeConnectCardEditor extends HTMLElement {
   setConfig(config) {
@@ -4665,6 +4913,12 @@ class HomeConnectCardEditor extends HTMLElement {
         type: 'grid', name: '', schema: [
           { name: 'name', selector: { text: {} } },
           { name: 'icon', selector: { icon: {} } },
+        ],
+      },
+      {
+        type: 'grid', name: '', schema: [
+          { name: 'illustration', selector: { boolean: {} } },
+          { name: 'illustration_theme', selector: { select: { mode: 'dropdown', options: ['auto', 'day', 'night'].map((v) => ({ value: v, label: t(`theme_${v}`) })) } } },
         ],
       },
       {

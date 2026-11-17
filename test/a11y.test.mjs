@@ -200,7 +200,14 @@ test("state, warning, error and primary texts reach 4.5:1 in light and dark them
 
 test("the mini card's status pill keeps its text in a title (and for screen readers) for when only its dot shows", () => {
   const Mini = customElements.get("home-connect-washer-mini-card");
-  const html = card(mockHass(), Mini).shadowRoot.innerHTML;
+  // Classic header (illustration: false): the pill; the illustrated header spells the state out in its subtitle.
+  const banner = card(mockHass(), Mini).shadowRoot.innerHTML;
+  assert.match(banner, /class="banner[^"]*"[\s\S]*<div class="sub">Running<\/div>/);
+  assert.doesNotMatch(banner, /class="line mstate"/);
+  const el = new Mini();
+  el.setConfig({ illustration: false });
+  el.hass = mockHass();
+  const html = el.shadowRoot.innerHTML;
   assert.match(html, /<div class="info"><div class="line mstate" aria-hidden="true"><span>Running<\/span><\/div>/);
   assert.match(html, /<span class="st" title="Running"><span class="dot"><\/span><span class="stt">Running<\/span><\/span>/);
 });

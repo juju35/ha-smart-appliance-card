@@ -87,7 +87,46 @@ test("header always shows the appliance icon, and the appliance illustration", (
   assert.match(render(HomeConnectDishwasherCard, mockHass()), /<ha-icon icon="mdi:dishwasher"/);
   assert.match(html, /class="drum"/);
   assert.match(render(HomeConnectWasherCard, mockHass(), { show_logo: false }), /class="logo"/);
-  assert.match(render(HomeConnectWasherCard, mockHass(), { icon: "mdi:washing-machine" }), /class="badge"/);
+  // A custom icon replaces the classic layout's illustration; the illustrated header keeps the appliance and shows
+  // the icon in its round badge.
+  assert.match(render(HomeConnectWasherCard, mockHass(), { icon: "mdi:washing-machine", illustration: false }), /class="badge"/);
+  const custom = render(HomeConnectWasherCard, mockHass(), { icon: "mdi:tshirt-crew" });
+  assert.match(custom, /class="logo"[^>]*><ha-icon icon="mdi:tshirt-crew"/);
+  assert.match(custom, /class="drum"/);
+});
+
+test("illustrated header: the room, the appliance on the floor strip, night mode and the classic fallback", () => {
+  const html = render(HomeConnectWasherCard, mockHass());
+  assert.match(html, /<div class="banner sc-laundry">/);
+  assert.match(html, /<svg class="scene" viewBox="0 0 200 80"/);
+  assert.match(html, /<div class="ground"><\/div>/);
+  assert.match(html, /<div class="bart"><div class="picture st-run running">/);
+  assert.doesNotMatch(html, /<div class="header">/);
+  // Ids numbered per card: two banners never share one.
+  assert.match(html, /id="hc\d+-wb"/);
+  assert.match(html, /url\(#hc\d+-wb\)/);
+  assert.match(render(HomeConnectDishwasherCard, mockHass()), /class="banner sc-kitchen"/);
+  assert.match(render(HomeConnectWasherCard, mockHass(), { illustration_theme: "night" }), /class="banner sc-laundry night"/);
+  const sunDown = mockHass();
+  sunDown.states["sun.sun"] = st("below_horizon");
+  assert.match(render(HomeConnectWasherCard, sunDown), /class="banner sc-laundry night"/);
+  assert.match(render(HomeConnectWasherCard, sunDown, { illustration_theme: "day" }), /class="banner sc-laundry"/);
+  const dark = mockHass();
+  dark.themes = { darkMode: true };
+  assert.match(render(HomeConnectWasherCard, dark), /night"/);
+  const classic = render(HomeConnectWasherCard, mockHass(), { illustration: false });
+  assert.doesNotMatch(classic, /class="banner/);
+  assert.match(classic, /<div class="header">/);
+});
+
+test("header icon colour follows the state: at work, warning, fault, done, idle", () => {
+  const icon = (washerState) => render(HomeConnectWasherCard, mockHass({ washerState })).match(/--hc-icon: ([^;]+);/)[1];
+  assert.match(icon("run"), /--info-color/);
+  assert.match(icon("pause"), /--warning-color/);
+  assert.match(icon("error"), /--error-color/);
+  assert.match(icon("finished"), /--success-color/);
+  assert.match(icon("ready"), /--state-inactive-color/);
+  assert.match(icon("inactive"), /--state-inactive-color/);
 });
 
 test("mini card: compact view, detail button toggles the full card", () => {
@@ -117,7 +156,7 @@ test("state badge on the illustration when paused, delayed or finished", () => {
   assert.match(render(HomeConnectWasherCard, mockHass({ washerState: "pause" })), /class="picture st-pause"[\s\S]*class="pbadge"/);
   assert.match(render(HomeConnectWasherCard, mockHass({ washerState: "finished" })), /class="sparkles"/);
   assert.doesNotMatch(render(HomeConnectWasherCard, mockHass({ washerState: "run" })), /class="pbadge"/);
-  assert.doesNotMatch(render(HomeConnectWasherCard, mockHass({ washerState: "pause" }), { icon: "mdi:washing-machine" }), /class="pbadge"/);
+  assert.doesNotMatch(render(HomeConnectWasherCard, mockHass({ washerState: "pause" }), { icon: "mdi:washing-machine", illustration: false }), /class="pbadge"/);
 });
 
 test("the washer gets the washer illustration even in a dishwasher card", () => {
@@ -130,7 +169,8 @@ test("door open: open-door illustration", () => {
   const hass = mockHass({ washerState: "ready" });
   hass.states["sensor.wm_door"] = st("open", { options: ["open", "closed", "locked"] });
   hass.entities["sensor.wm_door"] = { entity_id: "sensor.wm_door", device_id: "d2", translation_key: "door" };
-  assert.match(render(HomeConnectWasherCard, hass), /url\(#hc-wro\)/);
+  assert.match(render(HomeConnectWasherCard, hass), /url\(#hc\d+-wro\)/);
+  assert.match(render(HomeConnectWasherCard, hass, { illustration: false }), /url\(#hc-wro\)/);
   hass.states["sensor.wm_door"] = st("closed", { options: ["open", "closed", "locked"] });
   assert.doesNotMatch(render(HomeConnectWasherCard, hass), /hc-wro/);
 });

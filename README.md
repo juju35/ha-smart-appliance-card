@@ -189,7 +189,9 @@ entities:
 | `show_subtitle` | ❌ | `true` | Show the subtitle under the title |
 | `kind` | ❌ | Auto | Appliance type when it can't be detected: `dishwasher`, `washer`, `dryer`, `washer_dryer`, `oven`, `microwave`, `hob`, `coffee_maker`, `hood`, `fridge`, `freezer`, `wine_cooler`, `styler` |
 | `brand` | ❌ | Auto | Brand for the badge and button colour when the integration doesn't give it: `bosch`, `siemens`, `neff`, `gaggenau`, `constructa`, `miele`, `samsung`, `lg`, `whirlpool`, `maytag`, `kitchenaid`, `consul` |
-| `icon` | ❌ | Illustration | Replaces the appliance illustration with an icon |
+| `icon` | ❌ | Appliance icon | The header's round icon; with `illustration: false`, it also replaces the appliance illustration |
+| `illustration` | ❌ | `true` | Illustrated header (both cards): the appliance in its room (laundry room or kitchen) on a tiled floor, its icon tinted by the state and the brand's logo on it. `false` keeps the classic header |
+| `illustration_theme` | ❌ | `auto` | Illustrated header, both cards: `auto` (night after sunset, from `sun.sun`, else Home Assistant's dark mode), `day` or `night` |
 | `show_program` | ❌ | `true` | Show the program picker |
 | `show_options` | ❌ | `true` | Show program options (only before a program starts) |
 | `show_controls` | ❌ | `true` | Show Start / Pause / Resume / Stop buttons |
