@@ -4339,9 +4339,8 @@ class HomeConnectBaseCard extends HTMLElement {
       var pct = state === 'finished' ? 100 : (progress == null ? 0 : progress);
       // The state is in the header pill: beside the percentage, the time left instead (the finish time under the bar).
       // Without a finish time, the state stays there only for a card so narrow that the pill keeps just its dot.
-      var label = running && finish
-        ? `<span class="state" data-tick="left">${hcEsc(this._leftText(finish))}</span>`
-        : `<span class="state pill-echo">${hcEsc(statusText)}</span>`;
+      var label = `<span class="state pill-echo">${hcEsc(statusText)}</span>` +
+        (running && finish ? `<span class="state" data-tick="left">${hcEsc(this._leftText(finish))}</span>` : '');
       big = '<div class="big"><span class="pct">' + Math.round(pct) + '<small> %</small></span>' + label + '</div>' +
         '<div class="bar"><div class="fill" style="width:' + pct + '%"></div></div>' +
         (running && finish ? `<div class="time" data-tick="ends">${hcEsc(this._endsAt(finish))}</div>` : '');

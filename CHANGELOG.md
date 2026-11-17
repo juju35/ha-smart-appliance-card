@@ -12,7 +12,7 @@
 
 ### Fixes
 - Hob: the body no longer shows only its state — a **Cooking zones** section lists each zone in its tile (LG ThinQ per-location power level out of its maximum, state and timer left; Miele plates), with how many are on; the chips add remote control (LG ThinQ), child lock, the power drawn when the integration reports it, and a wine cabinet's light.
-- The body no longer repeats the header pill word for word: beside the percentage, the time left instead of "Running" (the finish time under the bar); the big idle / ready state is left to the pill. On a card so narrow that the banner's pill keeps only its dot, the state is written in the body again (full and mini card).
+- The body no longer repeats the header pill word for word: beside the percentage, the time left instead of "Running" (the finish time under the bar); the big idle / ready state is left to the pill. On a card so narrow that the banner's pill keeps only its dot, the state is written in the body again (full and mini card). On that narrow card the running state also comes back beside the percentage, above the time left.
 
 ## 2.7.1 - 2026-11-14
 
