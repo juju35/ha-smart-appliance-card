@@ -119,6 +119,19 @@ test("illustrated header: the room, the appliance on the floor strip, night mode
   assert.match(classic, /<div class="header">/);
 });
 
+test("illustrated header: the dark theme shows the night picture even while the sun is up; forced day/night win", () => {
+  const sunUp = (darkMode) => {
+    const h = mockHass();
+    h.states["sun.sun"] = st("above_horizon");
+    h.themes = { darkMode };
+    return h;
+  };
+  assert.match(render(HomeConnectWasherCard, sunUp(true)), /class="banner sc-laundry night"/);
+  assert.match(render(HomeConnectWasherCard, sunUp(false)), /class="banner sc-laundry"/);
+  assert.match(render(HomeConnectWasherCard, sunUp(true), { illustration_theme: "day" }), /class="banner sc-laundry"/);
+  assert.match(render(HomeConnectWasherCard, sunUp(false), { illustration_theme: "night" }), /class="banner sc-laundry night"/);
+});
+
 test("header icon colour follows the state: at work, warning, fault, done, idle", () => {
   const icon = (washerState) => render(HomeConnectWasherCard, mockHass({ washerState })).match(/--hc-icon: ([^;]+);/)[1];
   assert.match(icon("run"), /--info-color/);
