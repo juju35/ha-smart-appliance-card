@@ -18,6 +18,7 @@
   <br><br>
   <img src="https://raw.githubusercontent.com/juju35/ha-smart-appliance-card/main/logos/miele.svg" alt="Miele" height="20">&nbsp;&nbsp;
   <img src="https://raw.githubusercontent.com/juju35/ha-smart-appliance-card/main/logos/samsung.svg" alt="Samsung" height="15">&nbsp;&nbsp;
+  <picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/juju35/ha-smart-appliance-card/main/images/localthings-dark.png"><img src="https://raw.githubusercontent.com/juju35/ha-smart-appliance-card/main/images/localthings.png" alt="LocalThings" height="20"></picture>&nbsp;&nbsp;
   <img src="https://raw.githubusercontent.com/juju35/ha-smart-appliance-card/main/logos/lg.svg" alt="LG" height="26">&nbsp;&nbsp;
   <img src="https://raw.githubusercontent.com/juju35/ha-smart-appliance-card/main/logos/whirlpool.svg" alt="Whirlpool" height="20">&nbsp;&nbsp;
   <img src="https://raw.githubusercontent.com/juju35/ha-smart-appliance-card/main/logos/kitchenaid.svg" alt="KitchenAid" height="13">
