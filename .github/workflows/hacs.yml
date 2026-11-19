@@ -25,6 +25,9 @@ concurrency:
 jobs:
   hacs:
     name: HACS
+    # On a fork PR, hacs/action validates the fork, which has no built dist/ (release asset only) and fails;
+    # the push run on main still validates the merged result.
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
