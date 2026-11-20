@@ -4050,6 +4050,7 @@ class HomeConnectBaseCard extends HTMLElement {
   _unwatchPill() {
     this._pillResize?.disconnect();
     this._pillWidth = null;
+    if (typeof cancelAnimationFrame === "function") cancelAnimationFrame(this._pillFrame);
   }
 
   _refocus(focus) {
@@ -5170,19 +5171,39 @@ var hcMini = (Base) => class extends Base {
 
   constructor() {
     super();
+    var outside = (ev) => !ev.composedPath().includes(this) && !hcInDialog(ev);
     this._onUnzoom = (ev) => {
-      if (this._zoomed && !ev.composedPath().includes(this) && !hcInDialog(ev)) this._setZoom(false);
+      if (this._zoomed && outside(ev)) this._setZoom(false);
+    };
+    // "A click elsewhere" is caught on the pointer, as on the other cards: on iOS (Safari and the companion app) a
+    // tap on something that is not clickable (the background, an empty spot) sends no click to the page. It counts
+    // when the press and the release are both outside the card (a scroll cancels the pointer); keyboard clicks
+    // (no click count) still go through the click event.
+    var downOutside = false;
+    this._onUnzoomDown = (ev) => { downOutside = outside(ev); };
+    this._onUnzoomUp = (ev) => {
+      if (downOutside) this._onUnzoom(ev);
+      downOutside = false;
+    };
+    this._onUnzoomKey = (ev) => {
+      if (ev.detail === 0) this._onUnzoom(ev);
     };
   }
 
   connectedCallback() {
     super.connectedCallback();
-    document.addEventListener('click', this._onUnzoom, true);
+    document.addEventListener('pointerdown', this._onUnzoomDown, true);
+    document.addEventListener('pointerup', this._onUnzoomUp, true);
+    document.addEventListener('click', this._onUnzoomKey, true);
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    document.removeEventListener('click', this._onUnzoom, true);
+    document.removeEventListener('pointerdown', this._onUnzoomDown, true);
+    document.removeEventListener('pointerup', this._onUnzoomUp, true);
+    document.removeEventListener('click', this._onUnzoomKey, true);
+    // Back to the compact view once off the screen (another view, a conditional card hidden), as on the other cards.
+    this._zoomed = false;
   }
 
   getGridOptions() { return this._zoomed ? { ...super.getGridOptions(), rows: 'auto' } : { columns: 6, min_columns: 6, rows: 'auto' }; }
@@ -5199,6 +5220,8 @@ var hcMini = (Base) => class extends Base {
   _setZoom(on) {
     this._zoomed = on;
     this._update();
+    // Masonry and sections lay the card out again at its new height.
+    this.dispatchEvent(new CustomEvent('iron-resize', { bubbles: true, composed: true }));
   }
 
   // The focus follows to the button that replaced this one (see _update).

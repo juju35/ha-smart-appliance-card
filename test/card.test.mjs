@@ -795,3 +795,29 @@ test("cycle energy: the running cycle's kWh from the meter, then the last cycle'
   const none = await show(mockHass(), {});
   assert.equal(none.calls.length, 0);
 });
+
+test("mini card: a tap elsewhere (pointer, iOS) or leaving the page brings the compact view back", () => {
+  const Mini = customElements.get("smart-appliance-mini-card");
+  const card = new Mini();
+  card.setConfig({});
+  card.hass = mockHass();
+  const outside = { composedPath: () => [{ localName: "div" }], detail: 1 };
+  const inside = { composedPath: () => [card], detail: 1 };
+  card._setZoom(true);
+  // A press inside released outside (a drag) does not fold it; the click event of a tap is not needed.
+  card._onUnzoomDown(inside);
+  card._onUnzoomUp(outside);
+  assert.equal(card._zoomed, true);
+  card._onUnzoomKey(outside);
+  assert.equal(card._zoomed, true, "a pointer click is handled by the pointer events");
+  card._onUnzoomDown(outside);
+  card._onUnzoomUp(outside);
+  assert.equal(card._zoomed, false);
+  // Keyboard: a click with no click count.
+  card._setZoom(true);
+  card._onUnzoomKey({ ...outside, detail: 0 });
+  assert.equal(card._zoomed, false);
+  card._setZoom(true);
+  card.disconnectedCallback();
+  assert.equal(card._zoomed, false);
+});
