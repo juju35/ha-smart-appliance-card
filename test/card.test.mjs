@@ -491,6 +491,21 @@ test("renaming the device or switching 12/24 h redraws the card at once", () => 
   assert.notEqual(card._sig, before);
 });
 
+test("an update of another entity reuses the appliance's state text; a change of its own state redraws", () => {
+  const hass = mockHass();
+  const card = new HomeConnectWasherCard();
+  card.setConfig({ device_id: "d2" });
+  card.hass = hass;
+  const text = card._stText;
+  const sig = card._sig;
+  card.hass = { ...hass, states: { ...hass.states, "sensor.elsewhere": st("1") } };
+  assert.equal(card._stText, text);
+  assert.equal(card._sig, sig);
+  card.hass = { ...hass, states: { ...hass.states, "sensor.wm_operation_state": st("pause", { options: ["inactive", "ready", "run", "pause", "finished"] }) } };
+  assert.notEqual(card._stText, text);
+  assert.notEqual(card._sig, sig);
+});
+
 // A washer switched on, ready, with a program to pick and two option drop-downs and two option switches:
 // the tallest layout (picker, options, Start).
 function readyWithOptions() {
@@ -794,4 +809,30 @@ test("cycle energy: the running cycle's kWh from the meter, then the last cycle'
   assert.equal(off.calls.length, 0);
   const none = await show(mockHass(), {});
   assert.equal(none.calls.length, 0);
+});
+
+test("mini card: a tap elsewhere (pointer, iOS) or leaving the page brings the compact view back", () => {
+  const Mini = customElements.get("smart-appliance-mini-card");
+  const card = new Mini();
+  card.setConfig({});
+  card.hass = mockHass();
+  const outside = { composedPath: () => [{ localName: "div" }], detail: 1 };
+  const inside = { composedPath: () => [card], detail: 1 };
+  card._setZoom(true);
+  // A press inside released outside (a drag) does not fold it; the click event of a tap is not needed.
+  card._onUnzoomDown(inside);
+  card._onUnzoomUp(outside);
+  assert.equal(card._zoomed, true);
+  card._onUnzoomKey(outside);
+  assert.equal(card._zoomed, true, "a pointer click is handled by the pointer events");
+  card._onUnzoomDown(outside);
+  card._onUnzoomUp(outside);
+  assert.equal(card._zoomed, false);
+  // Keyboard: a click with no click count.
+  card._setZoom(true);
+  card._onUnzoomKey({ ...outside, detail: 0 });
+  assert.equal(card._zoomed, false);
+  card._setZoom(true);
+  card.disconnectedCallback();
+  assert.equal(card._zoomed, false);
 });

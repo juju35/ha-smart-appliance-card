@@ -57,6 +57,7 @@ export function loadCard(file, names) {
   // The current global Date, so node:test mock timers apply to the card too.
   Object.defineProperty(sandbox, "Date", { get: () => globalThis.Date });
   vm.createContext(sandbox);
-  vm.runInContext(`${src}\n;globalThis.__exports = { ${names.join(", ")} };`, sandbox, { filename: file });
+  // A file URL as the name lets `node --test --experimental-test-coverage` report the card's own coverage.
+  vm.runInContext(`${src}\n;globalThis.__exports = { ${names.join(", ")} };`, sandbox, { filename: new URL(`../src/${file}`, import.meta.url).href });
   return { ...sandbox.__exports, customElements: registry };
 }
