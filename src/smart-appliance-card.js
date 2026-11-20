@@ -4040,11 +4040,15 @@ class HomeConnectBaseCard extends HTMLElement {
     var ids = HC_ALL_ROLES.map((role) => r.ent[role]).concat(r.ent.option_switches, r.ent.option_selects, r.ent.temps,
       ...r.ent.zones.map((z) => z.ids));
     var hass = this._hass;
-    var states = JSON.stringify(ids.map((id) => {
-      var s = id && hass.states[id];
+    // Home Assistant replaces a state object when it changes: the same objects as last time give the same text, so
+    // an update of another entity costs a comparison instead of a serialisation.
+    var refs = ids.map((id) => id && hass.states[id]);
+    var prev = this._stRefs;
+    var states = prev && prev.length === refs.length && refs.every((s, i) => s === prev[i]) ? this._stText : JSON.stringify(refs.map((s, i) =>
       // Climate temperatures and the fan's speed live in attributes.
-      return s ? [id, s.state, s.attributes.options, s.attributes.current_temperature, s.attributes.percentage] : null;
-    }));
+      s ? [ids[i], s.state, s.attributes.options, s.attributes.current_temperature, s.attributes.percentage] : null));
+    this._stRefs = refs;
+    this._stText = states;
     // An error message goes away as soon as the appliance's state changes.
     if (this._error) {
       if (this._error.states == null) this._error.states = states;

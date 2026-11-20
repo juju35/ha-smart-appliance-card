@@ -8,6 +8,9 @@
 - README: the options table says which card each option applies to (`both`, `mini`), as on the other cards.
 - The page no longer moves by itself on state updates: the card is patched in place instead of being rewritten (icons and illustration stay the same nodes, animations no longer restart), and the icons of chips, lines, toggles, messages and buttons keep their size while they load — a rewrite made the card lose 1 to 4 px for a frame on every update of its entities. The status pill is measured again once Home Assistant's card frame has drawn its content, so that it is in its place from the first frame.
 
+### Performance
+- An update of another entity no longer serialises the appliance's states again: the same state objects reuse the text of the last update.
+
 ### Maintenance
 - The unit tests report the card's own coverage.
 

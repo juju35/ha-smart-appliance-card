@@ -491,6 +491,21 @@ test("renaming the device or switching 12/24 h redraws the card at once", () => 
   assert.notEqual(card._sig, before);
 });
 
+test("an update of another entity reuses the appliance's state text; a change of its own state redraws", () => {
+  const hass = mockHass();
+  const card = new HomeConnectWasherCard();
+  card.setConfig({ device_id: "d2" });
+  card.hass = hass;
+  const text = card._stText;
+  const sig = card._sig;
+  card.hass = { ...hass, states: { ...hass.states, "sensor.elsewhere": st("1") } };
+  assert.equal(card._stText, text);
+  assert.equal(card._sig, sig);
+  card.hass = { ...hass, states: { ...hass.states, "sensor.wm_operation_state": st("pause", { options: ["inactive", "ready", "run", "pause", "finished"] }) } };
+  assert.notEqual(card._stText, text);
+  assert.notEqual(card._sig, sig);
+});
+
 // A washer switched on, ready, with a program to pick and two option drop-downs and two option switches:
 // the tallest layout (picker, options, Start).
 function readyWithOptions() {
