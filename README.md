@@ -182,29 +182,29 @@ entities:
 
 ### Options reference
 
-| Option | Required | Default | Description |
+| Option | Card | Default | Description |
 |---|---|---|---|
-| `device_id` | ❌* | Auto | Appliance device (*or `entity`; the first supported appliance is used if both are missing) |
-| `entity` | ❌ | — | Any entity of the appliance, used to find the device (YAML only: the visual editor sets `device_id`) |
-| `name` | ❌ | Device name | Card title |
-| `show_title` | ❌ | `true` | Show the title in the header (e.g. `false` under a section heading of your own) |
-| `show_subtitle` | ❌ | `true` | Show the subtitle under the title |
-| `kind` | ❌ | Auto | Appliance type when it can't be detected: `dishwasher`, `washer`, `dryer`, `washer_dryer`, `oven`, `microwave`, `hob`, `coffee_maker`, `hood`, `fridge`, `freezer`, `wine_cooler`, `styler` |
-| `brand` | ❌ | Auto | Brand for the badge and button colour when the integration doesn't give it: `bosch`, `siemens`, `neff`, `gaggenau`, `constructa`, `miele`, `samsung`, `lg`, `whirlpool`, `maytag`, `kitchenaid`, `consul` |
-| `icon` | ❌ | Appliance icon | The header's round icon; with `illustration: false`, it also replaces the appliance illustration |
-| `illustration` | ❌ | `true` | Illustrated header (both cards): the appliance in its room (laundry room or kitchen) on a tiled floor, its icon tinted by the state and the brand's logo on it. `false` keeps the classic header |
-| `illustration_theme` | ❌ | `auto` | Illustrated header, both cards: `auto` (follows the Home Assistant theme: night with a dark theme, day with a light theme), `day` or `night` |
-| `show_program` | ❌ | `true` | Show the program picker |
-| `show_options` | ❌ | `true` | Show program options (only before a program starts) |
-| `show_controls` | ❌ | `true` | Show Start / Pause / Resume / Stop buttons |
-| `show_alerts` | ❌ | `true` | Show salt, rinse aid and coffee machine alerts, and the reminder when a finished program's door hasn't been opened |
-| `show_power` | ❌ | `true` | Show the power button (turn off for appliances that can't be switched on / off remotely) |
-| `show_energy` | ❌ | `true` | Energy chip of the running or last cycle (24 h), when the appliance has an energy meter |
-| `energy_price` | ❌ | — | Price per kWh: the cycle's cost next to its energy (*This cycle: 0.58 kWh · ≈ €0.12*), in Home Assistant's currency |
-| `energy_price_entity` | ❌ | — | A sensor giving the price per kWh (current tariff, Tempo…), used instead of `energy_price` |
-| `zoom` | ❌ | `true` | Mini cards only: detail button at the top right that unfolds the full card (a click elsewhere folds it back) |
-| `language` | ❌ | Auto | Force language: `fr`, `en`, `de`, `es`, `sr`, `sr-Latn`, `it`, `nl`, `pt`, `pl`, `ro`, `da`, `sv`, `bg`, `ru`, `uk`, `hu`, `sk`, `cs`, `sl`, `lv` or `el` (auto-detects from HA settings) |
-| `entities` | ❌ | Auto | Override detected entities (see below) |
+| `device_id` | both | Auto | Appliance device (or `entity`; the first supported appliance is used if both are missing) |
+| `entity` | both | — | Any entity of the appliance, used to find the device (YAML only: the visual editor sets `device_id`) |
+| `name` | both | Device name | Card title |
+| `show_title` | both | `true` | Show the title in the header (e.g. `false` under a section heading of your own) |
+| `show_subtitle` | both | `true` | Show the subtitle under the title |
+| `kind` | both | Auto | Appliance type when it can't be detected: `dishwasher`, `washer`, `dryer`, `washer_dryer`, `oven`, `microwave`, `hob`, `coffee_maker`, `hood`, `fridge`, `freezer`, `wine_cooler`, `styler` |
+| `brand` | both | Auto | Brand for the badge and button colour when the integration doesn't give it: `bosch`, `siemens`, `neff`, `gaggenau`, `constructa`, `miele`, `samsung`, `lg`, `whirlpool`, `maytag`, `kitchenaid`, `consul` |
+| `icon` | both | Appliance icon | The header's round icon; with `illustration: false`, it also replaces the appliance illustration |
+| `illustration` | both | `true` | Illustrated header (both cards): the appliance in its room (laundry room or kitchen) on a tiled floor, its icon tinted by the state and the brand's logo on it. `false` keeps the classic header |
+| `illustration_theme` | both | `auto` | Illustrated header, both cards: `auto` (follows the Home Assistant theme: night with a dark theme, day with a light theme), `day` or `night` |
+| `show_program` | both | `true` | Show the program picker |
+| `show_options` | both | `true` | Show program options (only before a program starts) |
+| `show_controls` | both | `true` | Show Start / Pause / Resume / Stop buttons |
+| `show_alerts` | both | `true` | Show salt, rinse aid and coffee machine alerts, and the reminder when a finished program's door hasn't been opened |
+| `show_power` | both | `true` | Show the power button (turn off for appliances that can't be switched on / off remotely) |
+| `show_energy` | both | `true` | Energy chip of the running or last cycle (24 h), when the appliance has an energy meter |
+| `energy_price` | both | — | Price per kWh: the cycle's cost next to its energy (*This cycle: 0.58 kWh · ≈ €0.12*), in Home Assistant's currency |
+| `energy_price_entity` | both | — | A sensor giving the price per kWh (current tariff, Tempo…), used instead of `energy_price` |
+| `zoom` | mini | `true` | Detail button at the top right that unfolds the full card (a click elsewhere folds it back) |
+| `language` | both | Auto | Force language: `fr`, `en`, `de`, `es`, `sr`, `sr-Latn`, `it`, `nl`, `pt`, `pl`, `ro`, `da`, `sv`, `bg`, `ru`, `uk`, `hu`, `sk`, `cs`, `sl`, `lv` or `el` (auto-detects from HA settings) |
+| `entities` | both | Auto | Override detected entities (see below) |
 
 ### Entity overrides
 
