@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.9.2 - 2026-11-20
+
+### Fixes
+- Mini cards: the detail view folds back on a tap elsewhere on iOS too (Safari and the companion app send no click for a tap on something that is not clickable): caught on the pointer, as on the other cards; and it is back to the compact view when the card leaves the page (another view, a conditional card hidden).
+- Mini cards: the dashboard lays the card out again when it unfolds or folds back; a pending header measurement is cancelled when the card leaves the page.
+- README: the options table says which card each option applies to (`both`, `mini`), as on the other cards.
+
+### Maintenance
+- The unit tests report the card's own coverage.
+
 ## 2.9.1 - 2026-11-19
 
 ### Fixes
