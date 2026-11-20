@@ -3784,6 +3784,56 @@ const PILL_GROUND_PX = 10;
 const PILL_GAP_PX = 8;
 
 // ── Base card ────────────────────────────────────────────────────────────────
+// ── Shadow DOM patching ───────────────────────────────────────────────────────
+// A render is applied to the nodes already there (text, attributes and classes updated in place) instead of
+// replacing the whole shadow root: replaced nodes made the card lose a few pixels of height for a frame on every state
+// update (icons empty until loaded, illustration rebuilt, animations restarted), and the dashboard's scroll anchoring
+// then moved the page. Form controls get their live value too (an attribute alone no longer moves a used <select>).
+function hcPatchAttrs(cur, next) {
+  for (const { name } of [...cur.attributes]) if (!next.hasAttribute(name)) cur.removeAttribute(name);
+  for (const { name, value } of next.attributes) if (cur.getAttribute(name) !== value) cur.setAttribute(name, value);
+  if (cur.localName === 'option' && cur.selected !== next.hasAttribute('selected')) cur.selected = next.hasAttribute('selected');
+}
+function hcKeyOf(n) { return n.nodeType === 1 ? n.getAttribute('data-key') : null; }
+function hcSameNode(a, b) { return !!a && a.nodeType === b.nodeType && a.nodeName === b.nodeName; }
+function hcPatchChildren(cur, next) {
+  const old = [...cur.childNodes];
+  const fresh = [...next.childNodes];
+  const byKey = new Map();
+  for (const o of old) {
+    const k = hcKeyOf(o);
+    if (k !== null && !byKey.has(k)) byKey.set(k, o);
+  }
+  const used = new Set();
+  fresh.forEach((n, i) => {
+    const k = hcKeyOf(n);
+    let o = k !== null ? byKey.get(k) : old[i];
+    if (!hcSameNode(o, n) || used.has(o) || (k === null && hcKeyOf(o) !== null)) o = null;
+    const ref = cur.childNodes[i] ?? null;
+    if (!o) {
+      cur.insertBefore(n, ref);
+      return;
+    }
+    used.add(o);
+    if (o !== ref) cur.insertBefore(o, ref);
+    if (n.nodeType === 1) {
+      hcPatchAttrs(o, n);
+      hcPatchChildren(o, n);
+    } else if (o.nodeValue !== n.nodeValue) o.nodeValue = n.nodeValue;
+  });
+  while (cur.childNodes.length > fresh.length) cur.removeChild(cur.lastChild);
+}
+// The first render (an empty shadow root) is written as is.
+function hcMorph(root, html) {
+  if (!root.firstChild) {
+    root.innerHTML = html;
+    return;
+  }
+  const tpl = document.createElement('template');
+  tpl.innerHTML = html;
+  hcPatchChildren(root, tpl.content);
+}
+
 class HomeConnectBaseCard extends HTMLElement {
   static get kind() { return 'dishwasher'; }
 
@@ -3997,7 +4047,7 @@ class HomeConnectBaseCard extends HTMLElement {
     if (active && active.tagName === 'SELECT') return;
     this._sig = sig;
     this._r = r;
-    // innerHTML replaces every control: the one that had the keyboard focus gets it back (an armed Stop
+    // A control the patch could not keep (another layout): the one that had the keyboard focus gets it back (an armed Stop
     // must stay focused for a second Enter to confirm it).
     var focus = hcFocusKey(active);
     this._render(r);
@@ -4245,7 +4295,7 @@ class HomeConnectBaseCard extends HTMLElement {
 
     if (!r.deviceId && !c.entities) {
       this._rows = 1;
-      this.shadowRoot.innerHTML = `${this._styles()}<ha-card><div class="empty"><ha-icon icon="${hcEsc(icon)}"></ha-icon>${this._t('no_device')}</div></ha-card>`;
+      hcMorph(this.shadowRoot, `${this._styles()}<ha-card><div class="empty"><ha-icon icon="${hcEsc(icon)}"></ha-icon>${this._t('no_device')}</div></ha-card>`);
       return;
     }
 
@@ -4455,9 +4505,9 @@ class HomeConnectBaseCard extends HTMLElement {
 
     if (this._compact()) {
       this._rows = hcRows(HC_PX.miniBase + (this._error ? HC_PX.error : 0));
-      this.shadowRoot.innerHTML = this._miniHtml({ c, ent, name, color, state, statusText, running, online, powerOn, progress,
+      hcMorph(this.shadowRoot, this._miniHtml({ c, ent, name, color, state, statusText, running, online, powerOn, progress,
         finish, progLabel, chips: chips.filter((x) => x.indexOf('chip warn') >= 0 || x.indexOf('chip extra') >= 0 || !online), art, logo, powerBtn,
-        banner: this._illustrated ? banner() : '' });
+        banner: this._illustrated ? banner() : '' }));
       return;
     }
 
@@ -4466,14 +4516,14 @@ class HomeConnectBaseCard extends HTMLElement {
     var nZones = zonesHtml ? ent.zones.length : 0;
     this._rows = hcRows(base + (nZones ? HC_PX.section + Math.ceil(nZones / 2) * HC_PX.zoneRow : 0) + (programHtml ? HC_PX.program : 0) + optPx + (errorHtml ? HC_PX.error : 0) +
       (controls ? HC_PX.controls : 0) + (controls.indexOf('class="hint"') >= 0 ? HC_PX.hint : 0));
-    this.shadowRoot.innerHTML = this._styles(color) + '<ha-card>' +
+    hcMorph(this.shadowRoot, this._styles(color) + '<ha-card>' +
       (this._illustrated ? banner() : '<div class="header">' + logo +
         '<div class="titles"><div class="trow"><div class="name">' + hcEsc(name) + '</div>' + this._pill(statusText) + '</div>' +
           '<div class="sub" title="' + hcEsc(sub) + '">' + this._brandLogo() + hcEsc(sub) + '</div></div>' +
         powerBtn + this._zoomButton() +
       '</div>') +
       heroHtml + zonesHtml + programHtml + optionsHtml + errorHtml + controls +
-    '</ha-card>';
+    '</ha-card>');
   }
 
   // A program-less appliance at work: a super mode on, the hood's fan turning or venting, a hob zone on, its light aside.
@@ -4824,7 +4874,7 @@ class HomeConnectBaseCard extends HTMLElement {
       '.chips { display: flex; flex-wrap: wrap; gap: 6px; }' +
       '.chip { display: inline-flex; align-items: center; gap: 4px; max-width: 100%; box-sizing: border-box; overflow-wrap: anywhere; font-size: 11px; font-weight: 500; padding: 1px 8px 1px 5px; border-radius: 12px;' +
         ' background: var(--secondary-background-color, rgba(128,128,128,0.12)); color: var(--secondary-text-color); }' +
-      '.chip ha-icon { --mdc-icon-size: 13px; flex: none; }' +
+      '.chip ha-icon { --mdc-icon-size: 13px; flex: none; width: 13px; height: 13px; }' +
       '.chip.clickable { cursor: pointer; }' +
       '.chip.clickable:focus-visible { outline: 2px solid var(--primary-color, #03a9f4); outline-offset: 1px; }' +
       '.chip.warn { background: color-mix(in srgb, var(--warning-color, #ffa600) 15%, transparent); color: var(--hc-warning-text); }' +
@@ -4861,14 +4911,14 @@ class HomeConnectBaseCard extends HTMLElement {
       '.zv small { font-size: 11px; font-weight: 400; color: var(--secondary-text-color); }' +
       '.zone:not(.on) .zv { font-size: 13px; font-weight: 400; color: var(--secondary-text-color); }' +
       '.zt { display: inline-flex; align-items: center; gap: 3px; font-size: 11px; color: var(--secondary-text-color); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }' +
-      '.zt ha-icon { --mdc-icon-size: 13px; flex: none; }' +
+      '.zt ha-icon { --mdc-icon-size: 13px; flex: none; width: 13px; height: 13px; }' +
       // A narrow card: smaller icons and gaps, then (6 columns of the Sections view) the zones one under the other.
       '@container hc-card (max-width: 300px) { .zone { gap: 8px; padding: 8px; } .zic { width: 32px; height: 32px; } .zic ha-icon { --mdc-icon-size: 18px; } .zt ha-icon { display: none; } }' +
       '@container hc-card (max-width: 240px) { .zones { grid-template-columns: minmax(0, 1fr); } }' +
       '.toggle { display: inline-flex; align-items: center; gap: 4px; max-width: 100%; box-sizing: border-box; overflow-wrap: anywhere; text-align: start;' +
         ' font-size: 11px; font-weight: 500; padding: 3px 8px 3px 5px; border-radius: 12px;' +
         ' background: var(--secondary-background-color, rgba(128,128,128,0.12)); color: var(--secondary-text-color); }' +
-      '.toggle ha-icon { --mdc-icon-size: 16px; flex: none; }' +
+      '.toggle ha-icon { --mdc-icon-size: 16px; flex: none; width: 16px; height: 16px; }' +
       '.toggle:disabled { opacity: 0.45; }' +
       '.reload { display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; font-size: 12px; color: var(--secondary-text-color); }' +
       '.link { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 500; padding: 4px 8px; border-radius: 10px; background: none; color: var(--hc-primary-text); }' +
@@ -4877,7 +4927,7 @@ class HomeConnectBaseCard extends HTMLElement {
       '.controls { display: flex; gap: 6px; }' +
       '.btn { flex: 1; display: inline-flex; align-items: center; justify-content: center; gap: 6px; font-size: 13px; font-weight: 500;' +
         ' padding: 7px 10px; border-radius: 10px; background: var(--secondary-background-color, rgba(128,128,128,0.12)); color: var(--primary-text-color); }' +
-      '.btn ha-icon { --mdc-icon-size: 18px; }' +
+      '.btn ha-icon { --mdc-icon-size: 18px; flex: none; width: 18px; height: 18px; }' +
       // Hover: a light veil over whatever the button's own tint is (neutral, on, primary, danger), so the state colour stays.
       '.btn:hover:not(:disabled), .round:hover:not(:disabled), .toggle:hover:not(:disabled), .power:hover:not(:disabled), .link:hover:not(:disabled) {' +
         ' background-image: linear-gradient(color-mix(in srgb, var(--primary-text-color) 8%, transparent), color-mix(in srgb, var(--primary-text-color) 8%, transparent)); }' +
@@ -4891,7 +4941,7 @@ class HomeConnectBaseCard extends HTMLElement {
       '.hint { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--secondary-text-color); margin-top: -6px; }' +
       '.hint ha-icon { --mdc-icon-size: 16px; }' +
       '.error { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--hc-error-text); }' +
-      '.error ha-icon { --mdc-icon-size: 16px; flex-shrink: 0; }' +
+      '.error ha-icon { --mdc-icon-size: 16px; flex-shrink: 0; width: 16px; height: 16px; }' +
       '.zoom { all: unset; flex: none; cursor: pointer; width: 24px; height: 24px; margin: -4px -4px -4px 0; border-radius: 50%;' +
         ' display: grid; place-items: center; color: var(--secondary-text-color); }' +
       '.zoom ha-icon { --mdc-icon-size: 16px; }' +
@@ -4909,7 +4959,7 @@ class HomeConnectBaseCard extends HTMLElement {
       '.mbar .bar { flex: 1; }' +
       '.mbar .v { font-weight: 500; min-width: 40px; text-align: right; color: var(--primary-text-color); }' +
       '.line { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--secondary-text-color); min-width: 0; }' +
-      '.line ha-icon { --mdc-icon-size: 14px; flex-shrink: 0; }' +
+      '.line ha-icon { --mdc-icon-size: 14px; flex-shrink: 0; width: 14px; height: 14px; }' +
       // Program and finish time wrap rather than being cut.
       '.line span { min-width: 0; overflow-wrap: break-word; }' +
       '.mstate { display: none; font-weight: 500; color: var(--hc-text); }' +
