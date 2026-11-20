@@ -6,7 +6,7 @@
 - Mini cards: the detail view folds back on a tap elsewhere on iOS too (Safari and the companion app send no click for a tap on something that is not clickable): caught on the pointer, as on the other cards; and it is back to the compact view when the card leaves the page (another view, a conditional card hidden).
 - Mini cards: the dashboard lays the card out again when it unfolds or folds back; a pending header measurement is cancelled when the card leaves the page.
 - README: the options table says which card each option applies to (`both`, `mini`), as on the other cards.
-- The page no longer moves by itself on state updates: the card is patched in place instead of being rewritten (icons and illustration stay the same nodes, animations no longer restart), and the icons of chips, lines, toggles, messages and buttons keep their size while they load — a rewrite made the card lose 1 to 4 px for a frame on every update of its entities.
+- The page no longer moves by itself on state updates: the card is patched in place instead of being rewritten (icons and illustration stay the same nodes, animations no longer restart), and the icons of chips, lines, toggles, messages and buttons keep their size while they load — a rewrite made the card lose 1 to 4 px for a frame on every update of its entities. The status pill is measured again once Home Assistant's card frame has drawn its content, so that it is in its place from the first frame.
 
 ### Maintenance
 - The unit tests report the card's own coverage.

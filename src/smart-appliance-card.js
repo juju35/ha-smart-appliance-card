@@ -3789,9 +3789,20 @@ const PILL_GAP_PX = 8;
 // replacing the whole shadow root: replaced nodes made the card lose a few pixels of height for a frame on every state
 // update (icons empty until loaded, illustration rebuilt, animations restarted), and the dashboard's scroll anchoring
 // then moved the page. Form controls get their live value too (an attribute alone no longer moves a used <select>).
+// A custom element (ha-icon, ha-card…) may set attributes on itself (a style, a state): it only loses those the
+// previous render gave it (hcTplAttrs) and are no longer in this one.
+function hcIsCustom(el) { return el.localName.includes('-'); }
+const hcTplAttrs = new WeakMap();
+function hcMarkTemplate(n) {
+  if (n.nodeType !== 1) return;
+  for (const el of [n, ...n.querySelectorAll('*')]) if (hcIsCustom(el)) hcTplAttrs.set(el, new Set(el.getAttributeNames()));
+}
 function hcPatchAttrs(cur, next) {
-  for (const { name } of [...cur.attributes]) if (!next.hasAttribute(name)) cur.removeAttribute(name);
+  const custom = hcIsCustom(cur);
+  const owned = custom ? hcTplAttrs.get(cur) || new Set() : null;
+  for (const name of cur.getAttributeNames()) if (!next.hasAttribute(name) && (!custom || owned.has(name))) cur.removeAttribute(name);
   for (const { name, value } of next.attributes) if (cur.getAttribute(name) !== value) cur.setAttribute(name, value);
+  if (custom) hcTplAttrs.set(cur, new Set(next.getAttributeNames()));
   if (cur.localName === 'option' && cur.selected !== next.hasAttribute('selected')) cur.selected = next.hasAttribute('selected');
 }
 function hcKeyOf(n) { return n.nodeType === 1 ? n.getAttribute('data-key') : null; }
@@ -3811,6 +3822,7 @@ function hcPatchChildren(cur, next) {
     if (!hcSameNode(o, n) || used.has(o) || (k === null && hcKeyOf(o) !== null)) o = null;
     const ref = cur.childNodes[i] ?? null;
     if (!o) {
+      hcMarkTemplate(n);
       cur.insertBefore(n, ref);
       return;
     }
@@ -3818,14 +3830,15 @@ function hcPatchChildren(cur, next) {
     if (o !== ref) cur.insertBefore(o, ref);
     if (n.nodeType === 1) {
       hcPatchAttrs(o, n);
-      hcPatchChildren(o, n);
+      // A custom element the template leaves empty (ha-icon) draws its own children: they are kept.
+      if (n.childNodes.length || !hcIsCustom(o)) hcPatchChildren(o, n);
     } else if (o.nodeValue !== n.nodeValue) o.nodeValue = n.nodeValue;
   });
   while (cur.childNodes.length > fresh.length) cur.removeChild(cur.lastChild);
 }
-// The first render (an empty shadow root) is written as is.
+// Without a DOM (the unit tests' stand-in shadow root), the HTML is only written.
 function hcMorph(root, html) {
-  if (!root.firstChild) {
+  if (!root.childNodes) {
     root.innerHTML = html;
     return;
   }
@@ -3898,6 +3911,7 @@ class HomeConnectBaseCard extends HTMLElement {
   }
 
   connectedCallback() {
+    Promise.resolve().then(() => this._fitAfterCard());
     // Refresh the remaining time every 30 s while a program with a finish time runs and the card is on screen.
     clearInterval(this._timer);
     this._timer = setInterval(() => this._tick(), 30000);
@@ -4052,6 +4066,7 @@ class HomeConnectBaseCard extends HTMLElement {
     var focus = hcFocusKey(active);
     this._render(r);
     this._fitPill();
+    this._fitAfterCard();
     if (focus) this._refocus(focus);
   }
 
@@ -4082,6 +4097,18 @@ class HomeConnectBaseCard extends HTMLElement {
       });
       if (out) t.classList.add("pill-dot");
     }
+  }
+
+  // <ha-card> (Lit) draws its slot a microtask after it is created: until then the card's content has no size, and the
+  // status pill measured then would take the wrong line (the card then changed height once measured again). A new
+  // <ha-card> is measured once more as soon as it has rendered, before the frame is painted.
+  // Rendered before the card is on the page, <ha-card> is only upgraded once connected: called again then (see
+  // connectedCallback).
+  _fitAfterCard() {
+    const card = this.shadowRoot?.querySelector?.('ha-card');
+    if (!card?.updateComplete || card === this._fitCard) return;
+    this._fitCard = card;
+    card.updateComplete?.then?.(() => this._fitPill());
   }
 
   _watchPill() {
