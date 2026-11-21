@@ -836,3 +836,14 @@ test("mini card: a tap elsewhere (pointer, iOS) or leaving the page brings the c
   card.disconnectedCallback();
   assert.equal(card._zoomed, false);
 });
+
+test("editor offers the too warm thresholds on cold appliances only", () => {
+  const names = (ed) => ed._schema().flatMap((s) => (s.type === "grid" ? s.schema : [s])).map((s) => s.name);
+  assert.ok(names(editor("fridge", {})).includes("temperature_alert"));
+  assert.ok(names(editor("freezer", {})).includes("freezer_temperature_alert"));
+  assert.ok(!names(editor("washer", {})).includes("temperature_alert"));
+  for (const n of ["temperature_alert", "freezer_temperature_alert"]) {
+    assert.notEqual(editor("fridge", {})._form.computeLabel({ name: n }), `ed_${n}`);
+    assert.ok(editor("fridge", {})._form.computeHelper({ name: n }));
+  }
+});

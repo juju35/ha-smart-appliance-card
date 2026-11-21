@@ -32,6 +32,15 @@ var HcI18n = {
     idos_2: 'i-Dos 2 presque vide',
     descale: 'Détartrage recommandé',
     clean: 'Nettoyage recommandé',
+    too_warm: 'Trop chaud',
+    setpoint: 'Consigne',
+    temperature: 'Température',
+    temp_down: 'Baisser la consigne',
+    temp_up: 'Monter la consigne',
+    ed_temperature_alert: 'Trop chaud au-delà de',
+    ed_temperature_alert_helper: 'Compartiments réfrigérateur, dans l\'unité de l\'appareil. Par défaut : 8°',
+    ed_freezer_temperature_alert: 'Congélateur trop chaud au-delà de',
+    ed_freezer_temperature_alert_helper: 'Compartiments congélateur. Par défaut : −12°',
     ed_kind: 'Type d\'appareil',
     ed_kind_helper: 'Laisser vide pour le détecter depuis l\'appareil',
     ed_brand: 'Marque',
@@ -159,6 +168,15 @@ var HcI18n = {
     idos_2: 'i-Dos 2 low',
     descale: 'Descaling recommended',
     clean: 'Cleaning recommended',
+    too_warm: 'Too warm',
+    setpoint: 'Setpoint',
+    temperature: 'Temperature',
+    temp_down: 'Lower the setpoint',
+    temp_up: 'Raise the setpoint',
+    ed_temperature_alert: 'Too warm above',
+    ed_temperature_alert_helper: 'Fridge compartments, in the appliance\'s unit. Default: 8°',
+    ed_freezer_temperature_alert: 'Freezer too warm above',
+    ed_freezer_temperature_alert_helper: 'Freezer compartments. Default: −12°',
     ed_kind: 'Appliance type',
     ed_kind_helper: 'Leave empty to detect it from the appliance',
     ed_brand: 'Brand',
@@ -286,6 +304,15 @@ var HcI18n = {
     idos_2: 'i-Dos 2 fast leer',
     descale: 'Entkalken empfohlen',
     clean: 'Reinigen empfohlen',
+    too_warm: 'Zu warm',
+    setpoint: 'Sollwert',
+    temperature: 'Temperatur',
+    temp_down: 'Sollwert senken',
+    temp_up: 'Sollwert erhöhen',
+    ed_temperature_alert: 'Zu warm ab',
+    ed_temperature_alert_helper: 'Kühlfächer, in der Einheit des Geräts. Standard: 8°',
+    ed_freezer_temperature_alert: 'Gefrierfach zu warm ab',
+    ed_freezer_temperature_alert_helper: 'Gefrierfächer. Standard: −12°',
     ed_kind: 'Gerätetyp',
     ed_kind_helper: 'Leer lassen, um ihn am Gerät zu erkennen',
     ed_brand: 'Marke',
@@ -413,6 +440,15 @@ var HcI18n = {
     idos_2: 'i-Dos 2 casi vacío',
     descale: 'Descalcificación recomendada',
     clean: 'Limpieza recomendada',
+    too_warm: 'Demasiado caliente',
+    setpoint: 'Consigna',
+    temperature: 'Temperatura',
+    temp_down: 'Bajar la consigna',
+    temp_up: 'Subir la consigna',
+    ed_temperature_alert: 'Demasiado caliente por encima de',
+    ed_temperature_alert_helper: 'Compartimentos del frigorífico, en la unidad del aparato. Por defecto: 8°',
+    ed_freezer_temperature_alert: 'Congelador demasiado caliente por encima de',
+    ed_freezer_temperature_alert_helper: 'Compartimentos del congelador. Por defecto: −12°',
     ed_kind: 'Tipo de aparato',
     ed_kind_helper: 'Dejar vacío para detectarlo desde el aparato',
     ed_brand: 'Marca',
@@ -540,6 +576,15 @@ var HcI18n = {
     idos_2: 'i-Dos 2 скоро празан',
     descale: 'Препоручено уклањање каменца',
     clean: 'Препоручено чишћење',
+    too_warm: 'Претопло',
+    setpoint: 'Задата вредност',
+    temperature: 'Температура',
+    temp_down: 'Смањи задату вредност',
+    temp_up: 'Повећај задату вредност',
+    ed_temperature_alert: 'Претопло изнад',
+    ed_temperature_alert_helper: 'Одељци фрижидера, у јединици уређаја. Подразумевано: 8°',
+    ed_freezer_temperature_alert: 'Замрзивач претопао изнад',
+    ed_freezer_temperature_alert_helper: 'Одељци замрзивача. Подразумевано: −12°',
     ed_kind: 'Врста уређаја',
     ed_kind_helper: 'Оставите празно да се препозна са уређаја',
     ed_brand: 'Бренд',
@@ -667,6 +712,15 @@ var HcI18n = {
     idos_2: 'i-Dos 2 skoro prazan',
     descale: 'Preporučeno uklanjanje kamenca',
     clean: 'Preporučeno čišćenje',
+    too_warm: 'Pretoplo',
+    setpoint: 'Zadata vrednost',
+    temperature: 'Temperatura',
+    temp_down: 'Smanji zadatu vrednost',
+    temp_up: 'Povećaj zadatu vrednost',
+    ed_temperature_alert: 'Pretoplo iznad',
+    ed_temperature_alert_helper: 'Odeljci frižidera, u jedinici uređaja. Podrazumevano: 8°',
+    ed_freezer_temperature_alert: 'Zamrzivač pretopao iznad',
+    ed_freezer_temperature_alert_helper: 'Odeljci zamrzivača. Podrazumevano: −12°',
     ed_kind: 'Vrsta uređaja',
     ed_kind_helper: 'Ostavite prazno da se prepozna sa uređaja',
     ed_brand: 'Brend',
@@ -794,6 +848,15 @@ var HcI18n = {
     idos_2: 'i-Dos 2 quasi vuoto',
     descale: 'Decalcificazione consigliata',
     clean: 'Pulizia consigliata',
+    too_warm: 'Troppo caldo',
+    setpoint: 'Valore impostato',
+    temperature: 'Temperatura',
+    temp_down: 'Abbassa il valore impostato',
+    temp_up: 'Alza il valore impostato',
+    ed_temperature_alert: 'Troppo caldo oltre',
+    ed_temperature_alert_helper: 'Scomparti frigorifero, nell\'unità dell\'apparecchio. Predefinito: 8°',
+    ed_freezer_temperature_alert: 'Congelatore troppo caldo oltre',
+    ed_freezer_temperature_alert_helper: 'Scomparti congelatore. Predefinito: −12°',
     ed_kind: 'Tipo di apparecchio',
     ed_kind_helper: 'Lasciare vuoto per rilevarlo dall\'apparecchio',
     ed_brand: 'Marca',
@@ -921,6 +984,15 @@ var HcI18n = {
     idos_2: 'i-Dos 2 bijna leeg',
     descale: 'Ontkalken aanbevolen',
     clean: 'Reinigen aanbevolen',
+    too_warm: 'Te warm',
+    setpoint: 'Instelwaarde',
+    temperature: 'Temperatuur',
+    temp_down: 'Instelwaarde verlagen',
+    temp_up: 'Instelwaarde verhogen',
+    ed_temperature_alert: 'Te warm boven',
+    ed_temperature_alert_helper: 'Koelvakken, in de eenheid van het apparaat. Standaard: 8°',
+    ed_freezer_temperature_alert: 'Vriezer te warm boven',
+    ed_freezer_temperature_alert_helper: 'Vriesvakken. Standaard: −12°',
     ed_kind: 'Apparaattype',
     ed_kind_helper: 'Leeg laten om het van het apparaat af te leiden',
     ed_brand: 'Merk',
@@ -1048,6 +1120,15 @@ var HcI18n = {
     idos_2: 'i-Dos 2 quase vazio',
     descale: 'Descalcificação recomendada',
     clean: 'Limpeza recomendada',
+    too_warm: 'Demasiado quente',
+    setpoint: 'Valor definido',
+    temperature: 'Temperatura',
+    temp_down: 'Baixar o valor definido',
+    temp_up: 'Subir o valor definido',
+    ed_temperature_alert: 'Demasiado quente acima de',
+    ed_temperature_alert_helper: 'Compartimentos do frigorífico, na unidade do aparelho. Predefinição: 8°',
+    ed_freezer_temperature_alert: 'Congelador demasiado quente acima de',
+    ed_freezer_temperature_alert_helper: 'Compartimentos do congelador. Predefinição: −12°',
     ed_kind: 'Tipo de aparelho',
     ed_kind_helper: 'Deixar vazio para o detetar a partir do aparelho',
     ed_brand: 'Marca',
@@ -1175,6 +1256,15 @@ var HcI18n = {
     idos_2: 'i-Dos 2 prawie pusty',
     descale: 'Zalecane odkamienianie',
     clean: 'Zalecane czyszczenie',
+    too_warm: 'Za ciepło',
+    setpoint: 'Wartość zadana',
+    temperature: 'Temperatura',
+    temp_down: 'Obniż wartość zadaną',
+    temp_up: 'Podnieś wartość zadaną',
+    ed_temperature_alert: 'Za ciepło powyżej',
+    ed_temperature_alert_helper: 'Komory chłodziarki, w jednostce urządzenia. Domyślnie: 8°',
+    ed_freezer_temperature_alert: 'Zamrażarka za ciepła powyżej',
+    ed_freezer_temperature_alert_helper: 'Komory zamrażarki. Domyślnie: −12°',
     ed_kind: 'Typ urządzenia',
     ed_kind_helper: 'Pozostaw puste, aby wykryć go z urządzenia',
     ed_brand: 'Marka',
@@ -1302,6 +1392,15 @@ var HcI18n = {
     idos_2: 'i-Dos 2 aproape gol',
     descale: 'Decalcifiere recomandată',
     clean: 'Curățare recomandată',
+    too_warm: 'Prea cald',
+    setpoint: 'Valoare setată',
+    temperature: 'Temperatură',
+    temp_down: 'Scade valoarea setată',
+    temp_up: 'Crește valoarea setată',
+    ed_temperature_alert: 'Prea cald peste',
+    ed_temperature_alert_helper: 'Compartimentele frigiderului, în unitatea aparatului. Implicit: 8°',
+    ed_freezer_temperature_alert: 'Congelator prea cald peste',
+    ed_freezer_temperature_alert_helper: 'Compartimentele congelatorului. Implicit: −12°',
     ed_kind: 'Tip de aparat',
     ed_kind_helper: 'Lăsați gol pentru a-l detecta de pe aparat',
     ed_brand: 'Marcă',
@@ -1429,6 +1528,15 @@ var HcI18n = {
     idos_2: 'i-Dos 2 næsten tom',
     descale: 'Afkalkning anbefales',
     clean: 'Rengøring anbefales',
+    too_warm: 'For varmt',
+    setpoint: 'Indstillet værdi',
+    temperature: 'Temperatur',
+    temp_down: 'Sænk den indstillede værdi',
+    temp_up: 'Hæv den indstillede værdi',
+    ed_temperature_alert: 'For varmt over',
+    ed_temperature_alert_helper: 'Kølerum, i apparatets enhed. Standard: 8°',
+    ed_freezer_temperature_alert: 'Fryser for varm over',
+    ed_freezer_temperature_alert_helper: 'Fryserum. Standard: −12°',
     ed_kind: 'Apparattype',
     ed_kind_helper: 'Lad stå tomt for at registrere den fra apparatet',
     ed_brand: 'Mærke',
@@ -1556,6 +1664,15 @@ var HcI18n = {
     idos_2: 'i-Dos 2 nästan tom',
     descale: 'Avkalkning rekommenderas',
     clean: 'Rengöring rekommenderas',
+    too_warm: 'För varmt',
+    setpoint: 'Börvärde',
+    temperature: 'Temperatur',
+    temp_down: 'Sänk börvärdet',
+    temp_up: 'Höj börvärdet',
+    ed_temperature_alert: 'För varmt över',
+    ed_temperature_alert_helper: 'Kylfack, i apparatens enhet. Standard: 8°',
+    ed_freezer_temperature_alert: 'Frysen för varm över',
+    ed_freezer_temperature_alert_helper: 'Frysfack. Standard: −12°',
     ed_kind: 'Apparattyp',
     ed_kind_helper: 'Lämna tomt för att identifiera den från apparaten',
     ed_brand: 'Märke',
@@ -1683,6 +1800,15 @@ var HcI18n = {
     idos_2: 'i-Dos 2 почти празен',
     descale: 'Препоръчва се премахване на котлен камък',
     clean: 'Препоръчва се почистване',
+    too_warm: 'Твърде топло',
+    setpoint: 'Зададена стойност',
+    temperature: 'Температура',
+    temp_down: 'Намали зададената стойност',
+    temp_up: 'Увеличи зададената стойност',
+    ed_temperature_alert: 'Твърде топло над',
+    ed_temperature_alert_helper: 'Отделения на хладилника, в единицата на уреда. По подразбиране: 8°',
+    ed_freezer_temperature_alert: 'Фризерът е твърде топъл над',
+    ed_freezer_temperature_alert_helper: 'Отделения на фризера. По подразбиране: −12°',
     ed_kind: 'Тип уред',
     ed_kind_helper: 'Оставете празно, за да се разпознае от уреда',
     ed_brand: 'Марка',
@@ -1810,6 +1936,15 @@ var HcI18n = {
     idos_2: 'i-Dos 2 почти пуст',
     descale: 'Рекомендуется удаление накипи',
     clean: 'Рекомендуется очистка',
+    too_warm: 'Слишком тепло',
+    setpoint: 'Заданная температура',
+    temperature: 'Температура',
+    temp_down: 'Понизить заданную температуру',
+    temp_up: 'Повысить заданную температуру',
+    ed_temperature_alert: 'Слишком тепло выше',
+    ed_temperature_alert_helper: 'Отделения холодильника, в единицах прибора. По умолчанию: 8°',
+    ed_freezer_temperature_alert: 'Морозильник слишком тёплый выше',
+    ed_freezer_temperature_alert_helper: 'Отделения морозильника. По умолчанию: −12°',
     ed_kind: 'Тип прибора',
     ed_kind_helper: 'Оставьте пустым, чтобы определить его по прибору',
     ed_brand: 'Марка',
@@ -1937,6 +2072,15 @@ var HcI18n = {
     idos_2: 'i-Dos 2 майже порожній',
     descale: 'Рекомендовано видалення накипу',
     clean: 'Рекомендовано очищення',
+    too_warm: 'Занадто тепло',
+    setpoint: 'Задана температура',
+    temperature: 'Температура',
+    temp_down: 'Знизити задану температуру',
+    temp_up: 'Підвищити задану температуру',
+    ed_temperature_alert: 'Занадто тепло вище',
+    ed_temperature_alert_helper: 'Відділення холодильника, в одиницях приладу. Типово: 8°',
+    ed_freezer_temperature_alert: 'Морозильник занадто теплий вище',
+    ed_freezer_temperature_alert_helper: 'Відділення морозильника. Типово: −12°',
     ed_kind: 'Тип приладу',
     ed_kind_helper: 'Залиште порожнім, щоб визначити його за приладом',
     ed_brand: 'Марка',
@@ -2064,6 +2208,15 @@ var HcI18n = {
     idos_2: 'i-Dos 2 majdnem üres',
     descale: 'Vízkőmentesítés ajánlott',
     clean: 'Tisztítás ajánlott',
+    too_warm: 'Túl meleg',
+    setpoint: 'Beállított érték',
+    temperature: 'Hőmérséklet',
+    temp_down: 'Beállított érték csökkentése',
+    temp_up: 'Beállított érték növelése',
+    ed_temperature_alert: 'Túl meleg e fölött',
+    ed_temperature_alert_helper: 'Hűtőrekeszek, a készülék mértékegységében. Alapértelmezett: 8°',
+    ed_freezer_temperature_alert: 'Fagyasztó túl meleg e fölött',
+    ed_freezer_temperature_alert_helper: 'Fagyasztórekeszek. Alapértelmezett: −12°',
     ed_kind: 'Készüléktípus',
     ed_kind_helper: 'Hagyja üresen, hogy a készülékből legyen felismerve',
     ed_brand: 'Márka',
@@ -2191,6 +2344,15 @@ var HcI18n = {
     idos_2: 'i-Dos 2 takmer prázdny',
     descale: 'Odporúča sa odvápnenie',
     clean: 'Odporúča sa čistenie',
+    too_warm: 'Príliš teplo',
+    setpoint: 'Nastavená hodnota',
+    temperature: 'Teplota',
+    temp_down: 'Znížiť nastavenú hodnotu',
+    temp_up: 'Zvýšiť nastavenú hodnotu',
+    ed_temperature_alert: 'Príliš teplo nad',
+    ed_temperature_alert_helper: 'Chladiace priestory, v jednotke spotrebiča. Predvolené: 8°',
+    ed_freezer_temperature_alert: 'Mraznička príliš teplá nad',
+    ed_freezer_temperature_alert_helper: 'Mraziace priestory. Predvolené: −12°',
     ed_kind: 'Typ spotrebiča',
     ed_kind_helper: 'Nechajte prázdne, ak ho chcete zistiť zo spotrebiča',
     ed_brand: 'Značka',
@@ -2318,6 +2480,15 @@ var HcI18n = {
     idos_2: 'i-Dos 2 téměř prázdný',
     descale: 'Doporučeno odvápnění',
     clean: 'Doporučeno čištění',
+    too_warm: 'Příliš teplo',
+    setpoint: 'Nastavená hodnota',
+    temperature: 'Teplota',
+    temp_down: 'Snížit nastavenou hodnotu',
+    temp_up: 'Zvýšit nastavenou hodnotu',
+    ed_temperature_alert: 'Příliš teplo nad',
+    ed_temperature_alert_helper: 'Chladicí prostory, v jednotce spotřebiče. Výchozí: 8°',
+    ed_freezer_temperature_alert: 'Mraznička příliš teplá nad',
+    ed_freezer_temperature_alert_helper: 'Mrazicí prostory. Výchozí: −12°',
     ed_kind: 'Typ spotřebiče',
     ed_kind_helper: 'Ponechte prázdné, chcete-li ho zjistit ze spotřebiče',
     ed_brand: 'Značka',
@@ -2445,6 +2616,15 @@ var HcI18n = {
     idos_2: 'i-Dos 2 skoraj prazen',
     descale: 'Priporočeno odstranjevanje vodnega kamna',
     clean: 'Priporočeno čiščenje',
+    too_warm: 'Pretoplo',
+    setpoint: 'Nastavljena vrednost',
+    temperature: 'Temperatura',
+    temp_down: 'Znižaj nastavljeno vrednost',
+    temp_up: 'Zvišaj nastavljeno vrednost',
+    ed_temperature_alert: 'Pretoplo nad',
+    ed_temperature_alert_helper: 'Hladilni predali, v enoti naprave. Privzeto: 8°',
+    ed_freezer_temperature_alert: 'Zamrzovalnik pretopel nad',
+    ed_freezer_temperature_alert_helper: 'Zamrzovalni predali. Privzeto: −12°',
     ed_kind: 'Vrsta aparata',
     ed_kind_helper: 'Pustite prazno, da se zazna iz aparata',
     ed_brand: 'Znamka',
@@ -2572,6 +2752,15 @@ var HcI18n = {
     idos_2: 'i-Dos 2 gandrīz tukšs',
     descale: 'Ieteicama atkaļķošana',
     clean: 'Ieteicama tīrīšana',
+    too_warm: 'Pārāk silts',
+    setpoint: 'Iestatītā vērtība',
+    temperature: 'Temperatūra',
+    temp_down: 'Samazināt iestatīto vērtību',
+    temp_up: 'Palielināt iestatīto vērtību',
+    ed_temperature_alert: 'Pārāk silts virs',
+    ed_temperature_alert_helper: 'Ledusskapja nodalījumi, ierīces mērvienībā. Noklusējums: 8°',
+    ed_freezer_temperature_alert: 'Saldētava pārāk silta virs',
+    ed_freezer_temperature_alert_helper: 'Saldētavas nodalījumi. Noklusējums: −12°',
     ed_kind: 'Ierīces veids',
     ed_kind_helper: 'Atstājiet tukšu, lai to noteiktu no ierīces',
     ed_brand: 'Zīmols',
@@ -2699,6 +2888,15 @@ var HcI18n = {
     idos_2: 'i-Dos 2 σχεδόν άδειο',
     descale: 'Συνιστάται αφαλάτωση',
     clean: 'Συνιστάται καθαρισμός',
+    too_warm: 'Πολύ ζεστό',
+    setpoint: 'Ρύθμιση',
+    temperature: 'Θερμοκρασία',
+    temp_down: 'Μείωση της ρύθμισης',
+    temp_up: 'Αύξηση της ρύθμισης',
+    ed_temperature_alert: 'Πολύ ζεστό πάνω από',
+    ed_temperature_alert_helper: 'Θάλαμοι ψυγείου, στη μονάδα της συσκευής. Προεπιλογή: 8°',
+    ed_freezer_temperature_alert: 'Καταψύκτης πολύ ζεστός πάνω από',
+    ed_freezer_temperature_alert_helper: 'Θάλαμοι καταψύκτη. Προεπιλογή: −12°',
     ed_kind: 'Τύπος συσκευής',
     ed_kind_helper: 'Αφήστε κενό για ανίχνευση από τη συσκευή',
     ed_brand: 'Μάρκα',
@@ -2977,7 +3175,7 @@ var hcIsDoor = (s) => s.attributes.device_class === 'door' || s.attributes.devic
 var hcIsTimestamp = (s) => s.attributes.device_class === 'timestamp';
 var HC_COMMON_ROLES = {
   boost: { domain: 'switch', keys: ['refrigerator_super_mode', 'freezer_super_mode', 'supercooling', 'superfreezing', 'power_cool',
-    'power_freeze', 'rapid_freeze', 'express_mode', 'express_fridge'] },
+    'power_freeze', 'rapid_freeze', 'express_mode', 'express_fridge', 'super_cool', 'super_frost'] },
   fan: { domain: 'fan', keys: ['fan', 'hood', 'fan_speed'], test: () => true },
   venting: { domain: 'select', keys: ['venting_level'] },
   light: { domain: 'light', keys: ['cooking_lighting', 'light', 'oven_light'], test: () => true },
@@ -3077,6 +3275,9 @@ var HC_PLATFORM_ROLES = {
     boost: { domain: 'switch', keys: ['switch_super_refrigerator', 'switch_super_freezer'] },
     light: { domain: 'light', keys: ['light_cooking_lighting', 'light_internal'], test: () => true },
   },
+  // Liebherr (built in): fridges and freezers, a temperature sensor and a setpoint number per zone, SuperCool / SuperFrost
+  // per zone (the super mode), party and night mode switches (settings). Nothing else to find: the common roles do.
+  liebherr: {},
   // LocalThings (mbillow/localthings): Samsung appliances over the local network. Its machine state is already
   // idle / active / pause; the step is the oven's cavity state or the laundry progress. A washer or dryer cycle select
   // is keyed by its course table (washer_cycle_table_02…).
@@ -3257,8 +3458,35 @@ function hcTempIds(hass, list) {
     test(hass.states[e.entity_id])).map((e) => e.entity_id);
   return pick('climate', (s) => s.attributes.current_temperature != null)
     .concat(pick('sensor', (s) => s.attributes.device_class === 'temperature' || unit(s)))
-    .concat(pick('number', unit)).slice(0, 3);
+    .concat(pick('number', unit)).slice(0, 6);
 }
+
+// The measured temperatures of a cold appliance, each with the setpoint (a `number`) of its compartment when there is one:
+// the setpoint whose entity_id shares strictly the most with it (`sensor.fridge_top_zone` with
+// `number.fridge_top_zone_setpoint`), or the only one beside a single temperature. Setpoints left over stand alone.
+function hcTempPairs(ids) {
+  var obj = (id) => id.split('.')[1];
+  var shared = (a, b) => { var n = 0; while (n < a.length && a[n] === b[n]) n++; return n; };
+  var measured = ids.filter((id) => id.indexOf('number.') !== 0);
+  var setpoints = ids.filter((id) => id.indexOf('number.') === 0);
+  var pairs = measured.map((id) => ({ temp: id, setpoint: undefined }));
+  setpoints.forEach((sp) => {
+    var best = -1, at = -1, tie = false;
+    pairs.forEach((p, i) => {
+      if (p.setpoint) return;
+      var n = shared(obj(sp), obj(p.temp));
+      if (n > best) { best = n; at = i; tie = false; } else if (n === best) tie = true;
+    });
+    var lone = measured.length === 1 && setpoints.length === 1;
+    if (at >= 0 && (lone || (!tie && best > 0))) pairs[at].setpoint = sp;
+    else pairs.push({ temp: undefined, setpoint: sp });
+  });
+  return pairs;
+}
+
+// Above this a compartment is too warm, by default: 8 °C in a fridge, −12 °C in a freezer (46 / 10 °F).
+var HC_TOO_WARM = { fridge: { '°C': 8, '°F': 46 }, freezer: { '°C': -12, '°F': 10 } };
+var HC_FREEZER_WORDS = /freez|congel|gefrier|congela|vries|zamra/i;
 
 // A hob's cooking zones: one per power level (LG ThinQ's per-location power level, Miele's plates), else one per
 // per-location state; each zone's state and timer joined to it by the longest shared entity_id start (the location's
@@ -3327,8 +3555,10 @@ var HC_KEY_KINDS = [
   ['hob', (k) => (k.favorite_short_press || k.favorite_long_press) && (k.preheat_finished || k.alarm_clock_elapsed)],
   ['wine_cooler', ['wine_compartment_setpoint_temperature']],
   ['fridge', ['refrigerator_setpoint_temperature', 'refrigerator_super_mode', 'cooler_temperature', 'power_cool',
-    'refrigerator_temperature_level', 'refrigerator_door']],
-  ['freezer', ['freezer_setpoint_temperature', 'freezer_super_mode', 'freezer_temperature', 'power_freeze']],
+    'refrigerator_temperature_level', 'refrigerator_door', 'super_cool', 'bio_fresh_plus', 'hydro_breeze']],
+  ['freezer', ['freezer_setpoint_temperature', 'freezer_super_mode', 'freezer_temperature', 'power_freeze', 'super_frost', 'ice_maker']],
+  // A Liebherr appliance with no super mode: a fridge until told otherwise (`kind`).
+  ['fridge', (k) => k.setpoint_temperature || k.setpoint_temperature_top_zone],
 ];
 
 var hcKindIndex = new WeakMap();
@@ -3408,7 +3638,7 @@ var HC_BRANDS = {
   gaggenau: { name: 'Gaggenau', color: '#3a3a3a' }, constructa: { name: 'Constructa', color: '#00589b' }, miele: { name: 'Miele', color: '#8c0014' },
   samsung: { name: 'Samsung', color: '#1428a0', match: /samsung/i }, lg: { name: 'LG', color: '#a50034', match: /^(lg|lge|lg electronics)$/i },
   whirlpool: { name: 'Whirlpool', color: '#8a6a00' }, maytag: { name: 'Maytag', color: '#002d72' }, kitchenaid: { name: 'KitchenAid', color: '#c8102e' },
-  consul: { name: 'Consul', color: '#0067b1' },
+  consul: { name: 'Consul', color: '#0067b1' }, liebherr: { name: 'Liebherr', color: '#4d5257' },
 };
 // Brand logos (SVG or PNG files in logos/, named after the HC_BRANDS key), embedded by the build; brands without one keep
 // the initial on their colour.
@@ -3451,6 +3681,7 @@ var HC_PX = {
   selectRow: 56,
   toggleRow: 28,
   zoneRow: 62, // a row of hob zone tiles
+  stepRow: 38, // a setpoint's − / + row
   reload: 30,
   error: 26,
   controls: 44,
@@ -4481,6 +4712,8 @@ class HomeConnectBaseCard extends HTMLElement {
     this._ticking = !!(running && finish);
     // A hob's zones (after the line above: a zone timer keeps the tick running too).
     var zonesHtml = this._compact() ? '' : this._zonesHtml(ent, deviceName, online);
+    this._nSetpoints = 0;
+    var setpointsHtml = this._compact() ? '' : this._setpointsHtml(ent, kind, deviceName, online);
 
     // While a program runs, integrations that report its step say more than "Running" (spinning, drying…).
     var statusText = this._t(`st_${state}`);
@@ -4519,6 +4752,7 @@ class HomeConnectBaseCard extends HTMLElement {
         var v = this._val(ent[a[0]]);
         if (v === 'full' ? a[0] === 'drip_tray' : HC_ALERT_ON.indexOf(v) >= 0) chips.push(hcChip('chip warn', a[1], this._t(a[0]), ent[a[0]]));
       });
+      if (online) chips = chips.concat(this._tempAlerts(ent, kind, deviceName));
       chips = chips.concat(this._customAlerts());
     }
     if (!online) chips.push(`<span class="chip"><ha-icon icon="mdi:cloud-off-outline"></ha-icon>${this._t('offline')}</span>`);
@@ -4648,7 +4882,8 @@ class HomeConnectBaseCard extends HTMLElement {
     // With the illustrated header the state row holds no picture: its own lines set its height.
     var base = this._illustrated ? HC_PX.bannerBase + (timeLine ? HC_PX.bannerTime : 0) + (chips.length ? HC_PX.bannerChips : 0) : HC_PX.base;
     var nZones = zonesHtml ? ent.zones.length : 0;
-    this._rows = hcRows(base + (nZones ? HC_PX.section + Math.ceil(nZones / 2) * HC_PX.zoneRow : 0) + (programHtml ? HC_PX.program : 0) + optPx + (errorHtml ? HC_PX.error : 0) +
+    this._rows = hcRows(base + (nZones ? HC_PX.section + Math.ceil(nZones / 2) * HC_PX.zoneRow : 0) +
+      (this._nSetpoints ? HC_PX.section + this._nSetpoints * HC_PX.stepRow : 0) + (programHtml ? HC_PX.program : 0) + optPx + (errorHtml ? HC_PX.error : 0) +
       (controls ? HC_PX.controls : 0) + (controls.indexOf('class="hint"') >= 0 ? HC_PX.hint : 0));
     hcMorph(this.shadowRoot, this._styles(color) + '<ha-card>' +
       (this._illustrated ? banner() : '<div class="header">' + logo +
@@ -4656,7 +4891,7 @@ class HomeConnectBaseCard extends HTMLElement {
           '<div class="sub" title="' + hcEsc(sub) + '">' + this._brandLogo() + hcEsc(sub) + '</div></div>' +
         powerBtn + this._zoomButton() +
       '</div>') +
-      heroHtml + zonesHtml + programHtml + optionsHtml + errorHtml + controls +
+      heroHtml + zonesHtml + setpointsHtml + programHtml + optionsHtml + errorHtml + controls +
     '</ha-card>');
   }
 
@@ -4751,6 +4986,84 @@ class HomeConnectBaseCard extends HTMLElement {
       `<div class="zones">${tiles}</div></div>`;
   }
 
+  // A temperature as shown on its chip (unit included), or '' when unavailable or not reported (null would read as 0 °):
+  // climate entities give the number in the card's locale with Home Assistant's unit, the others Home Assistant's text.
+  _tempText(id) {
+    var s = this._st(id);
+    if (!s || !this._avail(id)) return '';
+    if (id.indexOf('climate.') === 0) {
+      var n = this._tempNum(id);
+      return n == null ? '' : `${new Intl.NumberFormat(this._locale(), { maximumFractionDigits: 1 }).format(n)} ${this._hass.config?.unit_system?.temperature || '°'}`;
+    }
+    return this._hass.formatEntityState ? this._hass.formatEntityState(s) : `${s.state} ${s.attributes.unit_of_measurement || ''}`.trim();
+  }
+
+  _tempNum(id) {
+    var s = this._st(id);
+    if (!s || !this._avail(id)) return null;
+    var v = id.indexOf('climate.') === 0 ? s.attributes.current_temperature : s.state;
+    var n = v == null || v === '' ? Number.NaN : Number(v);
+    return Number.isFinite(n) ? n : null;
+  }
+
+  // A freezer compartment: named so, or set below zero.
+  _freezerZone(p, label) {
+    var id = p.temp || p.setpoint;
+    if (HC_FREEZER_WORDS.test(`${id} ${p.setpoint || ''} ${label}`)) return true;
+    var sp = p.setpoint ? this._tempNum(p.setpoint) : null;
+    return sp != null && sp < 0;
+  }
+
+  // "Too warm" alerts: a compartment of a cold appliance above `temperature_alert` (fridge compartments) or
+  // `freezer_temperature_alert` (freezer compartments), 8 °C / −12 °C by default; `false` turns one off. A wine cabinet
+  // only alerts when told a threshold.
+  _tempAlerts(ent, kind, deviceName) {
+    if (HC_COLD.indexOf(kind) < 0) return [];
+    var c = this._config;
+    return hcTempPairs(ent.temps).filter((p) => p.temp).map((p) => {
+      var n = this._tempNum(p.temp);
+      if (n == null) return '';
+      var freezer = kind === 'freezer' || this._freezerZone(p, this._entityLabel(p.temp, deviceName));
+      var opt = c[freezer ? 'freezer_temperature_alert' : 'temperature_alert'];
+      if (opt === false) return '';
+      var s = this._st(p.temp);
+      var unit = p.temp.indexOf('climate.') === 0 ? this._hass.config?.unit_system?.temperature : s.attributes.unit_of_measurement;
+      var limit = opt != null && opt !== '' ? Number(opt)
+        : (kind === 'wine_cooler' && !freezer ? Number.NaN : HC_TOO_WARM[freezer ? 'freezer' : 'fridge'][unit === '°F' ? '°F' : '°C']);
+      if (!Number.isFinite(limit) || n <= limit) return '';
+      return hcChip('chip warn', 'mdi:thermometer-alert', hcEsc(`${this._t('too_warm')} · ${this._tempText(p.temp)}`), p.temp);
+    }).filter(Boolean);
+  }
+
+  // − / + for each setpoint (`number`) of a cold appliance, within its min / max, by its step.
+  _setpointsHtml(ent, kind, deviceName, online) {
+    if (!online || HC_COLD.indexOf(kind) < 0) return '';
+    var rows = ent.temps.filter((id) => id.indexOf('number.') === 0 && this._tempNum(id) != null).map((id) => {
+      var a = this._st(id).attributes, v = this._tempNum(id), busy = this._pending.has(id);
+      var btn = (dir, icon, key) => {
+        var end = dir < 0 ? a.min : a.max;
+        var off = busy || (end != null && (dir < 0 ? v <= Number(end) : v >= Number(end)));
+        return `<button class="sb" data-step="${hcEsc(id)}" data-dir="${dir}" title="${hcEsc(this._t(key))}" aria-label="${hcEsc(this._t(key))}"${off ? ' disabled' : ''}><ha-icon icon="${icon}"></ha-icon></button>`;
+      };
+      return `<div class="stepper"><span class="sl" title="${hcEsc(this._entityLabel(id, deviceName))}">${hcEsc(this._entityLabel(id, deviceName))}</span>` +
+        `${btn(-1, 'mdi:minus', 'temp_down')}<span class="sv">${hcEsc(this._tempText(id))}</span>${btn(1, 'mdi:plus', 'temp_up')}</div>`;
+    });
+    this._nSetpoints = rows.length;
+    return rows.length ? `<div class="section"><div class="section-title"><ha-icon icon="mdi:thermometer"></ha-icon>${this._t('temperature')}</div><div class="steppers">${rows.join('')}</div></div>` : '';
+  }
+
+  _stepSetpoint(id, dir) {
+    var s = this._st(id), cur = this._tempNum(id);
+    if (!s || cur == null || !dir) return;
+    var a = s.attributes, step = Number(a.step) > 0 ? Number(a.step) : 1;
+    var digits = (String(step).split('.')[1] || '').length;
+    var v = Number((Math.round((cur + dir * step) / step) * step).toFixed(digits));
+    if (a.min != null) v = Math.max(Number(a.min), v);
+    if (a.max != null) v = Math.min(Number(a.max), v);
+    if (v === cur) return;
+    this._guard(id, () => this._option('number', 'set_value', { entity_id: id, value: v }));
+  }
+
   // Chips of the `alerts` option, while their entity is in one of their states.
   _customAlerts() {
     return hcCustomAlerts(this._config).filter((a) => {
@@ -4766,23 +5079,17 @@ class HomeConnectBaseCard extends HTMLElement {
     var chips = [];
     var chip = (icon, text, id, title) => hcChip('chip extra', icon, hcEsc(text), id, title);
     if (HC_COLD.indexOf(kind) >= 0 || (HC_HOT.indexOf(kind) >= 0 && state === 'run')) {
-      ent.temps.forEach((id) => {
-        var s = this._st(id);
-        if (!s) return;
+      // A cold appliance's compartment: its temperature and the setpoint it is set to, as "6 °C → 4 °C".
+      var pairs = HC_COLD.indexOf(kind) >= 0 ? hcTempPairs(ent.temps) : ent.temps.map((id) => ({ temp: id }));
+      pairs.forEach((p) => {
+        var id = p.temp || p.setpoint;
+        var value = this._tempText(id);
+        if (!value) return;
         var label = this._entityLabel(id, deviceName);
-        var value;
-        if (id.indexOf('climate.') === 0) {
-          // Unavailable or not reported (null would read as 0 °): no chip. The number in the card's locale, the unit
-          // Home Assistant's.
-          var cur = s.attributes.current_temperature;
-          var n = cur == null || cur === '' ? Number.NaN : Number(cur);
-          if (this._avail(id) && Number.isFinite(n)) {
-            value = `${new Intl.NumberFormat(this._locale(), { maximumFractionDigits: 1 }).format(n)} ${this._hass.config?.unit_system?.temperature || '°'}`;
-          }
-        } else if (this._avail(id)) {
-          value = this._hass.formatEntityState ? this._hass.formatEntityState(s) : `${s.state} ${s.attributes.unit_of_measurement || ''}`.trim();
-        }
-        if (value) chips.push(chip(/freez|congel|gefrier|congela|vries|zamra/i.test(`${id} ${label}`) ? 'mdi:snowflake' : 'mdi:thermometer', value, id, label));
+        var target = p.temp && p.setpoint ? this._tempText(p.setpoint) : '';
+        var text = target ? `${value} → ${target}` : value;
+        var title = target ? `${label} · ${this._t('setpoint')} ${target}` : label;
+        chips.push(chip(this._freezerZone(p, label) ? 'mdi:snowflake' : 'mdi:thermometer', text, id, title));
       });
     }
     if (kind === 'hood') {
@@ -5039,6 +5346,14 @@ class HomeConnectBaseCard extends HTMLElement {
       '.section-title ha-icon { --mdc-icon-size: 16px; }' +
       '.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 6px; }' +
       '.toggles { display: flex; flex-wrap: wrap; gap: 6px; }' +
+      '.steppers { display: flex; flex-direction: column; gap: 6px; }' +
+      '.stepper { display: flex; align-items: center; gap: 8px; min-width: 0; }' +
+      '.stepper .sl { flex: 1; min-width: 0; font-size: 13px; color: var(--secondary-text-color); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }' +
+      '.stepper .sv { min-width: 56px; text-align: center; font-size: 15px; font-weight: 600; font-variant-numeric: tabular-nums; }' +
+      '.sb { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; flex: none; border-radius: 50%;' +
+        ' background: var(--secondary-background-color, rgba(128,128,128,0.12)); color: var(--primary-text-color); }' +
+      '.sb ha-icon { --mdc-icon-size: 18px; width: 18px; height: 18px; }' +
+      '.sb:disabled { opacity: 0.4; }' +
       '.section-title .aside { margin-left: auto; text-transform: none; letter-spacing: 0; font-weight: 400; font-size: 11px; }' +
       // A hob's zones: tiles two (or more) to a row, a 40 px round icon tinted by the state while the zone heats.
       '.zones { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; }' +
@@ -5146,8 +5461,12 @@ class HomeConnectBaseCard extends HTMLElement {
   }
 
   _onClick(ev) {
-    var btn = ev.composedPath().find((n) => n.dataset && (n.dataset.action || n.dataset.toggle || n.dataset.entity));
+    var btn = ev.composedPath().find((n) => n.dataset && (n.dataset.action || n.dataset.toggle || n.dataset.step || n.dataset.entity));
     if (!btn || btn.disabled) return;
+    if (btn.dataset.step) {
+      this._stepSetpoint(btn.dataset.step, Number(btn.dataset.dir));
+      return;
+    }
     if (btn.dataset.entity) {
       this._moreInfo(btn.dataset.entity);
       return;
@@ -5536,7 +5855,13 @@ class HomeConnectCardEditor extends HTMLElement {
           { name: 'show_energy', selector: { boolean: {} } },
         ].concat(this.mini || /-mini-card$/.test(this._config.type || '') ? [{ name: 'zoom', selector: { boolean: {} } }] : []),
       },
-    ].concat([
+      // "Too warm" thresholds of the cold appliances.
+    ].concat(!kind || HC_COLD.indexOf(kind) >= 0 ? [{
+      type: 'grid', name: '', schema: [
+        { name: 'temperature_alert', selector: { number: { min: -40, max: 40, step: 0.5, mode: 'box' } } },
+        { name: 'freezer_temperature_alert', selector: { number: { min: -40, max: 20, step: 0.5, mode: 'box' } } },
+      ],
+    }] : []).concat([
       // The cost of a cycle next to its energy (the energy chip, on the mini card too).
       {
         type: 'grid', name: '', schema: [
