@@ -133,6 +133,11 @@ test("Home Connect Local: a delayed start shows when it starts and ends after it
   assert.ok(html.includes(`data-tick="ends">Ends at ${clock(111 + 90)}<`), "ends after the start plus the duration");
   assert.doesNotMatch(html, /class="pct"/, "no progress bar before it starts");
   assert.doesNotMatch(html, /1 hr 30 min left/);
+  // The mini card too: the start line, the end, no bar at 0 %.
+  const mini = render(hass, {}, SmartApplianceMiniCard).html;
+  assert.match(mini, /data-tick="start">Starts at [^<]* · in 1 hr 51 min</);
+  assert.ok(mini.includes(`data-tick="ends">Ends at ${clock(111 + 90)}<`), "mini: ends after the start plus the duration");
+  assert.doesNotMatch(mini, /class="mbar"/, "mini: no progress bar before it starts");
 });
 
 test("Home Connect Local: ready shows the program picker and options, Start presses its button", async () => {

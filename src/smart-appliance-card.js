@@ -4939,7 +4939,7 @@ class HomeConnectBaseCard extends HTMLElement {
     if (this._compact()) {
       this._rows = hcRows(HC_PX.miniBase + (this._error ? HC_PX.error : 0));
       hcMorph(this.shadowRoot, this._miniHtml({ c, ent, name, color, state, statusText, running, online, powerOn, progress,
-        finish, progLabel, chips: chips.filter((x) => x.indexOf('chip warn') >= 0 || x.indexOf('chip extra') >= 0 || !online), art, logo, powerBtn,
+        finish, startAt, progLabel, chips: chips.filter((x) => x.indexOf('chip warn') >= 0 || x.indexOf('chip extra') >= 0 || !online), art, logo, powerBtn,
         banner: this._illustrated ? banner() : '' }));
       return;
     }
@@ -5817,13 +5817,18 @@ var hcMini = (Base) => class extends Base {
     var c = m.c, ent = m.ent, lines = [];
     var mstate = `<div class="line mstate" aria-hidden="true"><span>${hcEsc(m.statusText)}</span></div>`;
     var bar = '';
-    if ((m.running && !this._noPct) || m.state === 'finished') {
+    // Waiting for a delayed start: no bar still at 0 %, but when it starts (then when it ends, below).
+    if (m.startAt) {
+      lines.push(`<div class="line"><ha-icon icon="mdi:timer-outline"></ha-icon><span data-tick="start">${hcEsc(this._startsText(m.startAt))}</span></div>`);
+    } else if ((m.running && !this._noPct) || m.state === 'finished') {
       var pct = m.state === 'finished' ? 100 : (m.progress == null ? 0 : m.progress);
       bar = `<div class="mbar"><div class="bar"><div class="fill" style="width:${pct}%"></div></div><span class="v">${Math.round(pct)} %</span></div>`;
     }
     if (m.progLabel && m.online && m.powerOn && !m.banner) lines.push(`<div class="line"><ha-icon icon="mdi:tune-variant"></ha-icon><span>${hcEsc(m.progLabel)}</span></div>`);
     if (m.running && m.finish) {
-      lines.push(`<div class="line"><ha-icon icon="mdi:clock-outline"></ha-icon><span data-tick="time">${hcEsc(this._timeLine(m.finish))}</span></div>`);
+      var tick = m.startAt ? 'ends' : 'time';
+      var when = m.startAt ? this._endsAt(m.finish) : this._timeLine(m.finish);
+      lines.push(`<div class="line"><ha-icon icon="mdi:clock-outline"></ha-icon><span data-tick="${tick}">${hcEsc(when)}</span></div>`);
     }
     if (m.chips.length) lines.push(`<div class="chips">${m.chips.join('')}</div>`);
 

@@ -3,7 +3,7 @@
 ## 2.11.1 - 2026-11-21
 
 ### Fixes
-- **Home Connect Local**: a delayed start no longer shows the program's duration as the time left with a wrong finish time. The card reads the *Start in* countdown and shows *Starts at 01:00 · in 1 hr 51 min*, then *Ends at* the start plus the program's duration, instead of a bar at 0 %.
+- **Home Connect Local**: a delayed start no longer shows the program's duration as the time left with a wrong finish time. The card reads the *Start in* countdown and shows *Starts at 01:00 · in 1 hr 51 min*, then *Ends at* the start plus the program's duration, instead of a bar at 0 % — on the mini card too.
 
 ## 2.11.0 - 2026-11-21
 
