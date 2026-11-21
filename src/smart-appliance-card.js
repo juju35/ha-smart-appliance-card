@@ -65,6 +65,8 @@ var HcI18n = {
     program: 'Programme',
     no_program: 'Aucun programme',
     ends_at: 'Fin à',
+    starts_at: 'Démarre à',
+    starts_in: 'dans {t}',
     remaining: 'reste {t}',
     start: 'Démarrer',
     stop: 'Arrêter',
@@ -201,6 +203,8 @@ var HcI18n = {
     program: 'Program',
     no_program: 'No program',
     ends_at: 'Ends at',
+    starts_at: 'Starts at',
+    starts_in: 'in {t}',
     remaining: '{t} left',
     start: 'Start',
     stop: 'Stop',
@@ -337,6 +341,8 @@ var HcI18n = {
     program: 'Programm',
     no_program: 'Kein Programm',
     ends_at: 'Endet um',
+    starts_at: 'Startet um',
+    starts_in: 'in {t}',
     remaining: 'Noch {t}',
     start: 'Starten',
     stop: 'Stoppen',
@@ -473,6 +479,8 @@ var HcI18n = {
     program: 'Programa',
     no_program: 'Sin programa',
     ends_at: 'Termina a las',
+    starts_at: 'Empieza a las',
+    starts_in: 'en {t}',
     remaining: 'Quedan {t}',
     start: 'Iniciar',
     stop: 'Detener',
@@ -609,6 +617,8 @@ var HcI18n = {
     program: 'Програм',
     no_program: 'Нема програма',
     ends_at: 'Завршава се у',
+    starts_at: 'Почиње у',
+    starts_in: 'за {t}',
     remaining: 'још {t}',
     start: 'Покрени',
     stop: 'Заустави',
@@ -745,6 +755,8 @@ var HcI18n = {
     program: 'Program',
     no_program: 'Nema programa',
     ends_at: 'Završava se u',
+    starts_at: 'Počinje u',
+    starts_in: 'za {t}',
     remaining: 'još {t}',
     start: 'Pokreni',
     stop: 'Zaustavi',
@@ -881,6 +893,8 @@ var HcI18n = {
     program: 'Programma',
     no_program: 'Nessun programma',
     ends_at: 'Fine alle',
+    starts_at: 'Inizia alle',
+    starts_in: 'tra {t}',
     remaining: 'ancora {t}',
     start: 'Avvia',
     stop: 'Arresta',
@@ -1017,6 +1031,8 @@ var HcI18n = {
     program: 'Programma',
     no_program: 'Geen programma',
     ends_at: 'Klaar om',
+    starts_at: 'Start om',
+    starts_in: 'over {t}',
     remaining: 'nog {t}',
     start: 'Starten',
     stop: 'Stoppen',
@@ -1153,6 +1169,8 @@ var HcI18n = {
     program: 'Programa',
     no_program: 'Nenhum programa',
     ends_at: 'Fim às',
+    starts_at: 'Começa às',
+    starts_in: 'daqui a {t}',
     remaining: 'faltam {t}',
     start: 'Iniciar',
     stop: 'Parar',
@@ -1289,6 +1307,8 @@ var HcI18n = {
     program: 'Program',
     no_program: 'Brak programu',
     ends_at: 'Koniec o',
+    starts_at: 'Start o',
+    starts_in: 'za {t}',
     remaining: 'zostało {t}',
     start: 'Uruchom',
     stop: 'Zatrzymaj',
@@ -1425,6 +1445,8 @@ var HcI18n = {
     program: 'Program',
     no_program: 'Niciun program',
     ends_at: 'Se termină la',
+    starts_at: 'Începe la',
+    starts_in: 'peste {t}',
     remaining: 'mai sunt {t}',
     start: 'Pornește',
     stop: 'Oprește',
@@ -1561,6 +1583,8 @@ var HcI18n = {
     program: 'Program',
     no_program: 'Intet program',
     ends_at: 'Færdig kl.',
+    starts_at: 'Starter kl.',
+    starts_in: 'om {t}',
     remaining: '{t} tilbage',
     start: 'Start',
     stop: 'Stop',
@@ -1697,6 +1721,8 @@ var HcI18n = {
     program: 'Program',
     no_program: 'Inget program',
     ends_at: 'Klar kl.',
+    starts_at: 'Startar kl.',
+    starts_in: 'om {t}',
     remaining: '{t} kvar',
     start: 'Starta',
     stop: 'Stoppa',
@@ -1833,6 +1859,8 @@ var HcI18n = {
     program: 'Програма',
     no_program: 'Няма програма',
     ends_at: 'Край в',
+    starts_at: 'Започва в',
+    starts_in: 'след {t}',
     remaining: 'остават {t}',
     start: 'Старт',
     stop: 'Спри',
@@ -1969,6 +1997,8 @@ var HcI18n = {
     program: 'Программа',
     no_program: 'Нет программы',
     ends_at: 'Окончание в',
+    starts_at: 'Начало в',
+    starts_in: 'через {t}',
     remaining: 'осталось {t}',
     start: 'Запустить',
     stop: 'Остановить',
@@ -2105,6 +2135,8 @@ var HcI18n = {
     program: 'Програма',
     no_program: 'Немає програми',
     ends_at: 'Завершення о',
+    starts_at: 'Початок о',
+    starts_in: 'через {t}',
     remaining: 'залишилося {t}',
     start: 'Запустити',
     stop: 'Зупинити',
@@ -2241,6 +2273,8 @@ var HcI18n = {
     program: 'Program',
     no_program: 'Nincs program',
     ends_at: 'Befejezés:',
+    starts_at: 'Indul:',
+    starts_in: '{t} múlva',
     remaining: 'még {t}',
     start: 'Indítás',
     stop: 'Leállítás',
@@ -2377,6 +2411,8 @@ var HcI18n = {
     program: 'Program',
     no_program: 'Žiadny program',
     ends_at: 'Koniec o',
+    starts_at: 'Začína o',
+    starts_in: 'o {t}',
     remaining: 'zostáva {t}',
     start: 'Spustiť',
     stop: 'Zastaviť',
@@ -2513,6 +2549,8 @@ var HcI18n = {
     program: 'Program',
     no_program: 'Žádný program',
     ends_at: 'Konec v',
+    starts_at: 'Začíná v',
+    starts_in: 'za {t}',
     remaining: 'zbývá {t}',
     start: 'Spustit',
     stop: 'Zastavit',
@@ -2649,6 +2687,8 @@ var HcI18n = {
     program: 'Program',
     no_program: 'Ni programa',
     ends_at: 'Konec ob',
+    starts_at: 'Začne ob',
+    starts_in: 'čez {t}',
     remaining: 'še {t}',
     start: 'Zaženi',
     stop: 'Ustavi',
@@ -2785,6 +2825,8 @@ var HcI18n = {
     program: 'Programma',
     no_program: 'Nav programmas',
     ends_at: 'Beigas plkst.',
+    starts_at: 'Sāksies',
+    starts_in: 'pēc {t}',
     remaining: 'atlikušas {t}',
     start: 'Sākt',
     stop: 'Apturēt',
@@ -2921,6 +2963,8 @@ var HcI18n = {
     program: 'Πρόγραμμα',
     no_program: 'Κανένα πρόγραμμα',
     ends_at: 'Λήξη στις',
+    starts_at: 'Ξεκινά στις',
+    starts_in: 'σε {t}',
     remaining: 'απομένουν {t}',
     start: 'Έναρξη',
     stop: 'Διακοπή',
@@ -3258,6 +3302,7 @@ var HC_PLATFORM_ROLES = {
     door: { domain: 'binary_sensor', keys: ['binary_sensor_door_state'], test: hcIsDoor },
     progress: { domain: 'sensor', keys: ['sensor_program_progress'] },
     remaining: { domain: 'sensor', keys: ['sensor_remaining_program_time'] },
+    start_in: { domain: 'sensor', keys: ['sensor_start_in'] },
     elapsed: { domain: 'sensor', keys: ['sensor_elapsed_program_time'] },
     selected_program: { domain: 'select', keys: ['select_program'] },
     active_program: { domain: 'sensor', keys: ['sensor_active_program'] },
@@ -3380,7 +3425,7 @@ function hcPlatform(list) {
 var HC_OVERRIDABLE = ['operation_state', 'door', 'progress', 'finish_time', 'selected_program',
   'active_program', 'power', 'stop', 'pause', 'resume', 'remote_start', 'remote_control', 'connectivity', 'salt', 'rinse_aid', 'energy'];
 // Every role, overridable or not.
-var HC_ALL_ROLES = HC_OVERRIDABLE.concat(['bean_container', 'water_tank', 'drip_tray', 'descale', 'clean', 'idos_1', 'idos_2', 'program', 'phase', 'remaining', 'elapsed',
+var HC_ALL_ROLES = HC_OVERRIDABLE.concat(['bean_container', 'water_tank', 'drip_tray', 'descale', 'clean', 'idos_1', 'idos_2', 'program', 'phase', 'remaining', 'start_in', 'elapsed',
   'total', 'operation', 'start'], Object.keys(HC_COMMON_ROLES).filter((r) => HC_OVERRIDABLE.indexOf(r) < 0));
 
 // Registry entries grouped by device, built once per `hass.entities` object (it only changes with the registry).
@@ -4298,7 +4343,8 @@ class HomeConnectBaseCard extends HTMLElement {
       var fmt = { left: this._leftText, ends: this._endsAt, time: this._timeLine }[el.dataset.tick] || this._timeLine;
       var txt = el.dataset.tick === 'waiting'
         ? (i.waiting && this._t('door_waiting').replace('{t}', this._ago(i.waiting)))
-        : (i.finish && fmt.call(this, i.finish));
+        : el.dataset.tick === 'start' ? (i.start && this._startsText(i.start))
+          : (i.finish && fmt.call(this, i.finish));
       if (txt && el.textContent !== txt) el.textContent = txt;
     });
   }
@@ -4488,10 +4534,20 @@ class HomeConnectBaseCard extends HTMLElement {
 
   // "Ends at 10:32": the full card's line under the bar, the time left being beside the percentage.
   _endsAt(finish) {
+    return `${this._t('ends_at')} ${this._clock(finish)}`;
+  }
+
+  // "Starts at 01:00 · in 1 hr 51 min": a delayed start's line.
+  _startsText(start) {
+    return `${this._t('starts_at')} ${this._clock(start)} · ${this._t('starts_in').replace('{t}', this._until(start))}`;
+  }
+
+  // A time of day, 12 h or 24 h as the Home Assistant locale says.
+  _clock(date) {
     var opts = { hour: '2-digit', minute: '2-digit' };
     var tf = this._hass.locale?.time_format;
     if (tf === '12' || tf === '24') opts.hour12 = tf === '12';
-    return `${this._t('ends_at')} ${finish.toLocaleTimeString(this._locale(), opts)}`;
+    return date.toLocaleTimeString(this._locale(), opts);
   }
 
   // "25 minutes ago", "3 hours ago", "yesterday", in the card's language.
@@ -4698,7 +4754,11 @@ class HomeConnectBaseCard extends HTMLElement {
     // Times left and elapsed in minutes, converted from the unit the sensor is shown in.
     var mins = (id) => (this._avail(id) ? hcMinutes(this._st(id)) : null);
     var left = mins(ent.remaining), elapsed = mins(ent.elapsed), total = num(ent.total);
-    if (!finish && running && left != null && left > 0) finish = new Date(Date.now() + left * 60000);
+    // A delayed start with its countdown (Home Connect Local): the program starts then, and the time left is its
+    // whole duration, so it ends that much after the start.
+    var startIn = state === 'delayedstart' ? mins(ent.start_in) : null;
+    var startAt = startIn != null && startIn > 0 ? new Date(Date.now() + startIn * 60000) : null;
+    if (!finish && running && left != null && left > 0) finish = new Date((startAt ? startAt.getTime() : Date.now()) + left * 60000);
     var clockProgress = false;
     if (progress == null && running) {
       if (left != null && elapsed != null && left + elapsed > 0) progress = (100 * elapsed) / (left + elapsed);
@@ -4732,7 +4792,7 @@ class HomeConnectBaseCard extends HTMLElement {
     if (ent.door && ent.door.indexOf('binary_sensor.') === 0) door = door === 'on' ? 'open' : (door === 'off' ? 'closed' : undefined);
     // Finished but not emptied: the door chip turns into a reminder, with the time since the program ended.
     var waiting = c.show_alerts && online && state === 'finished' ? this._doorWaiting(ent, door) : null;
-    this._tickInfo = { finish: running ? finish : null, waiting: waiting, clockProgress: clockProgress };
+    this._tickInfo = { finish: running ? finish : null, start: startAt, waiting: waiting, clockProgress: clockProgress };
     if (waiting) {
       chips.push(hcChip('chip warn', 'mdi:bell-ring-outline', `<span data-tick="waiting">${hcEsc(this._t('door_waiting').replace('{t}', this._ago(waiting)))}</span>`, ent.door));
       this._ticking = true;
@@ -4843,7 +4903,12 @@ class HomeConnectBaseCard extends HTMLElement {
     var big = '';
     // Other integrations may give no progress at all (Whirlpool): the state then stands alone, with the finish time.
     var noPct = this._noPct = running && progress == null && r.platform !== 'home_connect';
-    if ((running && !noPct) || state === 'finished') {
+    if (startAt) {
+      // Waiting for a delayed start: when it starts, and when it will end, rather than a bar still at 0 %.
+      big = `<div class="big pill-echo"><span class="state-big">${hcEsc(statusText)}</span></div>` +
+        `<div class="time" data-tick="start">${hcEsc(this._startsText(startAt))}</div>` +
+        (finish ? `<div class="time" data-tick="ends">${hcEsc(this._endsAt(finish))}</div>` : '');
+    } else if ((running && !noPct) || state === 'finished') {
       var pct = state === 'finished' ? 100 : (progress == null ? 0 : progress);
       // The state is in the header pill: beside the percentage, the time left instead (the finish time under the bar).
       // Without a finish time, the state stays there only for a card so narrow that the pill keeps just its dot.
@@ -4937,10 +5002,15 @@ class HomeConnectBaseCard extends HTMLElement {
 
   // "12 min left", "1 hr 5 min left".
   _leftText(finish) {
-    var mins = Math.max(0, Math.round((finish.getTime() - Date.now()) / 60000));
+    return this._t('remaining').replace('{t}', this._until(finish));
+  }
+
+  // "12 min", "1 hr 5 min" from now until `date`.
+  _until(date) {
+    var mins = Math.max(0, Math.round((date.getTime() - Date.now()) / 60000));
     var h = Math.floor(mins / 60), m = mins % 60;
     var unit = (u, n) => new Intl.NumberFormat(this._locale(), { style: 'unit', unit: u, unitDisplay: 'short' }).format(n);
-    return this._t('remaining').replace('{t}', h && m ? `${unit('hour', h)} ${unit('minute', m)}` : (h ? unit('hour', h) : unit('minute', m)));
+    return h && m ? `${unit('hour', h)} ${unit('minute', m)}` : (h ? unit('hour', h) : unit('minute', m));
   }
 
   // A zone's label: what its entities' names share once the device name is cut ("Left front" from "Left front power
