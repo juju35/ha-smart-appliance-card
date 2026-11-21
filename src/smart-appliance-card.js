@@ -28,6 +28,10 @@ var HcI18n = {
     bean_container: 'Bac à grains vide',
     water_tank: 'Réservoir d\'eau vide',
     drip_tray: 'Bac d\'égouttage plein',
+    idos_1: 'i-Dos 1 presque vide',
+    idos_2: 'i-Dos 2 presque vide',
+    descale: 'Détartrage recommandé',
+    clean: 'Nettoyage recommandé',
     ed_kind: 'Type d\'appareil',
     ed_kind_helper: 'Laisser vide pour le détecter depuis l\'appareil',
     ed_brand: 'Marque',
@@ -151,6 +155,10 @@ var HcI18n = {
     bean_container: 'Bean container empty',
     water_tank: 'Water tank empty',
     drip_tray: 'Drip tray full',
+    idos_1: 'i-Dos 1 low',
+    idos_2: 'i-Dos 2 low',
+    descale: 'Descaling recommended',
+    clean: 'Cleaning recommended',
     ed_kind: 'Appliance type',
     ed_kind_helper: 'Leave empty to detect it from the appliance',
     ed_brand: 'Brand',
@@ -274,6 +282,10 @@ var HcI18n = {
     bean_container: 'Bohnenbehälter leer',
     water_tank: 'Wassertank leer',
     drip_tray: 'Tropfschale voll',
+    idos_1: 'i-Dos 1 fast leer',
+    idos_2: 'i-Dos 2 fast leer',
+    descale: 'Entkalken empfohlen',
+    clean: 'Reinigen empfohlen',
     ed_kind: 'Gerätetyp',
     ed_kind_helper: 'Leer lassen, um ihn am Gerät zu erkennen',
     ed_brand: 'Marke',
@@ -397,6 +409,10 @@ var HcI18n = {
     bean_container: 'Depósito de café en grano vacío',
     water_tank: 'Depósito de agua vacío',
     drip_tray: 'Bandeja de goteo llena',
+    idos_1: 'i-Dos 1 casi vacío',
+    idos_2: 'i-Dos 2 casi vacío',
+    descale: 'Descalcificación recomendada',
+    clean: 'Limpieza recomendada',
     ed_kind: 'Tipo de aparato',
     ed_kind_helper: 'Dejar vacío para detectarlo desde el aparato',
     ed_brand: 'Marca',
@@ -520,6 +536,10 @@ var HcI18n = {
     bean_container: 'Посуда за зрна празна',
     water_tank: 'Резервоар за воду празан',
     drip_tray: 'Посуда за капање пуна',
+    idos_1: 'i-Dos 1 скоро празан',
+    idos_2: 'i-Dos 2 скоро празан',
+    descale: 'Препоручено уклањање каменца',
+    clean: 'Препоручено чишћење',
     ed_kind: 'Врста уређаја',
     ed_kind_helper: 'Оставите празно да се препозна са уређаја',
     ed_brand: 'Бренд',
@@ -643,6 +663,10 @@ var HcI18n = {
     bean_container: 'Posuda za zrna prazna',
     water_tank: 'Rezervoar za vodu prazan',
     drip_tray: 'Posuda za kapanje puna',
+    idos_1: 'i-Dos 1 skoro prazan',
+    idos_2: 'i-Dos 2 skoro prazan',
+    descale: 'Preporučeno uklanjanje kamenca',
+    clean: 'Preporučeno čišćenje',
     ed_kind: 'Vrsta uređaja',
     ed_kind_helper: 'Ostavite prazno da se prepozna sa uređaja',
     ed_brand: 'Brend',
@@ -766,6 +790,10 @@ var HcI18n = {
     bean_container: 'Contenitore caffè in grani vuoto',
     water_tank: 'Serbatoio dell\'acqua vuoto',
     drip_tray: 'Vaschetta raccogligocce piena',
+    idos_1: 'i-Dos 1 quasi vuoto',
+    idos_2: 'i-Dos 2 quasi vuoto',
+    descale: 'Decalcificazione consigliata',
+    clean: 'Pulizia consigliata',
     ed_kind: 'Tipo di apparecchio',
     ed_kind_helper: 'Lasciare vuoto per rilevarlo dall\'apparecchio',
     ed_brand: 'Marca',
@@ -889,6 +917,10 @@ var HcI18n = {
     bean_container: 'Bonenreservoir leeg',
     water_tank: 'Waterreservoir leeg',
     drip_tray: 'Lekbak vol',
+    idos_1: 'i-Dos 1 bijna leeg',
+    idos_2: 'i-Dos 2 bijna leeg',
+    descale: 'Ontkalken aanbevolen',
+    clean: 'Reinigen aanbevolen',
     ed_kind: 'Apparaattype',
     ed_kind_helper: 'Leeg laten om het van het apparaat af te leiden',
     ed_brand: 'Merk',
@@ -1012,6 +1044,10 @@ var HcI18n = {
     bean_container: 'Depósito de grãos vazio',
     water_tank: 'Depósito de água vazio',
     drip_tray: 'Tabuleiro de pingos cheio',
+    idos_1: 'i-Dos 1 quase vazio',
+    idos_2: 'i-Dos 2 quase vazio',
+    descale: 'Descalcificação recomendada',
+    clean: 'Limpeza recomendada',
     ed_kind: 'Tipo de aparelho',
     ed_kind_helper: 'Deixar vazio para o detetar a partir do aparelho',
     ed_brand: 'Marca',
@@ -1135,6 +1171,10 @@ var HcI18n = {
     bean_container: 'Pojemnik na ziarna pusty',
     water_tank: 'Zbiornik na wodę pusty',
     drip_tray: 'Tacka ociekowa pełna',
+    idos_1: 'i-Dos 1 prawie pusty',
+    idos_2: 'i-Dos 2 prawie pusty',
+    descale: 'Zalecane odkamienianie',
+    clean: 'Zalecane czyszczenie',
     ed_kind: 'Typ urządzenia',
     ed_kind_helper: 'Pozostaw puste, aby wykryć go z urządzenia',
     ed_brand: 'Marka',
@@ -1258,6 +1298,10 @@ var HcI18n = {
     bean_container: 'Recipient de boabe gol',
     water_tank: 'Rezervor de apă gol',
     drip_tray: 'Tavă de scurgere plină',
+    idos_1: 'i-Dos 1 aproape gol',
+    idos_2: 'i-Dos 2 aproape gol',
+    descale: 'Decalcifiere recomandată',
+    clean: 'Curățare recomandată',
     ed_kind: 'Tip de aparat',
     ed_kind_helper: 'Lăsați gol pentru a-l detecta de pe aparat',
     ed_brand: 'Marcă',
@@ -1381,6 +1425,10 @@ var HcI18n = {
     bean_container: 'Bønnebeholder tom',
     water_tank: 'Vandtank tom',
     drip_tray: 'Drypbakke fuld',
+    idos_1: 'i-Dos 1 næsten tom',
+    idos_2: 'i-Dos 2 næsten tom',
+    descale: 'Afkalkning anbefales',
+    clean: 'Rengøring anbefales',
     ed_kind: 'Apparattype',
     ed_kind_helper: 'Lad stå tomt for at registrere den fra apparatet',
     ed_brand: 'Mærke',
@@ -1504,6 +1552,10 @@ var HcI18n = {
     bean_container: 'Bönbehållaren är tom',
     water_tank: 'Vattentanken är tom',
     drip_tray: 'Droppbrickan är full',
+    idos_1: 'i-Dos 1 nästan tom',
+    idos_2: 'i-Dos 2 nästan tom',
+    descale: 'Avkalkning rekommenderas',
+    clean: 'Rengöring rekommenderas',
     ed_kind: 'Apparattyp',
     ed_kind_helper: 'Lämna tomt för att identifiera den från apparaten',
     ed_brand: 'Märke',
@@ -1627,6 +1679,10 @@ var HcI18n = {
     bean_container: 'Контейнерът за зърна е празен',
     water_tank: 'Резервоарът за вода е празен',
     drip_tray: 'Тавата за отцеждане е пълна',
+    idos_1: 'i-Dos 1 почти празен',
+    idos_2: 'i-Dos 2 почти празен',
+    descale: 'Препоръчва се премахване на котлен камък',
+    clean: 'Препоръчва се почистване',
     ed_kind: 'Тип уред',
     ed_kind_helper: 'Оставете празно, за да се разпознае от уреда',
     ed_brand: 'Марка',
@@ -1750,6 +1806,10 @@ var HcI18n = {
     bean_container: 'Контейнер для зёрен пуст',
     water_tank: 'Резервуар для воды пуст',
     drip_tray: 'Поддон для капель полон',
+    idos_1: 'i-Dos 1 почти пуст',
+    idos_2: 'i-Dos 2 почти пуст',
+    descale: 'Рекомендуется удаление накипи',
+    clean: 'Рекомендуется очистка',
     ed_kind: 'Тип прибора',
     ed_kind_helper: 'Оставьте пустым, чтобы определить его по прибору',
     ed_brand: 'Марка',
@@ -1873,6 +1933,10 @@ var HcI18n = {
     bean_container: 'Контейнер для зерен порожній',
     water_tank: 'Резервуар для води порожній',
     drip_tray: 'Піддон для крапель повний',
+    idos_1: 'i-Dos 1 майже порожній',
+    idos_2: 'i-Dos 2 майже порожній',
+    descale: 'Рекомендовано видалення накипу',
+    clean: 'Рекомендовано очищення',
     ed_kind: 'Тип приладу',
     ed_kind_helper: 'Залиште порожнім, щоб визначити його за приладом',
     ed_brand: 'Марка',
@@ -1996,6 +2060,10 @@ var HcI18n = {
     bean_container: 'A babtartály üres',
     water_tank: 'A víztartály üres',
     drip_tray: 'A csepptálca megtelt',
+    idos_1: 'i-Dos 1 majdnem üres',
+    idos_2: 'i-Dos 2 majdnem üres',
+    descale: 'Vízkőmentesítés ajánlott',
+    clean: 'Tisztítás ajánlott',
     ed_kind: 'Készüléktípus',
     ed_kind_helper: 'Hagyja üresen, hogy a készülékből legyen felismerve',
     ed_brand: 'Márka',
@@ -2119,6 +2187,10 @@ var HcI18n = {
     bean_container: 'Zásobník na zrná je prázdny',
     water_tank: 'Nádržka na vodu je prázdna',
     drip_tray: 'Odkvapkávacia miska je plná',
+    idos_1: 'i-Dos 1 takmer prázdny',
+    idos_2: 'i-Dos 2 takmer prázdny',
+    descale: 'Odporúča sa odvápnenie',
+    clean: 'Odporúča sa čistenie',
     ed_kind: 'Typ spotrebiča',
     ed_kind_helper: 'Nechajte prázdne, ak ho chcete zistiť zo spotrebiča',
     ed_brand: 'Značka',
@@ -2242,6 +2314,10 @@ var HcI18n = {
     bean_container: 'Zásobník na zrnka je prázdný',
     water_tank: 'Nádržka na vodu je prázdná',
     drip_tray: 'Odkapávací miska je plná',
+    idos_1: 'i-Dos 1 téměř prázdný',
+    idos_2: 'i-Dos 2 téměř prázdný',
+    descale: 'Doporučeno odvápnění',
+    clean: 'Doporučeno čištění',
     ed_kind: 'Typ spotřebiče',
     ed_kind_helper: 'Ponechte prázdné, chcete-li ho zjistit ze spotřebiče',
     ed_brand: 'Značka',
@@ -2365,6 +2441,10 @@ var HcI18n = {
     bean_container: 'Posoda za zrna je prazna',
     water_tank: 'Rezervoar za vodo je prazen',
     drip_tray: 'Pladenj za kapljanje je poln',
+    idos_1: 'i-Dos 1 skoraj prazen',
+    idos_2: 'i-Dos 2 skoraj prazen',
+    descale: 'Priporočeno odstranjevanje vodnega kamna',
+    clean: 'Priporočeno čiščenje',
     ed_kind: 'Vrsta aparata',
     ed_kind_helper: 'Pustite prazno, da se zazna iz aparata',
     ed_brand: 'Znamka',
@@ -2488,6 +2568,10 @@ var HcI18n = {
     bean_container: 'Pupiņu tvertne ir tukša',
     water_tank: 'Ūdens tvertne ir tukša',
     drip_tray: 'Pilienu paplāte ir pilna',
+    idos_1: 'i-Dos 1 gandrīz tukšs',
+    idos_2: 'i-Dos 2 gandrīz tukšs',
+    descale: 'Ieteicama atkaļķošana',
+    clean: 'Ieteicama tīrīšana',
     ed_kind: 'Ierīces veids',
     ed_kind_helper: 'Atstājiet tukšu, lai to noteiktu no ierīces',
     ed_brand: 'Zīmols',
@@ -2611,6 +2695,10 @@ var HcI18n = {
     bean_container: 'Το δοχείο κόκκων είναι άδειο',
     water_tank: 'Το δοχείο νερού είναι άδειο',
     drip_tray: 'Ο δίσκος σταγόνων είναι γεμάτος',
+    idos_1: 'i-Dos 1 σχεδόν άδειο',
+    idos_2: 'i-Dos 2 σχεδόν άδειο',
+    descale: 'Συνιστάται αφαλάτωση',
+    clean: 'Συνιστάται καθαρισμός',
     ed_kind: 'Τύπος συσκευής',
     ed_kind_helper: 'Αφήστε κενό για ανίχνευση από τη συσκευή',
     ed_brand: 'Μάρκα',
@@ -2877,6 +2965,11 @@ var HC_ROLES = {
 HC_ROLES.bean_container = { domain: 'sensor', keys: ['bean_container_empty'] };
 HC_ROLES.water_tank = { domain: 'sensor', keys: ['water_tank_empty'] };
 HC_ROLES.drip_tray = { domain: 'sensor', keys: ['drip_tray_full'] };
+HC_ROLES.descale = { domain: 'sensor', keys: ['device_should_be_descaled'] };
+HC_ROLES.clean = { domain: 'sensor', keys: ['device_should_be_cleaned'] };
+// Washers with i-Dos: one event per detergent container, `present` while it runs low.
+HC_ROLES.idos_1 = { domain: 'sensor', keys: ['poor_i_dos_1_fill_level'] };
+HC_ROLES.idos_2 = { domain: 'sensor', keys: ['poor_i_dos_2_fill_level'] };
 
 // Roles found the same way whatever the integration: the hood fan and its lights, the super modes of cold
 // appliances (and anything else that shows the appliance at work without a program).
@@ -3007,6 +3100,14 @@ var HC_PLATFORMS = Object.keys(HC_PLATFORM_ROLES);
 var HC_NOT_OPTIONS = ['switch_child_lock'];
 // Values of an alert entity (salt, rinse aid, coffee machine tanks) that call for a chip; `full` only on the drip tray.
 var HC_ALERT_ON = ['present', 'confirmed', 'on', 'empty', 'nearly_empty', 'not_inserted'];
+// States of a user's own alert entity that call for its chip, when the alert lists none: an on/off entity on, an event
+// present, a problem or a low level.
+var HC_CUSTOM_ALERT_ON = HC_ALERT_ON.concat(['problem', 'low', 'open', 'detected', 'wet']);
+// The `alerts` option: entities of the user's own (a template sensor, a helper, a leak sensor…) shown as alert chips,
+// each `{ entity, name?, icon?, state? }` (`state` a value or a list); a bare entity id is one too.
+function hcCustomAlerts(config) {
+  return [].concat(config?.alerts || []).map((a) => (typeof a === 'string' ? { entity: a } : a)).filter((a) => a && typeof a.entity === 'string');
+}
 
 // A duration sensor's value in minutes, whatever unit it is shown in (Home Connect Local defaults to hours).
 var HC_MINUTES = { s: 1 / 60, min: 1, h: 60, d: 1440 };
@@ -3078,7 +3179,7 @@ function hcPlatform(list) {
 var HC_OVERRIDABLE = ['operation_state', 'door', 'progress', 'finish_time', 'selected_program',
   'active_program', 'power', 'stop', 'pause', 'resume', 'remote_start', 'remote_control', 'connectivity', 'salt', 'rinse_aid', 'energy'];
 // Every role, overridable or not.
-var HC_ALL_ROLES = HC_OVERRIDABLE.concat(['bean_container', 'water_tank', 'drip_tray', 'program', 'phase', 'remaining', 'elapsed',
+var HC_ALL_ROLES = HC_OVERRIDABLE.concat(['bean_container', 'water_tank', 'drip_tray', 'descale', 'clean', 'idos_1', 'idos_2', 'program', 'phase', 'remaining', 'elapsed',
   'total', 'operation', 'start'], Object.keys(HC_COMMON_ROLES).filter((r) => HC_OVERRIDABLE.indexOf(r) < 0));
 
 // Registry entries grouped by device, built once per `hass.entities` object (it only changes with the registry).
@@ -4038,7 +4139,7 @@ class HomeConnectBaseCard extends HTMLElement {
     if (!this._config || !this._hass || !this.shadowRoot) return;
     var r = this._resolve();
     var ids = HC_ALL_ROLES.map((role) => r.ent[role]).concat(r.ent.option_switches, r.ent.option_selects, r.ent.temps,
-      ...r.ent.zones.map((z) => z.ids));
+      ...r.ent.zones.map((z) => z.ids), hcCustomAlerts(this._config).map((a) => a.entity));
     var hass = this._hass;
     // Home Assistant replaces a state object when it changes: the same objects as last time give the same text, so
     // an update of another entity costs a comparison instead of a serialisation.
@@ -4413,10 +4514,12 @@ class HomeConnectBaseCard extends HTMLElement {
     }
     if (c.show_alerts) {
       [['salt', 'mdi:shaker-outline'], ['rinse_aid', 'mdi:water-alert-outline'], ['bean_container', 'mdi:coffee-off-outline'],
-        ['water_tank', 'mdi:cup-water'], ['drip_tray', 'mdi:tray-full']].forEach((a) => {
+        ['water_tank', 'mdi:cup-water'], ['drip_tray', 'mdi:tray-full'], ['descale', 'mdi:water-opacity'], ['clean', 'mdi:spray-bottle'],
+        ['idos_1', 'mdi:cup-outline'], ['idos_2', 'mdi:cup-outline']].forEach((a) => {
         var v = this._val(ent[a[0]]);
         if (v === 'full' ? a[0] === 'drip_tray' : HC_ALERT_ON.indexOf(v) >= 0) chips.push(hcChip('chip warn', a[1], this._t(a[0]), ent[a[0]]));
       });
+      chips = chips.concat(this._customAlerts());
     }
     if (!online) chips.push(`<span class="chip"><ha-icon icon="mdi:cloud-off-outline"></ha-icon>${this._t('offline')}</span>`);
 
@@ -4646,6 +4749,16 @@ class HomeConnectBaseCard extends HTMLElement {
     return '<div class="section"><div class="section-title"><ha-icon icon="mdi:grid-large"></ha-icon><span>' + hcEsc(this._t('zones')) + '</span>' +
       `<span class="aside">${hcEsc(this._t('zones_on').replace('{n}', on).replace('{t}', zones.length))}</span></div>` +
       `<div class="zones">${tiles}</div></div>`;
+  }
+
+  // Chips of the `alerts` option, while their entity is in one of their states.
+  _customAlerts() {
+    return hcCustomAlerts(this._config).filter((a) => {
+      var v = this._val(a.entity);
+      var on = a.state == null ? HC_CUSTOM_ALERT_ON : [].concat(a.state).map(String);
+      return v !== undefined && on.indexOf(v) >= 0;
+    }).map((a) => hcChip('chip warn', a.icon || 'mdi:alert-circle-outline',
+      hcEsc(a.name || this._st(a.entity).attributes.friendly_name || a.entity), a.entity));
   }
 
   // Temperatures (cold appliances always, ovens while cooking) and the hood's fan and light.
