@@ -120,6 +120,26 @@ test("Home Connect Local: type from the model, door binary sensor, time left in 
   assert.deepEqual(plain(hass.calls[0]), ["button", "press", { entity_id: "button.bosch_dishwasher_abort_program" }]);
 });
 
+test("Home Connect Local: a delayed start shows when it starts and ends after its whole duration", () => {
+  const hass = hcLocal("delayedstart");
+  // Starts in 1.85 h (1 h 51 min); the program lasts 1.5 h: it ends 3 h 21 min from now, not 1 h 30 min
+  hass.states["sensor.bosch_dishwasher_start_in"] = st("1.85", { unit_of_measurement: "h", device_class: "duration" });
+  hass.entities["sensor.bosch_dishwasher_start_in"] = {
+    entity_id: "sensor.bosch_dishwasher_start_in", device_id: "a1", platform: "homeconnect_ws", translation_key: "sensor_start_in",
+  };
+  const clock = (m) => new Date(Date.now() + m * 60000).toLocaleTimeString("en", { hour: "2-digit", minute: "2-digit" });
+  const { html } = render(hass);
+  assert.match(html, /data-tick="start">Starts at [^<]* · in 1 hr 51 min</);
+  assert.ok(html.includes(`data-tick="ends">Ends at ${clock(111 + 90)}<`), "ends after the start plus the duration");
+  assert.doesNotMatch(html, /class="pct"/, "no progress bar before it starts");
+  assert.doesNotMatch(html, /1 hr 30 min left/);
+  // The mini card too: the start line, the end, no bar at 0 %.
+  const mini = render(hass, {}, SmartApplianceMiniCard).html;
+  assert.match(mini, /data-tick="start">Starts at [^<]* · in 1 hr 51 min</);
+  assert.ok(mini.includes(`data-tick="ends">Ends at ${clock(111 + 90)}<`), "mini: ends after the start plus the duration");
+  assert.doesNotMatch(mini, /class="mbar"/, "mini: no progress bar before it starts");
+});
+
 test("Home Connect Local: ready shows the program picker and options, Start presses its button", async () => {
   const hass = hcLocal("ready", "on");
   const { card, html } = render(hass);
