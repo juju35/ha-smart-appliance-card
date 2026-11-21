@@ -24,7 +24,7 @@
   <img src="https://raw.githubusercontent.com/juju35/ha-smart-appliance-card/main/logos/kitchenaid.svg" alt="KitchenAid" height="13">
 </p>
 
-Animated Lovelace cards for home appliances in Home Assistant: washing machines, tumble dryers, washer-dryers, dishwashers, ovens, microwaves, hobs, coffee machines, cooker hoods, fridges, freezers, wine cabinets and the LG Styler. They work with [Home Connect](https://www.home-assistant.io/integrations/home_connect/), [Miele](https://www.home-assistant.io/integrations/miele/), [SmartThings](https://www.home-assistant.io/integrations/smartthings/), [LocalThings](https://github.com/mbillow/localthings), [LG ThinQ](https://www.home-assistant.io/integrations/lg_thinq/), [Whirlpool](https://www.home-assistant.io/integrations/whirlpool/) and [Matter](https://www.home-assistant.io/integrations/matter/).
+Animated Lovelace cards for home appliances in Home Assistant: washing machines, tumble dryers, washer-dryers, dishwashers, ovens, microwaves, hobs, coffee machines, cooker hoods, fridges, freezers, wine cabinets and the LG Styler. They work with [Home Connect](https://www.home-assistant.io/integrations/home_connect/), [Miele](https://www.home-assistant.io/integrations/miele/), [Liebherr](https://www.home-assistant.io/integrations/liebherr/), [SmartThings](https://www.home-assistant.io/integrations/smartthings/), [LocalThings](https://github.com/mbillow/localthings), [LG ThinQ](https://www.home-assistant.io/integrations/lg_thinq/), [Whirlpool](https://www.home-assistant.io/integrations/whirlpool/) and [Matter](https://www.home-assistant.io/integrations/matter/).
 
 Pick the appliance: the card works out its type and its brand, and finds all its entities by itself.
 
@@ -45,7 +45,8 @@ Pick the appliance: the card works out its type and its brand, and finds all its
 - Status with colour, progress bar, finish time and time left, the program step when the integration reports it (spinning, drying…)
 - Program picker and **Start** (when remote start is enabled), **Pause / Resume**, **Stop** with a confirmation tap, whatever the integration offers
 - Program options before starting, and the settings of appliances without programs (super modes, fan stage…)
-- Temperatures of fridges, freezers and wine cabinets, and of ovens while cooking
+- Temperatures of fridges, freezers and wine cabinets (each compartment's temperature with its setpoint, *6 °C → 4 °C*), and of ovens while cooking
+- − / + buttons to change a fridge or freezer setpoint from the card, and a *Too warm* alert when a compartment goes above a threshold (`temperature_alert`, `freezer_temperature_alert`)
 - Door state, salt and rinse aid alerts, washer i-Dos fill level alerts, coffee machine bean container, water tank, drip tray, descaling and cleaning alerts, and alerts of your own (`alerts`)
 - A reminder chip when a program has finished and the door hasn't been opened since ("Finished 25 minutes ago, door still closed")
 - Energy per cycle: with an energy meter on the appliance (or a smart plug's, set as `entities.energy`), *This cycle: 0.6 kWh* while a program runs, then *Last cycle: 0.9 kWh*, with its cost when a price is set
@@ -66,6 +67,7 @@ Pick the appliance: the card works out its type and its brand, and finds all its
 | [LocalThings](https://github.com/mbillow/localthings) (custom, local network, no cloud) — Samsung | Washing machines, tumble dryers, dishwashers, ovens and ranges, type read from the device name | Machine state and step (oven cavity state, laundry progress), progress, finish time, cycle or oven mode picker, **Start / Pause / Resume / Stop** buttons, remote control, power, door, oven temperatures |
 | [LG ThinQ](https://www.home-assistant.io/integrations/lg_thinq/) (built in) — LG | Washing machines, tumble dryers, WashTower and WashCombo, dishwashers, ovens, microwaves, hobs, cooker hoods, fridges, wine cabinets, Styler | Current state and step, progress and finish time, **Start** and **Stop** through the operation mode, power, remote start, door, temperatures, express modes |
 | [Whirlpool](https://www.home-assistant.io/integrations/whirlpool/) (built in) — Whirlpool, Maytag, KitchenAid, Consul | Washing machines, tumble dryers, ovens, fridges | Washer and dryer state, finish time and door; oven state, temperature and **Stop** (set `brand` for a Maytag, KitchenAid or Consul: the integration doesn't say) |
+| [Liebherr](https://www.home-assistant.io/integrations/liebherr/) (built in) — Liebherr | Fridges, freezers, fridge-freezers | Temperature and setpoint of each zone, − / + on the setpoint, *Too warm* alert, SuperCool / SuperFrost (super mode animation), party and night mode, BioFresh-Plus, HydroBreeze and ice maker as settings (set `kind: freezer` for a freezer without SuperFrost) |
 | [Matter](https://www.home-assistant.io/integrations/matter/) (built in) | Dishwashers, washing machines, tumble dryers (Matter 1.2+) | Operational state and phase, finish time, **Start / Pause / Resume / Stop**, power, program options (set `kind` when the appliance type can't be told from its entities) |
 
 Air conditioners, purifiers and robot vacuums are left out: they have their own cards.
@@ -193,7 +195,7 @@ entities:
 | `show_title` | both | `true` | Show the title in the header (e.g. `false` under a section heading of your own) |
 | `show_subtitle` | both | `true` | Show the subtitle under the title |
 | `kind` | both | Auto | Appliance type when it can't be detected: `dishwasher`, `washer`, `dryer`, `washer_dryer`, `oven`, `microwave`, `hob`, `coffee_maker`, `hood`, `fridge`, `freezer`, `wine_cooler`, `styler` |
-| `brand` | both | Auto | Brand for the badge and button colour when the integration doesn't give it: `bosch`, `siemens`, `neff`, `gaggenau`, `constructa`, `miele`, `samsung`, `lg`, `whirlpool`, `maytag`, `kitchenaid`, `consul` |
+| `brand` | both | Auto | Brand for the badge and button colour when the integration doesn't give it: `bosch`, `siemens`, `neff`, `gaggenau`, `constructa`, `miele`, `samsung`, `lg`, `whirlpool`, `maytag`, `kitchenaid`, `consul`, `liebherr` |
 | `icon` | both | Appliance icon | The header's round icon; with `illustration: false`, it also replaces the appliance illustration |
 | `illustration` | both | `true` | Illustrated header (both cards): the appliance in its room (laundry room or kitchen) on a tiled floor, its icon tinted by the state and the brand's logo on it. `false` keeps the classic header |
 | `illustration_theme` | both | `auto` | Illustrated header, both cards: `auto` (follows the Home Assistant theme: night with a dark theme, day with a light theme), `day` or `night` |
@@ -202,6 +204,8 @@ entities:
 | `show_controls` | both | `true` | Show Start / Pause / Resume / Stop buttons |
 | `show_alerts` | both | `true` | Show salt, rinse aid, i-Dos and coffee machine alerts (descaling and cleaning included), the `alerts` below, and the reminder when a finished program's door hasn't been opened |
 | `alerts` | both | — | YAML only. Alert chips from entities of your own (a template sensor, a helper, a leak sensor…), see [Alerts of your own](#alerts-of-your-own) |
+| `temperature_alert` | both | `8` (°C) / `46` (°F) | Fridges, freezers, wine cabinets: a fridge compartment above this temperature (in the appliance's unit) gets a *Too warm* alert; `false` turns it off. A wine cabinet alerts only when it is set |
+| `freezer_temperature_alert` | both | `-12` (°C) / `10` (°F) | The same for freezer compartments (a freezer, or a compartment named so or set below zero) |
 | `show_power` | both | `true` | Show the power button (turn off for appliances that can't be switched on / off remotely) |
 | `show_energy` | both | `true` | Energy chip of the running or last cycle (24 h), when the appliance has an energy meter |
 | `energy_price` | both | — | Price per kWh: the cycle's cost next to its energy (*This cycle: 0.58 kWh · ≈ €0.12*), in Home Assistant's currency |

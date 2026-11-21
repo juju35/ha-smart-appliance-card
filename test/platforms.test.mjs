@@ -440,3 +440,67 @@ test("alerts of your own: on-like or listed states, name, icon, mini card too, e
   assert.match(render(hass, { device_id: "a1", alerts }, SmartApplianceMiniCard).html, /Clean the brewing unit/);
   assert.doesNotMatch(render(hass, { device_id: "a1", alerts, show_alerts: false }).html, /Clean the brewing unit/);
 });
+
+const liebherr = (fridgeTemp = "6", freezerTemp = "-18") =>
+  device("liebherr", { manufacturer: "Liebherr", model: "CBNsdc 5753" }, [
+    ["sensor.liebherr_top_zone", fridgeTemp, { unit_of_measurement: "°C", device_class: "temperature" }, { translation_key: "top_zone" }],
+    ["sensor.liebherr_bottom_zone", freezerTemp, { unit_of_measurement: "°C", device_class: "temperature" }, { translation_key: "bottom_zone" }],
+    ["number.liebherr_top_zone_setpoint", "4", { unit_of_measurement: "°C", min: 2, max: 9, step: 1, friendly_name: "Appliance Top zone setpoint" },
+      { translation_key: "setpoint_temperature_top_zone" }],
+    ["number.liebherr_bottom_zone_setpoint", "-18", { unit_of_measurement: "°C", min: -26, max: -15, step: 1, friendly_name: "Appliance Bottom zone setpoint" },
+      { translation_key: "setpoint_temperature_bottom_zone" }],
+    ["switch.liebherr_top_zone_supercool", "off", {}, { translation_key: "super_cool" }],
+    ["switch.liebherr_bottom_zone_superfrost", "off", {}, { translation_key: "super_frost" }],
+    ["switch.liebherr_party_mode", "off", {}, { translation_key: "party_mode" }],
+    ["switch.liebherr_night_mode", "off", {}, { translation_key: "night_mode" }],
+  ]);
+
+test("Liebherr: a fridge-freezer, each compartment's temperature with its setpoint, super modes and settings", () => {
+  const hass = liebherr();
+  assert.equal(hcKindOf(hass, "a1"), "fridge");
+  const { card, html } = render(hass);
+  assert.match(html, /data-entity="sensor.liebherr_top_zone"[^>]*><ha-icon icon="mdi:thermometer"><\/ha-icon>6 °C → 4 °C</);
+  assert.match(html, /data-entity="sensor.liebherr_bottom_zone"[^>]*><ha-icon icon="mdi:snowflake"><\/ha-icon>-18 °C → -18 °C</, "a setpoint below zero is a freezer");
+  assert.match(html, /title="[^"]*Setpoint 4 °C"/);
+  assert.doesNotMatch(html, /Too warm/);
+  assert.match(html, /data-toggle="switch.liebherr_party_mode"/);
+  assert.equal(card._r.ent.boost, "switch.liebherr_top_zone_supercool");
+  assert.equal(hcBrand(hass.devices.a1).name, "Liebherr");
+  // A single-zone freezer: one temperature beside one setpoint.
+  const freezer = device("liebherr", { manufacturer: "Liebherr" }, [
+    ["sensor.freezer", "-19", { unit_of_measurement: "°C", device_class: "temperature" }],
+    ["number.freezer_setpoint", "-20", { unit_of_measurement: "°C", min: -26, max: -15, step: 1 }, { translation_key: "setpoint_temperature" }],
+    ["switch.freezer_superfrost", "off", {}, { translation_key: "super_frost" }],
+  ]);
+  assert.equal(hcKindOf(freezer, "a1"), "freezer");
+  assert.match(render(freezer).html, /-19 °C → -20 °C/);
+});
+
+test("Liebherr: − / + change the setpoint within its range", async () => {
+  const hass = liebherr();
+  const { card, html } = render(hass);
+  assert.match(html, /class="stepper"/);
+  assert.match(html, /data-step="number.liebherr_top_zone_setpoint" data-dir="1"/);
+  const click = (id, dir) => card._onClick({ composedPath: () => [{ dataset: { step: id, dir: String(dir) } }] });
+  click("number.liebherr_top_zone_setpoint", 1);
+  await new Promise((r) => setTimeout(r));
+  assert.deepEqual(plain(hass.calls[0]), ["number", "set_value", { entity_id: "number.liebherr_top_zone_setpoint", value: 5 }]);
+  // At its maximum: the + button is disabled and nothing is sent.
+  hass.states["number.liebherr_bottom_zone_setpoint"] = st("-15", { unit_of_measurement: "°C", min: -26, max: -15, step: 1 });
+  card.hass = { ...hass };
+  assert.match(card.shadowRoot.innerHTML, /data-step="number.liebherr_bottom_zone_setpoint" data-dir="1"[^>]* disabled/);
+  click("number.liebherr_bottom_zone_setpoint", 1);
+  await new Promise((r) => setTimeout(r));
+  assert.equal(hass.calls.length, 1);
+  assert.doesNotMatch(render(hass, {}, SmartApplianceMiniCard).html, /class="stepper"/, "not in the compact view");
+});
+
+test("too warm: default thresholds per compartment, configurable, off with false", () => {
+  assert.match(render(liebherr("9")).html, /mdi:thermometer-alert"><\/ha-icon>Too warm · 9 °C/);
+  assert.match(render(liebherr("6", "-10")).html, /Too warm · -10 °C/, "the freezer compartment above −12 °C");
+  assert.doesNotMatch(render(liebherr("9"), { temperature_alert: 10 }).html, /Too warm/);
+  assert.match(render(liebherr("6"), { temperature_alert: 5 }).html, /Too warm · 6 °C/);
+  assert.doesNotMatch(render(liebherr("9", "-5"), { temperature_alert: false, freezer_temperature_alert: false }).html, /Too warm/);
+  assert.doesNotMatch(render(liebherr("9"), { show_alerts: false }).html, /Too warm/);
+  assert.match(render(liebherr("9"), {}, SmartApplianceMiniCard).html, /Too warm/, "on the mini card too");
+});

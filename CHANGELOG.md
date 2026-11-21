@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.11.0 - 2026-11-21
+
+### Features
+- **Fridges and freezers** (#101): each compartment's temperature is shown with its setpoint, *6 °C → 4 °C* (the setpoint in the chip's tooltip), instead of two chips that looked the same.
+- **− / + on the setpoint** (#101): a *Temperature* section on the full card, one row per setpoint (`number`), within its min / max and by its step.
+- **Too warm alert** (#101): a compartment above 8 °C (fridge) or −12 °C (freezer) gets a *Too warm* alert chip, on the mini card too; `temperature_alert` and `freezer_temperature_alert` set the thresholds (`false` turns one off), both in the visual editor. A compartment set below zero counts as a freezer one.
+- Support for the core [Liebherr](https://www.home-assistant.io/integrations/liebherr/) integration: fridges, freezers and fridge-freezers, temperature and setpoint per zone, SuperCool / SuperFrost as the super mode, party and night mode and the other switches and selects as settings; Liebherr brand colour.
+
 ## 2.10.0 - 2026-11-21
 
 ### Features
