@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.10.0 - 2026-11-21
+
+### Features
+- **i-Dos fill level alerts** (#102): washers with i-Dos show *i-Dos 1 low* / *i-Dos 2 low* while the Home Connect event of the detergent container is `present` or `confirmed`, like the salt and rinse aid alerts of the dishwasher.
+- **Coffee machine maintenance alerts** (#102): *Descaling recommended* and *Cleaning recommended* chips from the Home Connect events `device_should_be_descaled` / `device_should_be_cleaned`, next to the bean container, water tank and drip tray ones.
+- **Alerts of your own** (#102): the `alerts` option (YAML only) shows alert chips, in the same style as the built-in ones and on the mini card too, from entities of your own (a template sensor, a helper, a leak sensor…): while the entity is on (`on`, `present`, `problem`, `low`…) or in one of the states listed under `state`, with its own `name` and `icon`.
+
 ## 2.9.2 - 2026-11-20
 
 ### Fixes

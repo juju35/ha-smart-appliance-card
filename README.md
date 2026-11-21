@@ -46,7 +46,7 @@ Pick the appliance: the card works out its type and its brand, and finds all its
 - Program picker and **Start** (when remote start is enabled), **Pause / Resume**, **Stop** with a confirmation tap, whatever the integration offers
 - Program options before starting, and the settings of appliances without programs (super modes, fan stage…)
 - Temperatures of fridges, freezers and wine cabinets, and of ovens while cooking
-- Door state, salt and rinse aid alerts, coffee machine bean container, water tank and drip tray alerts
+- Door state, salt and rinse aid alerts, washer i-Dos fill level alerts, coffee machine bean container, water tank, drip tray, descaling and cleaning alerts, and alerts of your own (`alerts`)
 - A reminder chip when a program has finished and the door hasn't been opened since ("Finished 25 minutes ago, door still closed")
 - Energy per cycle: with an energy meter on the appliance (or a smart plug's, set as `entities.energy`), *This cycle: 0.6 kWh* while a program runs, then *Last cycle: 0.9 kWh*, with its cost when a price is set
 - A click on a chip (door, temperature, alert…) opens the more-info dialog of its entity
@@ -59,7 +59,7 @@ Pick the appliance: the card works out its type and its brand, and finds all its
 
 | Integration | Appliances | What the cards show |
 |---|---|---|
-| [Home Connect](https://www.home-assistant.io/integrations/home_connect/) (built in) — Bosch, Siemens, Neff, Gaggenau, Constructa | Dishwashers, washing machines, tumble dryers, washer-dryers, ovens, microwaves, hobs, coffee machines, cooker hoods, fridges, freezers, wine cabinets | Status, progress, finish time, program picker with its options, **Start** (remote start enabled), **Pause / Resume**, **Stop**, door, salt and rinse aid alerts, coffee machine alerts, oven temperature, fridge setpoints and super modes, hood fan stage and light |
+| [Home Connect](https://www.home-assistant.io/integrations/home_connect/) (built in) — Bosch, Siemens, Neff, Gaggenau, Constructa | Dishwashers, washing machines, tumble dryers, washer-dryers, ovens, microwaves, hobs, coffee machines, cooker hoods, fridges, freezers, wine cabinets | Status, progress, finish time, program picker with its options, **Start** (remote start enabled), **Pause / Resume**, **Stop**, door, salt and rinse aid alerts, i-Dos fill level alerts, coffee machine alerts (descaling and cleaning included), oven temperature, fridge setpoints and super modes, hood fan stage and light |
 | [Home Connect Local](https://github.com/chris-mc1/homeconnect_local_hass) (custom, local network, no cloud) — Bosch, Siemens, Neff, Gaggenau, Constructa | Same appliances as Home Connect, type read from the device model | Status, progress, time left, program picker with its options, **Start**, **Pause / Resume**, **Stop**, power, door (binary sensor), salt and rinse aid levels, coffee machine tanks, fridge super modes, lights |
 | [Miele](https://www.home-assistant.io/integrations/miele/) (built in) | Washing machines, tumble dryers, washer-dryers, dishwashers, ovens (steam and combi included), microwaves, hobs, coffee machines, cooker hoods, fridges, freezers, wine cabinets | Status and program phase, program, progress and finish time from the elapsed and remaining times, **Start**, **Pause**, **Stop**, power, door, zone temperatures, super cooling and super freezing |
 | [SmartThings](https://www.home-assistant.io/integrations/smartthings/) (built in) — Samsung | Washing machines, tumble dryers, washer-dryers, dishwashers, ovens, cooker hoods, fridges, freezers | Machine and job state, progress, finish time, **Start / Pause / Resume / Stop** through the operating state, dishwasher course picker, door, temperatures, rapid cooling and freezing |
@@ -171,6 +171,9 @@ show_program: true
 show_options: true
 show_controls: true
 show_alerts: true
+alerts:
+  - entity: binary_sensor.washer_dispenser_cleaning_due
+    name: Clean the detergent dispenser
 show_power: true
 show_energy: true
 language: en
@@ -197,7 +200,8 @@ entities:
 | `show_program` | both | `true` | Show the program picker |
 | `show_options` | both | `true` | Show program options (only before a program starts) |
 | `show_controls` | both | `true` | Show Start / Pause / Resume / Stop buttons |
-| `show_alerts` | both | `true` | Show salt, rinse aid and coffee machine alerts, and the reminder when a finished program's door hasn't been opened |
+| `show_alerts` | both | `true` | Show salt, rinse aid, i-Dos and coffee machine alerts (descaling and cleaning included), the `alerts` below, and the reminder when a finished program's door hasn't been opened |
+| `alerts` | both | — | YAML only. Alert chips from entities of your own (a template sensor, a helper, a leak sensor…), see [Alerts of your own](#alerts-of-your-own) |
 | `show_power` | both | `true` | Show the power button (turn off for appliances that can't be switched on / off remotely) |
 | `show_energy` | both | `true` | Energy chip of the running or last cycle (24 h), when the appliance has an energy meter |
 | `energy_price` | both | — | Price per kWh: the cycle's cost next to its energy (*This cycle: 0.58 kWh · ≈ €0.12*), in Home Assistant's currency |
@@ -205,6 +209,28 @@ entities:
 | `zoom` | mini | `true` | Detail button at the top right that unfolds the full card (a click elsewhere folds it back) |
 | `language` | both | Auto | Force language: `fr`, `en`, `de`, `es`, `sr`, `sr-Latn`, `it`, `nl`, `pt`, `pl`, `ro`, `da`, `sv`, `bg`, `ru`, `uk`, `hu`, `sk`, `cs`, `sl`, `lv` or `el` (auto-detects from HA settings) |
 | `entities` | both | Auto | Override detected entities (see below) |
+
+### Alerts of your own
+
+`alerts` adds alert chips, in the same style as the built-in ones, for reminders that don't come from the appliance (cleaning the detergent dispenser, descaling kept in a helper, a leak sensor under the appliance…). Each chip shows while its entity is on (`on`, `present`, `confirmed`, `problem`, `low`, `open`, `detected`, `wet`, `empty`…), or in one of the states listed under `state`. A click on it opens the entity.
+
+```yaml
+alerts:
+  - entity: binary_sensor.washer_dispenser_cleaning_due
+    name: Clean the detergent dispenser
+  - entity: input_select.coffee_brewing_unit
+    name: Clean the brewing unit
+    icon: mdi:coffee-maker-outline
+    state: [due, overdue]
+  - binary_sensor.leak_under_dishwasher   # a bare entity: its name, the default icon and states
+```
+
+| Key | Default | Description |
+|---|---|---|
+| `entity` | — | Entity whose state calls for the alert |
+| `name` | Entity name | Text of the chip |
+| `icon` | `mdi:alert-circle-outline` | Icon of the chip |
+| `state` | on-like states | A state or a list of states that show the chip |
 
 ### Entity overrides
 

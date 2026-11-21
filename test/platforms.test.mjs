@@ -385,3 +385,58 @@ test("single card and mini card registered, former Home Connect types still defi
   assert.equal(customElements.get("smart-appliance-mini-card"), SmartApplianceMiniCard);
   assert.deepEqual({ ...SmartApplianceCard.getStubConfig(miele()) }, { device_id: "a1" });
 });
+
+test("Home Connect washer: i-Dos fill level alerts while present or confirmed", () => {
+  const washer = (one, two) =>
+    device("home_connect", { manufacturer: "Siemens" }, [
+      ["select.washer_selected_program", "laundry_care_washer_program_cotton", { options: ["laundry_care_washer_program_cotton"] }, { translation_key: "selected_program" }],
+      ["sensor.washer_operation_state", "ready", { options: ["inactive", "ready", "run", "finished"] }, { translation_key: "operation_state" }],
+      ["sensor.washer_poor_i_dos_1_fill_level", one, { options: ["off", "present", "confirmed"] }, { translation_key: "poor_i_dos_1_fill_level" }],
+      ["sensor.washer_poor_i_dos_2_fill_level", two, { options: ["off", "present", "confirmed"] }, { translation_key: "poor_i_dos_2_fill_level" }],
+    ]);
+  const { html } = render(washer("present", "off"));
+  assert.match(html, /i-Dos 1 low/);
+  assert.doesNotMatch(html, /i-Dos 2 low/);
+  assert.match(render(washer("off", "confirmed")).html, /i-Dos 2 low/);
+  assert.doesNotMatch(render(washer("present", "off"), { show_alerts: false }).html, /i-Dos 1 low/);
+});
+
+test("Home Connect coffee machine: descaling and cleaning recommended", () => {
+  const coffee = (descale, clean) =>
+    device("home_connect", { manufacturer: "Siemens" }, [
+      ["select.coffee_selected_program", "consumer_products_coffee_maker_program_beverage_espresso",
+        { options: ["consumer_products_coffee_maker_program_beverage_espresso"] }, { translation_key: "selected_program" }],
+      ["sensor.coffee_operation_state", "ready", { options: ["inactive", "ready", "run", "finished"] }, { translation_key: "operation_state" }],
+      ["sensor.coffee_descale", descale, { options: ["off", "present", "confirmed"] }, { translation_key: "device_should_be_descaled" }],
+      ["sensor.coffee_clean", clean, { options: ["off", "present", "confirmed"] }, { translation_key: "device_should_be_cleaned" }],
+    ]);
+  const { html } = render(coffee("present", "confirmed"));
+  assert.match(html, /Descaling recommended/);
+  assert.match(html, /Cleaning recommended/);
+  assert.doesNotMatch(render(coffee("off", "off")).html, /recommended/);
+});
+
+test("alerts of your own: on-like or listed states, name, icon, mini card too, escaped", () => {
+  const hass = device("home_connect", { manufacturer: "Siemens" }, [
+    ["select.washer_selected_program", "laundry_care_washer_program_cotton", { options: ["laundry_care_washer_program_cotton"] }, { translation_key: "selected_program" }],
+    ["sensor.washer_operation_state", "ready", { options: ["inactive", "ready", "run", "finished"] }, { translation_key: "operation_state" }],
+  ]);
+  hass.states["binary_sensor.dispenser_due"] = st("on", { friendly_name: "Dispenser <due>" });
+  hass.states["input_select.brewing_unit"] = st("due", {});
+  hass.states["binary_sensor.leak"] = st("off", {});
+  const alerts = [
+    { entity: "binary_sensor.dispenser_due" },
+    { entity: "input_select.brewing_unit", name: "Clean the brewing unit", icon: "mdi:coffee-maker-outline", state: ["due", "overdue"] },
+    "binary_sensor.leak",
+  ];
+  const { card, html } = render(hass, { device_id: "a1", alerts });
+  assert.match(html, /Dispenser &lt;due&gt;/);
+  assert.match(html, /mdi:coffee-maker-outline"><\/ha-icon>Clean the brewing unit/);
+  assert.match(html, /data-entity="input_select.brewing_unit"/);
+  assert.doesNotMatch(html, /data-entity="binary_sensor.leak"/, "off is no alert");
+  hass.states = { ...hass.states, "binary_sensor.leak": st("on", {}) };
+  card.hass = { ...hass };
+  assert.match(card.shadowRoot.innerHTML, /data-entity="binary_sensor.leak"/, "a change of the alert entity redraws the card");
+  assert.match(render(hass, { device_id: "a1", alerts }, SmartApplianceMiniCard).html, /Clean the brewing unit/);
+  assert.doesNotMatch(render(hass, { device_id: "a1", alerts, show_alerts: false }).html, /Clean the brewing unit/);
+});

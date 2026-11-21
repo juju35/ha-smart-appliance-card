@@ -306,14 +306,14 @@ test("I18N parity: every language has exactly the English keys, array lengths an
 
 test("Serbian: sr is all Cyrillic and sr-Latn all Latin, brand names and placeholders aside", () => {
   const { HcI18n } = loadCard("smart-appliance-card.js", ["HcI18n"]);
-  const strip = (s) => String(s).replace(/Home Connect|Home Assistant|Miele|SmartThings|LG ThinQ|Whirlpool|Matter|Maytag|KitchenAid|Styler|kWh|Tempo|\{\w+\}/g, "");
+  const strip = (s) => String(s).replace(/Home Connect|Home Assistant|Miele|SmartThings|LG ThinQ|Whirlpool|Matter|Maytag|KitchenAid|Styler|kWh|Tempo|i-Dos|\{\w+\}/g, "");
   for (const [k, v] of Object.entries(HcI18n.sr)) assert.doesNotMatch(strip(v), /[A-Za-z]/, `sr.${k}`);
   for (const [k, v] of Object.entries(HcI18n["sr-Latn"])) assert.doesNotMatch(strip(v), /[\u0400-\u04FF]/, `sr-Latn.${k}`);
 });
 
 test("Bulgarian, Russian and Ukrainian are all Cyrillic, Greek all Greek, brand names and placeholders aside", () => {
   const { HcI18n } = loadCard("smart-appliance-card.js", ["HcI18n"]);
-  const strip = (s) => String(s).replace(/Home Connect|Home Assistant|Miele|SmartThings|LG ThinQ|Whirlpool|Matter|Maytag|KitchenAid|Styler|kWh|Tempo|\{\w+\}/g, "");
+  const strip = (s) => String(s).replace(/Home Connect|Home Assistant|Miele|SmartThings|LG ThinQ|Whirlpool|Matter|Maytag|KitchenAid|Styler|kWh|Tempo|i-Dos|\{\w+\}/g, "");
   for (const lang of ["bg", "ru", "uk", "el"]) {
     for (const [k, v] of Object.entries(HcI18n[lang])) assert.doesNotMatch(strip(v), /[A-Za-z]/, `${lang}.${k}`);
   }
