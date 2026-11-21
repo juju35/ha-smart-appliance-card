@@ -206,7 +206,7 @@ const icons = {
 const entities = {};
 const states = {};
 const PLATFORMS = { dryer: "miele", wd: "lg_thinq", mw: "lg_thinq", hob: "lg_thinq", fz: "miele", wine: "miele", styler: "lg_thinq",
-  stwm: "smartthings", wpdry: "whirlpool", kaov: "whirlpool" };
+  stwm: "smartthings", wpdry: "whirlpool", kaov: "whirlpool", hcl: "homeconnect_ws" };
 const add = (device, id, key, state, attributes = {}) => {
   entities[id] = { entity_id: id, device_id: device, translation_key: key, platform: PLATFORMS[device] || "home_connect" };
   states[id] = { entity_id: id, state, attributes: { friendly_name: id, ...attributes } };
@@ -364,6 +364,21 @@ add("kaov", "select.kitchenaid_oven_cook_mode", "oven_cook_mode", "convection_ba
 add("kaov", "button.kitchenaid_oven_stop", "oven_stop", "unknown");
 add("kaov", "light.kitchenaid_oven_light", "oven_light", "on");
 
+// Home Connect Local (homeconnect_ws) dishwasher waiting for a delayed start: it starts in 1 h 51 min, and its time
+// left is the program's whole duration (2 h 20 min), so it ends 4 h 11 min from now.
+add("hcl", "sensor.bosch_dishwasher_operation_state", "sensor_operation_state", "delayedstart",
+  { options: ["inactive", "ready", "delayedstart", "run", "pause", "finished", "error"] });
+add("hcl", "binary_sensor.bosch_dishwasher_door", "binary_sensor_door_state", "off", { device_class: "door" });
+add("hcl", "sensor.bosch_dishwasher_program_progress", "sensor_program_progress", "0", { unit_of_measurement: "%" });
+add("hcl", "sensor.bosch_dishwasher_start_in", "sensor_start_in", "1.85", { unit_of_measurement: "h", device_class: "duration" });
+add("hcl", "sensor.bosch_dishwasher_remaining_program_time", "sensor_remaining_program_time", "2.33",
+  { unit_of_measurement: "h", device_class: "duration" });
+add("hcl", "select.bosch_dishwasher_program", "select_program", "dishcare_dishwasher_program_eco50",
+  { options: ["dishcare_dishwasher_program_auto2", "dishcare_dishwasher_program_eco50"] });
+add("hcl", "sensor.bosch_dishwasher_active_program", "sensor_active_program", "dishcare_dishwasher_program_eco50");
+add("hcl", "button.bosch_dishwasher_abort_program", "button_abort_program", "unknown");
+add("hcl", "switch.bosch_dishwasher_power_state", "switch_power_state", "on");
+
 const devices = {
   dw: { id: "dw", name: "Dishwasher", manufacturer: "BOSCH" },
   wm: { id: "wm", name: "Washer", manufacturer: "SIEMENS" },
@@ -381,6 +396,7 @@ const devices = {
   stwm: { id: "stwm", name: "Washing machine", manufacturer: "Samsung Electronics", model: "WW90T" },
   wpdry: { id: "wpdry", name: "Dryer", manufacturer: "Whirlpool" },
   kaov: { id: "kaov", name: "Wall oven", manufacturer: "Whirlpool" },
+  hcl: { id: "hcl", name: "Dishwasher", manufacturer: "Bosch", model: "Dishwasher" },
 };
 // The new appliances: one capture per theme and one GIF of their animation.
 const NEW = [["dryer", "dryer"], ["washer-dryer", "wd"], ["oven", "oven"], ["microwave", "mw"], ["hob", "hob"], ["coffee-machine", "cm"],
@@ -481,6 +497,10 @@ await render(
         await page.mouse.move(0, 0);
       },
     },
+    // A delayed start with Home Connect Local's countdown: when it starts and when it ends, on both cards.
+    ...[["dishwasher-delayed-start", "smart-appliance-card", 460], ["dishwasher-delayed-start-mini", "smart-appliance-mini-card", 380]].flatMap(
+      ([file, type, width]) => ["light", "dark"].map((theme) => ({ file: theme === "light" ? file : `${file}-dark`, type, device: "hcl", theme, width, config: {} })),
+    ),
     ...NEW.flatMap(([file, device, config = {}]) => ["light", "dark"].map((theme) => ({
       file: theme === "light" ? file : `${file}-dark`, type: "smart-appliance-card", device, theme, width: 460, config,
     }))),
