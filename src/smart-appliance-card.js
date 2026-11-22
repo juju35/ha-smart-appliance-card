@@ -6016,7 +6016,7 @@ var HC_DOCS = 'https://github.com/juju35/ha-smart-appliance-card';
 ].forEach(([type, cls, name, description]) => {
   if (customElements.get(type)) return;
   customElements.define(type, cls);
-  window.customCards.push({ type, name, description, preview: true, documentationURL: HC_DOCS });
+  window.customCards.push({ type, name, description, preview: false, documentationURL: HC_DOCS });
 });
 // The former Home Connect card types keep working in existing dashboards; they are no longer offered in the card picker.
 [
