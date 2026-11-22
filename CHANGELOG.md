@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.12.0 - 2026-11-22
+
+### Features
+- **hOn support** ([#109](https://github.com/juju35/ha-smart-appliance-card/issues/109), thanks @Skifou): Haier, Candy and Hoover appliances through the [hOn](https://github.com/gvigroux/hon) custom integration — washing machines, washer-dryers, tumble dryers, dishwashers, fridges and wine cabinets, the type read from its entities. The card shows the machine mode (folded into its states, a dishwasher's numbered its own way), the program phase while it runs, the program, the finish time and the progress against the program duration, the door, the remote control, the salt and rinse aid alerts and the temperatures, with a Haier, Candy or Hoover badge. hOn has no start or stop button (it starts programs with its `hon.start_program` action), so the card has none either; its ovens, hobs, air conditioners, purifiers and water heaters are left out.
+
 ## 2.11.3 - 2026-11-22
 
 ### Performance

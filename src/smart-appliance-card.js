@@ -3408,6 +3408,24 @@ var HC_PLATFORM_ROLES = {
     remote_start: { domain: 'binary_sensor', keys: ['remote_control'] },
     door: { domain: 'binary_sensor', keys: ['door_open', 'door'], test: hcIsDoor },
   },
+  // hOn (gvigroux/hon): Haier, Candy and Hoover appliances through the hOn cloud. Its entities are named after the
+  // appliance ("Washing Machine Mode"), only some have a translation key, none has a start or stop button (programs
+  // are started with its hon.start_program action): the state is the machine mode (numbered), the step the program
+  // phase, the finish time its End time sensor and the progress the clock against the program duration.
+  hon: {
+    operation_state: { domain: 'sensor', keys: ['wash_mode', 'dishwasher_mode', 'tumbledryer_mode'],
+      id: /(?<!_holiday|_intelligence|_quick)_mode$/ },
+    phase: { domain: 'sensor', keys: ['wash_program_phase', 'tumbledryer_program_phase'], id: /_program_phase$/ },
+    program: { domain: 'sensor', keys: [], tk: /^programs_/, id: /_program_name$/ },
+    remaining: { domain: 'sensor', keys: [], id: /_remaining_time$/ },
+    finish_time: { domain: 'sensor', keys: [], id: /_end_time$/, test: hcIsTimestamp },
+    total: { domain: 'sensor', keys: [], id: /_program_duration$/ },
+    door: { domain: 'binary_sensor', keys: [], id: /_door_status$/, test: hcIsDoor },
+    remote_control: { domain: 'binary_sensor', keys: [], id: /_remote_control$/ },
+    // On while the salt or the rinse aid runs low.
+    salt: { domain: 'binary_sensor', keys: [], id: /_salt$/ },
+    rinse_aid: { domain: 'binary_sensor', keys: [], id: /_rinse_aid$/ },
+  },
 };
 var HC_PLATFORMS = Object.keys(HC_PLATFORM_ROLES);
 // Switches of Home Connect Local that are appliance settings, not program options.
@@ -3461,11 +3479,16 @@ var HC_STATE_MAPS = {
     factory_diagnostic_mode: 'actionrequired', life_test: 'actionrequired', customer_focus_mode: 'actionrequired', demo_mode: 'actionrequired',
   },
   matter: { stopped: 'ready', running: 'run', paused: 'pause', error: 'error' },
+  // hOn's machine mode (machMode) of washing machines, washer-dryers and tumble dryers.
+  hon: { 0: 'off', 1: 'ready', 2: 'run', 3: 'pause', 4: 'delayedstart', 5: 'delayedstart', 6: 'error', 7: 'finished', 8: 'run', 9: 'run' },
 };
+// A hOn dishwasher numbers its modes its own way: 3 is a delayed start, 5 a delayed start cancelled.
+var HC_HON_DISHWASHER = { 0: 'off', 1: 'ready', 2: 'run', 3: 'delayedstart', 5: 'ready', 6: 'error', 7: 'finished' };
 // Unknown values of these integrations are steps of a running program (LG "spinning", Whirlpool "cycle_rinsing"…).
-var HC_STATE_DEFAULT = { lg_thinq: 'run', whirlpool: 'run', matter: 'run', miele: 'ready' };
+var HC_STATE_DEFAULT = { lg_thinq: 'run', whirlpool: 'run', matter: 'run', miele: 'ready', hon: 'ready' };
 
-function hcNormState(platform, raw, phase) {
+// `kind`: the appliance type, for the integrations that number their states per type (hOn).
+function hcNormState(platform, raw, phase, kind) {
   if (raw === undefined || raw === 'unavailable' || raw === 'unknown') return undefined;
   if (platform === 'smartthings') {
     // Machine state (run / pause / stop, or the oven's ready / running / paused) and the job it is on.
@@ -3479,7 +3502,7 @@ function hcNormState(platform, raw, phase) {
     if (raw === 'pause') return 'pause';
     return phase === 'finish' ? 'finished' : 'ready';
   }
-  var map = HC_STATE_MAPS[platform];
+  var map = platform === 'hon' && kind === 'dishwasher' ? HC_HON_DISHWASHER : HC_STATE_MAPS[platform];
   if (!map) return raw;
   return map[raw] || HC_STATE_DEFAULT[platform] || raw;
 }
@@ -3674,6 +3697,26 @@ var HC_KEY_KINDS = [
   ['fridge', (k) => k.setpoint_temperature || k.setpoint_temperature_top_zone],
 ];
 
+// hOn: the type from the translation key of the program name or machine mode sensor (programs_wm…, wash_mode…), else
+// from the entities only one type has. Its ovens and hobs (no state the card can read), air conditioners, purifiers and
+// water heaters are left out.
+var HC_HON_TYPES = {
+  programs_wm: 'washer', programs_wd: 'washer_dryer', programs_td: 'dryer', programs_dw: 'dishwasher', programs_ref: 'fridge', programs_wc: 'wine_cooler', dishwasher_mode: 'dishwasher', tumbledryer_mode: 'dryer',
+  tumbledryer_program_phase: 'dryer',
+};
+var HC_HON_IDS = [
+  [/^sensor\..+_dry_level$/, 'dryer'], [/^binary_sensor\..+_(salt|rinse_aid)$/, 'dishwasher'], [/^sensor\..+_spin_speed$/, 'washer'],
+];
+function hcHonKind(list) {
+  var key = list.map((e) => e.translation_key).find((k) => HC_HON_TYPES[k]);
+  if (key) return HC_HON_TYPES[key];
+  var wd = list.some((e) => /^sensor\..+_dry_level$/.test(e.entity_id)) && list.some((e) => /^sensor\..+_spin_speed$/.test(e.entity_id));
+  if (wd) return 'washer_dryer';
+  if (list.some((e) => e.translation_key === 'wash_mode')) return 'washer';
+  var hit = HC_HON_IDS.find((m) => list.some((e) => m[0].test(e.entity_id)));
+  return hit ? hit[1] : null;
+}
+
 var hcKindIndex = new WeakMap();
 function hcKindOf(hass, deviceId) {
   var list = hcDeviceEntities(hass, deviceId);
@@ -3705,6 +3748,10 @@ function hcDetectKind(hass, deviceId, list) {
   if (platform === 'localthings') {
     var lt = String(dev.name || '').match(/^Samsung (.+?)(?: \(.*\))?$/);
     if (lt && HC_LOCALTHINGS_TYPES[lt[1]]) return HC_LOCALTHINGS_TYPES[lt[1]];
+  }
+  if (platform === 'hon') {
+    var hon = hcHonKind(list);
+    if (hon) return hon;
   }
   // Home Connect programs.
   var progs = list.filter((e) => e.entity_id.indexOf('select.') === 0)
@@ -3752,6 +3799,7 @@ var HC_BRANDS = {
   samsung: { name: 'Samsung', color: '#1428a0', match: /samsung/i }, lg: { name: 'LG', color: '#a50034', match: /^(lg|lge|lg electronics)$/i },
   whirlpool: { name: 'Whirlpool', color: '#8a6a00' }, maytag: { name: 'Maytag', color: '#002d72' }, kitchenaid: { name: 'KitchenAid', color: '#c8102e' },
   consul: { name: 'Consul', color: '#0067b1' }, liebherr: { name: 'Liebherr', color: '#4d5257' },
+  haier: { name: 'Haier', color: '#005eb8' }, candy: { name: 'Candy', color: '#e2001a' }, hoover: { name: 'Hoover', color: '#c8102e' },
 };
 // Brand logos (SVG or PNG files in logos/, named after the HC_BRANDS key), embedded by the build; brands without one keep
 // the initial on their colour.
@@ -4787,7 +4835,7 @@ class HomeConnectBaseCard extends HTMLElement {
     }
 
     var raw = this._val(ent.operation_state);
-    var opState = hcNormState(r.platform, raw, this._val(ent.phase));
+    var opState = hcNormState(r.platform, raw, this._val(ent.phase), kind);
     // Without a state sensor (a fridge, a hood) the appliance is online while any of its entities is.
     var online = ent.connectivity ? this._val(ent.connectivity) === 'on'
       : (ent.operation_state ? this._avail(ent.operation_state) && opState !== 'unavailable'
@@ -4810,7 +4858,8 @@ class HomeConnectBaseCard extends HTMLElement {
     var progId = this._avail(ent.active_program) ? ent.active_program : ent.selected_program;
     var progLabel = this._avail(progId) ? this._fmt(progId) : '';
     var progVal = this._val(ent.program);
-    if (!progLabel && this._avail(ent.program) && progVal !== 'no_program') progLabel = this._fmt(ent.program);
+    // hOn says "No program" when none runs.
+    if (!progLabel && this._avail(ent.program) && progVal !== 'no_program' && progVal !== 'No program') progLabel = this._fmt(ent.program);
 
     // Progress and finish time: given by the integration, or worked out from the time left, elapsed or in total.
     var num = (id) => (this._avail(id) && !Number.isNaN(Number(this._val(id))) ? Number(this._val(id)) : null);
@@ -4848,7 +4897,9 @@ class HomeConnectBaseCard extends HTMLElement {
     var runKey = `st_run_${kind}`;
     if (state === 'run' && profile.simple && this._t(runKey) !== runKey) statusText = this._t(runKey);
     else if (state === 'run' && r.platform !== 'home_connect') {
-      var detail = this._avail(ent.phase) && ['none', 'not_running'].indexOf(this._val(ent.phase)) < 0 ? ent.phase : ent.operation_state;
+      // hOn's phase 0 is "Ready", between two steps.
+      var detail = this._avail(ent.phase) && ['none', 'not_running'].indexOf(this._val(ent.phase)) < 0 && !(r.platform === 'hon' && this._val(ent.phase) === '0')
+        ? ent.phase : ent.operation_state;
       if (this._avail(detail) && hcNormState(r.platform, this._val(detail)) !== this._val(detail)) statusText = this._fmt(detail);
     }
     if (statusText === `st_${state}`) statusText = this._fmt(ent.operation_state);
