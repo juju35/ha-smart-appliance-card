@@ -524,3 +524,67 @@ test("too warm: default thresholds per compartment, configurable, off with false
   assert.doesNotMatch(render(liebherr("9"), { show_alerts: false }).html, /Too warm/);
   assert.match(render(liebherr("9"), {}, SmartApplianceMiniCard).html, /Too warm/, "on the mini card too");
 });
+
+// hOn (gvigroux/hon): entities named after the appliance, a few with a translation key, no start or stop button.
+const hon = (mode = "2", phase = "3", rows = []) =>
+  device("hon", { manufacturer: "haier", model: "HW90-B14959S8U1", name: "Washing Machine" }, [
+    ["sensor.washing_machine_mode", mode, {}, { translation_key: "wash_mode" }],
+    ["sensor.washing_machine_program_phase", phase, {}, { translation_key: "wash_program_phase" }],
+    ["sensor.washing_machine_program_name", "cotton", {}, { translation_key: "programs_wm" }],
+    ["sensor.washing_machine_remaining_time", "45", { unit_of_measurement: "min", device_class: "duration" }],
+    ["sensor.washing_machine_end_time", inMinutes(45), { device_class: "timestamp" }],
+    ["sensor.washing_machine_program_duration", "90", { unit_of_measurement: "min", device_class: "duration" }],
+    ["sensor.washing_machine_spin_speed", "1400", { unit_of_measurement: "rpm" }],
+    ["binary_sensor.washing_machine_status", "on", { device_class: "power" }],
+    ["binary_sensor.washing_machine_door_status", "off", { device_class: "door" }],
+    ["binary_sensor.washing_machine_remote_control", "on", { device_class: "connectivity" }],
+    ...rows,
+  ]);
+
+test("hOn: a Haier washing machine — type, state, step, finish time and progress against the program duration", () => {
+  const hass = hon();
+  assert.equal(hcKindOf(hass, "a1"), "washer");
+  hass.formatEntityState = (s, v = s.state) => ({ 3: "Spin", 0: "Ready" })[v] ?? v;
+  const { html } = render(hass);
+  assert.match(html, /title="Haier"/, "Haier badge");
+  assert.match(html, /Spin/, "the program phase while it runs");
+  assert.match(html, /50<small> %<\/small>/, "45 min left of 90");
+  assert.match(html, /Door closed/);
+  assert.doesNotMatch(html, /data-action="(start|stop|pause)"/, "hOn has no buttons for them");
+});
+
+test("hOn: machine modes folded into the card's states, a dishwasher numbering its own way", () => {
+  assert.equal(hcNormState("hon", "0"), "off");
+  assert.equal(hcNormState("hon", "1"), "ready");
+  assert.equal(hcNormState("hon", "3"), "pause");
+  assert.equal(hcNormState("hon", "4"), "delayedstart");
+  assert.equal(hcNormState("hon", "7"), "finished");
+  assert.equal(hcNormState("hon", "3", undefined, "dishwasher"), "delayedstart");
+  assert.equal(hcNormState("hon", "5", undefined, "dishwasher"), "ready");
+  assert.match(render(hon("3", "0")).html, /data-state="pause"|Paused/);
+  assert.match(render(hon("7", "0")).html, /Finished/);
+});
+
+test("hOn: dishwasher and tumble dryer told apart, salt and rinse aid alerts, ovens and air conditioners left out", () => {
+  const dw = device("hon", { manufacturer: "candy", name: "Dish Washer" }, [
+    ["sensor.dish_washer_mode", "3", {}, { translation_key: "dishwasher_mode" }],
+    ["sensor.dish_washer_program_name", "No program", {}, { translation_key: "programs_dw" }],
+    ["binary_sensor.dish_washer_salt", "on", { device_class: "presence" }],
+    ["binary_sensor.dish_washer_rinse_aid", "off", { device_class: "presence" }],
+  ]);
+  assert.equal(hcKindOf(dw, "a1"), "dishwasher");
+  const html = render(dw, { show_alerts: true }).html;
+  assert.match(html, /title="Candy"/);
+  assert.match(html, /mdi:shaker-outline/, "salt low");
+  assert.doesNotMatch(html, /mdi:water-alert-outline/, "rinse aid fine");
+  // Without any translation key: the entities only a tumble dryer has.
+  const td = device("hon", { manufacturer: "hoover", name: "Tumble Dryer" }, [
+    ["sensor.tumble_dryer_mode", "2"],
+    ["sensor.tumble_dryer_dry_level", "3"],
+  ]);
+  assert.equal(hcKindOf(td, "a1"), "dryer");
+  const oven = device("hon", { manufacturer: "candy", name: "Oven" }, [["sensor.oven_program_name", "No program", {}, { translation_key: "programs_ov" }]]);
+  assert.equal(hcKindOf(oven, "a1"), null);
+  const ac = device("hon", { manufacturer: "haier", name: "Climate" }, [["sensor.climate_mode", "1", {}, { translation_key: "climate_mode" }]]);
+  assert.equal(hcKindOf(ac, "a1"), null);
+});

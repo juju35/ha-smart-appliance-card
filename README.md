@@ -21,10 +21,13 @@
   <picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/juju35/ha-smart-appliance-card/main/images/localthings-dark.png"><img src="https://raw.githubusercontent.com/juju35/ha-smart-appliance-card/main/images/localthings.png" alt="LocalThings" height="20"></picture>&nbsp;&nbsp;
   <img src="https://raw.githubusercontent.com/juju35/ha-smart-appliance-card/main/logos/lg.svg" alt="LG" height="26">&nbsp;&nbsp;
   <img src="https://raw.githubusercontent.com/juju35/ha-smart-appliance-card/main/logos/whirlpool.svg" alt="Whirlpool" height="20">&nbsp;&nbsp;
-  <img src="https://raw.githubusercontent.com/juju35/ha-smart-appliance-card/main/logos/kitchenaid.svg" alt="KitchenAid" height="13">
+  <img src="https://raw.githubusercontent.com/juju35/ha-smart-appliance-card/main/logos/kitchenaid.svg" alt="KitchenAid" height="13">&nbsp;&nbsp;
+  <img src="https://raw.githubusercontent.com/juju35/ha-smart-appliance-card/main/logos/hoover.svg" alt="Hoover" height="22">&nbsp;&nbsp;
+  <img src="https://raw.githubusercontent.com/juju35/ha-smart-appliance-card/main/logos/candy.svg" alt="Candy" height="18">&nbsp;&nbsp;
+  <img src="https://raw.githubusercontent.com/juju35/ha-smart-appliance-card/main/logos/haier.svg" alt="Haier" height="18">
 </p>
 
-Animated Lovelace cards for home appliances in Home Assistant: washing machines, tumble dryers, washer-dryers, dishwashers, ovens, microwaves, hobs, coffee machines, cooker hoods, fridges, freezers, wine cabinets and the LG Styler. They work with [Home Connect](https://www.home-assistant.io/integrations/home_connect/), [Miele](https://www.home-assistant.io/integrations/miele/), [Liebherr](https://www.home-assistant.io/integrations/liebherr/), [SmartThings](https://www.home-assistant.io/integrations/smartthings/), [LocalThings](https://github.com/mbillow/localthings), [LG ThinQ](https://www.home-assistant.io/integrations/lg_thinq/), [Whirlpool](https://www.home-assistant.io/integrations/whirlpool/) and [Matter](https://www.home-assistant.io/integrations/matter/).
+Animated Lovelace cards for home appliances in Home Assistant: washing machines, tumble dryers, washer-dryers, dishwashers, ovens, microwaves, hobs, coffee machines, cooker hoods, fridges, freezers, wine cabinets and the LG Styler. They work with [Home Connect](https://www.home-assistant.io/integrations/home_connect/), [Miele](https://www.home-assistant.io/integrations/miele/), [Liebherr](https://www.home-assistant.io/integrations/liebherr/), [SmartThings](https://www.home-assistant.io/integrations/smartthings/), [LocalThings](https://github.com/mbillow/localthings), [LG ThinQ](https://www.home-assistant.io/integrations/lg_thinq/), [Whirlpool](https://www.home-assistant.io/integrations/whirlpool/), [hOn](https://github.com/gvigroux/hon) and [Matter](https://www.home-assistant.io/integrations/matter/).
 
 Pick the appliance: the card works out its type and its brand, and finds all its entities by itself.
 
@@ -68,6 +71,7 @@ Pick the appliance: the card works out its type and its brand, and finds all its
 | [LG ThinQ](https://www.home-assistant.io/integrations/lg_thinq/) (built in) — LG | Washing machines, tumble dryers, WashTower and WashCombo, dishwashers, ovens, microwaves, hobs, cooker hoods, fridges, wine cabinets, Styler | Current state and step, progress and finish time, **Start** and **Stop** through the operation mode, power, remote start, door, temperatures, express modes |
 | [Whirlpool](https://www.home-assistant.io/integrations/whirlpool/) (built in) — Whirlpool, Maytag, KitchenAid, Consul | Washing machines, tumble dryers, ovens, fridges | Washer and dryer state, finish time and door; oven state, temperature and **Stop** (set `brand` for a Maytag, KitchenAid or Consul: the integration doesn't say) |
 | [Liebherr](https://www.home-assistant.io/integrations/liebherr/) (built in) — Liebherr | Fridges, freezers, fridge-freezers | Temperature and setpoint of each zone, − / + on the setpoint, *Too warm* alert, SuperCool / SuperFrost (super mode animation), party and night mode, BioFresh-Plus, HydroBreeze and ice maker as settings (set `kind: freezer` for a freezer without SuperFrost) |
+| [hOn](https://github.com/gvigroux/hon) (custom, cloud) — Haier, Candy, Hoover | Washing machines, washer-dryers, tumble dryers, dishwashers, fridges, wine cabinets, type read from the entities | Machine mode and program phase, program, finish time, progress against the program duration, door, remote control, salt and rinse aid alerts, temperatures. No **Start / Stop** buttons: hOn has none (it starts programs with its `hon.start_program` action) |
 | [Matter](https://www.home-assistant.io/integrations/matter/) (built in) | Dishwashers, washing machines, tumble dryers (Matter 1.2+) | Operational state and phase, finish time, **Start / Pause / Resume / Stop**, power, program options (set `kind` when the appliance type can't be told from its entities) |
 
 Air conditioners, purifiers and robot vacuums are left out: they have their own cards.
@@ -76,21 +80,21 @@ Air conditioners, purifiers and robot vacuums are left out: they have their own 
 
 Each type is detected by itself; `kind` is the value to set when it can't be (a Matter appliance whose entities don't give it away, for instance).
 
-| Appliance | `kind` | Home Connect | Miele | SmartThings | LG ThinQ | Whirlpool | Matter |
-|---|---|---|---|---|---|---|---|
-| Dishwasher | `dishwasher` | ✅ | ✅ | ✅ | ✅ | — | ✅ |
-| Washing machine | `washer` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Tumble dryer | `dryer` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Washer-dryer | `washer_dryer` | ✅ | ✅ | ✅ | ✅ | — | — |
-| Oven | `oven` | ✅ | ✅ | ✅ | ✅ | ✅ | — |
-| Microwave | `microwave` | ✅ | ✅ | — | ✅ | — | — |
-| Hob | `hob` | ✅ | ✅ | — | ✅ | — | — |
-| Coffee machine | `coffee_maker` | ✅ | ✅ | — | — | — | — |
-| Cooker hood | `hood` | ✅ | ✅ | ✅ | ✅ | — | — |
-| Fridge | `fridge` | ✅ | ✅ | ✅ | ✅ | ✅ | — |
-| Freezer | `freezer` | ✅ | ✅ | ✅ | — | — | — |
-| Wine cabinet | `wine_cooler` | ✅ | ✅ | — | ✅ | — | — |
-| LG Styler | `styler` | — | — | — | ✅ | — | — |
+| Appliance | `kind` | Home Connect | Miele | SmartThings | LG ThinQ | Whirlpool | hOn | Matter |
+|---|---|---|---|---|---|---|---|---|
+| Dishwasher | `dishwasher` | ✅ | ✅ | ✅ | ✅ | — | ✅ | ✅ |
+| Washing machine | `washer` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Tumble dryer | `dryer` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Washer-dryer | `washer_dryer` | ✅ | ✅ | ✅ | ✅ | — | ✅ | — |
+| Oven | `oven` | ✅ | ✅ | ✅ | ✅ | ✅ | — | — |
+| Microwave | `microwave` | ✅ | ✅ | — | ✅ | — | — | — |
+| Hob | `hob` | ✅ | ✅ | — | ✅ | — | — | — |
+| Coffee machine | `coffee_maker` | ✅ | ✅ | — | — | — | — | — |
+| Cooker hood | `hood` | ✅ | ✅ | ✅ | ✅ | — | — | — |
+| Fridge | `fridge` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | — |
+| Freezer | `freezer` | ✅ | ✅ | ✅ | — | — | — | — |
+| Wine cabinet | `wine_cooler` | ✅ | ✅ | — | ✅ | — | ✅ | — |
+| LG Styler | `styler` | — | — | — | ✅ | — | — | — |
 
 ## Prerequisites
 
