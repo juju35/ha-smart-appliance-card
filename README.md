@@ -21,7 +21,10 @@
   <picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/juju35/ha-smart-appliance-card/main/images/localthings-dark.png"><img src="https://raw.githubusercontent.com/juju35/ha-smart-appliance-card/main/images/localthings.png" alt="LocalThings" height="20"></picture>&nbsp;&nbsp;
   <img src="https://raw.githubusercontent.com/juju35/ha-smart-appliance-card/main/logos/lg.svg" alt="LG" height="26">&nbsp;&nbsp;
   <img src="https://raw.githubusercontent.com/juju35/ha-smart-appliance-card/main/logos/whirlpool.svg" alt="Whirlpool" height="20">&nbsp;&nbsp;
-  <img src="https://raw.githubusercontent.com/juju35/ha-smart-appliance-card/main/logos/kitchenaid.svg" alt="KitchenAid" height="13">
+  <img src="https://raw.githubusercontent.com/juju35/ha-smart-appliance-card/main/logos/kitchenaid.svg" alt="KitchenAid" height="13">&nbsp;&nbsp;
+  <img src="https://raw.githubusercontent.com/juju35/ha-smart-appliance-card/main/logos/hoover.svg" alt="Hoover" height="18">&nbsp;&nbsp;
+  <img src="https://raw.githubusercontent.com/juju35/ha-smart-appliance-card/main/logos/candy.svg" alt="Candy" height="18">&nbsp;&nbsp;
+  <img src="https://raw.githubusercontent.com/juju35/ha-smart-appliance-card/main/logos/haier.svg" alt="Haier" height="18">
 </p>
 
 Animated Lovelace cards for home appliances in Home Assistant: washing machines, tumble dryers, washer-dryers, dishwashers, ovens, microwaves, hobs, coffee machines, cooker hoods, fridges, freezers, wine cabinets and the LG Styler. They work with [Home Connect](https://www.home-assistant.io/integrations/home_connect/), [Miele](https://www.home-assistant.io/integrations/miele/), [Liebherr](https://www.home-assistant.io/integrations/liebherr/), [SmartThings](https://www.home-assistant.io/integrations/smartthings/), [LocalThings](https://github.com/mbillow/localthings), [LG ThinQ](https://www.home-assistant.io/integrations/lg_thinq/), [Whirlpool](https://www.home-assistant.io/integrations/whirlpool/), [hOn](https://github.com/gvigroux/hon) and [Matter](https://www.home-assistant.io/integrations/matter/).
