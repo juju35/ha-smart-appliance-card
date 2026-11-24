@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.13.0 - 2026-11-24
+
+### Features
+- **Entities of your own** ([#116](https://github.com/juju35/ha-smart-appliance-card/issues/116)): three YAML options bring entities that are not the appliance's into the card.
+  - `sensors`: chips with the state (and unit) of other sensors — a smart plug, a room sensor, a template sensor —, a `name` and `icon` each if wanted; on the mini card too, a click opens the entity.
+  - `commands`: a *Commands* section under the program options (full card, whatever the appliance does) — `select` / `input_select` as drop-downs, `switch` / `input_boolean` / `light` / `fan` / `automation` as on / off pills, `button` / `input_button` / `script` / `scene` as buttons.
+  - `entities.watts`: the power chip from a sensor of your choice (a smart plug the appliance is plugged into), now listed with the other overrides in the visual editor (*Power draw*), next to `entities.energy` for the energy per cycle.
+
 ## 2.12.1 - 2026-11-24
 
 ### Maintenance

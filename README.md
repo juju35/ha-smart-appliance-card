@@ -51,6 +51,7 @@ Pick the appliance: the card works out its type and its brand, and finds all its
 - Temperatures of fridges, freezers and wine cabinets (each compartment's temperature with its setpoint, *6 °C → 4 °C*), and of ovens while cooking
 - − / + buttons to change a fridge or freezer setpoint from the card, and a *Too warm* alert when a compartment goes above a threshold (`temperature_alert`, `freezer_temperature_alert`)
 - Door state, salt and rinse aid alerts, washer i-Dos fill level alerts, coffee machine bean container, water tank, drip tray, descaling and cleaning alerts, and alerts of your own (`alerts`)
+- Entities of your own: chips for other sensors (`sensors`), a *Commands* section with drop-downs, switches, buttons and scripts (`commands`), and the power or energy of a smart plug in place of the appliance's (`entities.watts`, `entities.energy`)
 - A reminder chip when a program has finished and the door hasn't been opened since ("Finished 25 minutes ago, door still closed")
 - Energy per cycle: with an energy meter on the appliance (or a smart plug's, set as `entities.energy`), *This cycle: 0.6 kWh* while a program runs, then *Last cycle: 0.9 kWh*, with its cost when a price is set
 - A click on a chip (door, temperature, alert…) opens the more-info dialog of its entity
@@ -208,6 +209,8 @@ entities:
 | `show_controls` | both | `true` | Show Start / Pause / Resume / Stop buttons |
 | `show_alerts` | both | `true` | Show salt, rinse aid, i-Dos and coffee machine alerts (descaling and cleaning included), the `alerts` below, and the reminder when a finished program's door hasn't been opened |
 | `alerts` | both | — | YAML only. Alert chips from entities of your own (a template sensor, a helper, a leak sensor…), see [Alerts of your own](#alerts-of-your-own) |
+| `sensors` | both | — | YAML only. Chips showing the state of entities of your own (a smart plug, a room sensor, a template sensor…), see [Sensors and commands of your own](#sensors-and-commands-of-your-own) |
+| `commands` | full | — | YAML only. A *Commands* section with entities of your own: drop-downs (`select`, `input_select`), on / off pills (`switch`, `input_boolean`, `light`, `fan`, `automation`) and buttons (`button`, `input_button`, `script`, `scene`), see [Sensors and commands of your own](#sensors-and-commands-of-your-own) |
 | `temperature_alert` | both | `8` (°C) / `46` (°F) | Fridges, freezers, wine cabinets: a fridge compartment above this temperature (in the appliance's unit) gets a *Too warm* alert; `false` turns it off. A wine cabinet alerts only when it is set |
 | `freezer_temperature_alert` | both | `-12` (°C) / `10` (°F) | The same for freezer compartments (a freezer, or a compartment named so or set below zero) |
 | `show_power` | both | `true` | Show the power button (turn off for appliances that can't be switched on / off remotely) |
@@ -240,6 +243,28 @@ alerts:
 | `icon` | `mdi:alert-circle-outline` | Icon of the chip |
 | `state` | on-like states | A state or a list of states that show the chip |
 
+### Sensors and commands of your own
+
+`sensors` and `commands` bring entities that are not the appliance's own into the card — a smart plug the appliance is plugged into, a helper an automation reads, a script that sends a program to the appliance. Each item is an entity id, or `entity` with an optional `name` and `icon`.
+
+```yaml
+entities:
+  watts: sensor.fridge_plug_power        # the power chip from a smart plug (see Entity overrides)
+  energy: sensor.fridge_plug_energy      # the energy per cycle from the same plug
+sensors:
+  - sensor.kitchen_humidity
+  - entity: sensor.fridge_plug_voltage
+    name: Plug
+    icon: mdi:power-plug
+commands:
+  - input_select.fridge_program          # a drop-down: picking an option selects it
+  - input_boolean.fridge_night_eco       # a pill: turns it on or off
+  - entity: script.fridge_send_program   # a button: runs it (button and input_button are pressed)
+    name: Send program
+```
+
+A sensor chip shows the entity's state with its unit (its `name` first when one is given) and opens the entity on a click; it shows on the mini card too. The *Commands* section sits under the program options, on the full card, whatever the appliance is doing.
+
 ### Entity overrides
 
 Keys accepted under `entities`:
@@ -260,6 +285,7 @@ Keys accepted under `entities`:
 | `connectivity` | `binary_sensor` | Online / offline state |
 | `salt` / `rinse_aid` | `sensor` | Salt and rinse aid alerts (dishwashers) |
 | `energy` | `sensor` | Energy meter (kWh / Wh) for the energy per cycle; a smart plug's works too |
+| `watts` | `sensor` | What the appliance draws now (W / kW), shown as a chip while above 0; a smart plug's works too |
 
 Every other `switch` and `select` of the device is shown as a program option (or as a setting, on appliances without programs).
 
@@ -304,6 +330,7 @@ Home Connect: a dishwasher mid-cycle, spraying water and glowing on the floor, a
 | Dishwasher | <img src="https://raw.githubusercontent.com/juju35/ha-smart-appliance-card/main/screenshots/dishwasher.png" alt="dishwasher" width="400"> | <img src="https://raw.githubusercontent.com/juju35/ha-smart-appliance-card/main/screenshots/dishwasher-dark.png" alt="dishwasher dark" width="400"> |
 | Dishwasher, at work | <img src="https://raw.githubusercontent.com/juju35/ha-smart-appliance-card/main/screenshots/dishwasher-running.gif" alt="dishwasher, at work" width="400"> | <img src="https://raw.githubusercontent.com/juju35/ha-smart-appliance-card/main/screenshots/dishwasher-running-dark.gif" alt="dishwasher, at work dark" width="400"> |
 | Fridge-freezer | <img src="https://raw.githubusercontent.com/juju35/ha-smart-appliance-card/main/screenshots/fridge.png" alt="fridge-freezer" width="400"> | <img src="https://raw.githubusercontent.com/juju35/ha-smart-appliance-card/main/screenshots/fridge-dark.png" alt="fridge-freezer dark" width="400"> |
+| Fridge-freezer, with entities of your own (`watts`, `sensors`, `commands`) | <img src="https://raw.githubusercontent.com/juju35/ha-smart-appliance-card/main/screenshots/fridge-own-entities.png" alt="fridge-freezer with entities of your own" width="400"> | <img src="https://raw.githubusercontent.com/juju35/ha-smart-appliance-card/main/screenshots/fridge-own-entities-dark.png" alt="fridge-freezer with entities of your own dark" width="400"> |
 | Fridge-freezer, at work | <img src="https://raw.githubusercontent.com/juju35/ha-smart-appliance-card/main/screenshots/fridge-running.gif" alt="fridge-freezer, at work" width="400"> | <img src="https://raw.githubusercontent.com/juju35/ha-smart-appliance-card/main/screenshots/fridge-running-dark.gif" alt="fridge-freezer, at work dark" width="400"> |
 | Dishwasher mini card | <img src="https://raw.githubusercontent.com/juju35/ha-smart-appliance-card/main/screenshots/dishwasher-mini.png" alt="dishwasher mini card" width="400"> | <img src="https://raw.githubusercontent.com/juju35/ha-smart-appliance-card/main/screenshots/dishwasher-mini-dark.png" alt="dishwasher mini card dark" width="400"> |
 | Fridge-freezer mini card | <img src="https://raw.githubusercontent.com/juju35/ha-smart-appliance-card/main/screenshots/mini-bosch.png" alt="fridge-freezer mini card" width="400"> | <img src="https://raw.githubusercontent.com/juju35/ha-smart-appliance-card/main/screenshots/mini-bosch-dark.png" alt="fridge-freezer mini card dark" width="400"> |
