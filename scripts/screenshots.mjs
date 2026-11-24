@@ -154,6 +154,9 @@ export async function animate(shot, { icons = {}, hass = {}, extra = "", fps = 2
 }
 
 const icons = {
+  "gesture-tap-button": "M13 5C15.21 5 17 6.79 17 9C17 10.5 16.2 11.77 15 12.46V11.24C15.61 10.69 16 9.89 16 9C16 7.34 14.66 6 13 6S10 7.34 10 9C10 9.89 10.39 10.69 11 11.24V12.46C9.8 11.77 9 10.5 9 9C9 6.79 10.79 5 13 5M20 20.5C19.97 21.32 19.32 21.97 18.5 22H13C12.62 22 12.26 21.85 12 21.57L8 17.37L8.74 16.6C8.93 16.39 9.2 16.28 9.5 16.28H9.7L12 18V9C12 8.45 12.45 8 13 8S14 8.45 14 9V13.47L15.21 13.6L19.15 15.79C19.68 16.03 20 16.56 20 17.14V20.5M20 2H4C2.9 2 2 2.9 2 4V12C2 13.11 2.9 14 4 14H8V12L4 12L4 4H20L20 12H18V14H20V13.96L20.04 14C21.13 14 22 13.09 22 12V4C22 2.9 21.11 2 20 2Z",
+  "water-percent": "M12,3.25C12,3.25 6,10 6,14C6,17.32 8.69,20 12,20A6,6 0 0,0 18,14C18,10 12,3.25 12,3.25M14.47,9.97L15.53,11.03L9.53,17.03L8.47,15.97M9.75,10A1.25,1.25 0 0,1 11,11.25A1.25,1.25 0 0,1 9.75,12.5A1.25,1.25 0 0,1 8.5,11.25A1.25,1.25 0 0,1 9.75,10M14.25,14.5A1.25,1.25 0 0,1 15.5,15.75A1.25,1.25 0 0,1 14.25,17A1.25,1.25 0 0,1 13,15.75A1.25,1.25 0 0,1 14.25,14.5Z",
+  "script-text-play-outline": "M9 14H14V15.7C13.9 15.8 13.9 15.9 13.8 16H9V14M9 12H14V10H9V12M9 8H14V6H9V8M7 5C7 4.4 7.4 4 8 4H16V13.8C16.6 13.4 17.3 13.2 18 13.1V5C18 4.4 18.4 4 19 4S20 4.4 20 5V6H22V5C22 3.3 20.7 2 19 2H8C6.3 2 5 3.3 5 5V16H7V5M13 19V18.4 18H2V19C2 20.7 3.3 22 5 22H13.8C13.3 21.1 13 20.1 13 19M17 16V22L22 19L17 16Z",
   "arrow-collapse": "M19.5,3.09L15,7.59V4H13V11H20V9H16.41L20.91,4.5L19.5,3.09M4,13V15H7.59L3.09,19.5L4.5,20.91L9,16.41V20H11V13H4Z",
   "arrow-expand": "M10,21V19H6.41L10.91,14.5L9.5,13.09L5,17.59V14H3V21H10M14.5,10.91L19,6.41V10H21V3H14V5H17.59L13.09,9.5L14.5,10.91Z",
   "clock-outline": "M12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22C6.47,22 2,17.5 2,12A10,10 0 0,1 12,2M12.5,7V12.25L17,14.92L16.25,16.15L11,13V7H12.5Z",
@@ -328,6 +331,16 @@ add("fr", "switch.fridge_super_cooling", "refrigerator_super_mode", "on", { frie
 add("fr", "switch.fridge_eco_mode", "eco_mode", "off", { friendly_name: "Fridge Eco mode" });
 add("fr", "binary_sensor.fridge_door", "refrigerator_door", "off", { device_class: "door" });
 add("fr", "binary_sensor.fridge_connectivity", "connectivity", "on", { device_class: "connectivity" });
+// Entities of your own around the fridge (`sensors`, `commands` and the `watts` override): a smart plug, a helper, a
+// script — not of its device.
+const own = (id, state, attributes) => {
+  states[id] = { entity_id: id, state, attributes };
+};
+own("sensor.fridge_plug_power", "86.4", { friendly_name: "Fridge plug Power", unit_of_measurement: "W", device_class: "power" });
+own("sensor.kitchen_humidity", "48", { friendly_name: "Kitchen humidity", unit_of_measurement: "%", device_class: "humidity", icon: "mdi:water-percent" });
+own("input_select.fridge_program", "Holiday", { friendly_name: "Fridge program", options: ["Normal", "Holiday", "Party"] });
+own("input_boolean.fridge_night_eco", "on", { friendly_name: "Night eco" });
+own("script.fridge_send_program", "off", { friendly_name: "Send program" });
 // Freezer (Miele): super freezing, its climate zone.
 add("fz", "sensor.freezer", "status", "superfreezing", { options: ["off", "on", "superfreezing"] });
 add("fz", "climate.freezer", "freezer", "cool", { current_temperature: -21, friendly_name: "Freezer" });
@@ -504,6 +517,15 @@ await render(
     ...NEW.flatMap(([file, device, config = {}]) => ["light", "dark"].map((theme) => ({
       file: theme === "light" ? file : `${file}-dark`, type: "smart-appliance-card", device, theme, width: 460, config,
     }))),
+    // The fridge with entities of your own: a forced power sensor, a sensor chip, and the Commands section.
+    ...["light", "dark"].map((theme) => ({
+      file: theme === "light" ? "fridge-own-entities" : "fridge-own-entities-dark", type: "smart-appliance-card", device: "fr", theme, width: 460,
+      config: {
+        entities: { watts: "sensor.fridge_plug_power" },
+        sensors: ["sensor.kitchen_humidity"],
+        commands: ["input_select.fridge_program", "input_boolean.fridge_night_eco", "script.fridge_send_program"],
+      },
+    })),
     ...MINIS.flatMap(([brand, device, config = {}]) => ["light", "dark"].map((theme) => ({
       file: `mini-${brand}${theme === "light" ? "" : "-dark"}`, type: "smart-appliance-mini-card", device, theme, width: 380, config,
     }))),

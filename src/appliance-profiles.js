@@ -233,6 +233,22 @@ export function hcCustomAlerts(config) {
   return [].concat(config?.alerts || []).map((a) => (typeof a === 'string' ? { entity: a } : a)).filter((a) => a && typeof a.entity === 'string');
 }
 
+// The `sensors` and `commands` options: entities of your own (a smart plug, a helper, another device's button…), each a
+// bare entity id or { entity, name, icon }.
+export function hcOwnEntities(config, key) {
+  return [].concat(config?.[key] || []).map((a) => (typeof a === 'string' ? { entity: a } : a)).filter((a) => a && typeof a.entity === 'string');
+}
+
+// The `commands` an entity's domain makes: a drop-down, an on / off pill, or a button that runs it.
+export var HC_CMD_SELECTS = ['select', 'input_select'];
+export var HC_CMD_TOGGLES = ['switch', 'input_boolean', 'light', 'fan', 'automation'];
+export var HC_CMD_PRESS = {
+  button: ['press', 'mdi:gesture-tap-button'],
+  input_button: ['press', 'mdi:gesture-tap-button'],
+  script: ['turn_on', 'mdi:script-text-play-outline'],
+  scene: ['turn_on', 'mdi:palette-outline'],
+};
+
 // A duration sensor's value in minutes, whatever unit it is shown in (Home Connect Local defaults to hours).
 export var HC_MINUTES = { s: 1 / 60, min: 1, h: 60, d: 1440 };
 export function hcMinutes(s) {
@@ -306,7 +322,7 @@ export function hcPlatform(list) {
 }
 
 export var HC_OVERRIDABLE = ['operation_state', 'door', 'progress', 'finish_time', 'selected_program',
-  'active_program', 'power', 'stop', 'pause', 'resume', 'remote_start', 'remote_control', 'connectivity', 'salt', 'rinse_aid', 'energy'];
+  'active_program', 'power', 'stop', 'pause', 'resume', 'remote_start', 'remote_control', 'connectivity', 'salt', 'rinse_aid', 'energy', 'watts'];
 // Every role, overridable or not.
 export var HC_ALL_ROLES = HC_OVERRIDABLE.concat(['bean_container', 'water_tank', 'drip_tray', 'descale', 'clean', 'idos_1', 'idos_2', 'program', 'phase', 'remaining', 'start_in', 'elapsed',
   'total', 'operation', 'start'], Object.keys(HC_COMMON_ROLES).filter((r) => HC_OVERRIDABLE.indexOf(r) < 0));
@@ -645,7 +661,7 @@ export var HC_PX = {
 export function hcFocusKey(el) {
   var ds = el?.dataset;
   if (!ds) return null;
-  var k = ['action', 'toggle', 'select', 'entity'].find((a) => ds[a]);
+  var k = ['action', 'toggle', 'select', 'cmdToggle', 'cmdPress', 'entity'].find((a) => ds[a]);
   return k ? [k, ds[k]] : null;
 }
 

@@ -225,3 +225,49 @@ test("option pills: turn_on / turn_off from the state shown, disabled while the 
   c._onClick({ composedPath: () => [{ dataset: { toggle: id }, disabled: false }] });
   assert.equal(hass.calls[1].service, "turn_off");
 });
+
+test("sensors, watts and commands of your own: chips, a forced power sensor, and drop-downs, pills and buttons (#116)", async () => {
+  const hass = mockHass();
+  Object.assign(hass.states, {
+    "sensor.plug_power": st("82.5", { unit_of_measurement: "W", device_class: "power" }),
+    "sensor.cellar_humidity": st("64", { unit_of_measurement: "%", friendly_name: "Cellar humidity" }),
+    "input_select.fridge_program": st("Holiday", { options: ["Normal", "Holiday", "Party"], friendly_name: "Fridge program" }),
+    "input_boolean.eco_night": st("off", { friendly_name: "Eco night" }),
+    "button.fridge_send_json": st("unknown", { friendly_name: "Send program" }),
+    "script.fridge_reset": st("off", { friendly_name: "Reset" }),
+  });
+  const c = new HomeConnectWasherCard();
+  c.setConfig({
+    device_id: "d2",
+    entities: { watts: "sensor.plug_power" },
+    sensors: ["sensor.cellar_humidity", { entity: "sensor.plug_power", name: "Plug", icon: "mdi:power-plug" }],
+    commands: ["input_select.fridge_program", "input_boolean.eco_night", "button.fridge_send_json", "script.fridge_reset", "sensor.missing"],
+  });
+  c.hass = hass;
+  const h = c.shadowRoot.innerHTML;
+  // The forced power sensor's chip, and the sensors' chips (a name given goes first).
+  assert.match(h, /data-entity="sensor.plug_power"><ha-icon icon="mdi:flash"><\/ha-icon>82.5 W/);
+  assert.match(h, /data-entity="sensor.cellar_humidity" title="Cellar humidity"><ha-icon icon="mdi:information-outline"><\/ha-icon>64 %/);
+  assert.match(h, /title="Plug"><ha-icon icon="mdi:power-plug"><\/ha-icon>Plug 82.5 W/);
+  // The commands section: a drop-down, a pill, two buttons (a button never pressed is not disabled).
+  assert.match(h, /<select data-select="input_select.fridge_program">.*<option value="Holiday" selected>/);
+  assert.match(h, /data-cmd-toggle="input_boolean.eco_night" aria-pressed="false">/);
+  assert.match(h, /<button class="btn" data-cmd-press="button.fridge_send_json">/);
+  assert.match(h, /<button class="btn" data-cmd-press="script.fridge_reset">/);
+  c._onChange({ target: { dataset: { select: "input_select.fridge_program" }, value: "Party", blur() {} } });
+  c._onClick({ composedPath: () => [{ dataset: { cmdToggle: "input_boolean.eco_night" } }] });
+  await flush();
+  c._onClick({ composedPath: () => [{ dataset: { cmdPress: "button.fridge_send_json" } }] });
+  await flush();
+  c._onClick({ composedPath: () => [{ dataset: { cmdPress: "script.fridge_reset" } }] });
+  await flush();
+  assert.deepEqual(
+    hass.calls.map((x) => [x.domain, x.service, x.data.entity_id, x.data.option]),
+    [
+      ["input_select", "select_option", "input_select.fridge_program", "Party"],
+      ["input_boolean", "turn_on", "input_boolean.eco_night", undefined],
+      ["button", "press", "button.fridge_send_json", undefined],
+      ["script", "turn_on", "script.fridge_reset", undefined],
+    ],
+  );
+});

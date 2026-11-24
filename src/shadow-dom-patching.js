@@ -6,7 +6,7 @@
 // A custom element (ha-icon, ha-card…) may set attributes on itself (a style, a state): it only loses those the
 // previous render gave it (hcTplAttrs) and are no longer in this one.
 import { HC_CYCLE_ACTIVE, HC_CYCLE_HISTORY, HC_CYCLE_REFRESH, HC_DOOR_GRACE, HC_DOOR_HISTORY, HC_ERROR_TIMEOUT, HC_NO_POWER_OFF, HC_RETRYABLE, HC_RETRY_DELAY, hcCycleEnergy, hcDelay, hcErrText, hcEsc, hcLang, hcLocale, hcNoPowerOff, hcSince, hcT } from "./i18n-helpers.js";
-import { HC_ALERT_ON, HC_ALL_ROLES, HC_ART, HC_ART_OPEN, HC_BRAND_LOGOS, HC_COLD, HC_CUSTOM_ALERT_ON, HC_FREEZER_WORDS, HC_HOT, HC_OPERATION_OPTIONS, HC_PROFILES, HC_PX, HC_STATE_COLORS, HC_TOO_WARM, hcBrand, hcChip, hcCustomAlerts, hcDeviceRoles, hcFindDevice, hcFocusKey, hcHumanize, hcKindOf, hcMinutes, hcNormState, hcPicture, hcRows, hcTempPairs } from "./appliance-profiles.js";
+import { HC_ALERT_ON, HC_ALL_ROLES, HC_ART, HC_ART_OPEN, HC_BRAND_LOGOS, HC_CMD_PRESS, HC_CMD_SELECTS, HC_CMD_TOGGLES, HC_COLD, HC_CUSTOM_ALERT_ON, HC_FREEZER_WORDS, HC_HOT, HC_OPERATION_OPTIONS, HC_PROFILES, HC_PX, HC_STATE_COLORS, HC_TOO_WARM, hcBrand, hcChip, hcCustomAlerts, hcDeviceRoles, hcFindDevice, hcFocusKey, hcHumanize, hcKindOf, hcMinutes, hcNormState, hcOwnEntities, hcPicture, hcRows, hcTempPairs } from "./appliance-profiles.js";
 import { HC_BANNER_DROP, HC_BANNER_STYLE, HC_ICON_COLORS, HC_LAUNDRY, HC_SCENES, PILL_GAP_PX, PILL_GROUND_PX, hcIsNight } from "./illustrated-header.js";
 
 export var hcUid = 0;
@@ -647,6 +647,7 @@ export class HomeConnectBaseCard extends HTMLElement {
       chips.push(hcChip(`chip${door === 'open' ? ' warn' : ''}`, dIcon, this._t(`door_${door}`), ent.door));
     }
     if (online) chips = chips.concat(this._infoChips(ent, kind, state, deviceName));
+    chips = chips.concat(this._ownSensorChips());
     if (online && !profile.simple) {
       var energyChip = this._energyChip(ent, r.platform);
       if (energyChip) chips.push(energyChip);
@@ -719,6 +720,9 @@ export class HomeConnectBaseCard extends HTMLElement {
           (toggles ? `<div class="toggles">${toggles}</div>` : '') + reload + '</div>';
       }
     }
+
+    // Commands of your own (`commands`): drop-downs, pills and buttons of other entities, whatever the appliance does.
+    var own = this._compact() ? { html: '', px: 0 } : this._commandsHtml();
 
     // Controls.
     var controls = '';
@@ -794,7 +798,7 @@ export class HomeConnectBaseCard extends HTMLElement {
     var base = this._illustrated ? HC_PX.bannerBase + (timeLine ? HC_PX.bannerTime : 0) + (chips.length ? HC_PX.bannerChips : 0) : HC_PX.base;
     var nZones = zonesHtml ? ent.zones.length : 0;
     this._rows = hcRows(base + (nZones ? HC_PX.section + Math.ceil(nZones / 2) * HC_PX.zoneRow : 0) +
-      (this._nSetpoints ? HC_PX.section + this._nSetpoints * HC_PX.stepRow : 0) + (programHtml ? HC_PX.program : 0) + optPx + (errorHtml ? HC_PX.error : 0) +
+      (this._nSetpoints ? HC_PX.section + this._nSetpoints * HC_PX.stepRow : 0) + (programHtml ? HC_PX.program : 0) + optPx + own.px + (errorHtml ? HC_PX.error : 0) +
       (controls ? HC_PX.controls : 0) + (controls.indexOf('class="hint"') >= 0 ? HC_PX.hint : 0));
     hcMorph(this.shadowRoot, this._styles(color) + '<ha-card>' +
       (this._illustrated ? banner() : '<div class="header">' + logo +
@@ -802,7 +806,7 @@ export class HomeConnectBaseCard extends HTMLElement {
           '<div class="sub" title="' + hcEsc(sub) + '">' + this._brandLogo() + hcEsc(sub) + '</div></div>' +
         powerBtn + this._zoomButton() +
       '</div>') +
-      heroHtml + zonesHtml + setpointsHtml + programHtml + optionsHtml + errorHtml + controls +
+      heroHtml + zonesHtml + setpointsHtml + programHtml + optionsHtml + own.html + errorHtml + controls +
     '</ha-card>');
   }
 
@@ -978,6 +982,56 @@ export class HomeConnectBaseCard extends HTMLElement {
     if (a.max != null) v = Math.min(Number(a.max), v);
     if (v === cur) return;
     this._guard(id, () => this._option('number', 'set_value', { entity_id: id, value: v }));
+  }
+
+  // Chips of the `sensors` option: the state of each (with its unit), its name first when one is given.
+  _ownSensorChips() {
+    return hcOwnEntities(this._config, 'sensors').filter((a) => this._st(a.entity)).map((a) => {
+      var s = this._st(a.entity);
+      var value = this._hass.formatEntityState ? this._hass.formatEntityState(s) : `${s.state} ${s.attributes.unit_of_measurement || ''}`.trim();
+      var name = a.name || s.attributes.friendly_name || a.entity;
+      return hcChip('chip extra', a.icon || s.attributes.icon || 'mdi:information-outline', hcEsc(a.name ? `${a.name} ${value}` : value), a.entity, name);
+    });
+  }
+
+  // The `commands` section: selects and input selects as drop-downs, switches (helpers, lights, fans, automations) as
+  // pills, buttons, scripts and scenes as buttons. Returns its markup and height.
+  _commandsHtml() {
+    var list = hcOwnEntities(this._config, 'commands').filter((a) => this._st(a.entity));
+    var sel = [], tog = [], btn = [];
+    list.forEach((a) => {
+      var id = a.entity, d = id.split('.')[0], s = this._st(id), ok = this._avail(id);
+      var label = hcEsc(a.name || s.attributes.friendly_name || id);
+      if (HC_CMD_SELECTS.indexOf(d) >= 0) {
+        var o = ok
+          ? (s.attributes.options || []).map((v) => `<option value="${hcEsc(v)}"${v === s.state ? ' selected' : ''}>${hcEsc(this._fmt(id, v))}</option>`).join('')
+          : '<option selected>—</option>';
+        sel.push(`<label class="field small"><span>${label}</span><select data-select="${hcEsc(id)}"${ok ? '' : ' disabled'}>${o}</select></label>`);
+      } else if (HC_CMD_TOGGLES.indexOf(d) >= 0) {
+        var on = ok && s.state === 'on';
+        tog.push(`<button class="toggle${on ? ' on' : ''}" data-cmd-toggle="${hcEsc(id)}" aria-pressed="${on}"${ok && !this._pending.has(id) ? '' : ' disabled'}>` +
+          `<ha-icon icon="${hcEsc(a.icon || (on ? 'mdi:checkbox-marked-circle' : 'mdi:checkbox-blank-circle-outline'))}"></ha-icon>${label}</button>`);
+      } else if (HC_CMD_PRESS[d]) {
+        // A button never pressed is `unknown`: only `unavailable` disables it.
+        var off = s.state === 'unavailable' || this._pending.has(id);
+        btn.push(`<button class="btn" data-cmd-press="${hcEsc(id)}"${off ? ' disabled' : ''}><ha-icon icon="${hcEsc(a.icon || HC_CMD_PRESS[d][1])}"></ha-icon>${label}</button>`);
+      }
+    });
+    if (!sel.length && !tog.length && !btn.length) return { html: '', px: 0 };
+    return {
+      html: '<div class="section"><div class="section-title"><ha-icon icon="mdi:gesture-tap-button"></ha-icon>' + this._t('commands') + '</div>' +
+        (sel.length ? `<div class="grid">${sel.join('')}</div>` : '') +
+        (tog.length ? `<div class="toggles">${tog.join('')}</div>` : '') +
+        (btn.length ? `<div class="cmd-buttons">${btn.join('')}</div>` : '') + '</div>',
+      px: HC_PX.section + Math.ceil(sel.length / 3) * HC_PX.selectRow + Math.ceil(tog.length / 3) * HC_PX.toggleRow + (btn.length ? HC_PX.controls : 0),
+    };
+  }
+
+  // A command pill: turn_on or turn_off from the state shown; a button, script or scene runs.
+  _ownCommand(id, press) {
+    var d = id.split('.')[0];
+    if (press) return this._guard(id, () => this._option(d, HC_CMD_PRESS[d][0], { entity_id: id }));
+    return this._guard(id, () => this._option(d, this._val(id) === 'on' ? 'turn_off' : 'turn_on', { entity_id: id }));
   }
 
   // Chips of the `alerts` option, while their entity is in one of their states.
@@ -1262,6 +1316,8 @@ export class HomeConnectBaseCard extends HTMLElement {
       '.section-title ha-icon { --mdc-icon-size: 16px; }' +
       '.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 6px; }' +
       '.toggles { display: flex; flex-wrap: wrap; gap: 6px; }' +
+      '.cmd-buttons { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }' +
+      '.toggles + .cmd-buttons, .grid + .cmd-buttons { margin-top: 10px; }' +
       '.steppers { display: flex; flex-direction: column; gap: 6px; }' +
       '.stepper { display: flex; align-items: center; gap: 8px; min-width: 0; }' +
       '.stepper .sl { flex: 1; min-width: 0; font-size: 13px; color: var(--secondary-text-color); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }' +
@@ -1377,8 +1433,12 @@ export class HomeConnectBaseCard extends HTMLElement {
   }
 
   _onClick(ev) {
-    var btn = ev.composedPath().find((n) => n.dataset && (n.dataset.action || n.dataset.toggle || n.dataset.step || n.dataset.entity));
+    var btn = ev.composedPath().find((n) => n.dataset && (n.dataset.action || n.dataset.toggle || n.dataset.cmdToggle || n.dataset.cmdPress || n.dataset.step || n.dataset.entity));
     if (!btn || btn.disabled) return;
+    if (btn.dataset.cmdToggle || btn.dataset.cmdPress) {
+      this._ownCommand(btn.dataset.cmdToggle || btn.dataset.cmdPress, !!btn.dataset.cmdPress);
+      return;
+    }
     if (btn.dataset.step) {
       this._stepSetpoint(btn.dataset.step, Number(btn.dataset.dir));
       return;
@@ -1566,7 +1626,9 @@ export class HomeConnectBaseCard extends HTMLElement {
   _onChange(ev) {
     var el = ev.target;
     if (!el?.dataset?.select) return;
-    this._option('select', 'select_option', { entity_id: el.dataset.select, option: el.value });
+    // A `commands` drop-down may be a helper (input_select).
+    var domain = el.dataset.select.indexOf('input_select.') === 0 ? 'input_select' : 'select';
+    this._option(domain, 'select_option', { entity_id: el.dataset.select, option: el.value });
     el.blur();
   }
 }

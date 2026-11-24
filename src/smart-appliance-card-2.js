@@ -35,7 +35,7 @@ export class HomeConnectCardEditor extends HTMLElement {
     var domains = { operation_state: 'sensor', door: ['sensor', 'binary_sensor'], progress: 'sensor', finish_time: 'sensor',
       selected_program: 'select', active_program: ['select', 'sensor'], power: 'switch', stop: 'button',
       pause: 'button', resume: 'button', remote_start: 'binary_sensor', remote_control: 'binary_sensor', connectivity: 'binary_sensor',
-      salt: ['sensor', 'binary_sensor'], rinse_aid: ['sensor', 'binary_sensor'], energy: 'sensor' };
+      salt: ['sensor', 'binary_sensor'], rinse_aid: ['sensor', 'binary_sensor'], energy: 'sensor', watts: 'sensor' };
     // Pause / resume only exist on washers, salt / rinse aid only on dishwashers.
     var only = { pause: 'washer', resume: 'washer', salt: 'dishwasher', rinse_aid: 'dishwasher' };
     var roles = HC_OVERRIDABLE.filter((r) => !only[r] || !kind || only[r] === kind);
@@ -110,7 +110,7 @@ export class HomeConnectCardEditor extends HTMLElement {
     this._form.hass = this._hass;
     this._form.schema = this._schema();
     this._form.computeLabel = (s) => {
-      if (HC_ROLES[s.name]) return hcT(lang, `en_${s.name}`);
+      if (HC_ROLES[s.name] || HC_OVERRIDABLE.indexOf(s.name) >= 0) return hcT(lang, `en_${s.name}`);
       return hcT(lang, `ed_${s.name}`);
     };
     this._form.computeHelper = (s) => {
