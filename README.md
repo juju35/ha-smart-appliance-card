@@ -416,6 +416,8 @@ npm run screenshots  # renders the cards (and the animation GIFs, needs ffmpeg) 
 
 Brand logos live in `logos/`, one `<brand>.svg` or `.png` per key of the `brand` option; the build embeds them in the card, which stays a single file. A brand without a file gets the badge with its initial. The logos are the trademarks of their owners, shown only to identify the appliance's brand.
 
+The source is split into ES modules under `src/` (entry `src/index.js`); `npm run build` assembles them (`scripts/bundle.mjs`) into the single file the Marketplace serves.
+
 `dist/` is not committed: `npm run build` creates it locally, CI builds it on every push, and the release workflow attaches the built file to the release, which is where the Marketplace installs it from.
 
 ### Releasing

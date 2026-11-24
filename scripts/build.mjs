@@ -1,9 +1,10 @@
-// Builds src/smart-appliance-card.js into the single HACS file dist/smart-appliance-card.js, stamping the package version
+// Builds the ES modules of src/ (entry src/index.js, assembled by scripts/bundle.mjs) into the single HACS file dist/smart-appliance-card.js, stamping the package version
 // and embedding the brand logos of logos/.
 // Usage: node scripts/build.mjs  (dist/ is not committed: CI and the release workflow build it)
 import { mkdirSync, readdirSync, readFileSync, realpathSync, writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { splitDist } from "./i18n-split.mjs";
+import { bundle } from "./bundle.mjs";
 
 const FILE = "smart-appliance-card.js";
 const LEGACY = "home-connect-card.js";
@@ -22,7 +23,7 @@ const logos = Object.fromEntries(
     .sort()
     .map((f) => [f.replace(/\.(svg|png)$/, ""), logo(f)]),
 );
-const src = readFileSync(`${root}src/${FILE}`, "utf8");
+const src = bundle("src/index.js");
 if (!src.includes("var HC_BRAND_LOGOS = {}; // __BRAND_LOGOS__")) throw new Error("brand logos placeholder missing");
 const out = src
   .replace("__VERSION__", pkg.version)
