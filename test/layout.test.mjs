@@ -3,6 +3,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import { loadCard } from "./load.mjs";
+import { source } from "./source.mjs";
 
 const { HomeConnectWasherCard, customElements } = loadCard("smart-appliance-card.js", ["HomeConnectWasherCard"]);
 
@@ -156,8 +157,7 @@ test("in an inline-block, an auto grid column or a 1fr 1fr grid, direct or in a 
   } catch (e) {
     return t.skip(`Chromium unavailable: ${e.message.split("\n")[0]}`);
   }
-  const { readFileSync } = await import("node:fs");
-  const src = readFileSync(new URL("../src/smart-appliance-card.js", import.meta.url), "utf8");
+  const src = source;
   const entities = {};
   const states = {};
   const add = (id, key, state, attributes = {}) => {
@@ -245,8 +245,7 @@ test("the status pill sits beside a whole title, else under the subtitle, its la
   } catch (e) {
     return t.skip(`Chromium unavailable: ${e.message.split("\n")[0]}`);
   }
-  const { readFileSync } = await import("node:fs");
-  const src = readFileSync(new URL("../src/smart-appliance-card.js", import.meta.url), "utf8");
+  const src = source;
   const entities = {};
   const states = {};
   const add = (id, key, state, attributes = {}) => {

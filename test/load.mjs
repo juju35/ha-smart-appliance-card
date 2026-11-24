@@ -3,9 +3,10 @@
 import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import vm from "node:vm";
+import { sources } from "./source.mjs";
 
 export function loadCard(file, names) {
-  const src = readFileSync(fileURLToPath(new URL(`../src/${file}`, import.meta.url)), "utf8");
+  const src = (sources[file] ?? readFileSync(fileURLToPath(new URL(`../src/${file}`, import.meta.url)), "utf8"));
   const registry = new Map();
   const sandbox = {
     console: { info() {}, log() {}, warn() {}, error() {} },
