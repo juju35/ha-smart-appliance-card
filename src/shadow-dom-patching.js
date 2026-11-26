@@ -1140,6 +1140,9 @@ export class HomeConnectBaseCard extends HTMLElement {
         // The header icon's colour: the state's (at work, waiting, warning, fault, done), neutral grey when idle or off.
         ' --hc-icon: ' + (this._iconColor || 'var(--state-inactive-color, var(--disabled-text-color, #9e9e9e))') + '; }' +
       // A size container: narrow layouts (6 columns of a Sections view, the mini card) follow the card's own width.
+      // ha-icon as a flex box: its ha-svg-icon (inline-flex, vertical-align: middle) then fills it, instead of sitting
+      // on a line box built from the card's font size, which pushed small icons 1-3 px below their labels (#119).
+      'ha-icon { display: inline-flex; }' +
       'ha-card { container-name: hc-card; height: 100%; box-sizing: border-box; padding: 12px; display: flex; flex-direction: column; gap: 10px;' +
         ' container-type: inline-size; }' +
       // Containment drops the content's own width: hosts that size the card from it (layout-card, button-card, an
