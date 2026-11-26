@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.13.1 - 2026-11-26
+
+### Fixes
+- **Icons aligned with their labels** ([#119](https://github.com/juju35/ha-smart-appliance-card/issues/119), thanks @mtheli): the icons of the chips, option toggles, section titles, the header circle and the power button sat 1 to 3 px below their text; they now fill their box exactly.
+
 ## 2.13.0 - 2026-11-24
 
 ### Features
